@@ -1,24 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { supabase, GalleryImage } from '../lib/supabase';
+import { useSupabaseData } from './useSupabaseData';
 
 export const useSupabaseGallery = () => {
-  const [images, setImages] = useState<GalleryImage[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data, loading } = useSupabaseData();
+  const [images, setImages] = useState<GalleryImage[]>(data?.images || []);
 
   const fetchImages = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('gallery_images')
-        .select('*')
-        .order('created_at', { ascending: false });
-      
-      if (error) throw error;
-      setImages(data || []);
-    } catch (error) {
-      console.error('Error fetching images:', error);
-    } finally {
-      setLoading(false);
-    }
+    // Already cached
   };
 
   const uploadImage = async (file: File, title: string, description: string, category: string) => {
@@ -98,9 +87,9 @@ export const useSupabaseGallery = () => {
     }
   };
 
-  useEffect(() => {
-    fetchImages();
-  }, []);
+  if (data?.images && images.length === 0) {
+    setImages(data.images);
+  }
 
   return { images, loading, uploadImage, updateImage, deleteImage, refetch: fetchImages };
 };
