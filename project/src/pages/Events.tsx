@@ -1,10 +1,12 @@
 import { Calendar, Clock, MapPin, Users, Music, FileText, Book } from 'lucide-react';
 import { useContent } from '../hooks/useContent';
+import { useSupabaseEvents } from '../hooks/useSupabaseEvents';
 
 export default function Events() {
   const { content, loading } = useContent();
+  const { events: supabaseEvents, loading: eventsLoading } = useSupabaseEvents();
   
-  if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  if (loading || eventsLoading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   
   console.log('Events content:', content);
   const upcomingEvents = [
@@ -92,7 +94,7 @@ export default function Events() {
           </p>
 
           <div className="space-y-6">
-            {(content.events?.list || upcomingEvents).map((event: any, index: number) => {
+            {(supabaseEvents.length > 0 ? supabaseEvents : (content.events?.list || upcomingEvents)).map((event: any, index: number) => {
               const Icon = event.icon || Calendar;
               return (
                 <div
