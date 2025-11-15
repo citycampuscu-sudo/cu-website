@@ -222,21 +222,25 @@ export default function AdminDashboard() {
       
       // Save events data to Supabase
       if (content.events?.list && content.events.list.length > 0) {
-        await supabase.from('events').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+        const validEvents = content.events.list.filter((event: any) => event.title && event.date);
         
-        const { error: eventsError } = await supabase
-          .from('events')
-          .insert(content.events.list.map((event: any) => ({
-            title: event.title,
-            date: event.date,
-            time: event.time,
-            location: event.location,
-            description: event.description
-          })));
+        if (validEvents.length > 0) {
+          await supabase.from('events').delete().neq('id', '00000000-0000-0000-0000-000000000000');
           
-        if (eventsError) {
-          console.error('Events save error:', eventsError);
-          alert('Failed to save events to database');
+          const { error: eventsError } = await supabase
+            .from('events')
+            .insert(validEvents.map((event: any) => ({
+              title: event.title,
+              date: event.date,
+              time: event.time || '',
+              location: event.location || '',
+              description: event.description || ''
+            })));
+            
+          if (eventsError) {
+            console.error('Events save error:', eventsError);
+            alert(`Failed to save events to database: ${eventsError.message}`);
+          }
         }
       }
       
