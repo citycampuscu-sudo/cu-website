@@ -2,6 +2,9 @@
   command = "cd project && npm install && npm run build"
   publish = "project/dist"
 
+[build.environment]
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
