@@ -43,3 +43,13 @@ export interface LeadershipRole {
   year: string
   created_at: string
 }
+
+export interface Event {
+  id: string
+  title: string
+  date: string
+  time: string
+  location: string
+  description: string
+  created_at: string
+}

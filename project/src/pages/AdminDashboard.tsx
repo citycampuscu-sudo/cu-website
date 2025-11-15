@@ -220,6 +220,26 @@ export default function AdminDashboard() {
         alert(`Successfully uploaded ${pendingImages.length} images to Supabase!`);
       }
       
+      // Save events data to Supabase
+      if (content.events?.list && content.events.list.length > 0) {
+        await supabase.from('events').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+        
+        const { error: eventsError } = await supabase
+          .from('events')
+          .insert(content.events.list.map((event: any) => ({
+            title: event.title,
+            date: event.date,
+            time: event.time,
+            location: event.location,
+            description: event.description
+          })));
+          
+        if (eventsError) {
+          console.error('Events save error:', eventsError);
+          alert('Failed to save events to database');
+        }
+      }
+      
       // Save leadership data to Supabase
       if (content.leadership?.list && content.leadership.list.length > 0) {
         // Clear existing leadership data
