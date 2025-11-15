@@ -1,0 +1,143 @@
+{
+  "home": {
+    "heroTitle": "Welcome to Maseno University City Campus Christian Union",
+    "heroSubtitle": "Growing in Faith, Unity, and Purpose",
+    "aboutPreview": "We are a vibrant community of believers committed to spiritual growth, fellowship, and service to God and our campus community.",
+    "welcomeTitle": "Welcome to Our Community",
+    "welcomeText": "Join us as we grow together in faith, fellowship, and service to God and our campus community."
+  },
+  "about": {
+    "pageTitle": "About Us",
+    "pageSubtitle": "Our Story, Mission & Vision",
+    "mission": "To create a Christ-centered community that nurtures spiritual growth, academic excellence, and servant leadership among students at Maseno University City Campus.",
+    "vision": "To be a transformative Christian community that impacts the campus and beyond with the love of Christ.",
+    "values": ["Faith", "Unity", "Excellence", "Service", "Integrity"],
+    "history": "Founded with a heart for campus ministry, MUKCCU has been a beacon of hope and spiritual growth for students.",
+    "coreBeliefs": "We believe in the power of community, the importance of spiritual growth, and the call to serve others."
+  },
+  "activities": [
+    {
+      "day": "Sunday",
+      "title": "Sunday Service",
+      "time": "8:00 AM - 10:30 AM",
+      "location": "7th Floor",
+      "description": "Join us for worship, praise, and the Word."
+    },
+    {
+      "day": "Tuesday",
+      "title": "Online Bible Study",
+      "time": "8:00 PM - 9:00 PM",
+      "location": "Google Meet (Online)",
+      "description": "Deep dive into Scripture together."
+    }
+  ],
+  "events": {
+    "pageTitle": "Upcoming Events",
+    "pageSubtitle": "Join Us for These Special Occasions",
+    "list": [
+      {
+        "title": "Campus Crusade",
+        "date": "2024-02-15",
+        "time": "6:00 PM",
+        "location": "Main Hall",
+        "description": "Join us for an evening of worship and evangelism."
+      }
+    ]
+  },
+  "leadership": {
+    "pageTitle": "Our Leadership Team",
+    "pageSubtitle": "Meet the People Leading Our Community",
+    "previousPatron": {
+      "name": "Dr. Mildred Ayere",
+      "position": "Previous Patron",
+      "description": "10 years of dedicated service"
+    },
+    "previousChairpersons": [
+      { "name": "Nicodemus Simiyu", "year": "2013/2014" },
+      { "name": "Sammy Muraya", "year": "2014/2015" },
+      { "name": "Alex Ireri", "year": "2015/2016" },
+      { "name": "Timothy Kanda", "year": "2016/2017" },
+      { "name": "Solomon Naitaki", "year": "2017/2018" },
+      { "name": "Fred Mwongela", "year": "2018/2019" },
+      { "name": "Fidel Otieno", "year": "2019/2020" },
+      { "name": "Patrick Ndunyu", "year": "2020/2021" },
+      { "name": "Fanuel Favour", "year": "2021/2022" },
+      { "name": "Fadhili Mwivali", "year": "2022/2023" },
+      { "name": "Samuel Oyugi", "year": "2023/2024" }
+    ],
+    "list": [
+      {
+        "name": "John Doe",
+        "position": "Chairperson",
+        "email": "chair@mukccu.org",
+        "phone": "+254700000000",
+        "bio": "Passionate about leading with integrity and faith."
+      }
+    ]
+  },
+  "ministries": {
+    "pageTitle": "Our Ministries",
+    "pageSubtitle": "Serving God Through Various Ministries",
+    "list": [
+      {
+        "name": "Worship Ministry",
+        "description": "Leading the congregation in praise and worship through music and song",
+        "leader": "Music Team",
+        "activities": "Sunday worship, choir practice, instrument training",
+        "icon": "Music"
+      },
+      {
+        "name": "Prayer Ministry",
+        "description": "Interceding for the campus and community through prayer",
+        "leader": "Prayer Coordinator",
+        "activities": "Prayer meetings, fasting, intercession sessions",
+        "icon": "Heart"
+      },
+      {
+        "name": "Evangelism Ministry",
+        "description": "Sharing the Gospel with students and the wider community",
+        "leader": "Missions Coordinator",
+        "activities": "Campus outreach, high school missions, crusades",
+        "icon": "Globe"
+      }
+    ]
+  },
+  "gallery": {
+    "pageTitle": "Photo Gallery",
+    "pageSubtitle": "Capturing Our Journey Together",
+    "images": [
+      {
+        "url": "/gallery/IMG_0174_transcpr.jpg",
+        "title": "Sunday Service",
+        "description": "Our vibrant Sunday worship service",
+        "category": "Worship"
+      },
+      {
+        "url": "/gallery/sample2.jpg",
+        "title": "Fellowship Time",
+        "description": "Members enjoying fellowship after service",
+        "category": "Fellowship"
+      }
+    ]
+  },
+  "socialMedia": {
+    "pageTitle": "Connect With Us",
+    "pageSubtitle": "Stay Updated on Social Media"
+  },
+  "affiliations": {
+    "pageTitle": "Our Affiliations",
+    "pageSubtitle": "Connected to the Larger Body of Christ"
+  },
+  "contacts": {
+    "pageTitle": "Get In Touch",
+    "pageSubtitle": "We'd Love to Hear From You",
+    "email": "citycampusc.u@gmail.com",
+    "phone": "+254700000000",
+    "location": "7th Floor, Maseno University Kisumu Campus",
+    "socialMedia": {
+      "facebook": "https://facebook.com/mukccu",
+      "instagram": "https://instagram.com/mukccu",
+      "twitter": "https://twitter.com/mukccu"
+    }
+  }
+}
