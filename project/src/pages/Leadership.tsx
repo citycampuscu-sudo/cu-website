@@ -8,18 +8,10 @@ export default function Leadership() {
   
   if (loading || leadersLoading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   
-  console.log('Supabase roles:', supabaseRoles);
-  console.log('Content leadership:', content.leadership);
-  
   const currentPatron = supabaseRoles?.find(r => r.role_type === 'current_patron') || content.leadership?.currentPatron;
   const previousPatron = supabaseRoles?.find(r => r.role_type === 'previous_patron') || content.leadership?.previousPatron;
   const alumniDirector = supabaseRoles?.find(r => r.role_type === 'alumni_director') || content.leadership?.alumniDirector;
   const previousChairpersons = supabaseRoles?.filter(r => r.role_type === 'previous_chairperson')?.length > 0 ? supabaseRoles.filter(r => r.role_type === 'previous_chairperson') : (content.leadership?.previousChairpersons || []);
-  
-  console.log('Current patron:', currentPatron);
-  console.log('Previous patron:', previousPatron);
-  console.log('Alumni director:', alumniDirector);
-  console.log('Previous chairpersons:', previousChairpersons);
 
 
   return (
