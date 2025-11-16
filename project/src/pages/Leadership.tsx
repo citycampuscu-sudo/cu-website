@@ -6,7 +6,10 @@ export default function Leadership() {
   const { content, loading } = useContent();
   const { leaders: supabaseLeaders, roles: supabaseRoles, loading: leadersLoading } = useSupabaseLeadership();
   
-  if (loading || leadersLoading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  const leaders = supabaseLeaders.length > 0 ? supabaseLeaders : (content.leadership?.list || []);
+  const showLoading = loading && leadersLoading && leaders.length === 0;
+  
+  if (showLoading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   
   const currentPatron = supabaseRoles?.find(r => r.role_type === 'current_patron') || content.leadership?.currentPatron;
   const previousPatron = supabaseRoles?.find(r => r.role_type === 'previous_patron') || content.leadership?.previousPatron;
@@ -53,14 +56,14 @@ export default function Leadership() {
           </div>
         )}
 
-        {(supabaseLeaders.length > 0 || (content.leadership?.list && content.leadership.list.length > 0)) && (
+        {leaders.length > 0 && (
           <div className="mb-12 bg-white rounded-2xl shadow-xl p-8">
             <div className="flex items-center justify-center mb-6">
               <Users style={{ color: '#2e3e87' }} size={40} className="mr-3" />
               <h2 className="text-3xl font-bold" style={{ color: '#2e3e87' }}>Current Leadership Team</h2>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {(supabaseLeaders.length > 0 ? supabaseLeaders : (content.leadership?.list || [])).map((leader: any, index: number) => (
+              {leaders.map((leader: any, index: number) => (
             <div
               key={index}
               className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 p-6"
@@ -71,6 +74,7 @@ export default function Leadership() {
                   <img 
                     src={leader.image} 
                     alt={leader.name}
+                    loading="lazy"
                     className="w-12 h-12 rounded-full object-cover mr-4 border-2"
                     style={{ borderColor: '#2e3e87' }}
                   />
