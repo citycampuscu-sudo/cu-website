@@ -99,7 +99,7 @@ export default function AdminDashboard() {
     }
   }, [isAuthenticated]);
 
-  const compressImage = (file: File, maxWidth = 800, quality = 0.7): Promise<string> => {
+  const compressImage = (file: File, maxWidth = 800, quality = 0.8): Promise<string> => {
     return new Promise((resolve) => {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d')!;
@@ -111,7 +111,7 @@ export default function AdminDashboard() {
         canvas.height = img.height * ratio;
         
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        resolve(canvas.toDataURL('image/jpeg', quality));
+        resolve(canvas.toDataURL('image/webp', quality));
       };
       
       img.src = URL.createObjectURL(file);
