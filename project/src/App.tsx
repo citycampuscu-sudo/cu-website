@@ -27,6 +27,29 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, []);
 
+  useEffect(() => {
+    // Preload leadership images
+    const preloadImages = async () => {
+      try {
+        const { createClient } = await import('@supabase/supabase-js');
+        const supabase = createClient(
+          import.meta.env.VITE_SUPABASE_URL || '',
+          import.meta.env.VITE_SUPABASE_ANON_KEY || ''
+        );
+        const { data } = await supabase.from('leaders').select('image');
+        data?.forEach(leader => {
+          if (leader.image) {
+            const img = new Image();
+            img.src = leader.image;
+          }
+        });
+      } catch (error) {
+        console.error('Preload error:', error);
+      }
+    };
+    preloadImages();
+  }, []);
+
   const renderPage = () => {
     switch (currentPage) {
       case 'Home':
