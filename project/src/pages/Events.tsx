@@ -6,7 +6,8 @@ export default function Events() {
   const { content, loading } = useContent();
   const { events: supabaseEvents, loading: eventsLoading } = useSupabaseEvents();
   
-  if (loading || eventsLoading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  const events = supabaseEvents.length > 0 ? supabaseEvents : (content.events?.list || upcomingEvents);
+  const isLoading = (loading || eventsLoading) && events.length === 0;
   
   console.log('Events content:', content);
   const upcomingEvents = [
@@ -72,6 +73,9 @@ export default function Events() {
 
   return (
     <div className="min-h-screen">
+      {isLoading && (
+        <div className="fixed top-0 left-0 right-0 h-1 bg-blue-600 animate-pulse z-50"></div>
+      )}
       <div
         className="relative h-64 flex items-center justify-center text-white"
         style={{
@@ -94,7 +98,7 @@ export default function Events() {
           </p>
 
           <div className="space-y-6">
-            {(supabaseEvents.length > 0 ? supabaseEvents : (content.events?.list || upcomingEvents)).map((event: any, index: number) => {
+            {events.map((event: any, index: number) => {
               const Icon = event.icon || Calendar;
               return (
                 <div

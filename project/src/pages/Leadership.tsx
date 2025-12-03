@@ -7,9 +7,7 @@ export default function Leadership() {
   const { leaders: supabaseLeaders, roles: supabaseRoles, loading: leadersLoading } = useSupabaseLeadership();
   
   const leaders = supabaseLeaders.length > 0 ? supabaseLeaders : (content.leadership?.list || []);
-  const showLoading = loading && leadersLoading && leaders.length === 0;
-  
-  if (showLoading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  const isLoading = (loading || leadersLoading) && leaders.length === 0;
   
   const currentPatron = supabaseRoles?.find(r => r.role_type === 'current_patron') || content.leadership?.currentPatron;
   const previousPatron = supabaseRoles?.find(r => r.role_type === 'previous_patron') || content.leadership?.previousPatron;
@@ -19,6 +17,9 @@ export default function Leadership() {
 
   return (
     <div className="min-h-screen">
+      {isLoading && (
+        <div className="fixed top-0 left-0 right-0 h-1 bg-blue-600 animate-pulse z-50"></div>
+      )}
       <div
         className="relative h-64 flex items-center justify-center text-white"
         style={{
@@ -32,6 +33,13 @@ export default function Leadership() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {isLoading && leaders.length === 0 ? (
+          <div className="text-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Loading leadership...</p>
+          </div>
+        ) : (
+          <>
         <div className="mb-12 text-center">
           <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
             The CU has 11 executive committee leaders who are committed to serving God and the student body with dedication and integrity.
@@ -225,6 +233,8 @@ export default function Leadership() {
             </div>
           </div>
         </div>
+        </>
+        )}
       </div>
     </div>
   );
