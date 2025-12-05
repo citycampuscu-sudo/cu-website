@@ -6,11 +6,6 @@ export default function Events() {
   const { content, loading } = useContent();
   const { events: supabaseEvents, loading: eventsLoading } = useSupabaseEvents();
   
-  const contentEvents = content.events?.list || [];
-  const events = supabaseEvents.length > 0 ? supabaseEvents : (contentEvents.length > 0 ? contentEvents : upcomingEvents);
-  const isLoading = (loading || eventsLoading) && events.length === 0;
-  
-  console.log('Events content:', content);
   const upcomingEvents = [
     {
       title: 'Bible Trivia Sunday',
@@ -40,6 +35,10 @@ export default function Events() {
       color: '#2e3e87',
     },
   ];
+  
+  const contentEvents = content.events?.list || [];
+  const events = supabaseEvents.length > 0 ? supabaseEvents : (contentEvents.length > 0 ? contentEvents : upcomingEvents);
+  const isLoading = (loading || eventsLoading) && events.length === 0;
 
   const recurringEvents = [
     {
