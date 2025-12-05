@@ -6,7 +6,8 @@ export default function Events() {
   const { content, loading } = useContent();
   const { events: supabaseEvents, loading: eventsLoading } = useSupabaseEvents();
   
-  const events = supabaseEvents.length > 0 ? supabaseEvents : (content.events?.list || upcomingEvents);
+  const contentEvents = content.events?.list || [];
+  const events = supabaseEvents.length > 0 ? supabaseEvents : (contentEvents.length > 0 ? contentEvents : upcomingEvents);
   const isLoading = (loading || eventsLoading) && events.length === 0;
   
   console.log('Events content:', content);

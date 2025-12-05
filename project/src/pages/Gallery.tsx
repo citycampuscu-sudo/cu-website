@@ -7,8 +7,6 @@ export default function Gallery() {
   const { content, loading: contentLoading } = useContent();
   const { images: supabaseImages, loading: supabaseLoading } = useSupabaseGallery();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  
-  if (contentLoading || supabaseLoading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
 
   const defaultImages = [
     {
@@ -46,14 +44,17 @@ export default function Gallery() {
       description: img.description,
       category: img.category
     })),
-    ...localImages,
-    ...(supabaseImages.length === 0 && localImages.length === 0 ? defaultImages : [])
+    ...localImages
   ];
   
-  const images = combinedImages;
+  const images = combinedImages.length > 0 ? combinedImages : defaultImages;
+  const isLoading = (contentLoading || supabaseLoading) && images.length === 0;
 
   return (
     <div className="min-h-screen">
+      {isLoading && (
+        <div className="fixed top-0 left-0 right-0 h-1 bg-blue-600 animate-pulse z-50"></div>
+      )}
       <div
         className="relative h-64 flex items-center justify-center text-white"
         style={{
@@ -83,6 +84,7 @@ export default function Gallery() {
               <img
                 src={image.url}
                 alt={image.title}
+                loading="lazy"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
