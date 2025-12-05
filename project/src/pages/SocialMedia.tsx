@@ -12,7 +12,7 @@ export default function SocialMedia() {
     {
       name: 'YouTube',
       icon: Youtube,
-      url: 'https://youtube.com/@masenouniversitykisumucamp2013?si=58a9zMVbcGmLX98g',
+      url: 'https://www.youtube.com/@masenouniversitycitycamp2013',
       description: 'Subscribe to our YouTube channel for sermon recordings, worship sessions, testimonies, and more.',
       color: '#b4712d',
     },
