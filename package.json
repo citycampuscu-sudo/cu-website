@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "postinstall": "npx update-browserslist-db@latest --update-db"
+    "postinstall": "npx update-browserslist-db@latest --update-db",
+    "build": "npm --prefix project install && npm --prefix project run build && rm -rf dist && mkdir -p dist && cp -R project/dist/. dist/"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.79.0"

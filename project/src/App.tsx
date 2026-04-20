@@ -7,7 +7,6 @@ import Leadership from './pages/Leadership';
 import Ministries from './pages/Ministries';
 import WeeklyActivities from './pages/WeeklyActivities';
 import Events from './pages/Events';
-import Gallery from './pages/Gallery';
 import SocialMedia from './pages/SocialMedia';
 import Contacts from './pages/Contacts';
 import Affiliations from './pages/Affiliations';
@@ -64,8 +63,6 @@ function App() {
         return <WeeklyActivities />;
       case 'Events':
         return <Events />;
-      case 'Gallery':
-        return <Gallery />;
       case 'Social Media':
         return <SocialMedia />;
       case 'Contacts':

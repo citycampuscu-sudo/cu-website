@@ -16,7 +16,6 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
     'Ministries',
     'Weekly Activities',
     'Events',
-    'Gallery',
     'Social Media',
     'Contacts',
     'Affiliations',
