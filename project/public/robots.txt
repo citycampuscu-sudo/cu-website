@@ -1,0 +1,10 @@
+# Robots.txt for Maseno University City Campus Christian Union Website
+# Allow all crawlers to index the site
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://cu-website.com/sitemap.xml
+
+# Disallow admin dashboard from search indexing (optional - uncomment if desired)
+# Disallow: /#/admin
