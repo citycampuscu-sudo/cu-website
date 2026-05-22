@@ -37,7 +37,7 @@ export interface Leader {
 
 export interface LeadershipRole {
   id: string
-  role_type: 'current_patron' | 'previous_patron' | 'alumni_director' | 'previous_chairperson'
+  role_type: 'current_patron' | 'previous_patron' | 'alumni_director' | 'previous_chairperson' | 'focus_staff'
   name: string
   description: string
   year: string
