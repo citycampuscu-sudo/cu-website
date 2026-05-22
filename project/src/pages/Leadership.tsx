@@ -1,4 +1,4 @@
-import { User, Award, Clock, Users } from 'lucide-react';
+import { User, Award, Clock, Users, BookOpen } from 'lucide-react';
 import { useContent } from '../hooks/useContent';
 import { useSupabaseLeadership } from '../hooks/useSupabaseLeadership';
 
@@ -12,7 +12,8 @@ export default function Leadership() {
   const currentPatron = supabaseRoles?.find(r => r.role_type === 'current_patron') || content.leadership?.currentPatron;
   const previousPatron = supabaseRoles?.find(r => r.role_type === 'previous_patron') || content.leadership?.previousPatron;
   const alumniDirector = supabaseRoles?.find(r => r.role_type === 'alumni_director') || content.leadership?.alumniDirector;
-  const previousChairpersons = supabaseRoles?.filter(r => r.role_type === 'previous_chairperson')?.length > 0 ? supabaseRoles.filter(r => r.role_type === 'previous_chairperson') : (content.leadership?.previousChairpersons || []);
+  const focusStaffs = supabaseRoles?.filter(r => r.role_type === 'focus_staff') || [];
+  const previousChairpersons = supabaseRoles?.filter(r => r.role_type === 'previous_chairperson')?.length > 0 ? supabaseRoles.filter(r => r.role_type === 'previous_chairperson') : (content.leaders || []);
 
 
   return (
@@ -122,6 +123,53 @@ export default function Leadership() {
                 </div>
               )}
             </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {focusStaffs && focusStaffs.length > 0 && (
+          <div className="mb-12 bg-white rounded-2xl shadow-xl p-8">
+            <div className="flex items-center justify-center mb-6">
+              <BookOpen style={{ color: '#2e3e87' }} size={40} className="mr-3" />
+              <h2 className="text-3xl font-bold" style={{ color: '#2e3e87' }}>Recent FOCUS Staffs</h2>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {focusStaffs.map((staff: any, index: number) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 p-6"
+                  style={{ borderTop: '4px solid #b4712d' }}
+                >
+                  <div className="flex items-start mb-4">
+                    <div
+                      className="p-3 rounded-full mr-4"
+                      style={{ backgroundColor: '#2e3e87' }}
+                    >
+                      <BookOpen className="text-white" size={24} />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-lg font-semibold text-gray-800">
+                        {staff.name}
+                      </p>
+                      {staff.year && (
+                        <p className="text-sm" style={{ color: '#b4712d' }}>
+                          {staff.year}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  {staff.description && (
+                    <div
+                      className="pt-4 mt-4"
+                      style={{ borderTop: '1px solid #e5e7eb' }}
+                    >
+                      <p className="text-sm text-gray-600 leading-relaxed">
+                        {staff.description}
+                      </p>
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
           </div>
