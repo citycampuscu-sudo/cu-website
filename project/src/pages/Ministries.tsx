@@ -1,5 +1,6 @@
 import { Music, Camera, Users, Globe, Book, Heart, HeartHandshake, Award } from 'lucide-react';
 import { useContent } from '../hooks/useContent';
+import { useSupabaseMinistries } from '../hooks/useSupabaseMinistries';
 
 interface MinistriesProps {
   onNavigate: (page: string) => void;
@@ -7,8 +8,7 @@ interface MinistriesProps {
 
 export default function Ministries({ onNavigate }: MinistriesProps) {
   const { content, loading } = useContent();
-  
-  if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  const { ministries: supabaseMinistries, loading: ministriesLoading } = useSupabaseMinistries();
   
   const iconMap = {
     Music,
@@ -25,7 +25,7 @@ export default function Ministries({ onNavigate }: MinistriesProps) {
     {
       icon: 'Music',
       name: 'Board Ministry',
-      description: 'Comprises the Praise and worship, Choir, Creative ministry and instrumentalists. Responsible for plays, connecting and handling instruments, praise and worship sessions, choir, and worship experiences.',
+      description: 'Comprises the Praise and worship, Choir, Creative ministry and instrumentalists. Responsible for plays, connecting and handling instruments, praise and worship sessions, choir, [...]',
       leader: 'Board Director',
       activities: 'Praise & worship, choir practice, instrument training'
     },
@@ -73,10 +73,15 @@ export default function Ministries({ onNavigate }: MinistriesProps) {
     },
   ];
   
-  const ministries = content.ministries?.list || defaultMinistries;
+  // Use Supabase data if available, otherwise use defaults
+  const ministries = supabaseMinistries.length > 0 ? supabaseMinistries : defaultMinistries;
+  const isLoading = loading || ministriesLoading;
 
   return (
     <div className="min-h-screen">
+      {isLoading && (
+        <div className="fixed top-0 left-0 right-0 h-1 bg-blue-600 animate-pulse z-50"></div>
+      )}
       <div
         className="relative h-64 flex items-center justify-center text-white"
         style={{
