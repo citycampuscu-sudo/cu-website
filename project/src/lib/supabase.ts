@@ -44,6 +44,17 @@ export interface LeadershipRole {
   created_at: string
 }
 
+export interface Ministry {
+  id: string
+  name: string
+  description: string
+  icon: string
+  leader: string
+  activities: string
+  contact?: string
+  created_at: string
+}
+
 export interface Event {
   id: string
   title: string
