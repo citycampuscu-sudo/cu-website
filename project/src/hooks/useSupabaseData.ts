@@ -27,18 +27,20 @@ export const useSupabaseData = () => {
     
     const fetchAll = async () => {
       try {
-        const [leadersRes, rolesRes, eventsRes, imagesRes] = await Promise.all([
+        const [leadersRes, rolesRes, eventsRes, imagesRes, ministriesRes] = await Promise.all([
           supabase.from('leaders').select('*').order('created_at', { ascending: true }),
           supabase.from('leadership_roles').select('*').order('created_at', { ascending: true }),
           supabase.from('events').select('*').order('date', { ascending: true }),
-          supabase.from('gallery_images').select('*').order('created_at', { ascending: false })
+          supabase.from('gallery_images').select('*').order('created_at', { ascending: false }),
+          supabase.from('ministries').select('*').order('created_at', { ascending: true })
         ]);
 
         cachedData = {
           leaders: leadersRes.data || [],
           roles: rolesRes.data || [],
           events: eventsRes.data || [],
-          images: imagesRes.data || []
+          images: imagesRes.data || [],
+          ministries: ministriesRes.data || []
         };
 
         setData(cachedData);
