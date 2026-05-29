@@ -74,9 +74,42 @@ export default function Gallery() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {images.map((image, index) => (
-            <div
+        <div className="space-y-16">
+  {images.map((image, index) => (
+    <div
+      key={index}
+      className={`flex flex-col lg:flex-row ${
+        index % 2 === 1 ? 'lg:flex-row-reverse' : ''
+      } items-center gap-8`}
+    >
+      <div
+        className="w-full lg:w-1/2 overflow-hidden rounded-2xl shadow-lg cursor-pointer"
+        onClick={() => setSelectedImage(image.url)}
+      >
+        <img
+          src={image.url}
+          alt={image.title}
+          loading="lazy"
+          className="w-full h-[350px] object-cover hover:scale-105 transition-transform duration-500"
+        />
+      </div>
+
+      <div className="w-full lg:w-1/2">
+        <span className="inline-block mb-3 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+          {image.category}
+        </span>
+
+        <h2 className="text-3xl font-bold mb-4 text-gray-900">
+          {image.title}
+        </h2>
+
+        <p className="text-lg text-gray-700 leading-relaxed">
+          {image.description}
+        </p>
+      </div>
+    </div>
+  ))}
+</div>
               key={index}
               className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer aspect-[4/3]"
               onClick={() => setSelectedImage(image.url)}
