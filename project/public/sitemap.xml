@@ -7,57 +7,57 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mukccu.org/#/about</loc>
+    <loc>https://mukccu.org/about</loc>
     <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mukccu.org/#/leadership</loc>
+    <loc>https://mukccu.org/leadership</loc>
     <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mukccu.org/#/ministries</loc>
+    <loc>https://mukccu.org/ministries</loc>
     <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mukccu.org/#/weekly-activities</loc>
+    <loc>https://mukccu.org/weekly-activities</loc>
     <lastmod>2026-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mukccu.org/#/events</loc>
+    <loc>https://mukccu.org/events</loc>
     <lastmod>2026-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://mukccu.org/#/gallery</loc>
+    <loc>https://mukccu.org/gallery</loc>
     <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mukccu.org/#/social-media</loc>
+    <loc>https://mukccu.org/social-media</loc>
     <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mukccu.org/#/contacts</loc>
+    <loc>https://mukccu.org/contacts</loc>
     <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://mukccu.org/#/affiliations</loc>
+    <loc>https://mukccu.org/affiliations</loc>
     <lastmod>2026-05-22</lastmod>
-    <changefreq>quarterly</changefreq>
+    <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
 </urlset>
