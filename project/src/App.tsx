@@ -80,12 +80,12 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      <Navigation currentPage={currentPage} onNavigate={setCurrentPage} />
-      <main>{renderPage()}</main>
-      <Footer />
-    </div>
-  );
+  <div className="min-h-screen bg-white flex items-center justify-center">
+    <h1 className="text-4xl font-bold">
+      Hello MUKCCU
+    </h1>
+  </div>
+);
 }
 
 export default App;
