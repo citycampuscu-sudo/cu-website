@@ -32,7 +32,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center space-x-3 cursor-pointer" onClick={() => handleNavClick('Home')}>
-            <img src="/MUKCCU LOGO.jpg" alt="MUKCCU Logo" className="h-14 w-14 rounded-full object-cover" />
+            <img src="/MUKCCU LOGO.jpg" alt="MUKCCU Logo" className="h-16 w-16 rounded-full object-cover" />
             <div>
               <h1 className="text-xl font-bold" style={{ color: '#2e3e87' }}>MUKCCU</h1>
               <p className="text-xs" style={{ color: '#b4712d' }}>Pursuing Holiness</p>
@@ -56,18 +56,30 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
             ))}
           </div>
 
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+<button
+  onClick={() => setIsOpen(!isOpen)}
+  className="relative lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+>
+  <Menu
+    size={24}
+    className={`transition-all duration-300 ${
+      isOpen ? 'opacity-0 rotate-90' : 'opacity-100 rotate-0'
+    }`}
+  />
+
+  <X
+    size={24}
+    className={`absolute top-2 left-2 transition-all duration-300 ${
+      isOpen ? 'opacity-100 rotate-0' : 'opacity-0 -rotate-90'
+    }`}
+  />
+</button>
         </div>
 
         {isOpen && (
   <>
     <div
-      className="fixed inset-0 bg-black bg-opacity-40 z-40 lg:hidden"
+      className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 lg:hidden"
       onClick={() => setIsOpen(false)}
     />
 
