@@ -76,12 +76,12 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
               <button
                 key={item}
                 onClick={() => handleNavClick(item)}
-                className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${
+                className={`w-full text-left px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                   currentPage === item
                     ? 'text-white shadow-lg'
                     : 'text-gray-700 hover:bg-gray-100'
                 }`}
-                style={currentPage === item ? { backgroundColor: '#2e3e87' } : {}}
+                style={currentPage === item ? { backgroundColor: '#b4712d' } : {}}
               >
                 {item}
               </button>
