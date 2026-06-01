@@ -65,7 +65,13 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
         </div>
 
         {isOpen && (
-          <div className="lg:hidden pb-4 space-y-2">
+  <>
+    <div
+      className="fixed inset-0 bg-black bg-opacity-40 z-40 lg:hidden"
+      onClick={() => setIsOpen(false)}
+    />
+
+    <div className="relative z-50 lg:hidden pb-4 space-y-2 bg-white">
             {navItems.map((item) => (
               <button
                 key={item}
@@ -80,8 +86,9 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                 {item}
               </button>
             ))}
-          </div>
-        )}
+    </div>
+  </>
+)}
       </div>
     </nav>
   );
