@@ -28,7 +28,10 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
   };
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
+    <nav
+  className="bg-white shadow-md sticky top-0 z-50 border-b-2"
+  style={{ borderColor: '#b4712d' }}
+>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center space-x-3 cursor-pointer" onClick={() => handleNavClick('Home')}>
@@ -83,17 +86,24 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
       onClick={() => setIsOpen(false)}
     />
 
-    <div className="relative z-50 lg:hidden pb-4 space-y-2 bg-white">
+    <div className="relative z-50 lg:hidden p-4 space-y-1 bg-white shadow-xl">
             {navItems.map((item) => (
               <button
                 key={item}
                 onClick={() => handleNavClick(item)}
-                className={`w-full text-left px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                className={`w-full text-left px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:translate-x-2 ${
                   currentPage === item
                     ? 'text-white shadow-lg'
                     : 'text-gray-700 hover:bg-gray-100'
                 }`}
-                style={currentPage === item ? { backgroundColor: '#b4712d' } : {}}
+                style={
+  currentPage === item
+    ? {
+        backgroundColor: '#b4712d',
+        fontWeight: '700'
+      }
+    : {}
+}
               >
                 {item}
               </button>
