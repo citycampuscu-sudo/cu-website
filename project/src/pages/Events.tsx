@@ -77,18 +77,47 @@ export default function Events() {
         <div className="fixed top-0 left-0 right-0 h-1 bg-blue-600 animate-pulse z-50"></div>
       )}
       <div
-        className="relative h-64 flex items-center justify-center text-white"
+  className="relative h-80 md:h-96 flex items-center justify-center text-white"
         style={{
           background: 'linear-gradient(135deg, #2e3e87 0%, #1a2351 100%)'
         }}
       >
         <div className="text-center px-4">
-          <h1 className="text-5xl font-bold mb-2">{content.events?.pageTitle || 'Events'}</h1>
-          <p className="text-xl" style={{ color: '#b4712d' }}>{content.events?.pageSubtitle || 'Join Us in Celebration and Fellowship'}</p>
+          <h1 className="text-5xl md:text-7xl font-bold mb-4">{content.events?.pageTitle || 'Events'}</h1>
+          <p className="text-xl md:text-2xl" style={{ color: '#b4712d' }}>{content.events?.pageSubtitle || 'Join Us in Celebration and Fellowship'}</p>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+  <div className="bg-white rounded-2xl shadow-lg p-6 text-center">
+    <h3 className="text-3xl font-bold" style={{ color: '#2e3e87' }}>
+      {events.length}
+    </h3>
+    <p className="text-gray-600">Upcoming Events</p>
+  </div>
+
+  <div className="bg-white rounded-2xl shadow-lg p-6 text-center">
+    <h3 className="text-3xl font-bold" style={{ color: '#2e3e87' }}>
+      4
+    </h3>
+    <p className="text-gray-600">Regular Activities</p>
+  </div>
+
+  <div className="bg-white rounded-2xl shadow-lg p-6 text-center">
+    <h3 className="text-3xl font-bold" style={{ color: '#2e3e87' }}>
+      100+
+    </h3>
+    <p className="text-gray-600">Members</p>
+  </div>
+
+  <div className="bg-white rounded-2xl shadow-lg p-6 text-center">
+    <h3 className="text-3xl font-bold" style={{ color: '#2e3e87' }}>
+      11+
+    </h3>
+    <p className="text-gray-600">Years</p>
+  </div>
+</div>
         <div className="mb-16">
           <h2 className="text-4xl font-bold text-center mb-4" style={{ color: '#2e3e87' }}>
             Upcoming Events
@@ -97,7 +126,7 @@ export default function Events() {
             Mark your calendars and join us for these special gatherings
           </p>
 
-          <div className="space-y-6">
+          <div className="space-y-8">
             {events.map((event: any, index: number) => {
               const Icon = event.icon || Calendar;
               return (
@@ -107,9 +136,11 @@ export default function Events() {
                 >
                   <div className="flex flex-col md:flex-row">
                     <div
-                      className="md:w-48 p-8 flex flex-col items-center justify-center text-white"
-                      style={{ backgroundColor: event.color }}
-                    >
+  className="md:w-48 p-8 flex flex-col items-center justify-center text-white"
+  style={{
+    backgroundColor: event.color || '#2e3e87'
+  }}
+>
                       <Icon size={48} className="mb-4" />
                       <div className="text-center">
                         <p className="text-3xl font-bold mb-1">
@@ -120,8 +151,17 @@ export default function Events() {
                         </p>
                       </div>
                     </div>
-                    <div className="flex-1 p-8">
-                      <h3 className="text-2xl font-bold mb-4" style={{ color: '#2e3e87' }}>
+                    <div className="flex-1 p-6 md:p-8">
+                      <span
+  className="inline-block px-3 py-1 rounded-full text-xs font-bold mb-3"
+  style={{
+    backgroundColor: '#b4712d20',
+    color: '#b4712d',
+  }}
+>
+  SPECIAL EVENT
+</span>
+<h3 className="text-3xl font-bold mb-4" style={{ color: '#2e3e87' }}>
                         {event.title}
                       </h3>
                       <div className="space-y-2 mb-4">
@@ -165,7 +205,7 @@ export default function Events() {
               return (
                 <div
                   key={index}
-                  className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-6"
+                  className="bg-white rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-6"
                   style={{ borderLeft: '4px solid #b4712d' }}
                 >
                   <div className="flex items-start mb-4">
@@ -199,7 +239,28 @@ export default function Events() {
             })}
           </div>
         </div>
+<div className="mb-16">
+  <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
+    <h2
+      className="text-3xl font-bold mb-4"
+      style={{ color: '#2e3e87' }}
+    >
+      Invite a Friend
+    </h2>
 
+    <p className="text-gray-600 max-w-2xl mx-auto mb-6">
+      Our events are open to all students. Bring a friend and
+      experience worship, fellowship and spiritual growth together.
+    </p>
+
+    <button
+      className="px-8 py-3 rounded-full text-white font-semibold"
+      style={{ backgroundColor: '#b4712d' }}
+    >
+      Everyone is Welcome
+    </button>
+  </div>
+</div>
         <div
           className="rounded-2xl shadow-xl p-8 md:p-12 text-center text-white"
           style={{ backgroundColor: '#2e3e87' }}

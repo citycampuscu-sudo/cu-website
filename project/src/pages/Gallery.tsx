@@ -87,15 +87,19 @@ export default function Gallery() {
         onClick={() => setSelectedImage(image.url)}
       >
         <img
-          src={image.url}
-          alt={image.title}
-          loading="lazy"
-          className="w-full h-[350px] object-cover hover:scale-105 transition-transform duration-500"
-        />
+  src={image.url}
+  alt={image.title}
+  loading="lazy"
+  decoding="async"
+  className="w-full h-[350px] object-cover hover:scale-105 transition-transform duration-500"
+/>
       </div>
 
       <div className="w-full lg:w-1/2">
-        <span className="inline-block mb-3 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+        <span
+  className="inline-block mb-3 px-3 py-1 rounded-full text-sm text-white"
+  style={{ backgroundColor: '#b4712d' }}
+>
           {image.category}
         </span>
 
@@ -158,9 +162,9 @@ export default function Gallery() {
           onClick={() => setSelectedImage(null)}
         >
           <button
-            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
-            onClick={() => setSelectedImage(null)}
-          >
+  className="absolute top-4 right-4 text-white bg-black/40 p-2 rounded-full hover:bg-black/60 transition-all"
+  onClick={() => setSelectedImage(null)}
+>
             <X size={32} />
           </button>
           <img
