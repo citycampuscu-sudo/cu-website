@@ -1,14 +1,17 @@
 import { Music, Camera, Users, Globe, Book, Heart, HeartHandshake, Award } from 'lucide-react';
 import { useContent } from '../hooks/useContent';
 import { useSupabaseMinistries } from '../hooks/useSupabaseMinistries';
+import { useState } from 'react';
+import MinistryRegistrationModal from '../components/MinistryRegistrationModal';
+  
 
-interface MinistriesProps {
-  onNavigate: (page: string) => void;
-}
+interface MinistriesProps {}
 
-export default function Ministries({ onNavigate }: MinistriesProps) {
+export default function Ministries() {
   const { content, loading } = useContent();
   const { ministries: supabaseMinistries, loading: ministriesLoading } = useSupabaseMinistries();
+  const [selectedMinistry, setSelectedMinistry] = useState('');
+  const [showModal, setShowModal] = useState(false);
   
   const iconMap = {
     Music,
@@ -107,11 +110,22 @@ export default function Ministries({ onNavigate }: MinistriesProps) {
             return (
               <div
                 key={index}
-                className="flex items-start bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 group"
+                className="
+flex
+flex-col
+sm:flex-row
+items-start bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 group"
                 style={{ borderLeft: '6px solid #b4712d' }}
               >
                 <div
-                  className="p-4 rounded-xl mr-6 flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+                  className="
+p-4
+rounded-xl
+mb-4
+sm:mb-0
+sm:mr-6
+self-center
+sm:self-start flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
                   style={{ backgroundColor: '#2e3e87' }}
                 >
                   <Icon className="text-white" size={32} />
@@ -129,7 +143,9 @@ export default function Ministries({ onNavigate }: MinistriesProps) {
                     {ministry.description}
                   </p>
                   {ministry.activities && (
-                    <div className="mt-3 p-3 bg-gray-50 rounded-lg">
+                    <div className="mt-3 p-3 bg-blue-50
+border
+border-blue-100 rounded-lg">
                       <p className="text-sm font-medium text-gray-600 mb-1">Key Activities:</p>
                       <p className="text-sm text-gray-700">{ministry.activities}</p>
                     </div>
@@ -137,15 +153,13 @@ export default function Ministries({ onNavigate }: MinistriesProps) {
                   <div className="mt-4">
                     <button
                       onClick={() => {
-                        const phone = ministry.contact || '+254700000000';
-                        const message = `Hi! I would like to join the ${ministry.name}. Please provide me with more information about how to get involved. Thank you!`;
-                        const whatsappUrl = `https://wa.me/${phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
-                        window.open(whatsappUrl, '_blank');
-                      }}
+  setSelectedMinistry(ministry.name);
+  setShowModal(true);
+}}
                       className="px-6 py-2 rounded-full font-semibold transition-all duration-300 hover:scale-105 shadow-md"
                       style={{ backgroundColor: '#25D366', color: 'white' }}
                     >
-                      Join via WhatsApp
+                      Join Ministry
                     </button>
                   </div>
                 </div>
@@ -166,7 +180,10 @@ export default function Ministries({ onNavigate }: MinistriesProps) {
               Join a ministry and use your God-given talents to make an impact for the Kingdom. Every member is vital to the body of Christ.
             </p>
             <button
-              onClick={() => onNavigate('Contacts')}
+              onClick={() => {
+  setSelectedMinistry('General Ministry Registration');
+  setShowModal(true);
+}}
               className="px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg"
               style={{ backgroundColor: '#b4712d', color: 'white' }}
             >
@@ -204,6 +221,11 @@ export default function Ministries({ onNavigate }: MinistriesProps) {
           </div>
         </div>
       </div>
+      <MinistryRegistrationModal
+  ministry={selectedMinistry}
+  isOpen={showModal}
+  onClose={() => setShowModal(false)}
+/>
     </div>
   );
 }
