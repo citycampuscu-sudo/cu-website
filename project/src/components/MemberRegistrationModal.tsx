@@ -28,15 +28,24 @@ export default function MemberRegistrationModal({
     setLoading(true);
 
     const { error } = await supabase
-      .from('member_registrations')
-      .insert([formData]);
+  .from('member_registrations')
+  .insert([
+    {
+      full_name: formData.fullName,
+      school: formData.school,
+      phone: formData.phone,
+      year_of_study: formData.yearOfStudy,
+      residence: formData.residence
+    }
+  ]);
 
     setLoading(false);
 
     if (error) {
-      alert('Failed to submit registration');
-      return;
-    }
+  console.error(error);
+  alert(error.message);
+  return;
+}
 
     alert('Registration submitted successfully');
 
@@ -100,6 +109,7 @@ I would like to become a member of Maseno University Kisumu Campus Christian Uni
 
           <input
             required
+            type="text"
             placeholder="School / Faculty"
             className="w-full border rounded-lg p-3"
             value={formData.school}

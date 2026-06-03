@@ -92,8 +92,7 @@ onClose();
 
 <input
   required
-  type="tel"
-  pattern="[0-9]{10,13}"
+  type="text"
   placeholder="Full Name"
   className="w-full border rounded-lg p-3"
   value={formData.contact}
@@ -107,6 +106,7 @@ onClose();
 
           <input
             required
+            type="text"
             placeholder="School / Faculty"
             className="w-full border rounded-lg p-3"
             value={formData.school}

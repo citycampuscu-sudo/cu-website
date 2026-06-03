@@ -40,7 +40,7 @@ const sortedLeaders = [...leaders].sort((a: any, b: any) => {
   const currentPatron = supabaseRoles?.find(r => r.role_type === 'current_patron') || content.leadership?.currentPatron;
   const previousPatron = supabaseRoles?.find(r => r.role_type === 'previous_patron') || content.leadership?.previousPatron;
   const alumniDirector = supabaseRoles?.find(r => r.role_type === 'alumni_director') || content.leadership?.alumniDirector;
-  const recentFocusStaffs = supabaseRoles?.filter(r => r.role_type === 'recent Focus Staffs') || [];
+  const recentFOCUSStaffs = supabaseRoles?.filter(r => r.role_type === 'recent FOCUS Staffs') || [];
   const previousChairpersons = supabaseRoles?.filter(r => r.role_type === 'previous_chairperson')?.length > 0 ? supabaseRoles.filter(r => r.role_type === 'previous_chairperson') : (content.leadership?.previousChairpersons || []);
 
 
@@ -175,7 +175,7 @@ const sortedLeaders = [...leaders].sort((a: any, b: any) => {
           </div>
         )}
 
-        {recentFocusStaffs && recentFocusStaffs.length > 0 && (
+        {recentFOCUSStaffs && recentFOCUSStaffs.length > 0 && (
           <div className="mb-12 bg-white rounded-2xl shadow-xl p-8">
             <div className="flex items-center justify-center mb-6">
               <BookOpen style={{ color: '#2e3e87' }} size={40} className="mr-3" />
@@ -187,7 +187,7 @@ const sortedLeaders = [...leaders].sort((a: any, b: any) => {
 </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {recentFocusStaffs.map((staff: any, index: number) => (
+              {recentFOCUSStaffs.map((staff: any, index: number) => (
                 <div
                   key={index}
                   className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 p-5 md:p-6"
