@@ -1,13 +1,14 @@
 import { Book, Heart, Users, Target, Calendar, MapPin } from 'lucide-react';
 import { useContent } from '../hooks/useContent';
-
+import { useState } from 'react';
+import MemberRegistrationModal from '../components/MemberRegistrationModal';
 interface HomeProps {
   onNavigate: (page: string) => void;
 }
 
 export default function Home({ onNavigate }: HomeProps) {
   const { content, loading } = useContent();
-  
+  const [showMemberModal, setShowMemberModal] = useState(false);
   if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   const coreValues = [
     { icon: Heart, title: 'Godliness', description: 'Living in reverence and devotion to God' },
@@ -37,13 +38,23 @@ export default function Home({ onNavigate }: HomeProps) {
           <p className="text-2xl font-semibold mb-8">
             {content.home?.welcomeText || 'Pursuing Holiness'}
           </p>
-          <button
-            onClick={() => onNavigate('About')}
-            className="px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg"
-            style={{ backgroundColor: '#b4712d', color: 'white' }}
-          >
-            Learn More
-          </button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+  <button
+    onClick={() => onNavigate('About')}
+    className="px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg"
+    style={{ backgroundColor: '#b4712d', color: 'white' }}
+  >
+    Learn More
+  </button>
+
+  <button
+    onClick={() => setShowMemberModal(true)}
+    className="px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg"
+    style={{ backgroundColor: '#25D366', color: 'white' }}
+  >
+    Join CU
+  </button>
+</div>
         </div>
       </div>
 
@@ -155,6 +166,11 @@ export default function Home({ onNavigate }: HomeProps) {
           </div>
         </div>
       </div>
+
+      <MemberRegistrationModal
+        isOpen={showMemberModal}
+        onClose={() => setShowMemberModal(false)}
+      />
     </div>
   );
 }

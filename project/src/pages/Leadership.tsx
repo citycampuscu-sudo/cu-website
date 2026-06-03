@@ -22,8 +22,13 @@ export default function Leadership() {
 ];
 
 const sortedLeaders = [...leaders].sort((a: any, b: any) => {
-  const aIndex = positionOrder.indexOf(a.position);
-  const bIndex = positionOrder.indexOf(b.position);
+  const aIndex = positionOrder.findIndex(
+    p => p.toLowerCase() === a.position?.trim().toLowerCase()
+  );
+
+  const bIndex = positionOrder.findIndex(
+    p => p.toLowerCase() === b.position?.trim().toLowerCase()
+  );
 
   return (
     (aIndex === -1 ? 999 : aIndex) -
@@ -35,7 +40,7 @@ const sortedLeaders = [...leaders].sort((a: any, b: any) => {
   const currentPatron = supabaseRoles?.find(r => r.role_type === 'current_patron') || content.leadership?.currentPatron;
   const previousPatron = supabaseRoles?.find(r => r.role_type === 'previous_patron') || content.leadership?.previousPatron;
   const alumniDirector = supabaseRoles?.find(r => r.role_type === 'alumni_director') || content.leadership?.alumniDirector;
-  const recentFocusStaffs = supabaseRoles?.filter(r => r.role_type === 'recent_Focus Staffs') || [];
+  const recentFocusStaffs = supabaseRoles?.filter(r => r.role_type === 'recent Focus Staffs') || [];
   const previousChairpersons = supabaseRoles?.filter(r => r.role_type === 'previous_chairperson')?.length > 0 ? supabaseRoles.filter(r => r.role_type === 'previous_chairperson') : (content.leadership?.previousChairpersons || []);
 
 

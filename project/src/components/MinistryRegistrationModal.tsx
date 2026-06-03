@@ -94,7 +94,7 @@ onClose();
   required
   type="tel"
   pattern="[0-9]{10,13}"
-  placeholder="Phone Number"
+  placeholder="Full Name"
   className="w-full border rounded-lg p-3"
   value={formData.contact}
   onChange={(e) =>
