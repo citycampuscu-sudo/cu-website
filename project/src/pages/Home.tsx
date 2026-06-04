@@ -60,12 +60,33 @@ export default function Home({ onNavigate }: HomeProps) {
     Join CU
   </button>
 </div>
-        </div>
       </div>
+    </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4" style={{ color: '#2e3e87' }}>
+    <section className="bg-white py-12">
+      <div className="max-w-4xl mx-auto px-6 text-center">
+        <p className="text-lg text-gray-700 leading-relaxed">
+          Maseno University Kisumu Campus Christian Union (MUKCCU) is a vibrant
+          fellowship of students committed to knowing Christ, growing in faith,
+          and serving God with excellence. Our mission is to nurture belief in
+          Christ and develop Christ-like character among students and the wider
+          community through worship, discipleship, prayer, Bible study,
+          evangelism, leadership development, and fellowship.Maseno University Kisumu Campus Christian Union was established in prayer long before it came to be. It was established through prayer by people who believed in God and had passion for the young generation (they were not students themselves). They prayed and fasted day and night for its establishment. They even walked, not once, up and down the stairs dedicating the campus to God.On February 2015, the CU launched its first Sunday service with fully operational Executive Committee. Since then, the CU has grown enormously in terms of numbers, spiritual growth, structures and activities.We provide a welcoming environment where students can build meaningful friendships,
+          discover their God-given purpose, and grow spiritually while pursuing
+          academic excellence. Through weekly services, small group fellowships,
+          mentorship programs, outreach activities, missions, conferences, and
+          community engagement initiatives, MUKCCU seeks to impact lives and
+          transform society with the love of Christ. Whether you are a new
+          student, continuing student, alumnus, or visitor, you are welcome to
+          join our family as we pursue holiness, unity, integrity, godliness,
+          and excellence. Explore our ministries, upcoming events, leadership,
+          and activities, and become part of a community dedicated to living as
+          true disciples of Jesus Christ.
+        </p>
+      </div>
+    </section>
+
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             Scripture of the Week
           </h2>
           <div
