@@ -40,8 +40,16 @@ const sortedLeaders = [...leaders].sort((a: any, b: any) => {
   const currentPatron = supabaseRoles?.find(r => r.role_type === 'current_patron') || content.leadership?.currentPatron;
   const previousPatron = supabaseRoles?.find(r => r.role_type === 'previous_patron') || content.leadership?.previousPatron;
   const alumniDirector = supabaseRoles?.find(r => r.role_type === 'alumni_director') || content.leadership?.alumniDirector;
-  const recentFOCUSStaffs = supabaseRoles?.filter(r => r.role_type === 'recent FOCUS Staffs') || [];
-  const previousChairpersons = supabaseRoles?.filter(r => r.role_type === 'previous_chairperson')?.length > 0 ? supabaseRoles.filter(r => r.role_type === 'previous_chairperson') : (content.leadership?.previousChairpersons || []);
+  const recentFOCUSStaffs =
+  supabaseRoles
+    ?.filter(r => r.role_type === 'recent FOCUS Staffs')
+    ?.sort((a, b) => parseInt(b.year) - parseInt(a.year)) || [];
+  const previousChairpersons =
+  supabaseRoles?.filter(r => r.role_type === 'previous_chairperson')?.length > 0
+    ? supabaseRoles
+        .filter(r => r.role_type === 'previous_chairperson')
+        .sort((a, b) => parseInt(b.year) - parseInt(a.year))
+    : (content.leadership?.previousChairpersons || []);
 
 
   return (
