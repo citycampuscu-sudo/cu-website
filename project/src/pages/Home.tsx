@@ -29,11 +29,16 @@ export default function Home({ onNavigate }: HomeProps) {
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/60"></div>
         <div className="relative z-10 text-center px-4 max-w-4xl">
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 animate-fade-in">
-            {content.home?.heroTitle || 'Welcome to MUKCCU'}
-          </h1>
-          <p className="text-xl md:text-2xl mb-3" style={{ color: '#b4712d' }}>
-            {content.home?.heroSubtitle || 'Maseno University Kisumu Campus Christian Union'}
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4">
+  Maseno University Kisumu Campus Christian Union
+</h1>
+
+<h2
+  className="text-xl md:text-2xl mb-3"
+  style={{ color: '#b4712d' }}
+>
+  Welcome to MUKCCU
+</h2>
           </p>
           <p className="text-2xl font-semibold mb-8">
             {content.home?.welcomeText || 'Pursuing Holiness'}
