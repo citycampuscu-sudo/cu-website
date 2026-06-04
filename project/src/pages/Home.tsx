@@ -39,7 +39,7 @@ export default function Home({ onNavigate }: HomeProps) {
 >
   Welcome to MUKCCU
 </h2>
-          </p>
+          
           <p className="text-2xl font-semibold mb-8">
             {content.home?.welcomeText || 'Pursuing Holiness'}
           </p>
