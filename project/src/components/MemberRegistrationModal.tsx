@@ -31,10 +31,10 @@ export default function MemberRegistrationModal({
   .from('member_registrations')
   .insert([
     {
-      full_name: formData.fullName,
+      full_name: formData.full_name,
       school: formData.school,
       phone: formData.phone,
-      year_of_study: formData.yearOfStudy,
+      year_of_study: formData.year_of_study,
       residence: formData.residence
     }
   ]);

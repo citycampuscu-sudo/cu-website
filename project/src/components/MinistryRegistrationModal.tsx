@@ -95,11 +95,11 @@ onClose();
   type="text"
   placeholder="Full Name"
   className="w-full border rounded-lg p-3"
-  value={formData.contact}
+  value={formData.full_name}
   onChange={(e) =>
     setFormData({
       ...formData,
-      contact: e.target.value
+      full_name: e.target.value
     })
   }
 />
