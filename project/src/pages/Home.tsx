@@ -87,20 +87,33 @@ export default function Home({ onNavigate }: HomeProps) {
     </section>
 
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            Scripture of the Week
-          </h2>
-          <div
-            className="max-w-3xl mx-auto p-8 rounded-2xl shadow-xl"
-            style={{ backgroundColor: '#f8f9fa', borderLeft: '6px solid #b4712d' }}
-          >
-            <p className="text-xl italic mb-4 text-gray-700">
-              "But seek first his kingdom and his righteousness, and all these things will be given to you as well."
-            </p>
-            <p className="font-semibold" style={{ color: '#2e3e87' }}>
-              Matthew 6:33
-            </p>
-          </div>
-        </div>
+  <div className="text-center mb-16">
+    <h2
+      className="text-4xl font-bold mb-4"
+      style={{ color: '#2e3e87' }}
+    >
+      Scripture of the Week
+    </h2>
+
+    <div
+      className="max-w-3xl mx-auto p-8 rounded-2xl shadow-xl"
+      style={{
+        backgroundColor: '#f8f9fa',
+        borderLeft: '6px solid #b4712d'
+      }}
+    >
+      <p className="text-xl italic mb-4 text-gray-700">
+        "But seek first his kingdom and his righteousness, and all these things will be given to you as well."
+      </p>
+
+      <p
+        className="font-semibold"
+        style={{ color: '#2e3e87' }}
+      >
+        Matthew 6:33
+      </p>
+    </div>
+  </div>
 
         <div className="mb-16">
           <h2 className="text-4xl font-bold text-center mb-12" style={{ color: '#2e3e87' }}>
