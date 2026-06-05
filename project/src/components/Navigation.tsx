@@ -35,7 +35,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center space-x-3 cursor-pointer" onClick={() => handleNavClick('Home')}>
-            <img src="/MUKCCU LOGO.jpg" alt="MUKCCU Logo" className="h-16 w-16 rounded-full object-cover" />
+            <img src="/images/MUKCCU LOGO.jpg" alt="MUKCCU Logo" className="h-16 w-16 rounded-full object-cover" />
             <div>
               <h1 className="text-xl font-bold" style={{ color: '#2e3e87' }}>MUKCCU</h1>
               <p className="text-xs" style={{ color: '#b4712d' }}>Pursuing Holiness</p>
