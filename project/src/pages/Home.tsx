@@ -70,10 +70,7 @@ export default function Home({ onNavigate }: HomeProps) {
           fellowship of students committed to knowing Christ, growing in faith,
           and serving God with excellence.
           It was established through prayer by people who believed in God and had passion for the young generation (they were not students themselves) in February 2015. Since then, the CU has grown enormously in terms of numbers, spiritual growth, structures and activities.
-          Through weekly services, small group fellowships,
-          mentorship programs, outreach activities, missions, conferences, and
-          community engagement initiatives, MUKCCU seeks to impact lives and
-          transform society with the love of Christ. 
+          
         </p>
       </div>
     </section>
