@@ -1,19 +1,28 @@
-import { Music, Camera, Users, Globe, Book, Heart, HeartHandshake, Award } from 'lucide-react';
+import {
+  Music,
+  Camera,
+  Users,
+  Globe,
+  Book,
+  Heart,
+  HeartHandshake,
+} from 'lucide-react';
+
 import { useContent } from '../hooks/useContent';
 import { useSupabaseMinistries } from '../hooks/useSupabaseMinistries';
 import { useState } from 'react';
 import MinistryRegistrationModal from '../components/MinistryRegistrationModal';
-  
-
-interface MinistriesProps {}
+import { Helmet } from 'react-helmet-async';
 
 export default function Ministries() {
   const { content, loading } = useContent();
-  const { ministries: supabaseMinistries, loading: ministriesLoading } = useSupabaseMinistries();
+  const { ministries: supabaseMinistries, loading: ministriesLoading } =
+    useSupabaseMinistries();
+
   const [selectedMinistry, setSelectedMinistry] = useState('');
   const [showModal, setShowModal] = useState(false);
-  
-  const iconMap = {
+
+  const iconMap: any = {
     Music,
     Camera,
     Users,
@@ -21,153 +30,185 @@ export default function Ministries() {
     Book,
     Heart,
     HeartHandshake,
-    Award
   };
-  
+
   const defaultMinistries = [
     {
       icon: 'Music',
       name: 'Board Ministry',
-      description: 'Comprises the Praise and worship, Choir, Creative ministry and instrumentalists. Responsible for plays, connecting and handling instruments, praise and worship sessions, choir, [...]',
+      description:
+        'Praise & worship, choir, creative arts, and instrumentalists.',
       leader: 'Board Director',
-      activities: 'Praise & worship, choir practice, instrument training'
+      activities: 'Worship, choir, instruments',
     },
     {
       icon: 'Camera',
       name: 'Media and IT',
-      description: 'Responsible for church photography, poster designing, livestreaming, screen presentations, publicity, and managing social media pages.',
+      description:
+        'Photography, livestreaming, design, and social media management.',
       leader: 'Media Coordinator',
-      activities: 'Photography, livestreaming, social media management'
+      activities: 'Media, livestream, design',
     },
     {
       icon: 'HeartHandshake',
       name: 'Hospitality Ministry',
-      description: 'Responsible for welfare of the CU, ushering and catering in all CU events.',
+      description: 'Ushering, welfare, and event coordination.',
       leader: 'Hospitality Director',
-      activities: 'Ushering, catering, welfare coordination'
+      activities: 'Ushering, welfare, catering',
     },
     {
       icon: 'Globe',
       name: 'Missions Ministry',
-      description: 'Responsible for high school missions, outreach to hostels, inreach to classes, and weekend challenges.',
+      description:
+        'Evangelism, outreach, and mission work in schools and communities.',
       leader: 'Missions Coordinator',
-      activities: 'High school missions, campus outreach, evangelism'
+      activities: 'Outreach, missions, evangelism',
     },
     {
       icon: 'Book',
       name: 'Bible Study Ministry',
-      description: 'Responsible for Bible studies and trivia sessions.',
+      description: 'Bible study, teaching, and spiritual growth sessions.',
       leader: 'Bible Study Coordinator',
-      activities: 'Bible studies, trivia sessions, teaching'
+      activities: 'Bible study, teaching',
     },
     {
       icon: 'Users',
       name: 'Discipleship Ministry',
-      description: 'Responsible for nurturing of new believers, guidance and counselling, CU library and first year\'s orientation to the CU.',
+      description:
+        'Mentorship, counselling, and nurturing new believers.',
       leader: 'Discipleship Coordinator',
-      activities: 'Mentoring, counselling, library management'
+      activities: 'Mentorship, counselling',
     },
     {
       icon: 'Heart',
       name: 'Intercessory Ministry',
-      description: 'Responsible for all prayer meetings of the CU, prayer retreats and Kesha.',
+      description: 'Prayer meetings, intercession, and spiritual warfare.',
       leader: 'Prayer Coordinator',
-      activities: 'Prayer meetings, intercession, prayer retreats'
+      activities: 'Prayer, intercession',
     },
   ];
-  
-  // Use Supabase data if available, otherwise use defaults
-  const ministries = supabaseMinistries.length > 0 ? supabaseMinistries : defaultMinistries;
+
+  const ministries =
+    supabaseMinistries.length > 0
+      ? supabaseMinistries
+      : defaultMinistries;
+
   const isLoading = loading || ministriesLoading;
 
   return (
     <div className="min-h-screen">
+
+      {/* SEO */}
+      <Helmet>
+        <title>MUKCCU Ministries | Serve at Maseno University City Campus Christian Union</title>
+        <meta
+          name="description"
+          content="Explore ministries at Maseno University City Campus Christian Union (MUKCCU). Join worship, media, missions, prayer, and discipleship ministries."
+        />
+        <meta
+          name="keywords"
+          content="MUKCCU ministries, Maseno University City Campus Christian Union worship,Maseno University Kisumu Campus Christian Union ministries, campus ministry MUKCCU"
+        />
+
+        <meta property="og:title" content="MUKCCU Ministries" />
+        <meta
+          property="og:description"
+          content="Serve God through various ministries at Maseno University City Campus Christian Union."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://mukccu.org/ministries" />
+      </Helmet>
+
+      {/* LOADING BAR */}
       {isLoading && (
         <div className="fixed top-0 left-0 right-0 h-1 bg-blue-600 animate-pulse z-50"></div>
       )}
+
+      {/* HEADER */}
       <div
         className="relative h-64 flex items-center justify-center text-white"
         style={{
-          background: 'linear-gradient(135deg, #2e3e87 0%, #1a2351 100%)'
+          background: 'linear-gradient(135deg, #2e3e87 0%, #1a2351 100%)',
         }}
       >
         <div className="text-center px-4">
-          <h1 className="text-5xl font-bold mb-2">{content.ministries?.pageTitle || 'Ministries'}</h1>
-          <p className="text-xl" style={{ color: '#b4712d' }}>{content.ministries?.pageSubtitle || 'Serving God Through Diverse Gifts'}</p>
+          <h1 className="text-5xl font-bold mb-2">
+            {content.ministries?.pageTitle || 'Ministries'}
+          </h1>
+          <p className="text-xl" style={{ color: '#b4712d' }}>
+            {content.ministries?.pageSubtitle ||
+              'Serving God Through Diverse Gifts'}
+          </p>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      {/* CONTENT */}
+      <div className="max-w-6xl mx-auto px-4 py-16">
+
         <div className="text-center mb-12">
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            Every believer is gifted for service. Our ministries provide opportunities to use your talents and passions to build up the body of Christ and reach the lost.
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+            Every believer is gifted to serve. Join a ministry and use your
+            talents to build God’s Kingdom.
           </p>
         </div>
 
+        {/* MINISTRIES LIST */}
         <div className="space-y-6">
           {ministries.map((ministry: any, index: number) => {
-            const Icon = iconMap[ministry.icon as keyof typeof iconMap] || Heart;
+            const Icon =
+              iconMap[ministry.icon as keyof typeof iconMap] || Heart;
+
             return (
               <div
                 key={index}
-                className="
-flex
-flex-col
-sm:flex-row
-items-start bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 group"
+                className="bg-white rounded-2xl shadow-lg p-6 flex flex-col sm:flex-row"
                 style={{ borderLeft: '6px solid #b4712d' }}
               >
                 <div
-                  className="
-p-4
-rounded-xl
-mb-4
-sm:mb-0
-sm:mr-6
-self-center
-sm:self-start flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+                  className="p-4 rounded-xl mb-4 sm:mb-0 sm:mr-6 self-start"
                   style={{ backgroundColor: '#2e3e87' }}
                 >
                   <Icon className="text-white" size={32} />
                 </div>
+
                 <div className="flex-1">
-                  <h3 className="text-2xl font-bold mb-3 group-hover:text-opacity-80 transition-opacity" style={{ color: '#2e3e87' }}>
+                  <h3
+                    className="text-2xl font-bold mb-2"
+                    style={{ color: '#2e3e87' }}
+                  >
                     {ministry.name}
                   </h3>
+
                   {ministry.leader && (
-                    <p className="text-sm font-semibold mb-2" style={{ color: '#b4712d' }}>
+                    <p
+                      className="text-sm font-semibold mb-2"
+                      style={{ color: '#b4712d' }}
+                    >
                       Led by: {ministry.leader}
                     </p>
                   )}
-                  <p className="text-gray-700 text-lg leading-relaxed mb-3">
+
+                  <p className="text-gray-700 mb-3">
                     {ministry.description}
                   </p>
-                  {ministry.activities && (
-                    <div className="mt-3 p-3 bg-blue-50
-border
-border-blue-100 rounded-lg">
-                      <p className="text-sm font-medium text-gray-600 mb-1">Key Activities:</p>
-                      <p className="text-sm text-gray-700">{ministry.activities}</p>
-                    </div>
-                  )}
-                  <div className="mt-4">
-                    <button
-                      onClick={() => {
-  setSelectedMinistry(ministry.name);
-  setShowModal(true);
-}}
-                      className="px-6 py-2 rounded-full font-semibold transition-all duration-300 hover:scale-105 shadow-md"
-                      style={{ backgroundColor: '#25D366', color: 'white' }}
-                    >
-                      Join Ministry
-                    </button>
-                  </div>
+
+                  <button
+                    onClick={() => {
+                      setSelectedMinistry(ministry.name);
+                      setShowModal(true);
+                    }}
+                    className="px-6 py-2 rounded-full text-white font-semibold"
+                    style={{ backgroundColor: '#25D366' }}
+                  >
+                    Join Ministry
+                  </button>
                 </div>
               </div>
             );
           })}
         </div>
 
+        {/* CTA */}
         <div className="mt-16 text-center">
           <div
             className="inline-block p-8 rounded-2xl shadow-xl"
@@ -176,56 +217,31 @@ border-blue-100 rounded-lg">
             <h3 className="text-3xl font-bold text-white mb-4">
               Ready to Serve?
             </h3>
-            <p className="text-white text-lg mb-6 max-w-xl">
-              Join a ministry and use your God-given talents to make an impact for the Kingdom. Every member is vital to the body of Christ.
+
+            <p className="text-white mb-6 max-w-xl">
+              Every member has a role in the body of Christ.
             </p>
+
             <button
               onClick={() => {
-  setSelectedMinistry('General Ministry Registration');
-  setShowModal(true);
-}}
-              className="px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg"
+                setSelectedMinistry('General Registration');
+                setShowModal(true);
+              }}
+              className="px-8 py-3 rounded-full font-semibold"
               style={{ backgroundColor: '#b4712d', color: 'white' }}
             >
               Join a Ministry
             </button>
           </div>
         </div>
-
-        <div className="mt-16 bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl shadow-lg p-8">
-          <h2 className="text-3xl font-bold text-center mb-8" style={{ color: '#2e3e87' }}>
-            Ministry Opportunities
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-xl shadow p-6 text-center">
-              <Music className="mx-auto mb-4" style={{ color: '#b4712d' }} size={40} />
-              <h4 className="font-bold text-lg mb-2" style={{ color: '#2e3e87' }}>
-                Creative Arts
-              </h4>
-              <p className="text-gray-600">Use music, drama, and arts to worship and inspire</p>
-            </div>
-            <div className="bg-white rounded-xl shadow p-6 text-center">
-              <Globe className="mx-auto mb-4" style={{ color: '#b4712d' }} size={40} />
-              <h4 className="font-bold text-lg mb-2" style={{ color: '#2e3e87' }}>
-                Outreach
-              </h4>
-              <p className="text-gray-600">Share the Gospel in campuses and communities</p>
-            </div>
-            <div className="bg-white rounded-xl shadow p-6 text-center">
-              <Heart className="mx-auto mb-4" style={{ color: '#b4712d' }} size={40} />
-              <h4 className="font-bold text-lg mb-2" style={{ color: '#2e3e87' }}>
-                Prayer
-              </h4>
-              <p className="text-gray-600">Intercede for the body and the world</p>
-            </div>
-          </div>
-        </div>
       </div>
+
+      {/* MODAL */}
       <MinistryRegistrationModal
-  ministry={selectedMinistry}
-  isOpen={showModal}
-  onClose={() => setShowModal(false)}
-/>
+        ministry={selectedMinistry}
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+      />
     </div>
   );
 }

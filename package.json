@@ -4,6 +4,7 @@
     "build": "cd project && npm install && npm run build"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.79.0"
+    "@supabase/supabase-js": "^2.79.0",
+    "react-helmet-async": "^3.0.0"
   }
 }
