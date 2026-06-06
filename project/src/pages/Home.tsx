@@ -47,7 +47,7 @@ export default function Home({ onNavigate }: HomeProps) {
       <div
         className="relative min-h-[450px] md:h-[500px] flex items-center justify-center text-white overflow-hidden"
         style={{
-          backgroundImage: 'url(/gallery/IMG_0174_transcpr.jpg)',
+          backgroundImage: 'url(/gallery/IMG_0174_transcpr.webp)',
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
