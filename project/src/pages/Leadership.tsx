@@ -398,36 +398,44 @@ const filteredLeaders = useMemo(() => {
     <div className="flex items-center justify-center mb-6">
       <Clock style={{ color: '#2e3e87' }} size={40} className="mr-3" />
       <h2
-        className="text-2xl md:text-3xl font-bold"
+  className="text-2xl md:text-3xl font-bold"
+  style={{ color: '#2e3e87' }}
+>
+  Former Executive Teams
+</h2>
+    </div>
+
+    <div className="space-y-4">
+  {leadershipArchive.map((team, index) => (
+    <details
+      key={index}
+      className="bg-gray-50 border rounded-xl overflow-hidden"
+    >
+      <summary
+        className="cursor-pointer px-6 py-4 font-bold text-lg flex justify-between items-center"
         style={{ color: '#2e3e87' }}
       >
-        Leadership Archive
-      </h2>
-    </div>
+        {team.year}
+      </summary>
 
-    <div className="space-y-6">
-      {leadershipArchive.map((team, index) => (
-        <div key={index} className="border rounded-xl p-6 bg-gray-50">
-          <h3 className="text-xl font-bold mb-4" style={{ color: '#2e3e87' }}>
-            {team.year}
-          </h3>
-
-          <div className="grid md:grid-cols-2 gap-2 text-sm">
-            <p><strong>Chairperson:</strong> {team.chairperson}</p>
-            <p><strong>Vice Chairperson:</strong> {team.viceChairperson}</p>
-            <p><strong>Secretary:</strong> {team.secretary}</p>
-            <p><strong>Vice Secretary:</strong> {team.viceSecretary}</p>
-            <p><strong>Treasurer:</strong> {team.treasurer}</p>
-            <p><strong>Board Director:</strong> {team.boardDirector}</p>
-            <p><strong>Prayer Coordinator:</strong> {team.prayerCoordinator}</p>
-            <p><strong>Missions Coordinator:</strong> {team.missionsCoordinator}</p>
-            <p><strong>Discipleship Coordinator:</strong> {team.discipleshipCoordinator}</p>
-            <p><strong>Bible Study Coordinator:</strong> {team.bibleStudyCoordinator}</p>
-            <p><strong>Hospitality Director:</strong> {team.hospitalityDirector}</p>
-          </div>
+      <div className="px-6 pb-6 border-t bg-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm mt-4">
+          <p><strong>Chairperson:</strong> {team.chairperson}</p>
+          <p><strong>Vice Chairperson:</strong> {team.viceChairperson}</p>
+          <p><strong>Secretary:</strong> {team.secretary}</p>
+          <p><strong>Vice Secretary:</strong> {team.viceSecretary}</p>
+          <p><strong>Treasurer:</strong> {team.treasurer}</p>
+          <p><strong>Board Director:</strong> {team.boardDirector}</p>
+          <p><strong>Prayer Coordinator:</strong> {team.prayerCoordinator}</p>
+          <p><strong>Missions Coordinator:</strong> {team.missionsCoordinator}</p>
+          <p><strong>Discipleship Coordinator:</strong> {team.discipleshipCoordinator}</p>
+          <p><strong>Bible Study Coordinator:</strong> {team.bibleStudyCoordinator}</p>
+          <p><strong>Hospitality Director:</strong> {team.hospitalityDirector}</p>
         </div>
-      ))}
-    </div>
+      </div>
+    </details>
+  ))}
+</div>
   </div>
 
   {/* Structure Flow */}
