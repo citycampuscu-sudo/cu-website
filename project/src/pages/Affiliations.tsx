@@ -2,16 +2,18 @@ import { Link2, Users, BookOpen, Target } from 'lucide-react';
 
 export default function Affiliations() {
   const affiliations = [
-    {
-      name: 'FOCUS Kenya',
-      icon: Users,
+{
+  name: 'FOCUS Kenya',
+  logo: '/images/focus-logo.jpeg',
+  website: 'https://www.focuskenya.org',
       description: 'FOCUS Kenya is an umbrella organization that guides Christian Unions in universities, colleges, TVETS, and KMTC\'s across Kenya.',
       role: 'Provides spiritual guidance, training resources, and connects us with the broader Christian student movement in Kenya.',
       color: '#2e3e87',
     },
-    {
-      name: 'KSCF',
-      icon: BookOpen,
+{
+  name: 'KSCF',
+  logo: '/images/kscf-logo.png',
+  website: 'https://kscf.org',
       description: 'Kenya Students Christian Fellowship connects us with high schools for missions and weekend challenges.',
       role: 'Facilitates outreach programs to secondary schools, enabling us to share the Gospel with the next generation of students.',
       color: '#b4712d',
@@ -64,18 +66,26 @@ export default function Affiliations() {
 
         <div className="space-y-8 mb-16">
           {affiliations.map((affiliation, index) => {
-            const Icon = affiliation.icon;
             return (
               <div
                 key={index}
-                className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
-              >
+                className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden" >
                 <div className="flex flex-col md:flex-row">
                   <div
                     className="md:w-64 p-8 flex flex-col items-center justify-center text-white"
                     style={{ backgroundColor: affiliation.color }}
                   >
-                    <Icon size={64} className="mb-4" />
+                    <a
+  href={affiliation.website}
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <img
+    src={affiliation.logo}
+    alt={affiliation.name}
+    className="w-24 h-24 object-contain mb-4 hover:scale-105 transition"
+  />
+</a>
                     <h3 className="text-3xl font-bold text-center">{affiliation.name}</h3>
                   </div>
                   <div className="flex-1 p-8">
@@ -94,6 +104,15 @@ export default function Affiliations() {
                       <p className="text-gray-700 text-lg leading-relaxed">
                         {affiliation.role}
                       </p>
+                      <a
+  href={affiliation.website}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-block mt-4 px-5 py-2 rounded-lg text-white font-medium transition hover:opacity-90"
+  style={{ backgroundColor: affiliation.color }}
+>
+  Learn More
+</a>
                     </div>
                   </div>
                 </div>
@@ -136,7 +155,64 @@ export default function Affiliations() {
             })}
           </div>
         </div>
+<div className="mb-16">
+  <h2
+    className="text-4xl font-bold text-center mb-10"
+    style={{ color: '#2e3e87' }}
+  >
+    How We Engage With Our Partners
+  </h2>
 
+  <div className="grid md:grid-cols-2 gap-6">
+    {[
+      'Participation in FOCUS conferences',
+      'Leadership training programs',
+      'High school mission outreaches',
+      'Regional CU fellowships',
+      'National prayer initiatives',
+      'Mentorship and discipleship support'
+    ].map((item, index) => (
+      <div
+        key={index}
+        className="bg-white rounded-xl shadow p-5 border-l-4"
+        style={{ borderColor: '#b4712d' }}
+      >
+        {item}
+      </div>
+    ))}
+  </div>
+</div>
+<div className="mb-16">
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+    <div className="bg-white rounded-xl shadow p-6 text-center">
+      <h3 className="text-3xl font-bold" style={{ color: '#2e3e87' }}>
+        2
+      </h3>
+      <p>National Affiliations</p>
+    </div>
+
+    <div className="bg-white rounded-xl shadow p-6 text-center">
+      <h3 className="text-3xl font-bold" style={{ color: '#2e3e87' }}>
+        200+
+      </h3>
+      <p>Partner CUs</p>
+    </div>
+
+    <div className="bg-white rounded-xl shadow p-6 text-center">
+      <h3 className="text-3xl font-bold" style={{ color: '#2e3e87' }}>
+        30+
+      </h3>
+      <p>Counties Reached</p>
+    </div>
+
+    <div className="bg-white rounded-xl shadow p-6 text-center">
+      <h3 className="text-3xl font-bold" style={{ color: '#2e3e87' }}>
+        Annual
+      </h3>
+      <p>Mission Engagements</p>
+    </div>
+  </div>
+</div>
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           <div
             className="rounded-2xl shadow-xl p-8"
@@ -221,21 +297,71 @@ export default function Affiliations() {
             </div>
           </div>
         </div>
+        <div className="mb-16">
+          <hr className="my-16 border-gray-200" />
+  <h2
+    className="text-4xl font-bold text-center mb-10"
+    style={{ color: '#2e3e87' }}
+  >
+    Our Journey of Partnership
+  </h2>
 
+  <div className="space-y-4">
+  <div className="bg-white rounded-xl shadow p-5 hover:shadow-lg transition-all duration-300">
+    <strong>Affiliation with FOCUS Kenya</strong>
+  </div>
+
+  <div className="bg-white rounded-xl shadow p-5 hover:shadow-lg transition-all duration-300">
+    <strong>Ongoing collaboration with KSCF for school missions</strong>
+  </div>
+
+  <div className="bg-white rounded-xl shadow p-5 hover:shadow-lg transition-all duration-300">
+    <strong>Participation in national leadership development programs</strong>
+  </div>
+</div>
+</div>
+<div className="text-center py-12">
+  <blockquote className="text-2xl italic text-gray-700 max-w-3xl mx-auto">
+    "How good and pleasant it is when God's people live together in unity!"
+  </blockquote>
+
+  <p
+    className="mt-4 text-lg font-bold"
+    style={{ color: '#b4712d' }}
+  >
+    Psalm 133:1
+  </p>
+</div>
         <div
           className="rounded-2xl shadow-xl p-8 md:p-12 text-center"
           style={{ background: 'linear-gradient(135deg, #b4712d 0%, #8b5723 100%)' }}
         >
           <h2 className="text-4xl font-bold text-white mb-4">
-            Stronger Together
-          </h2>
-          <p className="text-white text-lg mb-6 max-w-3xl mx-auto">
-            Our affiliations with FOCUS Kenya and KSCF strengthen our ministry and expand our reach. Together, we're building a generation of committed disciples who will transform their communities and the world for Christ.
-          </p>
+  Stronger Together
+</h2>
+
+<p className="text-white text-lg mb-6 max-w-3xl mx-auto">
+  Our affiliations with FOCUS Kenya and KSCF strengthen our ministry and
+  expand our reach. Together, we're building a generation of committed
+  disciples who will transform their communities and the world for Christ.
+</p>
+
+<div className="mt-8 mb-8">
+  <a
+    href="/join"
+    className="inline-block px-8 py-4 bg-white rounded-xl font-bold"
+    style={{ color: '#2e3e87' }}
+  >
+    Become Part of the Mission
+  </a>
+</div>
           <div className="flex flex-wrap justify-center gap-4">
-            <div className="px-6 py-3 bg-white rounded-full font-semibold" style={{ color: '#2e3e87' }}>
-              Part of FOCUS Kenya
-            </div>
+            <div
+  className="px-6 py-3 bg-white rounded-full font-semibold"
+  style={{ color: '#2e3e87' }}
+>
+  Part of FOCUS Kenya
+</div>
             <div className="px-6 py-3 bg-white rounded-full font-semibold" style={{ color: '#2e3e87' }}>
               Connected with KSCF
             </div>
