@@ -1,10 +1,11 @@
 {
+  "name": "cu-website",
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
     "postinstall": "npx update-browserslist-db@latest --update-db",
-    "build": "cd project && npm install && npm run build"
-  },
-  "dependencies": {
-    "@supabase/supabase-js": "^2.79.0",
-    "react-helmet-async": "^3.0.0"
+    "dev": "cd project && npm run dev",
+    "build": "cd project && npm run build",
+    "preview": "cd project && npm run preview"
   }
 }
