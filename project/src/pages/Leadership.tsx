@@ -182,6 +182,17 @@ export default function Leadership() {
                   <h2 className="text-3xl font-bold">CU Patron</h2>
                 </div>
                 <div className="text-center">
+                  {currentPatron.image_url && (
+                    <div className="flex justify-center mb-4">
+                      <img 
+                        src={currentPatron.image_url} 
+                        alt={currentPatron.name}
+                        loading="lazy"
+                        className="w-24 h-24 rounded-full object-cover border-4"
+                        style={{ borderColor: '#b4712d' }}
+                      />
+                    </div>
+                  )}
                   <p className="text-2xl font-semibold mb-2">{currentPatron.name}</p>
                   <p className="text-lg" style={{ color: '#b4712d' }}>{currentPatron.description}</p>
                 </div>
@@ -315,12 +326,22 @@ export default function Leadership() {
                       style={{ borderTop: '4px solid #b4712d' }}
                     >
                       <div className="flex items-start mb-4">
-                        <div
-                          className="p-3 rounded-full mr-4"
-                          style={{ backgroundColor: '#2e3e87' }}
-                        >
-                          <BookOpen className="text-white" size={24} />
-                        </div>
+                        {staff.image_url ? (
+                          <img 
+                            src={staff.image_url} 
+                            alt={staff.name}
+                            loading="lazy"
+                            className="w-14 h-14 rounded-full object-cover mr-4 border-2"
+                            style={{ borderColor: '#2e3e87' }}
+                          />
+                        ) : (
+                          <div
+                            className="p-3 rounded-full mr-4"
+                            style={{ backgroundColor: '#2e3e87' }}
+                          >
+                            <BookOpen className="text-white" size={24} />
+                          </div>
+                        )}
                         <div className="flex-1">
                           <p className="text-lg font-semibold text-gray-800">
                             {staff.name}
@@ -358,6 +379,17 @@ export default function Leadership() {
                   <h2 className="text-3xl font-bold">Alumni Director</h2>
                 </div>
                 <div className="text-center">
+                  {alumniDirector.image_url && (
+                    <div className="flex justify-center mb-4">
+                      <img 
+                        src={alumniDirector.image_url} 
+                        alt={alumniDirector.name}
+                        loading="lazy"
+                        className="w-24 h-24 rounded-full object-cover border-4"
+                        style={{ borderColor: '#ffffff' }}
+                      />
+                    </div>
+                  )}
                   <p className="text-2xl font-semibold mb-2">{alumniDirector.name}</p>
                   <p className="text-lg text-white">{alumniDirector.description}</p>
                 </div>
@@ -374,6 +406,17 @@ export default function Leadership() {
                   <h2 className="text-3xl font-bold">Previous CU Patron</h2>
                 </div>
                 <div className="text-center">
+                  {previousPatron.image_url && (
+                    <div className="flex justify-center mb-4">
+                      <img 
+                        src={previousPatron.image_url} 
+                        alt={previousPatron.name}
+                        loading="lazy"
+                        className="w-24 h-24 rounded-full object-cover border-4"
+                        style={{ borderColor: '#ffffff' }}
+                      />
+                    </div>
+                  )}
                   <p className="text-2xl font-semibold mb-2">{previousPatron.name}</p>
                   <p className="text-lg text-white">{previousPatron.description}</p>
                 </div>
