@@ -148,7 +148,7 @@ export default function Ministries() {
         <div className="text-center mb-12">
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             Every believer is gifted to serve. Join a ministry and use your
-            talents to build God’s Kingdom.
+            talents to build God's Kingdom.
           </p>
         </div>
 
@@ -161,17 +161,30 @@ export default function Ministries() {
             return (
               <div
                 key={index}
-                className="bg-white rounded-2xl shadow-lg p-6 flex flex-col sm:flex-row"
+                className="relative bg-white rounded-2xl shadow-lg p-6 flex flex-col sm:flex-row overflow-hidden group"
                 style={{ borderLeft: '6px solid #b4712d' }}
               >
-                <div
-                  className="p-4 rounded-xl mb-4 sm:mb-0 sm:mr-6 self-start"
-                  style={{ backgroundColor: '#2e3e87' }}
-                >
-                  <Icon className="text-white" size={32} />
+                {/* Background Image */}
+                {ministry.image && (
+                  <div
+                    className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-15 transition-opacity duration-500"
+                    style={{
+                      backgroundImage: `url(${ministry.image})`,
+                    }}
+                  />
+                )}
+
+                {/* Content Overlay */}
+                <div className="relative z-10">
+                  <div
+                    className="p-4 rounded-xl mb-4 sm:mb-0 sm:mr-6 self-start"
+                    style={{ backgroundColor: '#2e3e87' }}
+                  >
+                    <Icon className="text-white" size={32} />
+                  </div>
                 </div>
 
-                <div className="flex-1">
+                <div className="relative z-10 flex-1">
                   <h3
                     className="text-2xl font-bold mb-2"
                     style={{ color: '#2e3e87' }}
