@@ -41,6 +41,7 @@ export interface LeadershipRole {
   name: string
   description: string
   year: string
+  image_url?: string
   created_at: string
 }
 
@@ -52,6 +53,7 @@ export interface Ministry {
   leader: string
   activities: string
   contact?: string
+  image?: string
   created_at: string
 }
 
