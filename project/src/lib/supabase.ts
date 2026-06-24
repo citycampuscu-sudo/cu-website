@@ -53,7 +53,7 @@ export interface Ministry {
   leader: string
   activities: string
   contact?: string
-  image?: string
+  image_url?: string
   created_at: string
 }
 
