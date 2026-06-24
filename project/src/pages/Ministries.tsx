@@ -152,6 +152,9 @@ export default function Ministries() {
           </p>
         </div>
 
+      <div className="bg-gray-100 p-4 rounded-lg mb-6 text-xs overflow-auto">
+  <pre>{JSON.stringify(supabaseMinistries, null, 2)}</pre>
+</div>
         {/* MINISTRIES LIST */}
         <div className="space-y-6">
           {ministries.map((ministry: any, index: number) => {
