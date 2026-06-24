@@ -151,20 +151,7 @@ export default function Ministries() {
             talents to build God's Kingdom.
           </p>
         </div>
-
-      <div className="bg-yellow-100 p-4 rounded-lg mb-6 text-xs overflow-auto">
-  <pre>
-    {JSON.stringify(
-      {
-        ministriesCount: supabaseMinistries.length,
-        firstMinistry: supabaseMinistries[0],
-        loading: ministriesLoading,
-      },
-      null,
-      2
-    )}
-  </pre>
-</div>
+        
         {/* MINISTRIES LIST */}
         <div className="space-y-6">
           {ministries.map((ministry: any, index: number) => {
