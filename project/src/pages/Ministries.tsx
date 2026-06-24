@@ -217,6 +217,7 @@ export default function Ministries() {
       </button>
     </div>
   </div>
+</div>
             );
           })}
         </div>
