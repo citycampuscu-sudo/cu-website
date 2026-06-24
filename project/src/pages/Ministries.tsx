@@ -169,12 +169,12 @@ export default function Ministries() {
       className="absolute inset-0 bg-cover bg-center"
       style={{
         backgroundImage: `url(${ministry.image_url})`,
-        opacity: 0.08,
+        opacity: 0.35,
       }}
     />
   )}
 
-  <div className="absolute inset-0 bg-white/85"></div>
+  <div className="absolute inset-0 bg-white/40"></div>
 
   <div className="relative z-10 p-6 flex flex-col sm:flex-row">
     <div
