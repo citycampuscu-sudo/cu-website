@@ -165,14 +165,14 @@ export default function Ministries() {
                 style={{ borderLeft: '6px solid #b4712d' }}
               >
                 {/* Background Image */}
-                {ministry.image && (
-                  <div
-                    className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-15 transition-opacity duration-500"
-                    style={{
-                      backgroundImage: `url(${ministry.image})`,
-                    }}
-                  />
-                )}
+                {ministry.image_url && (
+  <div
+    className="absolute inset-0 bg-cover bg-center opacity-10"
+    style={{
+      backgroundImage: `url(${ministry.image_url})`,
+    }}
+  />
+)}
 
                 {/* Content Overlay */}
                 <div className="relative z-10">
