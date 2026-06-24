@@ -1,13 +1,23 @@
 import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
-interface NavigationProps {
-  currentPage: string;
-  onNavigate: (page: string) => void;
-}
-
-export default function Navigation({ currentPage, onNavigate }: NavigationProps) {
+export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+
+const routes: Record<string, string> = {
+  Home: '/',
+  About: '/about',
+  Leadership: '/leadership',
+  Ministries: '/ministries',
+  'Weekly Activities': '/weekly-activities',
+  Events: '/events',
+  Gallery: '/gallery',
+  'Social Media': '/social-media',
+  Contacts: '/contacts',
+  Affiliations: '/affiliations',
+};
 
   const navItems = [
     'Home',
@@ -22,10 +32,9 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
     'Affiliations',
   ];
 
-  const handleNavClick = (page: string) => {
-    onNavigate(page);
-    setIsOpen(false);
-  };
+  const handleNavClick = () => {
+  setIsOpen(false);
+};
 
   return (
     <nav
@@ -34,29 +43,51 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
 >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => handleNavClick('Home')}>
-            <img src="/images/MUKCCU LOGO.jpg" alt="MUKCCU Logo" className="h-16 w-16 rounded-full object-cover" />
-            <div>
-              <h1 className="text-xl font-bold" style={{ color: '#2e3e87' }}>MUKCCU</h1>
-              <p className="text-xs" style={{ color: '#b4712d' }}>Pursuing Holiness</p>
-            </div>
-          </div>
+          <Link
+  to="/"
+  className="flex items-center space-x-3 cursor-pointer"
+  onClick={() => setIsOpen(false)}
+>
+  <img
+    src="/images/MUKCCU LOGO.jpg"
+    alt="MUKCCU Logo"
+    className="h-16 w-16 rounded-full object-cover"
+  />
+
+  <div>
+    <h1 className="text-xl font-bold" style={{ color: '#2e3e87' }}>
+      MUKCCU
+    </h1>
+
+    <p className="text-xs" style={{ color: '#b4712d' }}>
+      Pursuing Holiness
+    </p>
+  </div>
+</Link>
 
           <div className="hidden lg:flex space-x-1">
             {navItems.map((item) => (
-              <button
-                key={item}
-                onClick={() => handleNavClick(item)}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                  currentPage === item
-                    ? 'text-white shadow-lg'
-                    : 'text-gray-700 hover:bg-gray-100'
-                }`}
-                style={currentPage === item ? { backgroundColor: '#2e3e87' } : {}}
-              >
-                {item}
-              </button>
-            ))}
+  <Link
+    key={item}
+    to={routes[item]}
+    onClick={handleNavClick}
+    className={`block w-full text-left px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:translate-x-2 ${
+      location.pathname === routes[item]
+        ? 'text-white shadow-lg'
+        : 'text-gray-700 hover:bg-gray-100'
+    }`}
+    style={
+      location.pathname === routes[item]
+        ? {
+            backgroundColor: '#b4712d',
+            fontWeight: '700',
+          }
+        : {}
+    }
+  >
+    {item}
+  </Link>
+))}
           </div>
 
 <button
@@ -88,26 +119,25 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
 
     <div className="relative z-50 lg:hidden p-4 space-y-1 bg-white shadow-xl">
             {navItems.map((item) => (
-              <button
-                key={item}
-                onClick={() => handleNavClick(item)}
-                className={`w-full text-left px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:translate-x-2 ${
-                  currentPage === item
-                    ? 'text-white shadow-lg'
-                    : 'text-gray-700 hover:bg-gray-100'
-                }`}
-                style={
-  currentPage === item
-    ? {
-        backgroundColor: '#b4712d',
-        fontWeight: '700'
-      }
-    : {}
-}
-              >
-                {item}
-              </button>
-            ))}
+  <Link
+    key={item}
+    to={routes[item]}
+    onClick={handleNavClick}
+    className={`block w-full text-left px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:translate-x-2 ${
+  location.pathname === routes[item]
+    ? 'text-white shadow-lg'
+    : 'text-gray-700 hover:bg-gray-100'
+}`}
+    style={
+      location.pathname === routes[item]
+        ? { backgroundColor: '#2e3e87' }
+        : {}
+    }
+  >
+    {item}
+  </Link>
+))}
+                
     </div>
   </>
 )}
