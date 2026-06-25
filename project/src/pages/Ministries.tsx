@@ -16,9 +16,9 @@ import { Helmet } from 'react-helmet-async';
 
 export default function Ministries() {
   const { content, loading } = useContent();
-  const { ministries: supabaseMinistries, loading: ministriesLoading } =
-    useSupabaseMinistries();
+  const { data, loading: ministriesLoading, error } = useSupabaseData();
 
+const supabaseMinistries = data?.ministries || [];
   const [selectedMinistry, setSelectedMinistry] = useState('');
   const [showModal, setShowModal] = useState(false);
 
@@ -156,13 +156,19 @@ export default function Ministries() {
   <pre>
     {JSON.stringify(
       {
-        viteUrlExists: !!import.meta.env.VITE_SUPABASE_URL,
-        viteKeyExists: !!import.meta.env.VITE_SUPABASE_ANON_KEY,
+        loading: ministriesLoading,
+        dataExists: !!supabaseMinistries,
+        ministriesCount: supabaseMinistries.length,
+        supabaseUrl: import.meta.env.VITE_SUPABASE_URL,
       },
       null,
       2
     )}
   </pre>
+</div>
+       
+        <div className="bg-yellow-100 p-4 rounded-lg mb-6 text-xs overflow-auto">
+  <pre>{JSON.stringify({ error }, null, 2)}</pre>
 </div>
         {/* MINISTRIES LIST */}
         <div className="space-y-6">
