@@ -152,12 +152,12 @@ export default function Ministries() {
           </p>
         </div>
         
-        <div className="bg-gray-100 p-4 rounded-lg mb-6 text-xs overflow-auto">
+        <div className="bg-red-100 p-4 rounded-lg mb-6 text-xs overflow-auto">
   <pre>
     {JSON.stringify(
       {
-        ministriesCount: supabaseMinistries.length,
-        ministries: supabaseMinistries,
+        viteUrlExists: !!import.meta.env.VITE_SUPABASE_URL,
+        viteKeyExists: !!import.meta.env.VITE_SUPABASE_ANON_KEY,
       },
       null,
       2
