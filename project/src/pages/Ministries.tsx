@@ -16,9 +16,8 @@ import { Helmet } from 'react-helmet-async';
 
 export default function Ministries() {
   const { content, loading } = useContent();
-  const { data, loading: ministriesLoading, error } = useSupabaseData();
-
-const supabaseMinistries = data?.ministries || [];
+  const { ministries: supabaseMinistries, loading: ministriesLoading } =
+  useSupabaseMinistries();
   const [selectedMinistry, setSelectedMinistry] = useState('');
   const [showModal, setShowModal] = useState(false);
 
@@ -167,9 +166,6 @@ const supabaseMinistries = data?.ministries || [];
   </pre>
 </div>
        
-        <div className="bg-yellow-100 p-4 rounded-lg mb-6 text-xs overflow-auto">
-  <pre>{JSON.stringify({ error }, null, 2)}</pre>
-</div>
         {/* MINISTRIES LIST */}
         <div className="space-y-6">
           {ministries.map((ministry: any, index: number) => {
