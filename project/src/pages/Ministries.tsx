@@ -18,9 +18,10 @@ export default function Ministries() {
   const { content, loading } = useContent();
 
   const {
-    ministries: supabaseMinistries,
-    loading: ministriesLoading,
-  } = useSupabaseMinistries();
+  ministries: supabaseMinistries,
+  loading: ministriesLoading,
+  error,
+} = useSupabaseMinistries();
 
   console.log('Supabase ministries:', supabaseMinistries);
   console.log('Supabase ministries length:', supabaseMinistries.length);
@@ -157,7 +158,10 @@ export default function Ministries() {
           </p>
         </div>
         
-        
+        <div className="mb-6 rounded-lg border p-4 bg-gray-100">
+  <p><strong>Supabase ministries:</strong> {supabaseMinistries.length}</p>
+  <p><strong>Error:</strong> {error || 'None'}</p>
+</div>
         {/* MINISTRIES LIST */}
         <div className="space-y-6">
           {ministries.map((ministry: any, index: number) => {
