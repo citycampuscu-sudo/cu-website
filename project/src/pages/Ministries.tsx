@@ -16,11 +16,17 @@ import { Helmet } from 'react-helmet-async';
 
 export default function Ministries() {
   const { content, loading } = useContent();
+
+  const {
+    ministries: supabaseMinistries,
+    loading: ministriesLoading,
+  } = useSupabaseMinistries();
+
   console.log('Supabase ministries:', supabaseMinistries);
-console.log('Supabase ministries length:', supabaseMinistries.length);
+  console.log('Supabase ministries length:', supabaseMinistries.length);
+
   const [selectedMinistry, setSelectedMinistry] = useState('');
   const [showModal, setShowModal] = useState(false);
-
   const iconMap: any = {
     Music,
     Camera,
