@@ -20,12 +20,8 @@ export default function Ministries() {
   const {
   ministries: supabaseMinistries,
   loading: ministriesLoading,
-  error,
 } = useSupabaseMinistries();
-
-  console.log('Supabase ministries:', supabaseMinistries);
-  console.log('Supabase ministries length:', supabaseMinistries.length);
-
+  
   const [selectedMinistry, setSelectedMinistry] = useState('');
   const [showModal, setShowModal] = useState(false);
   const iconMap: any = {
@@ -38,66 +34,8 @@ export default function Ministries() {
     HeartHandshake,
   };
 
-  const defaultMinistries = [
-    {
-      icon: 'Music',
-      name: 'Board Ministry',
-      description:
-        'Praise & worship, choir, creative arts, and instrumentalists.',
-      leader: 'Board Director',
-      activities: 'Worship, choir, instruments',
-    },
-    {
-      icon: 'Camera',
-      name: 'Media and IT',
-      description:
-        'Photography, livestreaming, design, and social media management.',
-      leader: 'Media Coordinator',
-      activities: 'Media, livestream, design',
-    },
-    {
-      icon: 'HeartHandshake',
-      name: 'Hospitality Ministry',
-      description: 'Ushering, welfare, and event coordination.',
-      leader: 'Hospitality Director',
-      activities: 'Ushering, welfare, catering',
-    },
-    {
-      icon: 'Globe',
-      name: 'Missions Ministry',
-      description:
-        'Evangelism, outreach, and mission work in schools and communities.',
-      leader: 'Missions Coordinator',
-      activities: 'Outreach, missions, evangelism',
-    },
-    {
-      icon: 'Book',
-      name: 'Bible Study Ministry',
-      description: 'Bible study, teaching, and spiritual growth sessions.',
-      leader: 'Bible Study Coordinator',
-      activities: 'Bible study, teaching',
-    },
-    {
-      icon: 'Users',
-      name: 'Discipleship Ministry',
-      description:
-        'Mentorship, counselling, and nurturing new believers.',
-      leader: 'Discipleship Coordinator',
-      activities: 'Mentorship, counselling',
-    },
-    {
-      icon: 'Heart',
-      name: 'Intercessory Ministry',
-      description: 'Prayer meetings, intercession, and spiritual warfare.',
-      leader: 'Prayer Coordinator',
-      activities: 'Prayer, intercession',
-    },
-  ];
-
-  const ministries =
-    supabaseMinistries.length > 0
-      ? supabaseMinistries
-      : defaultMinistries;
+  
+  const ministries = supabaseMinistries;
 
   const isLoading = loading || ministriesLoading;
 
@@ -132,13 +70,13 @@ export default function Ministries() {
 
       {/* HEADER */}
       <div
-        className="relative h-64 flex items-center justify-center text-white"
+        className="relative flex min-h-[280px] items-center justify-center"
         style={{
           background: 'linear-gradient(135deg, #2e3e87 0%, #1a2351 100%)',
         }}
       >
         <div className="text-center px-4">
-          <h1 className="text-5xl font-bold mb-2">
+          <h1 className="text-4xl md:text-6xl font-bold">
             {content.ministries?.pageTitle || 'Ministries'}
           </h1>
           <p className="text-xl" style={{ color: '#b4712d' }}>
@@ -153,94 +91,128 @@ export default function Ministries() {
 
         <div className="text-center mb-12">
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            Every believer is gifted to serve. Join a ministry and use your
-            talents to build God's Kingdom.
+            God has uniquely gifted every believer for His work. Discover a ministry where your talents, passion, and calling can make a lasting impact as we serve Christ together.
           </p>
         </div>
         
         
         {/* MINISTRIES LIST */}
-        <div className="space-y-6">
-          {ministries.map((ministry: any, index: number) => {
-            const Icon =
-              iconMap[ministry.icon as keyof typeof iconMap] || Heart;
-
-            return (
-              <div
-  key={index}
-  className="relative rounded-2xl shadow-lg overflow-hidden"
-  style={{ borderLeft: '6px solid #b4712d' }}
->
-  {ministry.image_url && (
-    <div
-      className="absolute inset-0 bg-cover bg-center"
-      style={{
-        backgroundImage: `url(${ministry.image_url})`,
-        opacity: 0.35,
-      }}
-    />
-  )}
-
-  <div className="absolute inset-0 bg-white/40"></div>
-
-  <div className="relative z-10 p-6 flex flex-col sm:flex-row">
-    <div
-      className="p-4 rounded-xl mb-4 sm:mb-0 sm:mr-6 self-start"
-      style={{ backgroundColor: '#2e3e87' }}
-    >
-      <Icon className="text-white" size={32} />
-    </div>
-
-    <div className="flex-1">
-      <h3
-        className="text-2xl font-bold mb-2"
-        style={{ color: '#2e3e87' }}
-      >
-        {ministry.name}
+        <div className="space-y-8">
+  {ministries.length === 0 ? (
+    <div className="text-center py-20">
+      <Heart className="mx-auto mb-4 text-gray-400" size={56} />
+      <h3 className="text-2xl font-bold text-gray-700">
+        No ministries available
       </h3>
 
-      {ministry.leader && (
-        <p
-          className="text-sm font-semibold mb-2"
-          style={{ color: '#b4712d' }}
-        >
-          Led by: {ministry.leader}
-        </p>
-      )}
-
-      <p className="text-gray-700 mb-3">
-        {ministry.description}
+      <p className="text-gray-500 mt-2">
+        Ministries will appear here once they have been added.
       </p>
-
-      <button
-        onClick={() => {
-          setSelectedMinistry(ministry.name);
-          setShowModal(true);
-        }}
-        className="px-6 py-2 rounded-full text-white font-semibold"
-        style={{ backgroundColor: '#25D366' }}
-      >
-        Join Ministry
-      </button>
     </div>
-  </div>
-</div>
-            );
-          })}
-        </div>
+  ) : (
+    ministries.map((ministry: any, index: number) => {
+      const Icon =
+        iconMap[ministry.icon as keyof typeof iconMap] || Heart;
 
-        {/* CTA */}
+      return (
+        <div
+          key={ministry.id}
+          className="relative overflow-hidden rounded-3xl shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+        >
+          {ministry.image_url && (
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage: `url(${ministry.image_url})`,
+              }}
+            />
+          )}
+
+          {/* Better overlay */}
+          <div className="absolute inset-0 bg-white/72 backdrop-blur-[1px]" />
+
+          <div className="relative z-10 p-6 md:p-8">
+
+            <div className="flex items-start gap-5">
+
+              <div
+                className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl"
+                style={{ backgroundColor: "#2e3e87" }}
+              >
+                <Icon
+  className="text-white"
+  size={38}
+  aria-hidden="true"
+/>
+              </div>
+
+              <div className="flex-1">
+
+                <h2
+                  className="text-3xl font-extrabold leading-tight"
+                  style={{ color: "#2e3e87" }}
+                >
+                  {ministry.name}
+                </h2>
+
+                {ministry.leader && (
+                  <p
+                    className="mt-2 font-semibold text-lg"
+                    style={{ color: "#b4712d" }}
+                  >
+                    Led by {ministry.leader}
+                  </p>
+                )}
+
+                <p className="mt-4 text-gray-700 leading-8">
+                  {ministry.description}
+                </p>
+
+                {ministry.activities && (
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {ministry.activities
+                      .split(",")
+                      .map((activity: string) => (
+                        <span
+                          key={activity}
+                          className="rounded-full bg-[#2e3e87]/10 px-4 py-1 text-sm font-medium text-[#2e3e87]"
+                        >
+                          {activity.trim()}
+                        </span>
+                      ))}
+                  </div>
+                )}
+
+                <button
+                  onClick={() => {
+                    setSelectedMinistry(ministry.name);
+                    setShowModal(true);
+                  }}
+                  className="mt-6 rounded-full bg-[#25D366] px-8 py-3 text-lg font-bold text-white transition hover:scale-105"
+                >
+                  Join Ministry
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      );
+    })
+  )}
+</div>
+                {/* CTA */}
         <div className="mt-16 text-center">
-          <div
-            className="inline-block p-8 rounded-2xl shadow-xl"
-            style={{ backgroundColor: '#2e3e87' }}
-          >
-            <h3 className="text-3xl font-bold text-white mb-4">
-              Ready to Serve?
+          <div className="inline-block max-w-2xl rounded-2xl bg-[#2e3e87] p-8 shadow-xl">
+            <h3 className="mb-4 text-3xl font-bold text-white">
+              Ready to Make an Impact?
             </h3>
 
-            <p className="text-white mb-6 max-w-xl">
-              Every member has a role in the body of Christ.
+            <p className="mb-6 text-white">
+              Whether you're gifted in worship, evangelism, media, hospitality,
+              prayer, or discipleship, there is a place for you at MUKCCU.
             </p>
 
             <button
@@ -248,8 +220,7 @@ export default function Ministries() {
                 setSelectedMinistry('General Registration');
                 setShowModal(true);
               }}
-              className="px-8 py-3 rounded-full font-semibold"
-              style={{ backgroundColor: '#b4712d', color: 'white' }}
+              className="rounded-full bg-[#b4712d] px-8 py-3 font-semibold text-white transition duration-300 hover:scale-105 hover:bg-[#9b6226]"
             >
               Join a Ministry
             </button>
@@ -264,5 +235,3 @@ export default function Ministries() {
         onClose={() => setShowModal(false)}
       />
     </div>
-  );
-}
