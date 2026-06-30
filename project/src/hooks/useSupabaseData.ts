@@ -49,8 +49,11 @@ export const useSupabaseData = () => {
         console.log('Roles:', rolesRes.data?.length || 0, 'Error:', rolesRes.error);
         console.log('Events:', eventsRes.data?.length || 0, 'Error:', eventsRes.error);
         console.log('Images:', imagesRes.data?.length || 0, 'Error:', imagesRes.error);
-        console.log('Ministries:', ministriesRes.data?.length || 0, 'Error:', ministriesRes.error);
-
+        console.log('================ MINISTRIES ================');
+console.log('Data:', ministriesRes.data);
+console.log('Error:', ministriesRes.error);
+console.log('Status:', ministriesRes.status);
+console.log('============================================');
         // Check for errors
         const errors = [leadersRes.error, rolesRes.error, eventsRes.error, imagesRes.error, ministriesRes.error].filter(Boolean);
         if (errors.length > 0) {
