@@ -235,3 +235,5 @@ export default function Ministries() {
         onClose={() => setShowModal(false)}
       />
     </div>
+  );
+}
