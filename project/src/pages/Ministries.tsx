@@ -134,9 +134,9 @@ export default function Ministries() {
         }}
       >
         <div className="text-center px-4">
-          <h1 className="text-4xl md:text-6xl font-bold">
-            {content.ministries?.pageTitle || 'Ministries'}
-          </h1>
+          <h1 className="text-4xl md:text-6xl font-bold text-white">
+  {content.ministries?.pageTitle || 'Ministries'}
+</h1>
           <p className="text-xl" style={{ color: '#b4712d' }}>
             {content.ministries?.pageSubtitle ||
               'Serving God Through Diverse Gifts'}
