@@ -20,12 +20,8 @@ export default function Ministries() {
   const {
   ministries: supabaseMinistries,
   loading: ministriesLoading,
-  error,
 } = useSupabaseMinistries();
-
-  console.log('Supabase ministries:', supabaseMinistries);
-  console.log('Supabase ministries length:', supabaseMinistries.length);
-
+  
   const [selectedMinistry, setSelectedMinistry] = useState('');
   const [showModal, setShowModal] = useState(false);
   const iconMap: any = {
@@ -132,13 +128,13 @@ export default function Ministries() {
 
       {/* HEADER */}
       <div
-        className="relative h-64 flex items-center justify-center text-white"
+        className="relative flex min-h-[280px] items-center justify-center"
         style={{
           background: 'linear-gradient(135deg, #2e3e87 0%, #1a2351 100%)',
         }}
       >
         <div className="text-center px-4">
-          <h1 className="text-5xl font-bold mb-2">
+          <h1 className="text-4xl md:text-6xl font-bold">
             {content.ministries?.pageTitle || 'Ministries'}
           </h1>
           <p className="text-xl" style={{ color: '#b4712d' }}>
@@ -153,8 +149,7 @@ export default function Ministries() {
 
         <div className="text-center mb-12">
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            Every believer is gifted to serve. Join a ministry and use your
-            talents to build God's Kingdom.
+            God has uniquely gifted every believer for His work. Discover a ministry where your talents, passion, and calling can make a lasting impact as we serve Christ together.
           </p>
         </div>
         
@@ -236,11 +231,11 @@ export default function Ministries() {
             style={{ backgroundColor: '#2e3e87' }}
           >
             <h3 className="text-3xl font-bold text-white mb-4">
-              Ready to Serve?
+              Ready to Make an Impact?
             </h3>
 
             <p className="text-white mb-6 max-w-xl">
-              Every member has a role in the body of Christ.
+              Whether you're gifted in worship, evangelism, media, hospitality, prayer, or discipleship, there is a place for you at MUKCCU.
             </p>
 
             <button
