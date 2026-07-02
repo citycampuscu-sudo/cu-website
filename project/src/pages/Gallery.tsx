@@ -8,47 +8,14 @@ export default function Gallery() {
   const { images: supabaseImages, loading: supabaseLoading } = useSupabaseGallery();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  const defaultImages = [
-    {
-      url: '/gallery/IMG_0174_transcpr.webp',
-      title: 'MUKCCU Worship Service',
-      description: 'Sunday worship service',
-      category: 'Worship'
-    },
-    {
-      url: '/gallery/IMG_0235.jpg',
-      title: 'MUKCCU Fellowship',
-      description: 'Fellowship time',
-      category: 'Fellowship'
-    },
-    {
-      url: '/gallery/IMG_8493.JPG',
-      title: 'MUKCCU Event',
-      description: 'Special event',
-      category: 'Events'
-    },
-    {
-      url: '/gallery/IMG_8841.JPG',
-      title: 'MUKCCU Gathering',
-      description: 'Community gathering',
-      category: 'Fellowship'
-    },
-  ];
-  
-  // Combine Supabase images with local content images
-  const localImages = content.gallery?.images || [];
-  const combinedImages = [
-    ...supabaseImages.map(img => ({
-      url: img.image_url,
-      title: img.title,
-      description: img.description,
-      category: img.category
-    })),
-    ...localImages
-  ];
-  
-  const images = combinedImages.length > 0 ? combinedImages : defaultImages;
-  const isLoading = (contentLoading || supabaseLoading) && images.length === 0;
+  const images = supabaseImages.map((img) => ({
+  url: img.image_url,
+  title: img.title,
+  description: img.description,
+  category: img.category,
+}));
+
+const isLoading = supabaseLoading;
 
   return (
     <div className="min-h-screen">
@@ -73,7 +40,13 @@ export default function Gallery() {
             Capturing the joy, worship, and community that defines MUKCCU. These moments tell the story of God's work in our midst.
           </p>
         </div>
-
+{!supabaseLoading && images.length === 0 && (
+  <div className="text-center py-20">
+    <p className="text-gray-500 text-xl">
+      No gallery images available yet.
+    </p>
+  </div>
+)}
         <div className="space-y-16">
   {images.map((image, index) => (
     <div
