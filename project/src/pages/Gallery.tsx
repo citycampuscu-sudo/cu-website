@@ -10,7 +10,7 @@ export default function Gallery() {
 
   const defaultImages = [
     {
-      url: '/gallery/IMG_0174_transcpr.jpg',
+      url: '/gallery/IMG_0174_transcpr.webp',
       title: 'MUKCCU Worship Service',
       description: 'Sunday worship service',
       category: 'Worship'
