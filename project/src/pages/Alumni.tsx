@@ -36,7 +36,7 @@ export default function Alumni() {
         'Share opportunities, advice and professional experiences.',
     },
     {
-      icon: HandHeart,
+      icon: Handshake,
       title: 'Support the Ministry',
       description:
         'Partner with MUKCCU through prayer, service and giving.',
@@ -233,4 +233,4 @@ export default function Alumni() {
       </section>
     </div>
   );
-      }
+}
