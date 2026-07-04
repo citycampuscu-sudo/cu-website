@@ -40,7 +40,8 @@ export default function Alumni() {
   description:
     'Partner with MUKCCU through prayer, service and giving.',
 },
-      icon: Globe,
+   { 
+    icon: Globe,
       title: 'Kingdom Impact',
       description:
         'Continue influencing society with Christ-like leadership wherever God has placed you.',
