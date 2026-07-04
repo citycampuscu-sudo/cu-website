@@ -44,25 +44,25 @@ export default function About() {
       icon: Heart,
       title: 'Discipleship',
       description:
-        'Growing and nurturing believers in their walk with Christ',
+        'To deepen and strengthen the spiritual life of its members by study of the Bible, by prayers and Christian fellowship',
     },
     {
       icon: Globe,
       title: 'Mission',
       description:
-        'Reaching out to campuses and communities with the Gospel',
+        'To prepare Christian students to take good news to all nations of the world and to play an active role in the communities where they live',
     },
     {
       icon: Cross,
       title: 'Evangelism',
       description:
-        'Proclaiming the good news of Jesus Christ to all',
+        'To be witnesses of the Lord Jesus Christ as the Savior and seek to lead others to a personal faith in Him, both in and outside the University',
     },
     {
       icon: Users,
       title: 'Leadership Development',
       description:
-        'Equipping and empowering servant leaders for the Kingdom',
+        'To identify and develop Christian leaders',
     },
   ];
 
@@ -154,7 +154,7 @@ export default function About() {
                 </h3>
                 <p className="text-gray-700">
                   {content.about?.mission ||
-                    'To nurture belief in Christ and develop Christ-like character amongst students and communities'}
+                    'To nurture belief in Christ-like character amongst students and communities'}
                 </p>
               </div>
             </div>
