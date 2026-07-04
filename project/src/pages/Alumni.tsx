@@ -4,7 +4,6 @@ import {
   Heart,
   GraduationCap,
   Briefcase,
-  Handshake,
   Globe,
   CheckCircle,
 } from 'lucide-react';
@@ -35,13 +34,12 @@ export default function Alumni() {
       description:
         'Share opportunities, advice and professional experiences.',
     },
-    {
-      icon: Handshake,
-      title: 'Support the Ministry',
-      description:
-        'Partner with MUKCCU through prayer, service and giving.',
-    },
-    {
+   {
+  icon: Heart,
+  title: 'Support the Ministry',
+  description:
+    'Partner with MUKCCU through prayer, service and giving.',
+},
       icon: Globe,
       title: 'Kingdom Impact',
       description:
