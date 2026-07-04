@@ -14,6 +14,7 @@ import SocialMedia from './pages/SocialMedia';
 import Contacts from './pages/Contacts';
 import Affiliations from './pages/Affiliations';
 import AdminDashboard from './pages/AdminDashboard';
+import Alumni from './pages/Alumni';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/affiliations" element={<Affiliations />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/alumni" element={<Alumni />} />
         </Routes>
       </main>
 
