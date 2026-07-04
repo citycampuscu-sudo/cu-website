@@ -224,6 +224,252 @@ export default function Alumni() {
                   <p className="text-gray-600 leading-7">
                     {benefit.description}
                   </p>
+               {/* ALUMNI GALLERY */}
+
+<section className="py-20 bg-[#f8f9fa]">
+  <div className="max-w-7xl mx-auto px-6">
+
+    <div className="text-center mb-14">
+      <h2
+        className="text-4xl font-bold mb-4"
+        style={{ color: '#2e3e87' }}
+      >
+        Alumni Gallery
+      </h2>
+
+      <p className="text-gray-600 max-w-3xl mx-auto">
+        Celebrating moments of fellowship, conferences, outreach,
+        graduations and lifelong friendships built through MUKCCU.
+      </p>
+    </div>
+
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {[
+        'gallery1.jpg',
+        'gallery2.jpg',
+        'gallery3.jpg',
+        'gallery4.jpg',
+        'gallery5.jpg',
+        'gallery6.jpg',
+        'gallery7.jpg',
+        'gallery8.jpg',
+      ].map((image) => (
+        <div
+          key={image}
+          className="overflow-hidden rounded-2xl shadow-lg group"
+        >
+          <img
+            src={`/images/${image}`}
+            alt="MUKCCU Alumni"
+            className="w-full h-64 object-cover group-hover:scale-110 transition duration-500"
+          />
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+                  {/* JOIN ALUMNI NETWORK */}
+
+<section className="py-20 bg-white">
+  <div className="max-w-6xl mx-auto px-6">
+
+    <div className="text-center mb-14">
+
+      <h2
+        className="text-4xl font-bold mb-4"
+        style={{ color: '#2e3e87' }}
+      >
+        Join the Alumni Network
+      </h2>
+
+      <p className="text-gray-600 max-w-3xl mx-auto leading-8">
+        Keep your connection with MUKCCU alive. Register today to receive
+        alumni news, event invitations, mentorship opportunities and ministry
+        updates.
+      </p>
+
+    </div>
+
+    <div className="bg-[#f8f9fa] rounded-3xl shadow-xl p-8 md:p-12">
+
+      <form className="grid md:grid-cols-2 gap-6">
+
+        <input
+          type="text"
+          placeholder="Full Name"
+          className="border rounded-xl p-4"
+        />
+
+        <input
+          type="email"
+          placeholder="Email Address"
+          className="border rounded-xl p-4"
+        />
+
+        <input
+          type="tel"
+          placeholder="Phone Number"
+          className="border rounded-xl p-4"
+        />
+
+        <input
+          type="text"
+          placeholder="Course Studied"
+          className="border rounded-xl p-4"
+        />
+
+        <input
+          type="number"
+          placeholder="Graduation Year"
+          className="border rounded-xl p-4"
+        />
+
+        <input
+          type="text"
+          placeholder="Current Occupation"
+          className="border rounded-xl p-4"
+        />
+
+        <input
+          type="text"
+          placeholder="Current County / Country"
+          className="border rounded-xl p-4 md:col-span-2"
+        />
+
+        <textarea
+          rows={5}
+          placeholder="Prayer Requests or Comments"
+          className="border rounded-xl p-4 md:col-span-2"
+        />
+
+        <div className="md:col-span-2 text-center">
+
+          <button
+            type="submit"
+            className="px-10 py-4 rounded-xl text-white font-semibold hover:scale-105 transition"
+            style={{ backgroundColor: '#b4712d' }}
+          >
+            Join the Alumni Network
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+</section>
+                  {/* FAQ */}
+
+<section className="py-20 bg-[#f8f9fa]">
+
+<div className="max-w-5xl mx-auto px-6">
+
+<h2
+className="text-4xl font-bold text-center mb-14"
+style={{ color:'#2e3e87' }}
+>
+Frequently Asked Questions
+</h2>
+
+<div className="space-y-6">
+
+{[
+{
+q:"Who can join the Alumni Network?",
+a:"Any former member of Maseno University City Campus Christian Union is welcome to join."
+},
+{
+q:"Is there a registration fee?",
+a:"No. Registration is completely free."
+},
+{
+q:"How will I receive alumni updates?",
+a:"Through our official email, WhatsApp groups and social media platforms."
+},
+{
+q:"Can I mentor current students?",
+a:"Yes. We encourage alumni to mentor students spiritually, academically and professionally."
+},
+{
+q:"How can I support MUKCCU?",
+a:"You can support through prayer, mentorship, volunteering and participation in alumni activities."
+}
+
+].map((item)=>(
+
+<div
+key={item.q}
+className="bg-white rounded-2xl shadow-md p-6"
+>
+
+<h3
+className="font-bold text-lg mb-3"
+style={{color:"#2e3e87"}}
+>
+{item.q}
+</h3>
+
+<p className="text-gray-600">
+{item.a}
+</p>
+
+</div>
+
+))}
+
+</div>
+
+</div>
+
+</section>
+                  {/* FINAL CTA */}
+
+<section
+className="py-24 text-center text-white"
+style={{
+background:"linear-gradient(135deg,#2e3e87,#1a2351)"
+}}
+>
+
+<div className="max-w-4xl mx-auto px-6">
+
+<h2 className="text-5xl font-bold mb-6">
+
+Still Part of the Family
+
+</h2>
+
+<p className="text-xl text-gray-200 leading-8 mb-10">
+
+Graduation marks a new beginning—not the end of your journey with MUKCCU.
+
+Stay connected.
+
+Mentor students.
+
+Serve Christ.
+
+Continue pursuing holiness wherever God leads you.
+
+</p>
+
+<button
+className="px-10 py-4 rounded-xl font-semibold text-white hover:scale-105 transition"
+style={{
+background:"#b4712d"
+}}
+>
+
+Join the Alumni Network
+
+</button>
+
+</div>
+
+</section>
                 </div>
               );
             })}
