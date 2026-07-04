@@ -4,7 +4,7 @@ import {
   Heart,
   GraduationCap,
   Briefcase,
-  HandHeart,
+  Handshake,
   Globe,
   CheckCircle,
 } from 'lucide-react';
