@@ -14,23 +14,25 @@ const routes: Record<string, string> = {
   'Weekly Activities': '/weekly-activities',
   Events: '/events',
   Gallery: '/gallery',
+  Alumni: '/alumni',
   'Social Media': '/social-media',
   Contacts: '/contacts',
   Affiliations: '/affiliations',
 };
 
   const navItems = [
-    'Home',
-    'About',
-    'Leadership',
-    'Ministries',
-    'Weekly Activities',
-    'Events',
-    'Gallery',
-    'Social Media',
-    'Contacts',
-    'Affiliations',
-  ];
+  'Home',
+  'About',
+  'Leadership',
+  'Ministries',
+  'Weekly Activities',
+  'Events',
+  'Gallery',
+  'Alumni',
+  'Social Media',
+  'Contacts',
+  'Affiliations',
+];
 
   const handleNavClick = () => {
   setIsOpen(false);
