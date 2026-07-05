@@ -125,6 +125,21 @@ const [formData, setFormData] = useState({
   setLoading(false);
 
 };
+  const [copied, setCopied] = useState('');
+
+const copyText = async (text: string, field: string) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    setCopied(field);
+
+    setTimeout(() => {
+      setCopied('');
+    }, 2000);
+
+  } catch (err) {
+    alert('Failed to copy.');
+  }
+};
   return (
     <div className="min-h-screen bg-gray-50">
       <Helmet>
@@ -576,6 +591,94 @@ style={{color:"#2e3e87"}}
 
 </div>
 
+</section>
+      {/* SUPPORT MUKCCU */}
+
+<section className="py-20 bg-white">
+  <div className="max-w-5xl mx-auto px-6 text-center">
+
+    <h2
+      className="text-4xl font-bold mb-6"
+      style={{ color: "#2e3e87" }}
+    >
+      Support MUKCCU
+    </h2>
+
+    <p className="text-gray-600 leading-8 max-w-3xl mx-auto mb-10">
+      Your generosity enables MUKCCU to continue reaching students with the
+      Gospel through discipleship, missions, fellowships, conferences and
+      outreach ministries. Every contribution makes a difference.
+    </p>
+
+    <div className="bg-[#f8f9fa] rounded-3xl shadow-xl p-10">
+
+  <h3
+    className="text-2xl font-bold mb-8"
+    style={{ color: "#b4712d" }}
+  >
+    Give via M-Pesa Paybill
+  </h3>
+
+  {/* Paybill */}
+
+  <div className="mb-8">
+
+    <p className="font-semibold text-gray-700 mb-2">
+      Business Number
+    </p>
+
+    <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+
+      <span className="text-4xl font-bold text-[#2e3e87]">
+        247247
+      </span>
+
+      <button
+        type="button"
+        onClick={() => copyText("247247", "paybill")}
+        className="px-5 py-2 rounded-lg bg-[#2e3e87] text-white hover:bg-[#1a2351] transition"
+      >
+        {copied === "paybill" ? "✓ Copied" : "📋 Copy Paybill"}
+      </button>
+
+    </div>
+
+  </div>
+
+  {/* Account */}
+
+  <div>
+
+    <p className="font-semibold text-gray-700 mb-2">
+      Account Number
+    </p>
+
+    <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+
+      <span className="text-4xl font-bold text-[#2e3e87]">
+        123258
+      </span>
+
+      <button
+        type="button"
+        onClick={() => copyText("123258", "account")}
+        className="px-5 py-2 rounded-lg bg-[#2e3e87] text-white hover:bg-[#1a2351] transition"
+      >
+        {copied === "account" ? "✓ Copied" : "📋 Copy Account"}
+      </button>
+
+    </div>
+
+  </div>
+
+  <p className="mt-10 text-gray-600 leading-8">
+    Thank you for partnering with us in raising Christ-centred students through
+    discipleship, missions, conferences, outreach and fellowship.
+  </p>
+
+</div>
+
+  </div>
 </section>
                         {/* FINAL CTA */}
 
