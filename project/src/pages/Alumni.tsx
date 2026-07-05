@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import { createAlumni } from '../hooks/useSupabaseAlumni';
+import { useSupabaseAlumniEvents } from "../hooks/useSupabaseAlumniEvents";
 
 export default function Alumni() {
   const benefits = [
@@ -50,6 +51,9 @@ export default function Alumni() {
     },
   ];
 const [loading, setLoading] = useState(false);
+
+const { events, loading: eventsLoading } =
+  useSupabaseAlumniEvents();
 
 const [formData, setFormData] = useState({
   full_name: '',
@@ -403,39 +407,58 @@ const copyText = async (text: string, field: string) => {
     </div>
 
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+{eventsLoading ? (
 
-      {[
-        {
-          title: "Annual Alumni Fellowship",
-          date: "August 2026",
-          location: "Maseno University City Campus",
-          description:
-            "A day of worship, fellowship, networking and reconnecting with fellow alumni.",
-        },
-        {
-          title: "Career Mentorship Forum",
-          date: "October 2026",
-          location: "Online (Zoom)",
-          description:
-            "Alumni mentor current students on careers, leadership and Christian living.",
-        },
-        {
-          title: "Alumni Sunday",
-          date: "December 2026",
-          location: "Varsity Plaza, 7th Floor",
-          description:
-            "Sunday dedicated to the alumni to have a fellowship with the CU members.",
-        },
-      ].map((event, index) => (
-        <div
-          key={index}
-          className="bg-[#f8f9fa] rounded-2xl shadow-lg p-8 hover:-translate-y-2 transition duration-300"
-        >
+  <div className="text-center py-16">
+    <div className="inline-block h-10 w-10 animate-spin rounded-full border-4 border-[#2e3e87] border-t-transparent"></div>
+
+    <p className="mt-4 text-gray-600">
+      Loading upcoming events...
+    </p>
+  </div>
+
+) : events.length === 0 ? (
+
+  <div className="text-center py-16">
+    <h3
+      className="text-2xl font-semibold mb-3"
+      style={{ color: "#2e3e87" }}
+    >
+      No Upcoming Events
+    </h3>
+
+    <p className="text-gray-600 max-w-xl mx-auto">
+      There are currently no scheduled alumni events.
+      Please check back later or join the Alumni Network to
+      receive notifications whenever new events are announced.
+    </p>
+  </div>
+
+) : (
+
+  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+    {events.map((event) => (
+      <div
+        key={event.id}
+        className="bg-[#f8f9fa] rounded-2xl shadow-lg overflow-hidden hover:-translate-y-2 transition duration-300"
+      >
+
+        {event.image && (
+          <img
+            src={event.image}
+            alt={event.title}
+            className="w-full h-52 object-cover"
+          />
+        )}
+
+        <div className="p-8">
+
           <span
             className="inline-block px-4 py-2 rounded-full text-white text-sm font-semibold mb-5"
             style={{ backgroundColor: "#b4712d" }}
           >
-            {event.date}
+            {event.event_date}
           </span>
 
           <h3
@@ -445,26 +468,38 @@ const copyText = async (text: string, field: string) => {
             {event.title}
           </h3>
 
-          <p className="text-gray-500 font-medium mb-4">
-            📍 {event.location}
+          <p className="text-gray-500 mb-2">
+            📍 {event.venue}
+          </p>
+
+          <p className="text-gray-500 mb-4">
+            🕒 {event.event_time}
           </p>
 
           <p className="text-gray-600 leading-7 mb-6">
             {event.description}
           </p>
 
-          <button
-            className="px-6 py-3 rounded-lg text-white font-semibold hover:scale-105 transition"
-            style={{ backgroundColor: "#2e3e87" }}
-          >
-            Learn More
-          </button>
-        </div>
-      ))}
+          {event.registration_link && (
+            <a
+              href={event.registration_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-6 py-3 rounded-lg text-white font-semibold"
+              style={{ backgroundColor: "#2e3e87" }}
+            >
+              Register
+            </a>
+          )}
 
-    </div>
+        </div>
+
+      </div>
+    ))}
 
   </div>
+
+)}
 </section>
                   {/* JOIN ALUMNI NETWORK */}
 
@@ -790,11 +825,16 @@ style={{color:"#2e3e87"}}
           </p>
 
           <button
-            className="px-10 py-4 rounded-xl font-semibold text-white hover:scale-105 transition"
-            style={{ background: "#b4712d" }}
-          >
-            Join the Alumni Network
-          </button>
+  onClick={() =>
+    document
+      .getElementById("join-alumni")
+      ?.scrollIntoView({ behavior: "smooth" })
+  }
+  className="px-10 py-4 rounded-xl font-semibold text-white hover:scale-105 transition"
+  style={{ background: "#b4712d" }}
+>
+  Join the Alumni Network
+</button>
         </div>
       </section>
     </div>
