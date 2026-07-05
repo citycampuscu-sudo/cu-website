@@ -382,6 +382,90 @@ const copyText = async (text: string, field: string) => {
 
   </div>
 </section>
+      {/* UPCOMING ALUMNI EVENTS */}
+
+<section className="py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-6">
+
+    <div className="text-center mb-14">
+      <h2
+        className="text-4xl font-bold mb-4"
+        style={{ color: "#2e3e87" }}
+      >
+        Upcoming Alumni Events
+      </h2>
+
+      <p className="text-gray-600 max-w-3xl mx-auto">
+        Stay connected through reunions, fellowship, mentorship,
+        networking and ministry events organized by the MUKCCU Alumni
+        Network.
+      </p>
+    </div>
+
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      {[
+        {
+          title: "Annual Alumni Fellowship",
+          date: "August 2026",
+          location: "Maseno University City Campus",
+          description:
+            "A day of worship, fellowship, networking and reconnecting with fellow alumni.",
+        },
+        {
+          title: "Career Mentorship Forum",
+          date: "October 2026",
+          location: "Online (Zoom)",
+          description:
+            "Alumni mentor current students on careers, leadership and Christian living.",
+        },
+        {
+          title: "Alumni Sunday",
+          date: "December 2026",
+          location: "Varsity Plaza, 7th Floor",
+          description:
+            "Sunday dedicated to the alumni to have a fellowship with the CU members.",
+        },
+      ].map((event, index) => (
+        <div
+          key={index}
+          className="bg-[#f8f9fa] rounded-2xl shadow-lg p-8 hover:-translate-y-2 transition duration-300"
+        >
+          <span
+            className="inline-block px-4 py-2 rounded-full text-white text-sm font-semibold mb-5"
+            style={{ backgroundColor: "#b4712d" }}
+          >
+            {event.date}
+          </span>
+
+          <h3
+            className="text-2xl font-bold mb-3"
+            style={{ color: "#2e3e87" }}
+          >
+            {event.title}
+          </h3>
+
+          <p className="text-gray-500 font-medium mb-4">
+            📍 {event.location}
+          </p>
+
+          <p className="text-gray-600 leading-7 mb-6">
+            {event.description}
+          </p>
+
+          <button
+            className="px-6 py-3 rounded-lg text-white font-semibold hover:scale-105 transition"
+            style={{ backgroundColor: "#2e3e87" }}
+          >
+            Learn More
+          </button>
+        </div>
+      ))}
+
+    </div>
+
+  </div>
+</section>
                   {/* JOIN ALUMNI NETWORK */}
 
 <section
