@@ -349,8 +349,8 @@ const [formData, setFormData] = useState({
         'gallery4.jpg',
         'gallery5.jpg',
         'gallery6.jpg',
-        'gallery7.jpg',
-        'gallery8.jpg',
+        'gallery 7.jpg',
+        'gallery 8.jpg',
       ].map((image) => (
         <div
           key={image}
@@ -591,7 +591,7 @@ style={{color:"#2e3e87"}}
           </h2>
 
           <p className="text-xl text-gray-200 leading-8 mb-10">
-            Graduation marks a new beginning—not the end of your journey with
+            Graduation marks a new beginning not the end of your journey with
             MUKCCU.
           </p>
 
