@@ -577,18 +577,15 @@ Still Part of the Family
 
 </h2>
 
-<p className="text-xl text-gray-200 leading-8 mb-10"
+<p className="text-xl text-gray-200 leading-8 mb-10">
+  Graduation marks a new beginning—not the end of your journey with MUKCCU.
+</p>
 
-Graduation marks a new beginning—not the end of your journey with MUKCCU.
-
-Stay connected.
-
-Mentor students.
-
-Serve Christ.
-
-Continue pursuing holiness wherever God leads you.
-
+<p className="text-xl text-gray-200 leading-8 mb-10">
+  Stay connected.<br />
+  Mentor students.<br />
+  Serve Christ.<br />
+  Continue pursuing holiness wherever God leads you.
 </p>
 
 <button
