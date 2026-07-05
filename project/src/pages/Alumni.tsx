@@ -166,15 +166,27 @@ const [formData, setFormData] = useState({
 
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <button
-              className="px-8 py-4 rounded-xl font-semibold text-white transition hover:scale-105"
-              style={{ backgroundColor: '#b4712d' }}
-            >
-              Join the Alumni Network
-            </button>
+  onClick={() =>
+    document
+      .getElementById('join-alumni')
+      ?.scrollIntoView({ behavior: 'smooth' })
+  }
+  className="px-8 py-4 rounded-xl font-semibold text-white transition hover:scale-105"
+  style={{ backgroundColor: '#b4712d' }}
+>
+  Join the Alumni Network
+</button>
 
-            <button className="px-8 py-4 rounded-xl border-2 border-white hover:bg-white hover:text-[#2e3e87] transition">
-              Meet Our Alumni
-            </button>
+            <button
+  onClick={() =>
+    document
+      .getElementById('alumni-gallery')
+      ?.scrollIntoView({ behavior: 'smooth' })
+  }
+  className="px-8 py-4 rounded-xl border-2 border-white hover:bg-white hover:text-[#2e3e87] transition"
+>
+  Meet Our Alumni
+</button>
           </div>
         </div>
       </section>
@@ -309,7 +321,10 @@ const [formData, setFormData] = useState({
 </section>
                {/* ALUMNI GALLERY */}
 
-<section className="py-20 bg-[#f8f9fa]">
+<section
+  id="alumni-gallery"
+  className="py-20 bg-[#f8f9fa]"
+>
   <div className="max-w-7xl mx-auto px-6">
 
     <div className="text-center mb-14">
@@ -354,7 +369,10 @@ const [formData, setFormData] = useState({
 </section>
                   {/* JOIN ALUMNI NETWORK */}
 
-<section className="py-20 bg-white">
+<section
+  id="join-alumni"
+  className="py-20 bg-white"
+>
   <div className="max-w-6xl mx-auto px-6">
 
     <div className="text-center mb-14">
