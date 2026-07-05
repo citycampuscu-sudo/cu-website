@@ -347,7 +347,7 @@ const [formData, setFormData] = useState({
         'gallery2.jpg',
         'gallery3.jpg',
         'gallery4.jpg',
-        'gallery5.jpg',
+        'gallery5..jpg',
         'gallery6.jpg',
         'gallery 7.jpg',
         'gallery 8.jpg',
