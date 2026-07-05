@@ -7,6 +7,8 @@ import {
   Globe,
   CheckCircle,
 } from 'lucide-react';
+import { useState } from 'react';
+import { createAlumni } from '../hooks/useSupabaseAlumni';
 
 export default function Alumni() {
   const benefits = [
@@ -47,7 +49,82 @@ export default function Alumni() {
         'Continue influencing society with Christ-like leadership wherever God has placed you.',
     },
   ];
+const [loading, setLoading] = useState(false);
 
+const [formData, setFormData] = useState({
+  full_name: '',
+  email: '',
+  phone: '',
+  course: '',
+  graduation_year: '',
+  occupation: '',
+  location: '',
+  church: '',
+  mentor: false,
+  message: '',
+});
+  const handleChange = (
+  e: React.ChangeEvent<
+    HTMLInputElement | HTMLTextAreaElement
+  >
+) => {
+
+  const { name, value, type } = e.target;
+
+  setFormData(prev => ({
+    ...prev,
+    [name]:
+      type === 'checkbox'
+        ? (e.target as HTMLInputElement).checked
+        : value,
+  }));
+
+};
+  const handleSubmit = async (
+  e: React.FormEvent
+) => {
+
+  e.preventDefault();
+
+  setLoading(true);
+
+  try {
+
+    await createAlumni({
+  ...formData,
+  graduation_year: Number(formData.graduation_year),
+});
+
+    alert(
+      'Thank you for joining the MUKCCU Alumni Network!'
+    );
+
+    setFormData({
+      full_name: '',
+      email: '',
+      phone: '',
+      course: '',
+      graduation_year: '',
+      occupation: '',
+      location: '',
+      church: '',
+      mentor: false,
+      message: '',
+    });
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      'Registration failed. Please try again.'
+    );
+
+  }
+
+  setLoading(false);
+
+};
   return (
     <div className="min-h-screen bg-gray-50">
       <Helmet>
@@ -189,41 +266,47 @@ export default function Alumni() {
 
       {/* WHY JOIN */}
 
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2
-            className="text-4xl font-bold text-center mb-14"
-            style={{ color: '#2e3e87' }}
+<section className="py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-6">
+    <h2
+      className="text-4xl font-bold text-center mb-14"
+      style={{ color: '#2e3e87' }}
+    >
+      Why Join the Alumni Network?
+    </h2>
+
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {benefits.map((benefit, index) => {
+        const Icon = benefit.icon;
+
+        return (
+          <div
+            key={index}
+            className="bg-gray-50 rounded-2xl shadow-lg p-8 hover:-translate-y-2 transition duration-300"
           >
-            Why Join the Alumni Network?
-          </h2>
+            <div
+              className="w-16 h-16 rounded-full flex items-center justify-center mb-6"
+              style={{ backgroundColor: '#2e3e87' }}
+            >
+              <Icon className="text-white" size={30} />
+            </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {benefits.map((benefit, index) => {
-              const Icon = benefit.icon;
+            <h3
+              className="text-2xl font-semibold mb-4"
+              style={{ color: '#2e3e87' }}
+            >
+              {benefit.title}
+            </h3>
 
-              return (
-                <div
-                  key={index}
-                  className="bg-gray-50 rounded-2xl shadow-lg p-8 hover:-translate-y-2 transition duration-300"
-                >
-                  <div
-                    className="w-16 h-16 rounded-full flex items-center justify-center mb-6"
-                    style={{ backgroundColor: '#2e3e87' }}
-                  >
-                    <Icon className="text-white" size={30} />
-                  </div>
-
-                  <h3
-                    className="text-2xl font-semibold mb-4"
-                    style={{ color: '#2e3e87' }}
-                  >
-                    {benefit.title}
-                  </h3>
-
-                  <p className="text-gray-600 leading-7">
-                    {benefit.description}
-                  </p>
+            <p className="text-gray-600 leading-7">
+              {benefit.description}
+            </p>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
                {/* ALUMNI GALLERY */}
 
 <section className="py-20 bg-[#f8f9fa]">
@@ -293,66 +376,118 @@ export default function Alumni() {
 
     <div className="bg-[#f8f9fa] rounded-3xl shadow-xl p-8 md:p-12">
 
-      <form className="grid md:grid-cols-2 gap-6">
+      <form
+  onSubmit={handleSubmit}
+  className="grid md:grid-cols-2 gap-6"
+>
 
         <input
-          type="text"
-          placeholder="Full Name"
-          className="border rounded-xl p-4"
-        />
+  type="text"
+  name="full_name"
+  value={formData.full_name}
+  onChange={handleChange}
+  placeholder="Full Name"
+  className="border rounded-xl p-4"
+/>
 
+<input
+  type="email"
+  name="email"
+  value={formData.email}
+  onChange={handleChange}
+  placeholder="Email Address"
+  className="border rounded-xl p-4"
+/>
+
+<input
+  type="tel"
+  name="phone"
+  value={formData.phone}
+  onChange={handleChange}
+  placeholder="Phone Number"
+  className="border rounded-xl p-4"
+/>
+
+<input
+  type="text"
+  name="course"
+  value={formData.course}
+  onChange={handleChange}
+  placeholder="Course Studied"
+  className="border rounded-xl p-4"
+/>
+
+<input
+  type="number"
+  name="graduation_year"
+  value={formData.graduation_year}
+  onChange={handleChange}
+  placeholder="Graduation Year"
+  className="border rounded-xl p-4"
+/>
+
+<input
+  type="text"
+  name="occupation"
+  value={formData.occupation}
+  onChange={handleChange}
+  placeholder="Current Occupation"
+  className="border rounded-xl p-4"
+/>
+
+<input
+  type="text"
+  name="location"
+  value={formData.location}
+  onChange={handleChange}
+  placeholder="Current County / Country"
+  className="border rounded-xl p-4 md:col-span-2"
+/>
         <input
-          type="email"
-          placeholder="Email Address"
-          className="border rounded-xl p-4"
-        />
+  type="text"
+  name="church"
+  value={formData.church}
+  onChange={handleChange}
+  placeholder="Local Church (Optional)"
+  className="border rounded-xl p-4 md:col-span-2"
+/>
+        <div className="md:col-span-2">
+  <label className="flex items-center gap-3 cursor-pointer">
 
-        <input
-          type="tel"
-          placeholder="Phone Number"
-          className="border rounded-xl p-4"
-        />
+    <input
+      type="checkbox"
+      name="mentor"
+      checked={formData.mentor}
+      onChange={handleChange}
+      className="h-5 w-5"
+    />
 
-        <input
-          type="text"
-          placeholder="Course Studied"
-          className="border rounded-xl p-4"
-        />
+    <span className="text-gray-700">
+      I am willing to mentor current MUKCCU students.
+    </span>
 
-        <input
-          type="number"
-          placeholder="Graduation Year"
-          className="border rounded-xl p-4"
-        />
-
-        <input
-          type="text"
-          placeholder="Current Occupation"
-          className="border rounded-xl p-4"
-        />
-
-        <input
-          type="text"
-          placeholder="Current County / Country"
-          className="border rounded-xl p-4 md:col-span-2"
-        />
-
+  </label>
+</div>
         <textarea
-          rows={5}
-          placeholder="Prayer Requests or Comments"
-          className="border rounded-xl p-4 md:col-span-2"
-        />
+  name="message"
+  value={formData.message}
+  onChange={handleChange}
+  rows={5}
+  placeholder="Prayer Requests or Comments"
+  className="border rounded-xl p-4 md:col-span-2"
+/>
 
         <div className="md:col-span-2 text-center">
 
           <button
-            type="submit"
-            className="px-10 py-4 rounded-xl text-white font-semibold hover:scale-105 transition"
-            style={{ backgroundColor: '#b4712d' }}
-          >
-            Join the Alumni Network
-          </button>
-
+  type="submit"
+  disabled={loading}
+  className="..."
+>
+  {loading
+    ? "Submitting..."
+    : "Join the Alumni Network"}
+</button>
         </div>
 
       </form>
@@ -442,7 +577,7 @@ Still Part of the Family
 
 </h2>
 
-<p className="text-xl text-gray-200 leading-8 mb-10">
+<p className="text-xl text-gray-200 leading-8 mb-10"
 
 Graduation marks a new beginning—not the end of your journey with MUKCCU.
 
