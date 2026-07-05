@@ -482,11 +482,10 @@ const [formData, setFormData] = useState({
           <button
   type="submit"
   disabled={loading}
-  className="..."
+  className="px-10 py-4 rounded-xl text-white font-semibold hover:scale-105 transition duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+  style={{ backgroundColor: '#b4712d' }}
 >
-  {loading
-    ? "Submitting..."
-    : "Join the Alumni Network"}
+  {loading ? 'Submitting...' : 'Join the Alumni Network'}
 </button>
         </div>
 
@@ -560,51 +559,39 @@ style={{color:"#2e3e87"}}
 </div>
 
 </section>
-                  {/* FINAL CTA */}
+                        {/* FINAL CTA */}
 
-<section
-className="py-24 text-center text-white"
-style={{
-background:"linear-gradient(135deg,#2e3e87,#1a2351)"
-}}
->
+      <section
+        className="py-24 text-center text-white"
+        style={{
+          background: "linear-gradient(135deg,#2e3e87,#1a2351)",
+        }}
+      >
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-5xl font-bold mb-6">
+            Still Part of the Family
+          </h2>
 
-<div className="max-w-4xl mx-auto px-6">
+          <p className="text-xl text-gray-200 leading-8 mb-10">
+            Graduation marks a new beginning—not the end of your journey with
+            MUKCCU.
+          </p>
 
-<h2 className="text-5xl font-bold mb-6">
+          <p className="text-xl text-gray-200 leading-8 mb-10">
+            Stay connected.<br />
+            Mentor students.<br />
+            Serve Christ.<br />
+            Continue pursuing holiness wherever God leads you.
+          </p>
 
-Still Part of the Family
-
-</h2>
-
-<p className="text-xl text-gray-200 leading-8 mb-10">
-  Graduation marks a new beginning—not the end of your journey with MUKCCU.
-</p>
-
-<p className="text-xl text-gray-200 leading-8 mb-10">
-  Stay connected.<br />
-  Mentor students.<br />
-  Serve Christ.<br />
-  Continue pursuing holiness wherever God leads you.
-</p>
-
-<button
-className="px-10 py-4 rounded-xl font-semibold text-white hover:scale-105 transition"
-style={{
-background:"#b4712d"
-}}
->
-
-Join the Alumni Network
-
-</button>
-
-</div>
-
-</section>
-                
+          <button
+            className="px-10 py-4 rounded-xl font-semibold text-white hover:scale-105 transition"
+            style={{ background: "#b4712d" }}
+          >
+            Join the Alumni Network
+          </button>
         </div>
       </section>
     </div>
   );
-}
+        }
