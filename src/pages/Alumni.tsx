@@ -572,21 +572,11 @@ background:"linear-gradient(135deg,#2e3e87,#1a2351)"
 <div className="max-w-4xl mx-auto px-6">
 
 <h2 className="text-5xl font-bold mb-6">
-
 Still Part of the Family
-
 </h2>
 
 <p className="text-xl text-gray-200 leading-8 mb-10">
-Graduation marks a new beginning—not the end of your journey with MUKCCU.
-
-Stay connected.
-
-Mentor students.
-
-Serve Christ.
-
-Continue pursuing holiness wherever God leads you.
+Graduation marks a new beginning - not the end of your journey with MUKCCU. Stay connected. Mentor students. Serve Christ. Continue pursuing holiness wherever God leads you.
 </p>
 
 <button
@@ -595,14 +585,12 @@ style={{
 background:"#b4712d"
 }}
 >
-
 Join the Alumni Network
-
 </button>
 
 </div>
 
 </section>
-                </div>
-              );
-            }
+    </div>
+  );
+}
