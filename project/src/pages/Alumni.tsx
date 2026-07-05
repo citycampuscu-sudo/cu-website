@@ -602,10 +602,7 @@ Join the Alumni Network
 </div>
 
 </section>
-                </div>
-              );
-            })}
-          </div>
+                
         </div>
       </section>
     </div>
