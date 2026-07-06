@@ -214,39 +214,130 @@ export default function About() {
         </div>
 
         {/* HISTORY */}
-        <div className="mb-16">
-          <div
-            className="rounded-2xl shadow-xl p-8 md:p-12"
-            style={{
-              background: 'linear-gradient(135deg, #2e3e87 0%, #1a2351 100%)',
-            }}
-          >
-            <h2 className="text-4xl font-bold mb-8 text-white text-center">
-              Our History
-            </h2>
+<div className="mb-16">
+  <div
+    className="rounded-2xl shadow-xl p-8 md:p-12"
+    style={{
+      background: 'linear-gradient(135deg, #2e3e87 0%, #1a2351 100%)',
+    }}
+  >
+    <h2 className="text-4xl font-bold mb-8 text-white text-center">
+      Our History
+    </h2>
 
-            <div className="text-white text-lg leading-relaxed space-y-4">
-              <p>
-                Maseno University Kisumu Campus Christian Union was birthed through
-                prayer and intercession by dedicated believers before student leadership
-                was officially formed.
-              </p>
+    <div className="text-white text-lg leading-8 space-y-6">
 
-              <p>
-                In <span style={{ color: '#b4712d', fontWeight: 'bold' }}>January 2014</span>,
-                initial student leaders were appointed to organize the fellowship.
-              </p>
+      <p>
+        <span style={{ color: '#b4712d', fontWeight: 'bold' }}>Maseno University Kisumu Campus Christian Union (MUKCCU)</span>
+        traces its roots back to <span style={{ color: '#b4712d', fontWeight: 'bold' }}>2013</span>,
+        when a small group of Christian students, most of whom had transferred
+        from the Main Campus, longed for a place where they could worship,
+        grow spiritually and fellowship together within the City Campus.
+      </p>
 
-              <p>
-                By <span style={{ color: '#b4712d', fontWeight: 'bold' }}>February 2015</span>,
-                the CU officially launched its first Sunday service and has continued to grow
-                spiritually and numerically.
-              </p>
-            </div>
-          </div>
-        </div>
+      <p>
+        The vision to establish a Christian Union was strongly championed by
+        <span style={{ color: '#b4712d', fontWeight: 'bold' }}> Samy Morayah</span>,
+        whose burden for Christian fellowship inspired the birth of the ministry.
+        Together with the pioneer members, regular Bible studies, prayer meetings
+        and fellowship gatherings began despite having very few members.
+      </p>
 
-      </div>
+      <p>
+        The early years were marked by numerous challenges. Meetings were held in
+        borrowed classrooms and offices, members often faced interruptions while
+        praying, and resources were extremely limited. Nevertheless, the pioneers
+        remained steadfast in prayer, unity and commitment, laying a strong
+        spiritual foundation for future generations.
+      </p>
+
+      <p>
+        A major milestone came in
+        <span style={{ color: '#b4712d', fontWeight: 'bold' }}> 2015</span>,
+        when the University administration allocated the fellowship a dedicated
+        meeting space and MUKCCU officially began holding Sunday services.
+        Support from leaders such as <span style={{ color: '#b4712d', fontWeight: 'bold' }}>Permanent Kariuki</span>
+        and the long-serving patron
+        <span style={{ color: '#b4712d', fontWeight: 'bold' }}> Dr. Mari</span>
+        provided stability and encouragement during this formative period.
+      </p>
+
+      <p>
+        Through faithful leadership, discipleship and evangelism, the fellowship
+        steadily grew from only a handful of students to well over one hundred
+        active members. Leaders including
+        <span style={{ color: '#b4712d', fontWeight: 'bold' }}> Joshua</span>,
+        <span style={{ color: '#b4712d', fontWeight: 'bold' }}> Nick Mahan</span>,
+        <span style={{ color: '#b4712d', fontWeight: 'bold' }}> Asira Nelson</span>
+        and many others helped strengthen the ministry while alumni continued
+        supporting the work long after graduation.
+      </p>
+
+      <p>
+        Today, MUKCCU continues to pursue its calling of raising Christ-centred
+        students through discipleship, prayer, worship, missions and servant
+        leadership. More than a decade after its humble beginnings, the fellowship
+        remains committed to its motto,
+        <span style={{ color: '#b4712d', fontWeight: 'bold' }}>
+          {' '}“Pursuing Holiness.”
+        </span>
+      </p>
+
     </div>
-  );
-}
+  </div>
+</div>
+        {/* JOURNEY */}
+<div className="mb-16">
+  <h2
+    className="text-4xl font-bold text-center mb-12"
+    style={{ color: '#2e3e87' }}
+  >
+    Journey Through the Years
+  </h2>
+
+  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+    <div className="bg-white rounded-2xl shadow-lg p-6 border-t-4 border-[#b4712d]">
+      <h3 className="text-2xl font-bold mb-3 text-[#2e3e87]">
+        2013
+      </h3>
+      <p className="text-gray-700">
+        MUKCCU was born through the vision of pioneer students seeking a place
+        for Christian fellowship at the City Campus.
+      </p>
+    </div>
+
+    <div className="bg-white rounded-2xl shadow-lg p-6 border-t-4 border-[#b4712d]">
+      <h3 className="text-2xl font-bold mb-3 text-[#2e3e87]">
+        2015
+      </h3>
+      <p className="text-gray-700">
+        Sunday services officially began after the University allocated the
+        fellowship a dedicated worship space.
+      </p>
+    </div>
+
+    <div className="bg-white rounded-2xl shadow-lg p-6 border-t-4 border-[#b4712d]">
+      <h3 className="text-2xl font-bold mb-3 text-[#2e3e87]">
+        Growth
+      </h3>
+      <p className="text-gray-700">
+        Membership grew from fewer than 15 students to well over 100 through
+        faithful discipleship, prayer and evangelism.
+      </p>
+    </div>
+
+    <div className="bg-white rounded-2xl shadow-lg p-6 border-t-4 border-[#b4712d]">
+      <h3 className="text-2xl font-bold mb-3 text-[#2e3e87]">
+        Today
+      </h3>
+      <p className="text-gray-700">
+        MUKCCU continues to impact students while alumni remain actively involved
+        in mentoring, supporting and strengthening the ministry.
+      </p>
+    </div>
+
+  </div>
+</div>
+        );
+      }
