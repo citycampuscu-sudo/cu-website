@@ -2,11 +2,10 @@ import { useState, useEffect, useRef, KeyboardEvent } from "react";
 import { MessageCircle, X, Send } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { useAssistant } from "../../hooks/useAssistant";
+import { useAssistant } from "../hooks/useAssistant";
 import ChatMessage from "./ChatMessage";
 import TypingIndicator from "./TypingIndicator";
 import SuggestedQuestions from "./SuggestedQuestions";
-
 export default function ChatAssistant() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
