@@ -331,10 +331,11 @@ export default function About() {
       <h3 className="text-2xl font-bold mb-3 text-[#2e3e87]">
         Today
       </h3>
-      <p className="text-gray-700">
+            <p className="text-gray-700">
         MUKCCU continues to impact students while alumni remain actively involved
         in mentoring, supporting and strengthening the ministry.
       </p>
+
     </div>
   </div>
 
@@ -342,6 +343,7 @@ export default function About() {
 
 </div>
 
+</div>
+
 );
-  }
-  
+              }
