@@ -237,7 +237,7 @@ export default function About() {
 
       <p>
         The vision to establish a Christian Union was strongly championed by
-        <span style={{ color: '#b4712d', fontWeight: 'bold' }}> Samy Morayah</span>,
+        <span style={{ color: '#b4712d', fontWeight: 'bold' }}> Sammy Muraya </span>,
         whose burden for Christian fellowship inspired the birth of the ministry.
         Together with the pioneer members, regular Bible studies, prayer meetings
         and fellowship gatherings began despite having very few members.
@@ -256,9 +256,9 @@ export default function About() {
         <span style={{ color: '#b4712d', fontWeight: 'bold' }}> 2015</span>,
         when the University administration allocated the fellowship a dedicated
         meeting space and MUKCCU officially began holding Sunday services.
-        Support from leaders such as <span style={{ color: '#b4712d', fontWeight: 'bold' }}>Permanent Kariuki</span>
-        and the long-serving patron
-        <span style={{ color: '#b4712d', fontWeight: 'bold' }}> Dr. Mari</span>
+        Support from leaders such as <span style={{ color: '#b4712d', fontWeight: 'bold' }}>Perminus Kariuki</span>
+         and the long-serving patron
+        <span style={{ color: '#b4712d', fontWeight: 'bold' }}>Dr. Ayere</span>
         provided stability and encouragement during this formative period.
       </p>
 
@@ -266,11 +266,11 @@ export default function About() {
         Through faithful leadership, discipleship and evangelism, the fellowship
         steadily grew from only a handful of students to well over one hundred
         active members. Leaders including
-        <span style={{ color: '#b4712d', fontWeight: 'bold' }}> Joshua</span>,
+        <span style={{ color: '#b4712d', fontWeight: 'bold' }}> Nicodemus Simiyu</span>,
         <span style={{ color: '#b4712d', fontWeight: 'bold' }}> Nick Mahan</span>,
         <span style={{ color: '#b4712d', fontWeight: 'bold' }}> Asira Nelson</span>
-        and many others helped strengthen the ministry while alumni continued
-        supporting the work long after graduation.
+         and many others helped strengthen the ministry while alumni continued
+        supporting the work even after graduation.
       </p>
 
       <p>
