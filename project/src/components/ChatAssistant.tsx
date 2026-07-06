@@ -4,6 +4,14 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function ChatAssistant() {
   const [open, setOpen] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+useEffect(() => {
+   messagesEndRef.current?.scrollIntoView({
+      behavior: "smooth",
+   });
+}, [messages]);
+  <div ref={messagesEndRef} />
 
   return (
     <>
