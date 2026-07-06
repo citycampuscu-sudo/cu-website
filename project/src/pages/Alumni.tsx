@@ -406,7 +406,6 @@ const copyText = async (text: string, field: string) => {
       </p>
     </div>
 
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 {eventsLoading ? (
 
   <div className="text-center py-16">
@@ -500,6 +499,7 @@ const copyText = async (text: string, field: string) => {
   </div>
 
 )}
+</div>
 </section>
                   {/* JOIN ALUMNI NETWORK */}
 
