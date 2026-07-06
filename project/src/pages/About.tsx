@@ -336,8 +336,12 @@ export default function About() {
         in mentoring, supporting and strengthening the ministry.
       </p>
     </div>
-
   </div>
+
 </div>
-        );
-      }
+
+</div>
+
+);
+  }
+  
