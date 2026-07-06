@@ -15,6 +15,7 @@ import Contacts from './pages/Contacts';
 import Affiliations from './pages/Affiliations';
 import AdminDashboard from './pages/AdminDashboard';
 import Alumni from './pages/Alumni';
+import ChatAssistant from "./components/ChatAssistant";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
       </main>
 
       <Footer />
+      <ChatAssistant />
     </div>
   );
 }
