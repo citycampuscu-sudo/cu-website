@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Message } from "../types/assistant";
+import { supabase } from "../lib/supabase";
 
 export function useAssistant() {
   const [messages, setMessages] = useState<Message[]>([
@@ -28,20 +29,36 @@ export function useAssistant() {
 
     setLoading(true);
 
-    // Temporary fake response
-    setTimeout(() => {
-      const reply: Message = {
-        id: crypto.randomUUID(),
-        role: "assistant",
-        content:
-          "I'm still being trained. In the next step I'll answer using your website content.",
-        timestamp: Date.now(),
-      };
+    try {
+  const { data, error } = await supabase.functions.invoke("assistant", {
+    body: {
+      question: text,
+    },
+  });
 
-      setMessages((prev) => [...prev, reply]);
+  if (error) throw error;
 
-      setLoading(false);
-    }, 1000);
+  const reply: Message = {
+    id: crypto.randomUUID(),
+    role: "assistant",
+    content: data.answer,
+    timestamp: Date.now(),
+  };
+
+  setMessages((prev) => [...prev, reply]);
+} catch (err) {
+  const reply: Message = {
+    id: crypto.randomUUID(),
+    role: "assistant",
+    content:
+      "Sorry, something went wrong. Please try again later.",
+    timestamp: Date.now(),
+  };
+
+  setMessages((prev) => [...prev, reply]);
+} finally {
+  setLoading(false);
+      }
   };
 
   return {
