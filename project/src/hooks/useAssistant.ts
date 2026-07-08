@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Message } from "../types/assistant";
+import { Message } from "../lib/assistant";
 import { supabase } from "../lib/supabase";
 
 export function useAssistant() {
