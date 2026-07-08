@@ -80,17 +80,18 @@ Deno.serve(async (req) => {
       }
     );
   } catch (err) {
-    return new Response(
-      JSON.stringify({
-        found: false,
-        answer: "Internal server error.",
-      }),
-      {
-        status: 500,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-  }
+  return new Response(
+    JSON.stringify({
+      found: false,
+      error: String(err),
+      answer: "Internal server error.",
+    }),
+    {
+      status: 500,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+          }
 });
