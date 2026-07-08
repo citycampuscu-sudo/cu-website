@@ -1,4 +1,4 @@
-import { Message } from "../../types/assistant";
+import { Message } from "../../lib/assistant";
 
 interface Props {
   message: Message;
