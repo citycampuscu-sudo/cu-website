@@ -9,8 +9,27 @@ import SuggestedQuestions from "./SuggestedQuestions";
 export default function ChatAssistant() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const { messages, loading, sendMessage } = useAssistant();
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  };
+
+  const handleSend = () => {
+    if (input.trim() && !loading) {
+      sendMessage(input);
+      setInput("");
+    }
+  };
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
     <>
@@ -148,4 +167,4 @@ export default function ChatAssistant() {
       </AnimatePresence>
     </>
   );
-              }
+}
