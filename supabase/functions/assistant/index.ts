@@ -9,40 +9,54 @@ Deno.serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
-    const { data: knowledge, error } = await supabase
-      .from("knowledge")
-      .select("*");
+    const { data, error } = await supabase
+      .from("knowledge_base")
+      .select("title, category, content, keywords, url");
 
-    if (error) {
-      throw error;
-    }
+    if (error) throw error;
 
-    const userQuestion = question.toLowerCase();
+    const search = question.toLowerCase();
 
     let bestMatch = null;
+    let bestScore = 0;
 
-    for (const item of knowledge) {
-      const keywords = item.question.toLowerCase().split(" ");
+    for (const item of data ?? []) {
+      let score = 0;
 
-      const matched = keywords.filter((word: string) =>
-        userQuestion.includes(word)
-      );
+      if (item.title?.toLowerCase().includes(search)) {
+        score += 5;
+      }
 
-      if (
-        matched.length > 0 &&
-        (!bestMatch || matched.length > bestMatch.score)
-      ) {
-        bestMatch = {
-          answer: item.answer,
-          score: matched.length,
-        };
+      if (item.content?.toLowerCase().includes(search)) {
+        score += 3;
+      }
+
+      if (item.keywords) {
+        const keywords = item.keywords
+          .toLowerCase()
+          .split(",")
+          .map((k: string) => k.trim());
+
+        for (const keyword of keywords) {
+          if (search.includes(keyword) || keyword.includes(search)) {
+            score += 2;
+          }
+        }
+      }
+
+      if (score > bestScore) {
+        bestScore = score;
+        bestMatch = item;
       }
     }
 
-    if (bestMatch) {
+    if (!bestMatch) {
       return new Response(
         JSON.stringify({
-          answer: bestMatch.answer,
+          found: false,
+          answer:
+            "Sorry, I couldn't find that information in our knowledge base. Please contact us on WhatsApp for further assistance.",
+          whatsapp: "https://wa.me/254748777612"
         }),
         {
           headers: {
@@ -54,8 +68,10 @@ Deno.serve(async (req) => {
 
     return new Response(
       JSON.stringify({
-        answer:
-          "Sorry, I couldn't find that information in our knowledge base. Please contact us on WhatsApp for further assistance.",
+        found: true,
+        title: bestMatch.title,
+        answer: bestMatch.content,
+        url: bestMatch.url,
       }),
       {
         headers: {
@@ -66,7 +82,8 @@ Deno.serve(async (req) => {
   } catch (err) {
     return new Response(
       JSON.stringify({
-        error: err.message,
+        found: false,
+        answer: "Internal server error.",
       }),
       {
         status: 500,
