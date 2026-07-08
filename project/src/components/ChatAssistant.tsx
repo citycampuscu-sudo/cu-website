@@ -11,56 +11,6 @@ export default function ChatAssistant() {
   const [input, setInput] = useState("");
 
   const { messages, loading, sendMessage } = useAssistant();
-const sendMessage = async (text: string) => {
-  if (!text.trim()) return;
-
-  const userMessage: Message = {
-    id: crypto.randomUUID(),
-    role: "user",
-    content: text,
-    timestamp: Date.now(),
-  };
-
-  setMessages((prev) => [...prev, userMessage]);
-  setLoading(true);
-
-  try {
-    const { supabase } = await import("../lib/supabase");
-
-    const { data, error } = await supabase.functions.invoke("assistant", {
-      body: {
-        message: text,
-      },
-    });
-
-    if (error) throw error;
-
-    const reply: Message = {
-      id: crypto.randomUUID(),
-      role: "assistant",
-      content:
-        data?.reply ??
-        "Sorry, I couldn't generate a response.",
-      timestamp: Date.now(),
-    };
-
-    setMessages((prev) => [...prev, reply]);
-  } catch (err) {
-    console.error(err);
-
-    const reply: Message = {
-      id: crypto.randomUUID(),
-      role: "assistant",
-      content:
-        "Sorry, I couldn't reach the AI assistant.",
-      timestamp: Date.now(),
-    };
-
-    setMessages((prev) => [...prev, reply]);
-  } finally {
-    setLoading(false);
-  }
-};
 
   return (
     <>
