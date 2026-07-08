@@ -11,29 +11,56 @@ export default function ChatAssistant() {
   const [input, setInput] = useState("");
 
   const { messages, loading, sendMessage } = useAssistant();
+const sendMessage = async (text: string) => {
+  if (!text.trim()) return;
 
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const userMessage: Message = {
+    id: crypto.randomUUID(),
+    role: "user",
+    content: text,
+    timestamp: Date.now(),
+  };
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({
-      behavior: "smooth",
+  setMessages((prev) => [...prev, userMessage]);
+  setLoading(true);
+
+  try {
+    const { supabase } = await import("../lib/supabase");
+
+    const { data, error } = await supabase.functions.invoke("assistant", {
+      body: {
+        message: text,
+      },
     });
-  }, [messages, loading]);
 
-  const handleSend = () => {
-    if (!input.trim()) return;
+    if (error) throw error;
 
-    sendMessage(input);
+    const reply: Message = {
+      id: crypto.randomUUID(),
+      role: "assistant",
+      content:
+        data?.reply ??
+        "Sorry, I couldn't generate a response.",
+      timestamp: Date.now(),
+    };
 
-    setInput("");
-  };
+    setMessages((prev) => [...prev, reply]);
+  } catch (err) {
+    console.error(err);
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      handleSend();
-    }
-  };
+    const reply: Message = {
+      id: crypto.randomUUID(),
+      role: "assistant",
+      content:
+        "Sorry, I couldn't reach the AI assistant.",
+      timestamp: Date.now(),
+    };
+
+    setMessages((prev) => [...prev, reply]);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <>
