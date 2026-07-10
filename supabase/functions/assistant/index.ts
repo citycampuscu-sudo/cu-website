@@ -15,56 +15,58 @@ Deno.serve(async (req) => {
 
     if (error) throw error;
 
-    const search = question.toLowerCase();
+    const searchWords = question
+  .toLowerCase()
+  .replace(/[^\w\s]/g, "")
+  .split(/\s+/)
+  .filter(Boolean);
 
-    let bestMatch = null;
-    let bestScore = 0;
+let bestMatch = null;
+let bestScore = 0;
 
-    for (const item of data ?? []) {
-      let score = 0;
+for (const item of data ?? []) {
+  let score = 0;
 
-      if (item.title?.toLowerCase().includes(search)) {
-        score += 5;
-      }
+  const title = (item.title ?? "").toLowerCase();
+  const category = (item.category ?? "").toLowerCase();
+  const content = (item.content ?? "").toLowerCase();
+  const keywords = (item.keywords ?? "")
+    .toLowerCase()
+    .split(",")
+    .map((k: string) => k.trim());
 
-      if (item.content?.toLowerCase().includes(search)) {
-        score += 3;
-      }
+  for (const word of searchWords) {
+    if (title.includes(word)) score += 10;
+    if (category.includes(word)) score += 8;
+    if (keywords.some((k: string) => k.includes(word))) score += 6;
+    if (content.includes(word)) score += 2;
+  }
 
-      if (item.keywords) {
-        const keywords = item.keywords
-          .toLowerCase()
-          .split(",")
-          .map((k: string) => k.trim());
+  // Bonus for exact phrase match
+  if (title.includes(question.toLowerCase())) score += 20;
+  if (content.includes(question.toLowerCase())) score += 10;
 
-        for (const keyword of keywords) {
-          if (search.includes(keyword) || keyword.includes(search)) {
-            score += 2;
-          }
-        }
-      }
-
-      if (score > bestScore) {
-        bestScore = score;
-        bestMatch = item;
-      }
-    }
+  if (score > bestScore) {
+    bestScore = score;
+    bestMatch = item;
+  }
+  }
 
     if (!bestMatch) {
-      return new Response(
-        JSON.stringify({
-          found: false,
-          answer:
-            "Sorry, I couldn't find that information in our knowledge base. Please contact us on WhatsApp for further assistance.",
-          whatsapp: "https://wa.me/254748777612"
-        }),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+  return new Response(
+    JSON.stringify({
+      found: false,
+      answer:
+        "I couldn't find an answer to that question.\n\nYou can ask me about:\n• Fellowships\n• Ministries\n• Events\n• Leadership\n• Membership\n• Alumni\n\nOr contact us directly on WhatsApp.",
+      whatsapp: "https://wa.me/254748777612",
+    }),
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
     }
+  );
+     }
 
     return new Response(
       JSON.stringify({
