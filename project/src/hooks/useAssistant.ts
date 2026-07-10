@@ -48,14 +48,15 @@ export function useAssistant() {
   setMessages((prev) => [...prev, reply]);
 } catch (err) {
   const reply: Message = {
-    id: crypto.randomUUID(),
-    role: "assistant",
-    content:
-      "Sorry, something went wrong. Please try again later.",
-    timestamp: Date.now(),
-  };
+  id: crypto.randomUUID(),
+  role: "assistant",
+  content: data.answer,
+  timestamp: Date.now(),
+  whatsapp: data.whatsapp,
+  url: data.url,
+};
 
-  setMessages((prev) => [...prev, reply]);
+setMessages((prev) => [...prev, reply]);
 } finally {
   setLoading(false);
       }
