@@ -3,4 +3,7 @@ export interface Message {
   role: "user" | "assistant";
   content: string;
   timestamp: number;
+
+  whatsapp?: string;
+  url?: string;
 }
