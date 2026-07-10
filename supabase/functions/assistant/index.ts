@@ -4,96 +4,192 @@ Deno.serve(async (req) => {
   try {
     const { question } = await req.json();
 
+    const search = question.toLowerCase();
+
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
-    const { data, error } = await supabase
+    // --------------------------
+    // KNOWLEDGE BASE
+    // --------------------------
+
+    const { data: knowledge } = await supabase
       .from("knowledge_base")
-      .select("title, category, content, keywords, url");
+      .select("*");
 
-    if (error) throw error;
+    let bestMatch = null;
+    let bestScore = 0;
 
-    const searchWords = question
-  .toLowerCase()
-  .replace(/[^\w\s]/g, "")
-  .split(/\s+/)
-  .filter(Boolean);
+    for (const item of knowledge ?? []) {
+      let score = 0;
 
-let bestMatch = null;
-let bestScore = 0;
+      if (item.title?.toLowerCase().includes(search))
+        score += 5;
 
-for (const item of data ?? []) {
-  let score = 0;
+      if (item.content?.toLowerCase().includes(search))
+        score += 3;
 
-  const title = (item.title ?? "").toLowerCase();
-  const category = (item.category ?? "").toLowerCase();
-  const content = (item.content ?? "").toLowerCase();
-  const keywords = (item.keywords ?? "")
-    .toLowerCase()
-    .split(",")
-    .map((k: string) => k.trim());
+      if (item.keywords) {
+        const words = item.keywords
+          .toLowerCase()
+          .split(",");
 
-  for (const word of searchWords) {
-    if (title.includes(word)) score += 10;
-    if (category.includes(word)) score += 8;
-    if (keywords.some((k: string) => k.includes(word))) score += 6;
-    if (content.includes(word)) score += 2;
-  }
+        for (const word of words) {
+          const w = word.trim();
 
-  // Bonus for exact phrase match
-  if (title.includes(question.toLowerCase())) score += 20;
-  if (content.includes(question.toLowerCase())) score += 10;
-
-  if (score > bestScore) {
-    bestScore = score;
-    bestMatch = item;
-  }
-  }
-
-    if (!bestMatch) {
-  return new Response(
-    JSON.stringify({
-      found: false,
-      answer:
-        "I couldn't find an answer to that question.\n\nYou can ask me about:\n• Fellowships\n• Ministries\n• Events\n• Leadership\n• Membership\n• Alumni\n\nOr contact us directly on WhatsApp.",
-      whatsapp: "https://wa.me/254748777612",
-    }),
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-     }
-
-    return new Response(
-      JSON.stringify({
-        found: true,
-        title: bestMatch.title,
-        answer: bestMatch.content,
-        url: bestMatch.url,
-      }),
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-  } catch (err) {
-  return new Response(
-    JSON.stringify({
-      found: false,
-      error: String(err),
-      answer: "Internal server error.",
-    }),
-    {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+          if (
+            search.includes(w) ||
+            w.includes(search)
+          ) {
+            score += 2;
           }
+        }
+      }
+
+      if (score > bestScore) {
+        bestScore = score;
+        bestMatch = {
+          answer: item.content,
+          url: item.url,
+        };
+      }
+    }
+
+    if (bestMatch) {
+      return Response.json({
+        answer: bestMatch.answer,
+        url: bestMatch.url,
+      });
+    }
+
+    // --------------------------
+    // EVENTS
+    // --------------------------
+
+    if (
+      search.includes("event") ||
+      search.includes("upcoming") ||
+      search.includes("meeting")
+    ) {
+
+      const { data: events } = await supabase
+        .from("events")
+        .select("*")
+        .order("date");
+
+      if (events?.length) {
+
+        let reply = "📅 Upcoming Events\n\n";
+
+        for (const e of events) {
+          reply +=
+`${e.title}
+📍 ${e.location}
+📅 ${e.date}
+🕒 ${e.time}
+
+`;
+        }
+
+        return Response.json({
+          answer: reply,
+        });
+
+      }
+
+    }
+
+    // --------------------------
+    // MINISTRIES
+    // --------------------------
+
+    if (
+      search.includes("ministry") ||
+      search.includes("ministries")
+    ) {
+
+      const { data } = await supabase
+        .from("ministries")
+        .select("*");
+
+      if (data?.length) {
+
+        let text = "Our ministries:\n\n";
+
+        for (const m of data) {
+          text += `• ${m.name}\n`;
+        }
+
+        return Response.json({
+          answer: text,
+        });
+
+      }
+
+    }
+
+    // --------------------------
+    // LEADERSHIP
+    // --------------------------
+
+    if (
+      search.includes("leader") ||
+      search.includes("leadership") ||
+      search.includes("chairperson")
+    ) {
+
+      const { data } = await supabase
+        .from("leadership_roles")
+        .select("*");
+
+      if (data?.length) {
+
+        let text = "Current Leadership\n\n";
+
+        for (const l of data) {
+          text += `${l.name} — ${l.role_type}\n`;
+        }
+
+        return Response.json({
+          answer: text,
+        });
+
+      }
+
+    }
+
+    // --------------------------
+    // FALLBACK
+    // --------------------------
+
+    return Response.json({
+      answer:
+`Sorry, I couldn't find that information.
+
+You can ask me about:
+
+• Fellowships
+• Ministries
+• Events
+• Leadership
+• Membership
+• Alumni
+
+Or contact us on WhatsApp.`,
+
+      whatsapp:
+"https://wa.me/254748777612"
+    });
+
+  } catch (err) {
+
+    return Response.json({
+      answer: "Internal server error."
+    }, {
+      status: 500
+    });
+
+  }
 });
