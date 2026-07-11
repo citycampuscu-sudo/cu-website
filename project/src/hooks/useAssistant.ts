@@ -26,45 +26,46 @@ export function useAssistant() {
     };
 
     setMessages((prev) => [...prev, userMessage]);
-
     setLoading(true);
 
     try {
-  
+      console.log("Sending question:", text);
 
-  if (error) throw error;
+      const { data, error } = await supabase.functions.invoke("assistant", {
+        body: {
+          question: text,
+        },
+      });
 
-  conconsole.log("Sending question:", text);
+      console.log("Response:", data);
+      console.log("Error:", error);
 
-const { data, error } = await supabase.functions.invoke("assistant", {
-  body: {
-    question: text,
-  },
-});
+      if (error) throw error;
 
-console.log("Response:", data);
-console.log("Error:", error);st reply: Message = {
-    id: crypto.randomUUID(),
-    role: "assistant",
-    content: data.answer,
-    timestamp: Date.now(),
-  };
+      const reply: Message = {
+        id: crypto.randomUUID(),
+        role: "assistant",
+        content: data?.answer ?? "No response received.",
+        timestamp: Date.now(),
+        whatsapp: data?.whatsapp,
+        url: data?.url,
+      };
 
-  setMessages((prev) => [...prev, reply]);
-} catch (err) {
-  const reply: Message = {
-  id: crypto.randomUUID(),
-  role: "assistant",
-  content: data.answer,
-  timestamp: Date.now(),
-  whatsapp: data.whatsapp,
-  url: data.url,
-};
+      setMessages((prev) => [...prev, reply]);
+    } catch (err) {
+      console.error(err);
 
-setMessages((prev) => [...prev, reply]);
-} finally {
-  setLoading(false);
-      }
+      const reply: Message = {
+        id: crypto.randomUUID(),
+        role: "assistant",
+        content: "Sorry, something went wrong.",
+        timestamp: Date.now(),
+      };
+
+      setMessages((prev) => [...prev, reply]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return {
