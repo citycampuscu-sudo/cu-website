@@ -40,25 +40,28 @@ export function useAssistant() {
       console.log("Response:", data);
       console.log("Error:", error);
 
-      if (error) throw error;
+      if (error) {
+        throw error;
+      }
 
       const reply: Message = {
         id: crypto.randomUUID(),
         role: "assistant",
-        content: data?.answer ?? "No response received.",
+        content: data?.answer ?? "No response received from the assistant.",
         timestamp: Date.now(),
         whatsapp: data?.whatsapp,
         url: data?.url,
       };
 
       setMessages((prev) => [...prev, reply]);
-    } catch (err) {
-      console.error(err);
+
+    } catch (err: any) {
+      console.error("Assistant Error:", err);
 
       const reply: Message = {
         id: crypto.randomUUID(),
         role: "assistant",
-        content: "Sorry, something went wrong.",
+        content: `❌ ${JSON.stringify(err, null, 2)}`,
         timestamp: Date.now(),
       };
 
