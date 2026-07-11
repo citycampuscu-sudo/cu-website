@@ -1,195 +1,140 @@
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
 Deno.serve(async (req) => {
-  try {
-    const { question } = await req.json();
+  let question = "";
 
-    const search = question.toLowerCase();
+try {
+  const body = await req.json();
+  console.log("Received body:", body);
 
-    const supabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
-    );
+  question = body?.question ?? "";
+} catch (err) {
+  console.error("JSON Error:", err);
 
-    // --------------------------
-    // KNOWLEDGE BASE
-    // --------------------------
+  return Response.json({
+    answer: "The assistant did not receive a valid question.",
+  });
+}
+  const search = question.toLowerCase();
 
-    const { data: knowledge } = await supabase
-      .from("knowledge_base")
+  const supabase = createClient(
+    Deno.env.get("SUPABASE_URL")!,
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+  );
+
+  // EVENTS
+  if (
+    search.includes("event") ||
+    search.includes("upcoming") ||
+    search.includes("fellowship")
+  ) {
+    const { data } = await supabase
+      .from("events")
+      .select("*")
+      .order("date", { ascending: true });
+
+    if (data?.length) {
+      return Response.json({
+        answer: data
+          .map(
+            (e) =>
+              `📅 ${e.title}\n🗓 ${e.date}\n🕒 ${e.time}\n📍 ${e.location}`
+          )
+          .join("\n\n"),
+      });
+    }
+  }
+
+  // MINISTRIES
+  if (
+    search.includes("ministry") ||
+    search.includes("ministries")
+  ) {
+    const { data } = await supabase
+      .from("ministries")
       .select("*");
 
-    let bestMatch = null;
-    let bestScore = 0;
-
-    for (const item of knowledge ?? []) {
-      let score = 0;
-
-      if (item.title?.toLowerCase().includes(search))
-        score += 5;
-
-      if (item.content?.toLowerCase().includes(search))
-        score += 3;
-
-      if (item.keywords) {
-        const words = item.keywords
-          .toLowerCase()
-          .split(",");
-
-        for (const word of words) {
-          const w = word.trim();
-
-          if (
-            search.includes(w) ||
-            w.includes(search)
-          ) {
-            score += 2;
-          }
-        }
-      }
-
-      if (score > bestScore) {
-        bestScore = score;
-        bestMatch = {
-          answer: item.content,
-          url: item.url,
-        };
-      }
-    }
-
-    if (bestMatch) {
+    if (data?.length) {
       return Response.json({
-        answer: bestMatch.answer,
-        url: bestMatch.url,
+        answer:
+          "Our Ministries:\n\n" +
+          data.map((m) => `• ${m.name}`).join("\n"),
+      });
+    }
+  }
+
+  // LEADERS
+  if (
+    search.includes("leader") ||
+    search.includes("leadership") ||
+    search.includes("chairperson")
+  ) {
+    const { data } = await supabase
+      .from("leaders")
+      .select("*");
+
+    if (data?.length) {
+      return Response.json({
+        answer:
+          "Current Leaders:\n\n" +
+          data
+            .map((l) => `${l.position}: ${l.name}`)
+            .join("\n"),
+      });
+    }
+  }
+
+  // ALUMNI
+  if (search.includes("alumni")) {
+    const { data } = await supabase
+      .from("alumni_events")
+      .select("*")
+      .order("event_date");
+
+    if (data?.length) {
+      return Response.json({
+        answer:
+          "Upcoming Alumni Events:\n\n" +
+          data
+            .map((a) => `${a.title} - ${a.event_date}`)
+            .join("\n"),
       });
     }
 
-    // --------------------------
-    // EVENTS
-    // --------------------------
-
-    if (
-      search.includes("event") ||
-      search.includes("upcoming") ||
-      search.includes("meeting")
-    ) {
-
-      const { data: events } = await supabase
-        .from("events")
-        .select("*")
-        .order("date");
-
-      if (events?.length) {
-
-        let reply = "📅 Upcoming Events\n\n";
-
-        for (const e of events) {
-          reply +=
-`${e.title}
-📍 ${e.location}
-📅 ${e.date}
-🕒 ${e.time}
-
-`;
-        }
-
-        return Response.json({
-          answer: reply,
-        });
-
-      }
-
-    }
-
-    // --------------------------
-    // MINISTRIES
-    // --------------------------
-
-    if (
-      search.includes("ministry") ||
-      search.includes("ministries")
-    ) {
-
-      const { data } = await supabase
-        .from("ministries")
-        .select("*");
-
-      if (data?.length) {
-
-        let text = "Our ministries:\n\n";
-
-        for (const m of data) {
-          text += `• ${m.name}\n`;
-        }
-
-        return Response.json({
-          answer: text,
-        });
-
-      }
-
-    }
-
-    // --------------------------
-    // LEADERSHIP
-    // --------------------------
-
-    if (
-      search.includes("leader") ||
-      search.includes("leadership") ||
-      search.includes("chairperson")
-    ) {
-
-      const { data } = await supabase
-        .from("leadership_roles")
-        .select("*");
-
-      if (data?.length) {
-
-        let text = "Current Leadership\n\n";
-
-        for (const l of data) {
-          text += `${l.name} — ${l.role_type}\n`;
-        }
-
-        return Response.json({
-          answer: text,
-        });
-
-      }
-
-    }
-
-    // --------------------------
-    // FALLBACK
-    // --------------------------
-
     return Response.json({
       answer:
-`Sorry, I couldn't find that information.
-
-You can ask me about:
-
-• Fellowships
-• Ministries
-• Events
-• Leadership
-• Membership
-• Alumni
-
-Or contact us on WhatsApp.`,
-
-      whatsapp:
-"https://wa.me/254748777612"
+        "Our Alumni Network keeps former members connected through fellowship, mentorship and events.",
     });
-
-  } catch (err) {
-
-    return Response.json({
-      answer: "Internal server error."
-    }, {
-      status: 500
-    });
-
   }
+
+  // CONTACT
+  if (
+    search.includes("contact") ||
+    search.includes("phone") ||
+    search.includes("email")
+  ) {
+    return Response.json({
+      answer:
+        "Email: citycampusc.u@gmail.com",
+    });
+  }
+
+  // JOIN CU
+  if (
+    search.includes("join") ||
+    search.includes("member")
+  ) {
+    return Response.json({
+      answer:
+        "You are welcome to join Maseno City Campus Christian Union. Attend our fellowship or register through the Membership page on our website.",
+    });
+  }
+
+  // DEFAULT
+  return Response.json({
+    answer:
+      "Sorry, I couldn't find that information.",
+    whatsapp:
+      "https://wa.me/254748777612",
+  });
 });

@@ -30,15 +30,20 @@ export function useAssistant() {
     setLoading(true);
 
     try {
-  const { data, error } = await supabase.functions.invoke("assistant", {
-    body: {
-      question: text,
-    },
-  });
+  
 
   if (error) throw error;
 
-  const reply: Message = {
+  conconsole.log("Sending question:", text);
+
+const { data, error } = await supabase.functions.invoke("assistant", {
+  body: {
+    question: text,
+  },
+});
+
+console.log("Response:", data);
+console.log("Error:", error);st reply: Message = {
     id: crypto.randomUUID(),
     role: "assistant",
     content: data.answer,
