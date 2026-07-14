@@ -6,8 +6,12 @@ import {
   Briefcase,
   Globe,
   CheckCircle,
+  FileText,
+  ExternalLink,
+  Download,
 } from 'lucide-react';
 import { useState } from 'react';
+import { useDocuments } from '../hooks/useDocuments';
 import { createAlumni } from '../hooks/useSupabaseAlumni';
 import { useSupabaseAlumniEvents } from "../hooks/useSupabaseAlumniEvents";
 
@@ -54,6 +58,11 @@ const [loading, setLoading] = useState(false);
 
 const { events, loading: eventsLoading } =
   useSupabaseAlumniEvents();
+  const { documents, loading: documentsLoading } = useDocuments();
+
+const alumniDocuments = documents.filter(
+  doc => doc.category === 'alumni'
+);
 
 const [formData, setFormData] = useState({
   full_name: '',
@@ -336,6 +345,104 @@ const copyText = async (text: string, field: string) => {
         );
       })}
     </div>
+  </div>
+</section>
+      {/* ALUMNI RESOURCES */}
+
+<section className="py-20 bg-[#f8f9fa]">
+  <div className="max-w-6xl mx-auto px-6">
+
+    <div className="text-center mb-14">
+
+      <h2
+        className="text-4xl font-bold mb-4"
+        style={{ color: "#2e3e87" }}
+      >
+        Alumni Resources
+      </h2>
+
+      <p className="text-gray-600 max-w-3xl mx-auto">
+        Access official documents that guide the MUKCCU Alumni Association.
+      </p>
+
+    </div>
+
+    {documentsLoading ? (
+
+      <div className="text-center py-10">
+        Loading resources...
+      </div>
+
+    ) : (
+
+      <div className="grid md:grid-cols-1 gap-8 max-w-4xl mx-auto">
+
+        {alumniDocuments.map((doc) => (
+
+          <div
+            key={doc.id}
+            className="bg-white rounded-2xl shadow-lg p-8 border-t-4"
+            style={{ borderColor: "#b4712d" }}
+          >
+
+            <div className="flex items-center mb-5">
+
+              <FileText
+                size={36}
+                className="mr-4"
+                style={{ color: "#2e3e87" }}
+              />
+
+              <div>
+
+                <h3
+                  className="text-2xl font-bold"
+                  style={{ color: "#2e3e87" }}
+                >
+                  {doc.title}
+                </h3>
+
+                <p className="text-gray-600 mt-1">
+                  {doc.description}
+                </p>
+
+              </div>
+
+            </div>
+
+            <div className="flex gap-4 flex-wrap">
+
+              <a
+                href={doc.file_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-6 py-3 rounded-lg text-white font-semibold"
+                style={{ backgroundColor: "#2e3e87" }}
+              >
+                <ExternalLink size={18} className="mr-2" />
+                View Document
+              </a>
+
+              <a
+                href={doc.file_url}
+                download={doc.title}
+                className="inline-flex items-center px-6 py-3 rounded-lg text-white font-semibold"
+                style={{ backgroundColor: "#b4712d" }}
+              >
+                <Download size={18} className="mr-2" />
+                Download PDF
+              </a>
+
+            </div>
+
+          </div>
+
+        ))}
+
+      </div>
+
+    )}
+
   </div>
 </section>
                {/* ALUMNI GALLERY */}
