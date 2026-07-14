@@ -10,7 +10,11 @@ import {
 import { useDocuments } from '../hooks/useDocuments';
 
 export default function DocumentsManager() {
-  const { documents, loading } = useDocuments();
+  const {
+    documents,
+    loading,
+    refreshDocuments
+} = useDocuments();
   return (
     <div className="space-y-6">
 
