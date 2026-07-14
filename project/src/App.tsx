@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
+import { useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
@@ -18,6 +19,27 @@ import Alumni from './pages/Alumni';
 import ChatAssistant from "./components/ChatAssistant";
 
 function App() {
+  const navigate = useNavigate();
+  useEffect(() => {
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (
+      e.ctrlKey &&
+      e.shiftKey &&
+      e.code === "KeyA"
+    ) {
+      e.preventDefault();
+      navigate("/admin");
+    }
+  };
+
+  window.addEventListener("keydown", handleKeyDown);
+
+  return () =>
+    window.removeEventListener(
+      "keydown",
+      handleKeyDown
+    );
+}, [navigate]);
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
