@@ -11,7 +11,7 @@ interface DocumentUploadModalProps {
 export default function DocumentUploadModal({
   isOpen,
   onClose,
-  onSuccess,
+  onUploaded,
 }: DocumentUploadModalProps) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
