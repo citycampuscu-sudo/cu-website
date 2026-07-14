@@ -192,9 +192,7 @@ export default function DocumentsManager() {
     await refreshDocuments();
   }}
 />
-    </div>
-  );
-}
+    
 {editingDocument && (
     <DocumentEditModal
         document={editingDocument}
@@ -206,3 +204,6 @@ export default function DocumentsManager() {
         }}
     />
 )}
+      </div>
+);
+}
