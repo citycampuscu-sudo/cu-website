@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { 
   Save, Plus, Trash2, Edit3, Home, Users, Calendar, 
-  Phone, Settings, Image, Globe, Award, BookOpen,
+  Phone, FileText, Settings, Image, Globe, Award, BookOpen,
   Menu, X, Eye, Upload, Search, LogOut
 } from 'lucide-react';
 import AdminLogin from '../components/AdminLogin';
@@ -401,6 +401,7 @@ export default function AdminDashboard() {
     { id: 'ministries', label: 'Ministries', icon: Award },
     { id: 'gallery', label: 'Gallery', icon: Image },
     { id: 'contacts', label: 'Contacts', icon: Phone },
+    { id: 'documents', label: 'Documents', icon: FileText },
     { id: 'settings', label: 'Settings', icon: Settings }
   ];
 
