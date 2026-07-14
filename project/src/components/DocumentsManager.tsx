@@ -8,6 +8,7 @@ import {
   Edit
 } from 'lucide-react';
 import { useDocuments } from '../hooks/useDocuments';
+import DocumentUploadModal from './DocumentUploadModal';
 
 export default function DocumentsManager() {
   const {
@@ -15,6 +16,7 @@ export default function DocumentsManager() {
     loading,
     refreshDocuments
 } = useDocuments();
+  const [showUploadModal, setShowUploadModal] = useState(false);
   return (
     <div className="space-y-6">
 
@@ -31,6 +33,7 @@ export default function DocumentsManager() {
         </div>
 
         <button
+  onClick={() => setShowUploadModal(true)}
   className="flex items-center gap-2 px-5 py-3 rounded-lg text-white"
   style={{ backgroundColor: "#2e3e87" }}
 >
@@ -153,6 +156,13 @@ export default function DocumentsManager() {
 
 )}
 
+      <DocumentUploadModal
+  isOpen={showUploadModal}
+  onClose={() => setShowUploadModal(false)}
+  onUploaded={async () => {
+    await refreshDocuments();
+  }}
+/>
     </div>
   );
 }
