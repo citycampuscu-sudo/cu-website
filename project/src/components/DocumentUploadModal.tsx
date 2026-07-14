@@ -3,9 +3,9 @@ import { X, Upload, FileText, Loader2 } from 'lucide-react';
 import { uploadDocument } from '../lib/documentService';
 
 interface DocumentUploadModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onSuccess?: () => void;
+    isOpen: boolean;
+    onClose: () => void;
+    onUploaded: () => Promise<void>;
 }
 
 export default function DocumentUploadModal({
@@ -56,7 +56,7 @@ export default function DocumentUploadModal({
 
       alert('Document uploaded successfully.');
 
-      onSuccess?.();
+      await onUploaded();
       onClose();
     } catch (error) {
       console.error(error);
