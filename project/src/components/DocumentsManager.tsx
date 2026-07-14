@@ -27,12 +27,12 @@ export default function DocumentsManager() {
         </div>
 
         <button
-          className="flex items-center gap-2 px-5 py-3 rounded-lg text-white"
-          style={{ backgroundColor: "#2e3e87" }}
-        >
-          <Plus size={18} />
-          Upload Document
-        </button>
+  className="flex items-center gap-2 px-5 py-3 rounded-lg text-white"
+  style={{ backgroundColor: "#2e3e87" }}
+>
+  <Plus size={18} />
+  Upload Document
+</button>
 
       </div>
 
