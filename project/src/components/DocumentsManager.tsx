@@ -11,6 +11,7 @@ import { useDocuments } from '../hooks/useDocuments';
 import { deleteDocument } from '../lib/documentService';
 import type { Document } from '../lib/supabase';
 import DocumentUploadModal from './DocumentUploadModal';
+import DocumentEditModal from './DocumentEditModal';
 
 export default function DocumentsManager() {
   const {
@@ -18,6 +19,8 @@ export default function DocumentsManager() {
     loading,
     refreshDocuments
 } = useDocuments();
+  const [editingDocument, setEditingDocument] =
+    useState<Document | null>(null);
   const [showUploadModal, setShowUploadModal] = useState(false);
   async function handleDelete(doc: Document) {
   const confirmed = window.confirm(
@@ -147,12 +150,14 @@ export default function DocumentsManager() {
                   />
                 </a>
 
-                <button>
-                  <Edit
-                    size={20}
-                    className="text-amber-600"
-                  />
-                </button>
+                <button
+    onClick={() => setEditingDocument(doc)}
+>
+    <Edit
+        size={20}
+        className="text-amber-600 hover:text-amber-800"
+    />
+</button>
 
                 <button
   onClick={() => handleDelete(doc)}
@@ -190,3 +195,14 @@ export default function DocumentsManager() {
     </div>
   );
 }
+{editingDocument && (
+    <DocumentEditModal
+        document={editingDocument}
+        isOpen={true}
+        onClose={() => setEditingDocument(null)}
+        onUpdated={async () => {
+            await refreshDocuments();
+            setEditingDocument(null);
+        }}
+    />
+)}
