@@ -79,5 +79,8 @@ export interface Document {
   description: string
   category: 'home' | 'alumni'
   file_url: string
+  storage_path: string
+  created_at: string
+}
   created_at: string
 }
