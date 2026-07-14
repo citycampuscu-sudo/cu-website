@@ -82,5 +82,4 @@ export interface Document {
   storage_path: string
   created_at: string
 }
-  created_at: string
-}
+ 
