@@ -28,6 +28,29 @@ export async function uploadDocument(
     });
 
   if (dbError) throw dbError;
+}
 
-  return true;
+export async function deleteDocument(document: {
+  id: string;
+  file_url: string;
+}) {
+  // Extract the filename from the public URL
+  const fileName = document.file_url.split('/').pop();
+
+  if (fileName) {
+    const { error: storageError } = await supabase.storage
+      .from('documents')
+      .remove([fileName]);
+
+    if (storageError) {
+      console.error(storageError);
+    }
+  }
+
+  const { error } = await supabase
+    .from('documents')
+    .delete()
+    .eq('id', document.id);
+
+  if (error) throw error;
 }
