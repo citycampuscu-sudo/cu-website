@@ -1,5 +1,16 @@
-import { Book, Heart, Users, Target, Calendar, MapPin } from 'lucide-react';
+import {
+  Book,
+  Heart,
+  Users,
+  Target,
+  Calendar,
+  MapPin,
+  FileText,
+  ExternalLink,
+  Download
+} from 'lucide-react';
 import { useContent } from '../hooks/useContent';
+import { useDocuments } from '../hooks/useDocuments';
 import { useState } from 'react';
 import MemberRegistrationModal from '../components/MemberRegistrationModal';
 import { Helmet } from 'react-helmet-async';
@@ -10,6 +21,11 @@ interface HomeProps {
 
 export default function Home({ onNavigate }: HomeProps) {
   const { content, loading } = useContent();
+  const { documents, loading: documentsLoading } = useDocuments();
+
+const homeDocuments = documents.filter(
+  doc => doc.category === 'home'
+);
   const [showMemberModal, setShowMemberModal] = useState(false);
 
   if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
@@ -170,6 +186,82 @@ export default function Home({ onNavigate }: HomeProps) {
             })}
           </div>
         </div>
+        {/* OFFICIAL DOCUMENTS */}
+<div className="mb-16">
+  <h2
+    className="text-4xl font-bold text-center mb-4"
+    style={{ color: '#2e3e87' }}
+  >
+    Official Documents
+  </h2>
+
+  <p className="text-center text-gray-600 mb-10">
+    Access important MUKCCU documents and the current semester programme.
+  </p>
+
+  {documentsLoading ? (
+    <div className="text-center text-gray-500">
+      Loading documents...
+    </div>
+  ) : (
+    <div className="grid md:grid-cols-2 gap-6">
+      {homeDocuments.map((doc) => (
+        <div
+          key={doc.id}
+          className="bg-white rounded-2xl shadow-lg p-6 border-t-4"
+          style={{ borderColor: '#b4712d' }}
+        >
+          <div className="flex items-center mb-4">
+            <FileText
+              size={32}
+              style={{ color: '#2e3e87' }}
+              className="mr-3"
+            />
+
+            <h3
+              className="text-xl font-bold"
+              style={{ color: '#2e3e87' }}
+            >
+              {doc.title}
+            </h3>
+          </div>
+
+          <p className="text-gray-600 mb-6">
+            {doc.description}
+          </p>
+
+          <div className="flex gap-3 flex-wrap">
+
+            <a
+              href={doc.file_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-4 py-2 rounded-lg text-white font-semibold"
+              style={{ backgroundColor: '#2e3e87' }}
+            >
+              <ExternalLink size={18} className="mr-2" />
+              View
+            </a>
+
+            <a
+              href={doc.file_url}
+             download={doc.title}
+              className="inline-flex items-center px-4 py-2 rounded-lg font-semibold"
+              style={{
+                backgroundColor: '#b4712d',
+                color: 'white'
+              }}
+            >
+              <Download size={18} className="mr-2" />
+              Download
+            </a>
+
+          </div>
+        </div>
+      ))}
+    </div>
+  )}
+</div>
 
         {/* INFO CARDS */}
         <div className="grid md:grid-cols-2 gap-8 mb-16">
