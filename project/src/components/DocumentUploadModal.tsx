@@ -1,11 +1,12 @@
-import { useState, useRef, useEffect } from 'react';
-import { X, Upload, FileText, Loader2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { X, Upload, Loader2 } from 'lucide-react';
 import { uploadDocument } from '../lib/documentService';
+import DocumentForm from './DocumentForm';
 
 interface DocumentUploadModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    onUploaded: () => Promise<void>;
+  isOpen: boolean;
+  onClose: () => void;
+  onUploaded: () => Promise<void>;
 }
 
 export default function DocumentUploadModal({
@@ -18,8 +19,6 @@ export default function DocumentUploadModal({
   const [category, setCategory] = useState<'home' | 'alumni'>('home');
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
-
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!isOpen) {
@@ -35,40 +34,31 @@ export default function DocumentUploadModal({
 
   async function handleSubmit() {
     if (!title.trim()) {
-      alert('Please enter a document title.');
+      alert('Please enter a title.');
       return;
     }
 
     if (!file) {
-      alert('Please select a PDF file.');
+      alert('Please choose a file.');
       return;
     }
 
-   try {
-  setUploading(true);
+    try {
+      setUploading(true);
 
-  await uploadDocument(
-    file,
-    title,
-    description,
-    category
-  );
+      await uploadDocument(
+        file,
+        title,
+        description,
+        category
+      );
 
-  alert('Document uploaded successfully.');
+      await onUploaded();
 
-  // Reset the form
-  setTitle('');
-  setDescription('');
-  setCategory('home');
-  setFile(null);
+      onClose();
 
-  // Refresh the documents list
-  await onUploaded();
-
-  // Close the modal
-  onClose();
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
       alert('Failed to upload document.');
     } finally {
       setUploading(false);
@@ -76,13 +66,13 @@ export default function DocumentUploadModal({
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
 
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-xl">
 
-        <div className="flex items-center justify-between border-b p-6">
+        <div className="flex justify-between items-center border-b p-6">
 
-          <h2 className="text-2xl font-bold text-gray-800">
+          <h2 className="text-2xl font-bold">
             Upload Document
           </h2>
 
@@ -92,83 +82,19 @@ export default function DocumentUploadModal({
 
         </div>
 
-        <div className="p-6 space-y-5">
+        <div className="p-6">
 
-          <div>
-
-            <label className="block mb-2 font-semibold">
-              Title
-            </label>
-
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="e.g. Semester Programme"
-              className="w-full border rounded-lg px-4 py-3"
-            />
-
-          </div>
-
-          <div>
-
-            <label className="block mb-2 font-semibold">
-              Description
-            </label>
-
-            <textarea
-              rows={3}
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="w-full border rounded-lg px-4 py-3"
-            />
-
-          </div>
-
-          <div>
-
-            <label className="block mb-2 font-semibold">
-              Category
-            </label>
-
-            <select
-              value={category}
-              onChange={(e) =>
-                setCategory(e.target.value as 'home' | 'alumni')
-              }
-              className="w-full border rounded-lg px-4 py-3"
-            >
-              <option value="home">Home Page</option>
-              <option value="alumni">Alumni Page</option>
-            </select>
-
-          </div>
-
-          <div>
-
-            <label className="block mb-2 font-semibold">
-              PDF Document
-            </label>
-
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept=".pdf"
-              onChange={(e) =>
-                setFile(
-                  e.target.files?.[0] || null
-                )
-              }
-            />
-
-            {file && (
-              <div className="mt-3 flex items-center gap-2 text-green-700">
-                <FileText size={18} />
-                {file.name}
-              </div>
-            )}
-
-          </div>
+          <DocumentForm
+            title={title}
+            setTitle={setTitle}
+            description={description}
+            setDescription={setDescription}
+            category={category}
+            setCategory={setCategory}
+            file={file}
+            setFile={setFile}
+            uploading={uploading}
+          />
 
         </div>
 
@@ -177,7 +103,7 @@ export default function DocumentUploadModal({
           <button
             onClick={onClose}
             disabled={uploading}
-            className="px-6 py-3 rounded-lg border"
+            className="px-6 py-3 border rounded-lg"
           >
             Cancel
           </button>
@@ -186,17 +112,20 @@ export default function DocumentUploadModal({
             onClick={handleSubmit}
             disabled={uploading}
             className="px-6 py-3 rounded-lg text-white flex items-center gap-2"
-            style={{ backgroundColor: '#2e3e87' }}
+            style={{ backgroundColor: "#2e3e87" }}
           >
             {uploading ? (
               <>
-                <Loader2 className="animate-spin" size={18} />
+                <Loader2
+                  size={18}
+                  className="animate-spin"
+                />
                 Uploading...
               </>
             ) : (
               <>
                 <Upload size={18} />
-                Upload Document
+                Upload
               </>
             )}
           </button>
