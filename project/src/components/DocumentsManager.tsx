@@ -1,9 +1,16 @@
 import { useState } from 'react';
-import { FileText, Plus } from 'lucide-react';
+import {
+  FileText,
+  Plus,
+  Download,
+  ExternalLink,
+  Trash2,
+  Edit
+} from 'lucide-react';
+import { useDocuments } from '../hooks/useDocuments';
 
 export default function DocumentsManager() {
-  const [documents] = useState([]);
-
+  const { documents, loading } = useDocuments();
   return (
     <div className="space-y-6">
 
@@ -29,22 +36,118 @@ export default function DocumentsManager() {
 
       </div>
 
-      <div className="bg-white rounded-xl shadow p-8">
+      {loading ? (
 
-        <div className="text-center text-gray-500">
+  <div className="bg-white rounded-xl shadow p-8 text-center">
+    Loading documents...
+  </div>
 
-          <FileText
-            size={60}
-            className="mx-auto mb-4 text-gray-400"
-          />
+) : (
 
-          <p>
-            No documents loaded.
-          </p>
+  <div className="bg-white rounded-xl shadow overflow-hidden">
 
-        </div>
+    <table className="min-w-full">
 
-      </div>
+      <thead
+        className="text-white"
+        style={{ backgroundColor: "#2e3e87" }}
+      >
+        <tr>
+
+          <th className="text-left px-6 py-4">
+            Title
+          </th>
+
+          <th className="text-left px-6 py-4">
+            Category
+          </th>
+
+          <th className="text-left px-6 py-4">
+            Actions
+          </th>
+
+        </tr>
+      </thead>
+
+      <tbody>
+
+        {documents.map((doc) => (
+
+          <tr
+            key={doc.id}
+            className="border-b hover:bg-gray-50"
+          >
+
+            <td className="px-6 py-4">
+
+              <div className="font-semibold">
+                {doc.title}
+              </div>
+
+              <div className="text-sm text-gray-500">
+                {doc.description}
+              </div>
+
+            </td>
+
+            <td className="px-6 py-4 capitalize">
+              {doc.category}
+            </td>
+
+            <td className="px-6 py-4">
+
+              <div className="flex gap-3">
+
+                <a
+                  href={doc.file_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink
+                    size={20}
+                    className="text-blue-600"
+                  />
+                </a>
+
+                <a
+                  href={doc.file_url}
+                  download={doc.title}
+                >
+                  <Download
+                    size={20}
+                    className="text-green-600"
+                  />
+                </a>
+
+                <button>
+                  <Edit
+                    size={20}
+                    className="text-amber-600"
+                  />
+                </button>
+
+                <button>
+                  <Trash2
+                    size={20}
+                    className="text-red-600"
+                  />
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        ))}
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+)}
 
     </div>
   );
