@@ -37,7 +37,12 @@ export interface Leader {
 
 export interface LeadershipRole {
   id: string
-  role_type: 'current_patron' | 'previous_patron' | 'alumni_director' | 'previous_chairperson' | 'focus_staff'
+  role_type:
+    | 'current_patron'
+    | 'previous_patron'
+    | 'alumni_director'
+    | 'previous_chairperson'
+    | 'focus_staff'
   name: string
   description: string
   year: string
@@ -64,5 +69,15 @@ export interface Event {
   time: string
   location: string
   description: string
+  created_at: string
+}
+
+// NEW: Documents
+export interface Document {
+  id: string
+  title: string
+  description: string
+  category: 'home' | 'alumni'
+  file_url: string
   created_at: string
 }
