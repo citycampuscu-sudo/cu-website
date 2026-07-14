@@ -19,13 +19,14 @@ export async function uploadDocument(
     .getPublicUrl(fileName);
 
   const { error: dbError } = await supabase
-    .from('documents')
-    .insert({
-      title,
-      description,
-      category,
-      file_url: data.publicUrl,
-    });
+  .from('documents')
+  .insert({
+    title,
+    description,
+    category,
+    file_url: data.publicUrl,
+    storage_path: fileName,
+  });
 
   if (dbError) throw dbError;
 }
