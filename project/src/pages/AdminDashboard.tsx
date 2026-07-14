@@ -7,6 +7,7 @@ import {
 import AdminLogin from '../components/AdminLogin';
 import { supabase } from '../lib/supabase';
 import { useSupabaseGallery } from '../hooks/useSupabaseGallery';
+import DocumentsManager from '../components/DocumentsManager';
 
 export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -917,6 +918,8 @@ export default function AdminDashboard() {
         return renderDashboard();
       case 'leadership':
         return renderLeadershipEditor();
+      case 'documents':
+      return <DocumentsManager />;
       case 'home':
         return (
           <div className="bg-white rounded-xl shadow-sm border p-6">
