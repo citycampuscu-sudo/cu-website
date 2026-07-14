@@ -8,6 +8,8 @@ import {
   Edit
 } from 'lucide-react';
 import { useDocuments } from '../hooks/useDocuments';
+import { deleteDocument } from '../lib/documentService';
+import type { Document } from '../lib/supabase';
 import DocumentUploadModal from './DocumentUploadModal';
 
 export default function DocumentsManager() {
@@ -17,6 +19,25 @@ export default function DocumentsManager() {
     refreshDocuments
 } = useDocuments();
   const [showUploadModal, setShowUploadModal] = useState(false);
+  async function handleDelete(doc: Document) {
+  const confirmed = window.confirm(
+    `Delete "${doc.title}"?\n\nThis action cannot be undone.`
+  );
+
+  if (!confirmed) return;
+
+  try {
+    await deleteDocument(doc);
+
+    alert('Document deleted successfully.');
+
+    await refreshDocuments();
+
+  } catch (error) {
+    console.error(error);
+    alert('Failed to delete document.');
+  }
+}
   return (
     <div className="space-y-6">
 
@@ -133,12 +154,15 @@ export default function DocumentsManager() {
                   />
                 </button>
 
-                <button>
-                  <Trash2
-                    size={20}
-                    className="text-red-600"
-                  />
-                </button>
+                <button
+  onClick={() => handleDelete(doc)}
+  title="Delete document"
+>
+  <Trash2
+    size={20}
+    className="text-red-600 hover:text-red-800"
+  />
+</button>
 
               </div>
 
