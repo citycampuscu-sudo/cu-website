@@ -44,20 +44,29 @@ export default function DocumentUploadModal({
       return;
     }
 
-    try {
-      setUploading(true);
+   try {
+  setUploading(true);
 
-      await uploadDocument(
-        file,
-        title,
-        description,
-        category
-      );
+  await uploadDocument(
+    file,
+    title,
+    description,
+    category
+  );
 
-      alert('Document uploaded successfully.');
+  alert('Document uploaded successfully.');
 
-      await onUploaded();
-      onClose();
+  // Reset the form
+  setTitle('');
+  setDescription('');
+  setCategory('home');
+  setFile(null);
+
+  // Refresh the documents list
+  await onUploaded();
+
+  // Close the modal
+  onClose();
     } catch (error) {
       console.error(error);
       alert('Failed to upload document.');
