@@ -42,22 +42,45 @@ const homeDocuments = documents.filter(
 
       {/* SEO SECTION */}
       <Helmet>
-        <title>Maseno University City Campus Christian Union | MUKCCU</title>
-        <meta
-          name="description"
-          content="Maseno University City Campus Christian Union (MUKCCU) is a vibrant fellowship of students committed to knowing Christ, growing in faith, and serving God with excellence."
-        />
-        <meta
-          name="keywords"
-          content="MUKCCU, Maseno University Kisumu Campus Christian Union"
-        />
+  <title>Maseno University City Campus Christian Union | MUKCCU</title>
 
-        {/* Open Graph */}
-        <meta property="og:title" content="MUKCCU - Maseno University City Campus Christian Union" />
-        <meta property="og:description" content="A vibrant Christian fellowship of students at Maseno University Kisumu Campus." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://mukccu.org/" />
-      </Helmet>
+  <meta
+    name="description"
+    content="Maseno University City Campus Christian Union (MUKCCU) is a vibrant fellowship of students committed to knowing Christ, growing in faith, and serving God with excellence."
+  />
+
+  <meta
+    name="keywords"
+    content="MUKCCU, Maseno University City Campus Christian Union"
+  />
+
+  <meta
+    property="og:title"
+    content="Maseno University City Campus Christian Union | MUKCCU"
+  />
+
+  <meta
+    property="og:description"
+    content="A vibrant Christian fellowship of students at Maseno University City Campus."
+  />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mukccu.org/" />
+  <meta
+    property="og:site_name"
+    content="Maseno University City Campus Christian Union"
+  />
+
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      url: "https://mukccu.org/",
+      name: "Maseno University City Campus Christian Union",
+      alternateName: "MUKCCU"
+    })}
+  </script>
+</Helmet>
 
       {/* HERO SECTION */}
       <div
