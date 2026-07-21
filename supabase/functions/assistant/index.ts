@@ -21,120 +21,216 @@ try {
     Deno.env.get("SUPABASE_URL")!,
     Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
   );
+  // ------------------------------
+// FETCH ALL WEBSITE DATA
+// ------------------------------
+async function fetchWebsiteData() {
+  const [
+    content,
+    leadership,
+    ministries,
+    events,
+    documents,
+    knowledge
+  ] = await Promise.all([
+    supabase.from("content").select("*"),
+    supabase.from("leadership").select("*"),
+    supabase.from("ministries").select("*"),
+    supabase.from("events").select("*"),
+    supabase.from("documents").select("*"),
+    supabase.from("knowledge_base").select("*")
+  ]);
 
-  // EVENTS
-  if (
-    search.includes("event") ||
-    search.includes("upcoming") ||
-    search.includes("fellowship")
-  ) {
-    const { data } = await supabase
-      .from("events")
-      .select("*")
-      .order("date", { ascending: true });
+  return {
+    content: content.data || [],
+    leadership: leadership.data || [],
+    ministries: ministries.data || [],
+    events: events.data || [],
+    documents: documents.data || [],
+    knowledge: knowledge.data || []
+  };
+}
 
-    if (data?.length) {
-      return Response.json({
-        answer: data
-          .map(
-            (e) =>
-              `📅 ${e.title}\n🗓 ${e.date}\n🕒 ${e.time}\n📍 ${e.location}`
-          )
-          .join("\n\n"),
-      });
-    }
-  }
+// ------------------------------
+// BUILD SEARCH INDEX
+// ------------------------------
+function buildSearchIndex(data: any) {
+  const index: any[] = [];
+
+  // CONTENT
+  data.content.forEach((item: any) => {
+    index.push({
+      source: "content",
+      title: item.page ?? "Website Content",
+      text: JSON.stringify(item),
+      raw: item
+    });
+  });
+
+  // LEADERSHIP
+  data.leadership.forEach((item: any) => {
+    index.push({
+      source: "leadership",
+      title: item.name,
+      text: `
+        ${item.name ?? ""}
+        ${item.position ?? ""}
+        ${item.bio ?? ""}
+        ${item.email ?? ""}
+      `,
+      raw: item
+    });
+  });
 
   // MINISTRIES
-  if (
-    search.includes("ministry") ||
-    search.includes("ministries")
-  ) {
-    const { data } = await supabase
-      .from("ministries")
-      .select("*");
-
-    if (data?.length) {
-      return Response.json({
-        answer:
-          "Our Ministries:\n\n" +
-          data.map((m) => `• ${m.name}`).join("\n"),
-      });
-    }
-  }
-
-  // LEADERS
-  if (
-    search.includes("leader") ||
-    search.includes("leadership") ||
-    search.includes("chairperson")
-  ) {
-    const { data } = await supabase
-      .from("leaders")
-      .select("*");
-
-    if (data?.length) {
-      return Response.json({
-        answer:
-          "Current Leaders:\n\n" +
-          data
-            .map((l) => `${l.position}: ${l.name}`)
-            .join("\n"),
-      });
-    }
-  }
-
-  // ALUMNI
-  if (search.includes("alumni")) {
-    const { data } = await supabase
-      .from("alumni_events")
-      .select("*")
-      .order("event_date");
-
-    if (data?.length) {
-      return Response.json({
-        answer:
-          "Upcoming Alumni Events:\n\n" +
-          data
-            .map((a) => `${a.title} - ${a.event_date}`)
-            .join("\n"),
-      });
-    }
-
-    return Response.json({
-      answer:
-        "Our Alumni Network keeps former members connected through fellowship, mentorship and events.",
+  data.ministries.forEach((item: any) => {
+    index.push({
+      source: "ministries",
+      title: item.name,
+      text: `
+        ${item.name ?? ""}
+        ${item.description ?? ""}
+      `,
+      raw: item
     });
-  }
-
-  // CONTACT
-  if (
-    search.includes("contact") ||
-    search.includes("phone") ||
-    search.includes("email")
-  ) {
-    return Response.json({
-      answer:
-        "Email: citycampusc.u@gmail.com",
-    });
-  }
-
-  // JOIN CU
-  if (
-    search.includes("join") ||
-    search.includes("member")
-  ) {
-    return Response.json({
-      answer:
-        "You are welcome to join Maseno City Campus Christian Union. Attend our fellowship or register through the Membership page on our website.",
-    });
-  }
-
-  // DEFAULT
-  return Response.json({
-    answer:
-      "Sorry, I couldn't find that information.",
-    whatsapp:
-      "https://wa.me/254748777612",
   });
+
+  // EVENTS
+  data.events.forEach((item: any) => {
+    index.push({
+      source: "events",
+      title: item.title,
+      text: `
+        ${item.title ?? ""}
+        ${item.description ?? ""}
+        ${item.date ?? ""}
+        ${item.time ?? ""}
+        ${item.location ?? ""}
+      `,
+      raw: item
+    });
+  });
+
+  // DOCUMENTS
+  data.documents.forEach((item: any) => {
+    index.push({
+      source: "documents",
+      title: item.title,
+      text: `
+        ${item.title ?? ""}
+        ${item.description ?? ""}
+      `,
+      raw: item
+    });
+  });
+
+  // KNOWLEDGE BASE
+  data.knowledge.forEach((item: any) => {
+    index.push({
+      source: "knowledge",
+      title: item.title,
+      text: `
+        ${item.title ?? ""}
+        ${item.content ?? ""}
+        ${item.keywords ?? ""}
+      `,
+      raw: item
+    });
+  });
+
+  return index;
+}
+
+// ------------------------------
+// SIMPLE RELEVANCE SCORING
+// ------------------------------
+function searchKnowledge(index: any[], question: string) {
+
+  const words = question
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean);
+
+  return index
+    .map((item) => {
+
+      let score = 0;
+
+      const text = item.text.toLowerCase();
+
+      words.forEach((word) => {
+
+        if (text.includes(word)) score += 3;
+
+        if (item.title?.toLowerCase().includes(word))
+          score += 5;
+
+      });
+
+      return {
+        ...item,
+        score
+      };
+
+    })
+    .filter(item => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 5);
+
+    }
+
+  const websiteData = await fetchWebsiteData();
+
+const searchIndex = buildSearchIndex(websiteData);
+
+const results = searchKnowledge(searchIndex, question);
+
+if (results.length) {
+
+  const answer = results
+    .map(item => {
+
+      switch (item.source) {
+
+        case "leadership":
+          return `${item.raw.position}: ${item.raw.name}`;
+
+        case "ministries":
+          return `${item.raw.name}\n${item.raw.description}`;
+
+        case "events":
+          return `📅 ${item.raw.title}
+🗓 ${item.raw.date}
+🕒 ${item.raw.time}
+📍 ${item.raw.location}`;
+
+        case "documents":
+          return `${item.raw.title}\n${item.raw.description}`;
+
+        case "content":
+          return JSON.stringify(item.raw, null, 2);
+
+        case "knowledge":
+          return item.raw.content;
+
+        default:
+          return item.text;
+
+      }
+
+    })
+    .join("\n\n");
+
+  return Response.json({
+    answer
+  });
+
+}
+
+return Response.json({
+  answer:
+    "Sorry, I couldn't find that information on the MUKCCU website.",
+  whatsapp:
+    "https://wa.me/254748777612"
+});
 });
