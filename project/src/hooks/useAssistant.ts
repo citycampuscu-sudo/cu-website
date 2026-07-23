@@ -31,7 +31,7 @@ export function useAssistant() {
     try {
       console.log("Sending question:", text);
 
-      const { data, error } = await supabase.functions.invoke("assistant", {
+      const { data, error } = await supabase.functions.invoke("assistant-v2", {
         body: {
           question: text,
         },
