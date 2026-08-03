@@ -250,21 +250,21 @@ export default function Leadership() {
                         className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 p-5 md:p-6"
                         style={{ borderTop: '4px solid #b4712d' }}
                       >
-                        <div className="flex items-start mb-4">
+                        <div className="flex items-start gap-5 mb-5">
                           {leader.image ? (
-                            <img 
-                              src={leader.image} 
-                              alt={leader.name}
-                              loading="lazy"
-                              className="w-12 h-12 rounded-full object-cover mr-4 border-2"
-                              style={{ borderColor: '#2e3e87' }}
-                            />
+                            <img
+  src={leader.image}
+  alt={leader.name}
+  loading="lazy"
+  className="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover mr-5 border-[3px] flex-shrink-0"
+  style={{ borderColor: '#2e3e87' }}
+/>
                           ) : (
                             <div
-                              className="w-14 h-14 rounded-full mr-4 flex items-center justify-center"
-                              style={{ backgroundColor: '#2e3e87' }}
-                            >
-                              <span className="text-white font-bold text-base">
+  className="w-24 h-24 md:w-28 md:h-28 rounded-full mr-5 flex items-center justify-center flex-shrink-0"
+  style={{ backgroundColor: '#2e3e87' }}
+>
+                              <span className="text-white font-bold text-2xl">
                                 {leader.name
                                   ?.split(' ')
                                   .map((n: string) => n[0])
