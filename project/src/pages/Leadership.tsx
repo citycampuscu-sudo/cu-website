@@ -443,34 +443,58 @@ export default function Leadership() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {previousChairpersons.map((chair: any, index: number) => (
                     <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      whileHover={{ y: -8, scale: 1.02 }}
-                      viewport={{ once: true }}
-                      transition={{
-                        duration: 0.4,
-                        delay: index * 0.05
-                      }}
-                      className="p-5 rounded-xl shadow-sm hover:shadow-md transition-all"
-                      style={{
-                        backgroundColor: '#f8f9fa',
-                        borderLeft: '4px solid #b4712d'
-                      }}
-                    >
-                      <p
-                        className="font-semibold text-lg"
-                        style={{ color: '#2e3e87' }}
-                      >
-                        {chair.name}
-                      </p>
-                      <p
-                        className="text-sm"
-                        style={{ color: '#b4712d' }}
-                      >
-                        {chair.year}
-                      </p>
-                    </motion.div>
+  key={index}
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  whileHover={{ y: -8, scale: 1.02 }}
+  viewport={{ once: true }}
+  transition={{
+    duration: 0.4,
+    delay: index * 0.05,
+  }}
+  className="bg-white rounded-2xl shadow-lg p-6 text-center"
+  style={{ borderTop: "4px solid #b4712d" }}
+>
+  {chair.image_url ? (
+    <img
+      src={chair.image_url}
+      alt={chair.name}
+      loading="lazy"
+      className="w-28 h-28 mx-auto rounded-full object-cover border-4 shadow-md"
+      style={{ borderColor: "#2e3e87" }}
+    />
+  ) : (
+    <div
+      className="w-28 h-28 mx-auto rounded-full flex items-center justify-center border-4"
+      style={{
+        backgroundColor: "#2e3e87",
+        borderColor: "#2e3e87",
+      }}
+    >
+      <span className="text-white text-3xl font-bold">
+        {chair.name
+          ?.split(" ")
+          .map((n: string) => n[0])
+          .slice(0, 2)
+          .join("")}
+      </span>
+    </div>
+  )}
+
+  <h3
+    className="mt-4 text-xl font-bold"
+    style={{ color: "#2e3e87" }}
+  >
+    {chair.name}
+  </h3>
+
+  <p
+    className="mt-1 text-base font-medium"
+    style={{ color: "#b4712d" }}
+  >
+    {chair.year}
+  </p>
+</motion.div>
                   ))}
                 </div>
               </div>
