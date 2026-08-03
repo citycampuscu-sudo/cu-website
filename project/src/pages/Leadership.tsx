@@ -250,46 +250,49 @@ export default function Leadership() {
                         className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 p-5 md:p-6"
                         style={{ borderTop: '4px solid #b4712d' }}
                       >
-                        <div className="flex items-start gap-5 mb-5">
-                          {leader.image ? (
-                            <img
-  src={leader.image}
-  alt={leader.name}
-  loading="lazy"
-  className="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover mr-5 border-[3px] flex-shrink-0"
-  style={{ borderColor: '#2e3e87' }}
-/>
-                          ) : (
-                            <div
-  className="w-24 h-24 md:w-28 md:h-28 rounded-full mr-5 flex items-center justify-center flex-shrink-0"
-  style={{ backgroundColor: '#2e3e87' }}
->
-                              <span className="text-white font-bold text-2xl">
-                                {leader.name
-                                  ?.split(' ')
-                                  .map((n: string) => n[0])
-                                  .slice(0, 2)
-                                  .join('')}
-                              </span>
-                            </div>
-                          )}
-                          <div className="flex-1">
-                            <h3
-                              className="text-xl font-bold mb-1"
-                              style={{ color: '#2e3e87' }}
-                            >
-                              {leader.position}
-                            </h3>
-                            <p className="text-lg font-semibold text-gray-800">
-                              {leader.name}
-                            </p>
-                            {leader.course && leader.year && (
-                              <p className="text-sm" style={{ color: '#b4712d' }}>
-                                {leader.year} {leader.course}
-                              </p>
-                            )}
-                          </div>
-                        </div>
+                        <div className="flex items-start gap-6 mb-5">
+  {leader.image ? (
+    <img
+      src={leader.image}
+      alt={leader.name}
+      loading="lazy"
+      className="w-28 h-28 rounded-full object-cover border-[3px] flex-shrink-0"
+      style={{ borderColor: '#2e3e87' }}
+    />
+  ) : (
+    <div
+      className="w-28 h-28 rounded-full flex items-center justify-center flex-shrink-0"
+      style={{ backgroundColor: '#2e3e87' }}
+    >
+      <span className="text-white font-bold text-2xl">
+        {leader.name
+          ?.split(' ')
+          .map((n: string) => n[0])
+          .slice(0, 2)
+          .join('')}
+      </span>
+    </div>
+  )}
+
+  <div className="flex-1 min-w-0 pt-1">
+    <h3
+      className="text-2xl md:text-3xl font-bold leading-tight mb-2"
+      style={{ color: '#2e3e87' }}
+    >
+      {leader.position}
+    </h3>
+
+    <p className="text-xl font-semibold text-gray-800 leading-snug">
+      {leader.name}
+    </p>
+
+    {leader.course && leader.year && (
+      <p className="text-base mt-1" style={{ color: '#b4712d' }}>
+        {leader.year} {leader.course}
+      </p>
+    )}
+  </div>
+</div>
                         {leader.bio && (
                           <div
                             className="pt-4 mt-4"
