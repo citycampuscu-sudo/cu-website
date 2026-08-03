@@ -235,75 +235,78 @@ export default function Leadership() {
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredLeaders.map((leader: any, index: number) => (
                       <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        whileHover={{
-                          y: -8,
-                          scale: 1.02
-                        }}
-                        viewport={{ once: true }}
-                        transition={{
-                          duration: 0.5,
-                          delay: index * 0.05
-                        }}
-                        key={index}
-                        className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 p-5 md:p-6"
-                        style={{ borderTop: '4px solid #b4712d' }}
-                      >
-                        <div className="flex items-start gap-6 mb-5">
-  {leader.image ? (
-    <img
-      src={leader.image}
-      alt={leader.name}
-      loading="lazy"
-      className="w-28 h-28 rounded-full object-cover border-[3px] flex-shrink-0"
-      style={{ borderColor: '#2e3e87' }}
-    />
-  ) : (
-    <div
-      className="w-28 h-28 rounded-full flex items-center justify-center flex-shrink-0"
-      style={{ backgroundColor: '#2e3e87' }}
-    >
-      <span className="text-white font-bold text-2xl">
-        {leader.name
-          ?.split(' ')
-          .map((n: string) => n[0])
-          .slice(0, 2)
-          .join('')}
-      </span>
-    </div>
-  )}
-
-  <div className="flex-1 min-w-0 pt-1">
-    <h3
-      className="text-2xl md:text-3xl font-bold leading-tight mb-2"
-      style={{ color: '#2e3e87' }}
-    >
-      {leader.position}
-    </h3>
-
-    <p className="text-xl font-semibold text-gray-800 leading-snug">
-      {leader.name}
-    </p>
-
-    {leader.course && leader.year && (
-      <p className="text-base mt-1" style={{ color: '#b4712d' }}>
-        {leader.year} {leader.course}
-      </p>
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  whileHover={{ y: -8, scale: 1.02 }}
+  viewport={{ once: true }}
+  transition={{
+    duration: 0.5,
+    delay: index * 0.05,
+  }}
+  key={index}
+  className="bg-white rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 md:p-8"
+  style={{ borderTop: "5px solid #b4712d" }}
+>
+  {/* Photo */}
+  <div className="flex justify-center mb-5">
+    {leader.image ? (
+      <img
+        src={leader.image}
+        alt={leader.name}
+        loading="lazy"
+        className="w-36 h-36 md:w-44 md:h-44 rounded-full object-cover border-4 shadow-md"
+        style={{ borderColor: "#2e3e87" }}
+      />
+    ) : (
+      <div
+        className="w-36 h-36 md:w-44 md:h-44 rounded-full flex items-center justify-center"
+        style={{ backgroundColor: "#2e3e87" }}
+      >
+        <span className="text-white text-5xl font-bold">
+          {leader.name
+            ?.split(" ")
+            .map((n: string) => n[0])
+            .slice(0, 2)
+            .join("")}
+        </span>
+      </div>
     )}
   </div>
-</div>
-                        {leader.bio && (
-                          <div
-                            className="pt-4 mt-4"
-                            style={{ borderTop: '1px solid #e5e7eb' }}
-                          >
-                            <p className="text-sm md:text-base text-gray-600 leading-7">
-                              {leader.bio}
-                            </p>
-                          </div>
-                        )}
-                      </motion.div>
+
+  {/* Position */}
+  <h3
+    className="text-3xl font-bold text-center"
+    style={{ color: "#2e3e87" }}
+  >
+    {leader.position}
+  </h3>
+
+  {/* Name */}
+  <p className="text-2xl font-semibold text-center text-gray-800 mt-2">
+    {leader.name}
+  </p>
+
+  {/* Course */}
+  {leader.course && leader.year && (
+    <p
+      className="text-lg text-center mt-2"
+      style={{ color: "#b4712d" }}
+    >
+      {leader.year} {leader.course}
+    </p>
+  )}
+
+  {/* Divider */}
+  {leader.bio && (
+    <>
+      <div className="border-t border-gray-200 my-6"></div>
+
+      <p className="text-gray-600 text-base md:text-lg leading-8 text-center">
+        {leader.bio}
+      </p>
+    </>
+  )}
+</motion.div>
                     ))}
                   </div>
                 )}
