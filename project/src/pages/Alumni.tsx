@@ -202,7 +202,7 @@ const copyText = async (text: string, field: string) => {
   className="px-8 py-4 rounded-xl font-semibold text-white transition hover:scale-105"
   style={{ backgroundColor: '#b4712d' }}
 >
-  Join the Alumni Network
+  Stay Connected 
 </button>
 
             <button
@@ -268,6 +268,86 @@ const copyText = async (text: string, field: string) => {
           </div>
         </div>
       </section>
+      {/* ALUMNI SPOTLIGHT */}
+
+<section className="py-20 bg-white">
+  <div className="max-w-6xl mx-auto px-6">
+
+    <div className="text-center mb-14">
+      <h2
+        className="text-4xl font-bold mb-4"
+        style={{ color: "#2e3e87" }}
+      >
+        🌟 Alumni Spotlight
+      </h2>
+
+      <p className="text-gray-600 max-w-3xl mx-auto">
+        Every alumnus has a story of faith, growth and purpose.
+        Our Alumni Spotlight celebrates graduates whose lives
+        continue to reflect Christ in their professions,
+        churches and communities.
+      </p>
+    </div>
+
+    <div className="bg-[#f8f9fa] rounded-3xl shadow-xl p-10 lg:p-14">
+
+      <div className="grid lg:grid-cols-3 gap-10 items-center">
+
+        <div className="flex justify-center">
+          <img
+            src="/images/alumni-spotlight.jpg"
+            alt="Featured Alumni"
+            className="w-72 h-72 rounded-full object-cover shadow-xl border-8 border-white"
+          />
+        </div>
+
+        <div className="lg:col-span-2">
+
+          <span
+            className="inline-block px-4 py-2 rounded-full text-white mb-4"
+            style={{ backgroundColor: "#b4712d" }}
+          >
+            Featured Alumnus
+          </span>
+
+          <h3
+            className="text-4xl font-bold mb-3"
+            style={{ color: "#2e3e87" }}
+          >
+            Dr. Nashon Atieno
+          </h3>
+
+          <p className="text-lg text-gray-500 mb-5">
+            MBChB • Class of 2026
+          </p>
+
+          <p className="text-xl font-semibold mb-6">
+            Medical Officer Intern
+          </p>
+
+          <blockquote className="italic text-gray-700 leading-8 border-l-4 border-[#b4712d] pl-6 mb-8">
+            "Serving in MUKCCU transformed my walk with Christ and
+            taught me servant leadership. The friendships,
+            discipleship and opportunities to serve continue to
+            shape who I am today."
+          </blockquote>
+
+          <div className="font-medium text-[#2e3e87]">
+            Favourite Scripture:
+          </div>
+
+          <p className="italic mt-2">
+            Proverbs 3:5–6
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
 
       {/* OUR IMPACT */}
 
@@ -285,7 +365,12 @@ const copyText = async (text: string, field: string) => {
               ['200+', 'Alumni'],
               ['15+', 'Graduation Classes'],
               ['10+', 'Schools Represented'],
-            ].map(([number, label]) => (
+            ]<p className="text-center text-gray-600 leading-8 max-w-4xl mx-auto mt-12">
+  God has faithfully raised men and women through MUKCCU who now
+  serve Christ in healthcare, education, law, engineering,
+  business, ministry, public service and many other professions
+  across Kenya and beyond.
+</p>.map(([number, label]) => (
               <div
                 key={label}
                 className="bg-white rounded-2xl shadow-lg p-8 text-center"
@@ -304,7 +389,7 @@ const copyText = async (text: string, field: string) => {
         </div>
       </section>
 
-      {/* WHY JOIN */}
+      {/* Stay Connected */}
 
 <section className="py-20 bg-white">
   <div className="max-w-7xl mx-auto px-6">
@@ -317,32 +402,44 @@ const copyText = async (text: string, field: string) => {
 
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       {benefits.map((benefit, index) => {
-        const Icon = benefit.icon;
-
-        return (
-          <div
-            key={index}
-            className="bg-gray-50 rounded-2xl shadow-lg p-8 hover:-translate-y-2 transition duration-300"
-          >
-            <div
-              className="w-16 h-16 rounded-full flex items-center justify-center mb-6"
-              style={{ backgroundColor: '#2e3e87' }}
-            >
-              <Icon className="text-white" size={30} />
-            </div>
-
-            <h3
-              className="text-2xl font-semibold mb-4"
-              style={{ color: '#2e3e87' }}
-            >
-              {benefit.title}
-            </h3>
-
-            <p className="text-gray-600 leading-7">
-              {benefit.description}
-            </p>
-          </div>
-        );
+        const benefits = [
+  {
+    icon: GraduationCap,
+    title: "Become a Mentor",
+    description:
+      "Walk alongside current students by offering spiritual, academic and professional guidance.",
+  },
+  {
+    icon: Briefcase,
+    title: "Share Opportunities",
+    description:
+      "Connect students and fellow alumni with internships, jobs, scholarships and career advice.",
+  },
+  {
+    icon: Heart,
+    title: "Support the Ministry",
+    description:
+      "Partner with MUKCCU through prayer, volunteering and financial support.",
+  },
+  {
+    icon: Users,
+    title: "Grow Your Network",
+    description:
+      "Reconnect with former members and build meaningful professional and ministry relationships.",
+  },
+  {
+    icon: Globe,
+    title: "Attend Alumni Events",
+    description:
+      "Participate in reunions, worship experiences, networking events and outreach programmes.",
+  },
+  {
+    icon: CheckCircle,
+    title: "Share Your Story",
+    description:
+      "Encourage the next generation by sharing your journey of faith, leadership and service.",
+  },
+];
       })}
     </div>
   </div>
