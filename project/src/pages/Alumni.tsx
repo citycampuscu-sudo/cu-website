@@ -350,44 +350,45 @@ const copyText = async (text: string, field: string) => {
 </section>
 
       {/* OUR IMPACT */}
+<section className="py-20 bg-[#f8f9fa]">
+  <div className="max-w-6xl mx-auto px-6">
+    <h2
+      className="text-4xl font-bold text-center mb-14"
+      style={{ color: "#2e3e87" }}
+    >
+      Our Impact
+    </h2>
 
-      <section className="py-20 bg-[#f8f9fa]">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2
-            className="text-4xl font-bold text-center mb-14"
-            style={{ color: '#2e3e87' }}
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+      {[
+        ["200+", "Alumni"],
+        ["15+", "Graduation Classes"],
+        ["10+", "Schools Represented"],
+      ].map(([number, label]) => (
+        <div
+          key={label}
+          className="bg-white rounded-2xl shadow-lg p-8 text-center"
+        >
+          <h3
+            className="text-5xl font-bold mb-3"
+            style={{ color: "#b4712d" }}
           >
-            Our Impact
-          </h2>
+            {number}
+          </h3>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              ['200+', 'Alumni'],
-              ['15+', 'Graduation Classes'],
-              ['10+', 'Schools Represented'],
-            ]<p className="text-center text-gray-600 leading-8 max-w-4xl mx-auto mt-12">
-  God has faithfully raised men and women through MUKCCU who now
-  serve Christ in healthcare, education, law, engineering,
-  business, ministry, public service and many other professions
-  across Kenya and beyond.
-</p>.map(([number, label]) => (
-              <div
-                key={label}
-                className="bg-white rounded-2xl shadow-lg p-8 text-center"
-              >
-                <h3
-                  className="text-5xl font-bold mb-3"
-                  style={{ color: '#b4712d' }}
-                >
-                  {number}
-                </h3>
-
-                <p className="text-gray-700 font-medium">{label}</p>
-              </div>
-            ))}
-          </div>
+          <p className="text-gray-700 font-medium">{label}</p>
         </div>
-      </section>
+      ))}
+    </div>
+
+    <p className="text-center text-gray-600 leading-8 max-w-4xl mx-auto mt-12">
+      God has faithfully raised men and women through MUKCCU who now
+      serve Christ in healthcare, education, law, engineering,
+      business, ministry, public service and many other professions
+      across Kenya and beyond.
+    </p>
+  </div>
+</section>
 
       {/* Stay Connected */}
 
