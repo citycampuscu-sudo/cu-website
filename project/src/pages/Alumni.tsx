@@ -571,11 +571,10 @@ const copyText = async (text: string, field: string) => {
         >
 
           <img
-            src={`/images/${item.image}`}
-            alt={item.title}
-            className="w-full h-72 object-cover transition duration-700 group-hover:scale-110"
-          />
-
+  src={`/images/${item.image}`}
+  alt={item.title}
+  className="w-full aspect-[4/3] object-cover transition duration-700 group-hover:scale-110"
+/>
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-500" />
 
           <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-8 group-hover:translate-y-0 transition duration-500">
