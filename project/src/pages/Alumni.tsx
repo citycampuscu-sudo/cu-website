@@ -295,7 +295,7 @@ const copyText = async (text: string, field: string) => {
 
         <div className="flex justify-center">
           <img
-            src="/images/alumni-spotlight.jpg"
+            src="/images/gallery1.jpg"
             alt="Featured Alumni"
             className="w-72 h-72 rounded-full object-cover shadow-xl border-8 border-white"
           />
@@ -314,15 +314,15 @@ const copyText = async (text: string, field: string) => {
             className="text-4xl font-bold mb-3"
             style={{ color: "#2e3e87" }}
           >
-            Dr. Nashon Atieno
+            Dr. Joshua Okise
           </h3>
 
           <p className="text-lg text-gray-500 mb-5">
-            MBChB • Class of 2026
+            Business and Economis• Class of 2016
           </p>
 
           <p className="text-xl font-semibold mb-6">
-            Medical Officer Intern
+            Acting CEO JOOTRH
           </p>
 
           <blockquote className="italic text-gray-700 leading-8 border-l-4 border-[#b4712d] pl-6 mb-8">
@@ -543,50 +543,142 @@ const copyText = async (text: string, field: string) => {
 
   </div>
 </section>
-               {/* ALUMNI GALLERY */}
+              {/* ALUMNI GALLERY */}
 
 <section
   id="alumni-gallery"
-  className="py-20 bg-[#f8f9fa]"
+  className="py-24 bg-gradient-to-b from-[#f8f9fa] to-white"
 >
   <div className="max-w-7xl mx-auto px-6">
 
-    <div className="text-center mb-14">
+    {/* Section Header */}
+    <div className="text-center mb-16">
+
+      <span
+        className="inline-block px-5 py-2 rounded-full text-sm font-semibold text-white mb-5"
+        style={{ backgroundColor: "#b4712d" }}
+      >
+        📸 Reliving Memories
+      </span>
+
       <h2
-        className="text-4xl font-bold mb-4"
-        style={{ color: '#2e3e87' }}
+        className="text-4xl md:text-5xl font-bold mb-5"
+        style={{ color: "#2e3e87" }}
       >
         Alumni Gallery
       </h2>
 
-      <p className="text-gray-600 max-w-3xl mx-auto">
-        Celebrating moments of fellowship, conferences, outreach,
-        graduations and lifelong friendships built through MUKCCU.
+      <p className="text-gray-600 max-w-3xl mx-auto leading-8">
+        Celebrating unforgettable moments of fellowship, graduations,
+        conferences, outreach and lifelong friendships built through
+        Maseno University City Campus Christian Union.
       </p>
+
     </div>
 
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    {/* Gallery */}
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7">
+
       {[
-        'gallery1.jpg',
-        'gallery2.jpg',
-        'gallery3.jpg',
-        'gallery4.jpg',
-        'gallery5..jpg',
-        'gallery6.jpg',
-        'gallery 7.jpg',
-        'gallery 8.jpg',
-      ].map((image) => (
-        <div
-          key={image}
-          className="overflow-hidden rounded-2xl shadow-lg group"
+        {
+          image: "gallery1.jpg",
+          title: "Annual Alumni Reunion",
+          category: "Reunion",
+        },
+        {
+          image: "gallery2.jpg",
+          title: "Graduation Celebration",
+          category: "Graduation",
+        },
+        {
+          image: "gallery3.jpg",
+          title: "Community Outreach",
+          category: "Outreach",
+        },
+        {
+          image: "gallery4.jpg",
+          title: "Leadership Forum",
+          category: "Leadership",
+        },
+        {
+          image: "gallery5..jpg",
+          title: "Prayer Fellowship",
+          category: "Fellowship",
+        },
+        {
+          image: "gallery6.jpg",
+          title: "Mentorship Session",
+          category: "Mentorship",
+        },
+        {
+          image: "gallery 7.jpg",
+          title: "Conference",
+          category: "Conference",
+        },
+        {
+          image: "gallery 8.jpg",
+          title: "Family Gathering",
+          category: "Community",
+        },
+      ].map((item, index) => (
+
+        <motion.div
+          key={item.image}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 0.5,
+            delay: index * 0.08,
+          }}
+          className="relative overflow-hidden rounded-3xl shadow-xl group"
         >
+
           <img
-            src={`/images/${image}`}
-            alt="MUKCCU Alumni"
-            className="w-full h-64 object-cover group-hover:scale-110 transition duration-500"
+            src={`/images/${item.image}`}
+            alt={item.title}
+            className="w-full h-72 object-cover transition duration-700 group-hover:scale-110"
           />
-        </div>
+
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-500" />
+
+          <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-8 group-hover:translate-y-0 transition duration-500">
+
+            <span
+              className="inline-block px-3 py-1 rounded-full text-xs font-semibold text-white mb-3"
+              style={{ backgroundColor: "#b4712d" }}
+            >
+              {item.category}
+            </span>
+
+            <h3 className="text-white text-xl font-bold">
+              {item.title}
+            </h3>
+
+          </div>
+
+        </motion.div>
+
       ))}
+
+    </div>
+
+    {/* CTA */}
+
+    <div className="text-center mt-14">
+
+      <button
+        onClick={() =>
+          document
+            .getElementById("join-alumni")
+            ?.scrollIntoView({ behavior: "smooth" })
+        }
+        className="px-8 py-4 rounded-xl text-white font-semibold hover:scale-105 transition"
+        style={{ backgroundColor: "#2e3e87" }}
+      >
+        Join Our Alumni Network
+      </button>
+
     </div>
 
   </div>
