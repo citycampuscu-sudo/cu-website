@@ -319,7 +319,7 @@ const copyText = async (text: string, field: string) => {
           </h3>
 
           <p className="text-lg text-gray-500 mb-5">
-            Business and Economis• Class of 2016
+            Business and Economics • Class of 2016
           </p>
 
           <p className="text-xl font-semibold mb-6">
@@ -384,8 +384,7 @@ const copyText = async (text: string, field: string) => {
 
     <p className="text-center text-gray-600 leading-8 max-w-4xl mx-auto mt-12">
       God has faithfully raised men and women through MUKCCU who now
-      serve Christ in healthcare, education, law, engineering,
-      business, ministry, public service and many other professions
+      serve Christ in healthcare, education, media, business, ministry, public service and many other professions
       across Kenya and beyond.
     </p>
   </div>
@@ -531,16 +530,6 @@ const copyText = async (text: string, field: string) => {
           image: "gallery1.jpg",
           title: "Alumni Reunion 2022",
           category: "Annual Reunion",
-        },
-        {
-          image: "gallery2.jpg",
-          title: "Reunion 2016",
-          category: "Alumni Sunday",
-        },
-        {
-          image: "gallery3.jpg",
-          title: "Reunion 2017",
-          category: "Alumni Sunday",
         },
         {
           image: "gallery4.jpg",
