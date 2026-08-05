@@ -296,7 +296,7 @@ const copyText = async (text: string, field: string) => {
 
         <div className="flex justify-center">
           <img
-            src="/images/gallery1.jpg"
+            src="/images/gallery 7.jpg"
             alt="Featured Alumni"
             className="w-72 h-72 rounded-full object-cover shadow-xl border-8 border-white"
           />
@@ -391,61 +391,7 @@ const copyText = async (text: string, field: string) => {
   </div>
 </section>
 
-      {/* Stay Connected */}
-
-<section className="py-20 bg-white">
-  <div className="max-w-7xl mx-auto px-6">
-    <h2
-      className="text-4xl font-bold text-center mb-14"
-      style={{ color: '#2e3e87' }}
-    >
-      Why Join the Alumni Network?
-    </h2>
-
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {benefits.map((benefit, index) => {
-        const benefits = [
-  {
-    icon: GraduationCap,
-    title: "Become a Mentor",
-    description:
-      "Walk alongside current students by offering spiritual, academic and professional guidance.",
-  },
-  {
-    icon: Briefcase,
-    title: "Share Opportunities",
-    description:
-      "Connect students and fellow alumni with internships, jobs, scholarships and career advice.",
-  },
-  {
-    icon: Heart,
-    title: "Support the Ministry",
-    description:
-      "Partner with MUKCCU through prayer, volunteering and financial support.",
-  },
-  {
-    icon: Users,
-    title: "Grow Your Network",
-    description:
-      "Reconnect with former members and build meaningful professional and ministry relationships.",
-  },
-  {
-    icon: Globe,
-    title: "Attend Alumni Events",
-    description:
-      "Participate in reunions, worship experiences, networking events and outreach programmes.",
-  },
-  {
-    icon: CheckCircle,
-    title: "Share Your Story",
-    description:
-      "Encourage the next generation by sharing your journey of faith, leadership and service.",
-  },
-];
-      })}
-    </div>
-  </div>
-</section>
+    
       {/* ALUMNI RESOURCES */}
 
 <section className="py-20 bg-[#f8f9fa]">
