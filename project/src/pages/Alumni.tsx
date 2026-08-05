@@ -529,43 +529,43 @@ const copyText = async (text: string, field: string) => {
       {[
         {
           image: "gallery1.jpg",
-          title: "Annual Alumni Reunion",
-          category: "Reunion",
+          title: "Alumni Reunion 2022",
+          category: "Annual Reunion",
         },
         {
           image: "gallery2.jpg",
-          title: "Graduation Celebration",
-          category: "Graduation",
+          title: "Reunion 2016",
+          category: "Alumni Sunday",
         },
         {
           image: "gallery3.jpg",
-          title: "Community Outreach",
-          category: "Outreach",
+          title: "Reunion 2017",
+          category: "Alumni Sunday",
         },
         {
           image: "gallery4.jpg",
-          title: "Leadership Forum",
-          category: "Leadership",
+          title: "First CU Exec Alumni",
+          category: "Annual Reunion",
         },
         {
           image: "gallery5..jpg",
-          title: "Prayer Fellowship",
-          category: "Fellowship",
+          title: "Reunion 2025",
+          category: "Alumni Sunday",
         },
         {
           image: "gallery6.jpg",
-          title: "Mentorship Session",
-          category: "Mentorship",
+          title: "CU AGM 2023",
+          category: "AGM",
         },
         {
           image: "gallery 7.jpg",
-          title: "Conference",
-          category: "Conference",
+          title: "Sermon by Alumni Director",
+          category: "Alumni Sunday",
         },
         {
           image: "gallery 8.jpg",
-          title: "Family Gathering",
-          category: "Community",
+          title: "CU 2025 Mentorship by Alumni",
+          category: "Mentorship",
         },
       ].map((item, index) => (
 
