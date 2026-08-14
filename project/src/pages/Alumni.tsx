@@ -319,7 +319,7 @@ const copyText = async (text: string, field: string) => {
           </h3>
 
           <p className="text-lg text-gray-500 mb-5">
-            Business and Economics • Class of 2016
+            Business and Administration|Accounting • Class of 2016
           </p>
 
           <p className="text-xl font-semibold mb-6">
