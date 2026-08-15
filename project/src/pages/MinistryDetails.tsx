@@ -31,8 +31,10 @@ export default function MinistryDetails() {
       .replace(/^-+|-+$/g, '');
 
   const ministry = ministries.find(
-    (item: any) => createSlug(item.name) === slug
-  );
+  (item: any) =>
+    slug &&
+    createSlug(item.name) === slug
+);
 
   useEffect(() => {
     window.scrollTo({
