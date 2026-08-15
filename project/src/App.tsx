@@ -16,6 +16,7 @@ import Contacts from './pages/Contacts';
 import Affiliations from './pages/Affiliations';
 import AdminDashboard from './pages/AdminDashboard';
 import Alumni from './pages/Alumni';
+import MinistryDetails from './pages/MinistryDetails';
 import ChatAssistant from "./components/ChatAssistant";
 
 function App() {
@@ -50,6 +51,10 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/leadership" element={<Leadership />} />
           <Route path="/ministries" element={<Ministries />} />
+          <Route
+  path="/ministries/:slug"
+  element={<MinistryDetails />}
+/>
           <Route path="/weekly-activities" element={<WeeklyActivities />} />
           <Route path="/events" element={<Events />} />
           <Route path="/gallery" element={<Gallery />} />
