@@ -8,18 +8,13 @@ import {
 
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSupabaseMinistries } from '../hooks/useSupabaseMinistries';
 import MinistryRegistrationModal from '../components/MinistryRegistrationModal';
 
-interface MinistryDetailsProps {
-  slug: string;
-  onBack: () => void;
-}
-
-export default function MinistryDetails({
-  slug,
-  onBack,
-}: MinistryDetailsProps) {
+export default function MinistryDetails() {
+  const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
   const {
     ministries,
     loading,
@@ -83,7 +78,7 @@ export default function MinistryDetails({
           </p>
 
           <button
-            onClick={onBack}
+            onClick={() => navigate('/ministries')}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#2e3e87] text-white font-semibold hover:bg-[#1a2351] transition"
           >
             <ArrowLeft size={18} />
@@ -170,7 +165,7 @@ export default function MinistryDetails({
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 min-h-[430px] md:min-h-[520px] flex flex-col justify-end">
 
           <button
-            onClick={onBack}
+            onClick={() => navigate('/ministries')}
             className="absolute top-8 left-6 md:left-0 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-white hover:bg-white/20 transition"
           >
             <ArrowLeft size={17} />
