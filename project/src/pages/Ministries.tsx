@@ -6,6 +6,8 @@ import {
   Book,
   Heart,
   HeartHandshake,
+  ArrowRight,
+  Sparkles,
 } from 'lucide-react';
 
 import { useContent } from '../hooks/useContent';
@@ -18,12 +20,13 @@ export default function Ministries() {
   const { content, loading } = useContent();
 
   const {
-  ministries: supabaseMinistries,
-  loading: ministriesLoading,
-} = useSupabaseMinistries();
-  
+    ministries: supabaseMinistries,
+    loading: ministriesLoading,
+  } = useSupabaseMinistries();
+
   const [selectedMinistry, setSelectedMinistry] = useState('');
   const [showModal, setShowModal] = useState(false);
+
   const iconMap: any = {
     Music,
     Camera,
@@ -54,7 +57,8 @@ export default function Ministries() {
     {
       icon: 'HeartHandshake',
       name: 'Hospitality Ministry',
-      description: 'Ushering, welfare, and event coordination.',
+      description:
+        'Ushering, welfare, and event coordination.',
       leader: 'Hospitality Director',
       activities: 'Ushering, welfare, catering',
     },
@@ -69,7 +73,8 @@ export default function Ministries() {
     {
       icon: 'Book',
       name: 'Bible Study Ministry',
-      description: 'Bible study, teaching, and spiritual growth sessions.',
+      description:
+        'Bible study, teaching, and spiritual growth sessions.',
       leader: 'Bible Study Coordinator',
       activities: 'Bible study, teaching',
     },
@@ -84,7 +89,8 @@ export default function Ministries() {
     {
       icon: 'Heart',
       name: 'Intercessory Ministry',
-      description: 'Prayer meetings, intercession, and spiritual warfare.',
+      description:
+        'Prayer meetings, intercession, and spiritual warfare.',
       leader: 'Prayer Coordinator',
       activities: 'Prayer, intercession',
     },
@@ -97,167 +103,321 @@ export default function Ministries() {
 
   const isLoading = loading || ministriesLoading;
 
+  const handleJoinMinistry = (name: string) => {
+    setSelectedMinistry(name);
+    setShowModal(true);
+  };
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
 
       {/* SEO */}
       <Helmet>
-        <title>MUKCCU Ministries | Serve at Maseno University City Campus Christian Union</title>
+        <title>
+          MUKCCU Ministries | Serve at Maseno University City Campus Christian Union
+        </title>
+
         <meta
           name="description"
-          content="Explore ministries at Maseno University City Campus Christian Union (MUKCCU). Join worship, media, missions, prayer, and discipleship ministries."
-        />
-        <meta
-          name="keywords"
-          content="MUKCCU ministries, Maseno University City Campus Christian Union worship,Maseno University Kisumu Campus Christian Union ministries, campus ministry MUKCCU"
+          content="Explore ministries at Maseno University City Campus Christian Union (MUKCCU). Discover opportunities to serve through worship, media, missions, prayer, discipleship, hospitality and more."
         />
 
-        <meta property="og:title" content="MUKCCU Ministries" />
+        <meta
+          name="keywords"
+          content="MUKCCU ministries, Maseno University City Campus Christian Union ministries, MUKCCU worship, MUKCCU missions, MUKCCU discipleship, MUKCCU prayer, MUKCCU media"
+        />
+
+        <meta
+          property="og:title"
+          content="MUKCCU Ministries | Serve Through Your Gifts"
+        />
+
         <meta
           property="og:description"
-          content="Serve God through various ministries at Maseno University City Campus Christian Union."
+          content="Discover ministries at Maseno University City Campus Christian Union and find a place to serve, grow and make an impact."
         />
+
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://mukccu.org/ministries" />
+
+        <meta
+          property="og:url"
+          content="https://mukccu.org/ministries"
+        />
       </Helmet>
 
       {/* LOADING BAR */}
       {isLoading && (
-        <div className="fixed top-0 left-0 right-0 h-1 bg-blue-600 animate-pulse z-50"></div>
+        <div className="fixed top-0 left-0 right-0 h-1 bg-[#b4712d] animate-pulse z-50" />
       )}
 
-      {/* HEADER */}
-      <div
-        className="relative flex min-h-[280px] items-center justify-center"
-        style={{
-          background: 'linear-gradient(135deg, #2e3e87 0%, #1a2351 100%)',
-        }}
-      >
-        <div className="text-center px-4">
-          <h1 className="text-4xl md:text-6xl font-bold text-white">
-  {content.ministries?.pageTitle || 'Ministries'}
-</h1>
-          <p className="text-xl" style={{ color: '#b4712d' }}>
-            {content.ministries?.pageSubtitle ||
-              'Serving God Through Diverse Gifts'}
-          </p>
-        </div>
-      </div>
+      {/* =====================================================
+          HERO
+      ====================================================== */}
+      <section className="relative min-h-[430px] md:min-h-[500px] flex items-center overflow-hidden bg-[#1a2351]">
 
-      {/* CONTENT */}
-      <div className="max-w-6xl mx-auto px-4 py-16">
+        {/* Decorative background */}
+        <div className="absolute inset-0">
+          <div className="absolute -top-32 -right-32 w-[450px] h-[450px] rounded-full bg-[#2e3e87] opacity-60" />
 
-        <div className="text-center mb-12">
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            God has uniquely gifted every believer for His work. Discover a ministry where your talents, passion, and calling can make a lasting impact as we serve Christ together.
-          </p>
-        </div>
-        
-        
-        {/* MINISTRIES LIST */}
-        <div className="space-y-6">
-          {ministries.map((ministry: any, index: number) => {
-            const Icon =
-              iconMap[ministry.icon as keyof typeof iconMap] || Heart;
+          <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#b4712d] opacity-10" />
 
-            return (
-              <div
-  key={index}
-  className="relative rounded-2xl shadow-lg overflow-hidden"
-  style={{ borderLeft: '6px solid #b4712d' }}
->
-  {ministry.image_url && (
-    <div
-      className="absolute inset-0 bg-cover bg-center"
-      style={{
-        backgroundImage: `url(${ministry.image_url})`,
-        opacity: 0.35,
-      }}
-    />
-  )}
-
-  <div className="absolute inset-0 bg-white/40"></div>
-
-  <div className="relative z-10 p-6 flex flex-col sm:flex-row">
-    <div
-      className="p-4 rounded-xl mb-4 sm:mb-0 sm:mr-6 self-start"
-      style={{ backgroundColor: '#2e3e87' }}
-    >
-      <Icon className="text-white" size={32} />
-    </div>
-
-    <div className="flex-1">
-      <h3
-        className="text-2xl font-bold mb-2"
-        style={{ color: '#2e3e87' }}
-      >
-        {ministry.name}
-      </h3>
-
-      {ministry.leader && (
-        <p
-          className="text-sm font-semibold mb-2"
-          style={{ color: '#b4712d' }}
-        >
-          Led by: {ministry.leader}
-        </p>
-      )}
-
-      <p className="text-gray-700 mb-3">
-        {ministry.description}
-      </p>
-
-      <button
-        onClick={() => {
-          setSelectedMinistry(ministry.name);
-          setShowModal(true);
-        }}
-        className="px-6 py-2 rounded-full text-white font-semibold"
-        style={{ backgroundColor: '#25D366' }}
-      >
-        Join Ministry
-      </button>
-    </div>
-  </div>
-</div>
-            );
-          })}
-        </div>
-
-        {/* CTA */}
-        <div className="mt-16 text-center">
           <div
-            className="inline-block p-8 rounded-2xl shadow-xl"
-            style={{ backgroundColor: '#2e3e87' }}
-          >
-            <h3 className="text-3xl font-bold text-white mb-4">
-              Ready to Make an Impact?
-            </h3>
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 1px 1px, white 1px, transparent 0)',
+              backgroundSize: '40px 40px',
+            }}
+          />
+        </div>
 
-            <p className="text-white mb-6 max-w-xl">
-              Whether you're gifted in worship, evangelism, media, hospitality, prayer, or discipleship, there is a place for you at MUKCCU.
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-6 py-20">
+
+          <div className="max-w-4xl mx-auto text-center">
+
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm mb-7">
+              <Sparkles
+                size={16}
+                className="text-[#b4712d]"
+              />
+
+              <span className="text-sm font-semibold tracking-wide text-white">
+                SERVE • GROW • IMPACT
+              </span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-tight">
+              {content.ministries?.pageTitle || 'Our Ministries'}
+            </h1>
+
+            <p className="mt-5 text-xl md:text-2xl text-[#b4712d] font-medium">
+              {content.ministries?.pageSubtitle ||
+                'Serving God Through Diverse Gifts'}
             </p>
 
-            <button
-              onClick={() => {
-                setSelectedMinistry('General Registration');
-                setShowModal(true);
-              }}
-              className="px-8 py-3 rounded-full font-semibold"
-              style={{ backgroundColor: '#b4712d', color: 'white' }}
-            >
-              Join a Ministry
-            </button>
+            <p className="mt-7 text-base md:text-lg text-white/75 max-w-2xl mx-auto leading-relaxed">
+              Discover a place where your gifts, passion and calling can
+              be used to serve Christ, build His church and impact the
+              university community.
+            </p>
+
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* MODAL */}
+      {/* =====================================================
+          INTRODUCTION
+      ====================================================== */}
+      <section className="py-20 md:py-24 bg-white">
+
+        <div className="max-w-5xl mx-auto px-6 text-center">
+
+          <p className="text-[#b4712d] uppercase tracking-[0.2em] text-sm font-bold mb-4">
+            Find Your Place
+          </p>
+
+          <h2 className="text-3xl md:text-5xl font-bold text-[#2e3e87] mb-6">
+            There Is a Place for You
+          </h2>
+
+          <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+            God has uniquely gifted every believer for His work.
+            At MUKCCU, our ministries provide opportunities to discover,
+            develop and use those gifts while growing together in Christ.
+          </p>
+
+        </div>
+      </section>
+
+      {/* =====================================================
+          MINISTRIES
+      ====================================================== */}
+      <section className="pb-24 bg-gray-50">
+
+        <div className="max-w-7xl mx-auto px-6">
+
+          {/* Section heading */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+
+            <div>
+              <p className="text-[#b4712d] uppercase tracking-[0.2em] text-sm font-bold mb-3">
+                Explore
+              </p>
+
+              <h2 className="text-3xl md:text-4xl font-bold text-[#2e3e87]">
+                Areas of Service
+              </h2>
+            </div>
+
+            <p className="text-gray-600 max-w-xl md:text-right">
+              Find a ministry that matches your gifts, interests and
+              desire to serve God's kingdom.
+            </p>
+
+          </div>
+
+          {/* Ministry Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+
+            {ministries.map((ministry: any, index: number) => {
+
+              const Icon =
+                iconMap[ministry.icon as keyof typeof iconMap] || Heart;
+
+              return (
+                <div
+                  key={ministry.id || index}
+                  className="group relative bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:-translate-y-2"
+                >
+
+                  {/* IMAGE */}
+                  <div className="relative h-56 overflow-hidden bg-[#2e3e87]">
+
+                    {ministry.image_url ? (
+                      <img
+                        src={ministry.image_url}
+                        alt={ministry.name}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#2e3e87] to-[#1a2351]">
+                        <Icon
+                          size={72}
+                          className="text-white/30"
+                        />
+                      </div>
+                    )}
+
+                    {/* Image overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1a2351]/90 via-[#1a2351]/20 to-transparent" />
+
+                    {/* Icon */}
+                    <div className="absolute left-5 bottom-5 w-14 h-14 rounded-2xl bg-[#b4712d] flex items-center justify-center shadow-lg">
+                      <Icon
+                        size={28}
+                        className="text-white"
+                      />
+                    </div>
+
+                    {/* Number */}
+                    <div className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center">
+                      <span className="text-xs font-bold text-[#2e3e87]">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                    </div>
+
+                  </div>
+
+                  {/* CONTENT */}
+                  <div className="p-6">
+
+                    <h3 className="text-2xl font-bold text-[#2e3e87] mb-2">
+                      {ministry.name}
+                    </h3>
+
+                    {ministry.leader && (
+                      <div className="flex items-center gap-2 mb-4">
+                        <div className="w-2 h-2 rounded-full bg-[#b4712d]" />
+
+                        <p className="text-sm font-semibold text-[#b4712d]">
+                          {ministry.leader}
+                        </p>
+                      </div>
+                    )}
+
+                    <p className="text-gray-600 leading-relaxed mb-5">
+                      {ministry.description}
+                    </p>
+
+                    {/* Activities */}
+                    {ministry.activities && (
+                      <div className="mb-6">
+
+                        <p className="text-xs uppercase tracking-wider font-bold text-gray-400 mb-2">
+                          Activities
+                        </p>
+
+                        <p className="text-sm text-gray-600">
+                          {ministry.activities}
+                        </p>
+
+                      </div>
+                    )}
+
+                    {/* Button */}
+                    <button
+                      onClick={() =>
+                        handleJoinMinistry(ministry.name)
+                      }
+                      className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#2e3e87] text-white font-semibold hover:bg-[#1a2351] transition-colors duration-300"
+                    >
+                      Join This Ministry
+
+                      <ArrowRight
+                        size={18}
+                        className="transition-transform duration-300 group-hover:translate-x-1"
+                      />
+                    </button>
+
+                  </div>
+                </div>
+              );
+            })}
+
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================
+          SERVE CTA
+      ====================================================== */}
+      <section className="relative overflow-hidden bg-[#2e3e87]">
+
+        {/* Decorative elements */}
+        <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-white/5" />
+
+        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#b4712d]/10" />
+
+        <div className="relative max-w-5xl mx-auto px-6 py-20 md:py-24 text-center">
+
+          <Sparkles
+            size={34}
+            className="mx-auto text-[#b4712d] mb-6"
+          />
+
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-5">
+            Ready to Make an Impact?
+          </h2>
+
+          <p className="text-lg text-white/75 max-w-2xl mx-auto mb-9 leading-relaxed">
+            Whether you're gifted in worship, evangelism, media,
+            hospitality, prayer, discipleship or another area,
+            there is a place for you at MUKCCU.
+          </p>
+
+          <button
+            onClick={() =>
+              handleJoinMinistry('General Registration')
+            }
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#b4712d] text-white font-bold shadow-lg hover:bg-[#965d23] hover:shadow-xl transition-all duration-300"
+          >
+            Join a Ministry
+
+            <ArrowRight size={20} />
+          </button>
+
+        </div>
+      </section>
+
+      {/* =====================================================
+          REGISTRATION MODAL
+      ====================================================== */}
       <MinistryRegistrationModal
         ministry={selectedMinistry}
         isOpen={showModal}
         onClose={() => setShowModal(false)}
       />
+
     </div>
   );
 }
