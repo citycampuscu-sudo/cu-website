@@ -14,6 +14,7 @@ import { useContent } from '../hooks/useContent';
 import { useSupabaseMinistries } from '../hooks/useSupabaseMinistries';
 import { useState } from 'react';
 import MinistryRegistrationModal from '../components/MinistryRegistrationModal';
+import MinistryDetailsModal from '../components/MinistryDetailsModal';
 import { Helmet } from 'react-helmet-async';
 
 export default function Ministries() {
@@ -26,6 +27,8 @@ export default function Ministries() {
 
   const [selectedMinistry, setSelectedMinistry] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [detailsMinistry, setDetailsMinistry] = useState<any>(null);
+const [showDetails, setShowDetails] = useState(false);
 
   const iconMap: any = {
     Music,
@@ -345,19 +348,32 @@ export default function Ministries() {
                     )}
 
                     {/* Button */}
-                    <button
-                      onClick={() =>
-                        handleJoinMinistry(ministry.name)
-                      }
-                      className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#2e3e87] text-white font-semibold hover:bg-[#1a2351] transition-colors duration-300"
-                    >
-                      Join This Ministry
+                    <div className="flex gap-3">
 
-                      <ArrowRight
-                        size={18}
-                        className="transition-transform duration-300 group-hover:translate-x-1"
-                      />
-                    </button>
+  <button
+    onClick={() => {
+      setDetailsMinistry(ministry);
+      setShowDetails(true);
+    }}
+    className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 border-[#2e3e87] text-[#2e3e87] font-semibold hover:bg-[#2e3e87] hover:text-white transition-all duration-300"
+  >
+    Explore
+
+    <ArrowRight size={17} />
+  </button>
+
+  <button
+    onClick={() =>
+      handleJoinMinistry(ministry.name)
+    }
+    className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#b4712d] text-white font-semibold hover:bg-[#965d23] transition-all duration-300"
+  >
+    Join
+
+    <ArrowRight size={17} />
+  </button>
+
+</div>
 
                   </div>
                 </div>
@@ -409,14 +425,27 @@ export default function Ministries() {
         </div>
       </section>
 
-      {/* =====================================================
-          REGISTRATION MODAL
-      ====================================================== */}
-      <MinistryRegistrationModal
-        ministry={selectedMinistry}
-        isOpen={showModal}
-        onClose={() => setShowModal(false)}
-      />
+      {/* MINISTRY DETAILS */}
+<MinistryDetailsModal
+  ministry={detailsMinistry}
+  isOpen={showDetails}
+  onClose={() => {
+    setShowDetails(false);
+    setDetailsMinistry(null);
+  }}
+  onJoin={() => {
+    setShowDetails(false);
+    setSelectedMinistry(detailsMinistry?.name || '');
+    setShowModal(true);
+  }}
+/>
+
+{/* REGISTRATION */}
+<MinistryRegistrationModal
+  ministry={selectedMinistry}
+  isOpen={showModal}
+  onClose={() => setShowModal(false)}
+/>
 
     </div>
   );
