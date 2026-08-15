@@ -39,7 +39,7 @@ export default function MinistryDetails() {
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: 'auto',
     });
   }, [slug]);
 
@@ -111,44 +111,88 @@ export default function MinistryDetails() {
     ministry.full_description ||
     ministry.description ||
     `Discover ${ministry.name} at Maseno University City Campus Christian Union.`;
+  const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: `${ministry.name} - MUKCCU`,
+  description: pageDescription,
+  url: `https://mukccu.org/ministries/${slug}`,
+  parentOrganization: {
+    '@type': 'Organization',
+    name: 'Maseno University City Campus Christian Union',
+    url: 'https://mukccu.org/',
+  },
+};
 
   return (
     <div className="min-h-screen bg-white">
 
-      {/* SEO */}
       <Helmet>
+  <title>{pageTitle}</title>
 
-        <title>{pageTitle}</title>
+  <script type="application/ld+json">
+  {JSON.stringify(structuredData)}
+</script>
+  <meta
+    name="description"
+    content={pageDescription.substring(0, 155)}
+  />
 
-        <meta
-          name="description"
-          content={pageDescription.substring(0, 155)}
-        />
+  <link
+    rel="canonical"
+    href={`https://mukccu.org/ministries/${slug}`}
+  />
 
-        <meta
-          property="og:title"
-          content={pageTitle}
-        />
+  <meta
+    property="og:title"
+    content={pageTitle}
+  />
 
-        <meta
-          property="og:description"
-          content={pageDescription.substring(0, 200)}
-        />
+  <meta
+    property="og:description"
+    content={pageDescription.substring(0, 200)}
+  />
 
-        {ministry.image_url && (
-          <meta
-            property="og:image"
-            content={ministry.image_url}
-          />
-        )}
+  <meta
+    property="og:url"
+    content={`https://mukccu.org/ministries/${slug}`}
+  />
 
-        <meta
-          property="og:type"
-          content="website"
-        />
+  <meta
+    property="og:type"
+    content="website"
+  />
 
-      </Helmet>
+  {ministry.image_url && (
+    <meta
+      property="og:image"
+      content={ministry.image_url}
+    />
+  )}
 
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  />
+
+  <meta
+    name="twitter:title"
+    content={pageTitle}
+  />
+
+  <meta
+    name="twitter:description"
+    content={pageDescription.substring(0, 200)}
+  />
+
+  {ministry.image_url && (
+    <meta
+      name="twitter:image"
+      content={ministry.image_url}
+    />
+  )}
+</Helmet>
+      
       {/* =====================================================
           HERO
       ====================================================== */}
