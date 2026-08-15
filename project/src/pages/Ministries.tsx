@@ -47,7 +47,7 @@ const [showDetails, setShowDetails] = useState(false);
       description:
         'Praise & worship, choir, creative arts, and instrumentalists.',
       leader: 'Board Director',
-      activities: 'Worship, choir, instruments',
+      events: 'Worship experiences, choir, bondings, african sundays, hymnal sundays, fellowships',
     },
     {
       icon: 'Camera',
@@ -55,7 +55,7 @@ const [showDetails, setShowDetails] = useState(false);
       description:
         'Photography, livestreaming, design, and social media management.',
       leader: 'Media Coordinator',
-      activities: 'Media, livestream, design',
+      events: 'Content productions, livestream, podcasts, photography, poster editings',
     },
     {
       icon: 'HeartHandshake',
@@ -63,7 +63,7 @@ const [showDetails, setShowDetails] = useState(false);
       description:
         'Ushering, welfare, and event coordination.',
       leader: 'Hospitality Director',
-      activities: 'Ushering, welfare, catering',
+      events: 'Charity Visits, CU Welfare, CU Events Catering',
     },
     {
       icon: 'Globe',
@@ -71,7 +71,7 @@ const [showDetails, setShowDetails] = useState(false);
       description:
         'Evangelism, outreach, and mission work in schools and communities.',
       leader: 'Missions Coordinator',
-      activities: 'Outreach, missions, evangelism',
+      events: 'High School Weekend Challenges, High School Missions, Mentorship, KSCF Rallies, Annual Missions,Hostels Evangelism',
     },
     {
       icon: 'Book',
@@ -79,7 +79,7 @@ const [showDetails, setShowDetails] = useState(false);
       description:
         'Bible study, teaching, and spiritual growth sessions.',
       leader: 'Bible Study Coordinator',
-      activities: 'Bible study, teaching',
+      events: 'Bible Study Sundays, BEST-P, Bible Trivia, Online Bible Study',
     },
     {
       icon: 'Users',
@@ -87,7 +87,7 @@ const [showDetails, setShowDetails] = useState(false);
       description:
         'Mentorship, counselling, and nurturing new believers.',
       leader: 'Discipleship Coordinator',
-      activities: 'Mentorship, counselling',
+      events: 'Mentorship day, anza fyt, vuka fyt, bonfire nights,first years orientation, estate fellowships',
     },
     {
       icon: 'Heart',
@@ -95,7 +95,7 @@ const [showDetails, setShowDetails] = useState(false);
       description:
         'Prayer meetings, intercession, and spiritual warfare.',
       leader: 'Prayer Coordinator',
-      activities: 'Prayer, intercession',
+      events: 'Prayer keshas, prayer retreats, prayer seminars, prayer and fasting, fellowships, bonding',
     },
   ];
 
