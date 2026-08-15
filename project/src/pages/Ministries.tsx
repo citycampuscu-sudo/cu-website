@@ -14,10 +14,12 @@ import { useContent } from '../hooks/useContent';
 import { useSupabaseMinistries } from '../hooks/useSupabaseMinistries';
 import { useState } from 'react';
 import MinistryRegistrationModal from '../components/MinistryRegistrationModal';
-import MinistryDetailsModal from '../components/MinistryDetailsModal';
 import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
 
 export default function Ministries() {
+  const navigate = useNavigate();
+
   const { content, loading } = useContent();
 
   const {
@@ -27,8 +29,14 @@ export default function Ministries() {
 
   const [selectedMinistry, setSelectedMinistry] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const [detailsMinistry, setDetailsMinistry] = useState<any>(null);
-const [showDetails, setShowDetails] = useState(false);
+
+  const createSlug = (name: string) =>
+    name
+      .toLowerCase()
+      .trim()
+      .replace(/&/g, 'and')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
 
   const iconMap: any = {
     Music,
@@ -39,7 +47,6 @@ const [showDetails, setShowDetails] = useState(false);
     Heart,
     HeartHandshake,
   };
-
   const defaultMinistries = [
     {
       icon: 'Music',
@@ -351,16 +358,16 @@ const [showDetails, setShowDetails] = useState(false);
                     <div className="flex gap-3">
 
   <button
-    onClick={() => {
-      setDetailsMinistry(ministry);
-      setShowDetails(true);
-    }}
-    className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 border-[#2e3e87] text-[#2e3e87] font-semibold hover:bg-[#2e3e87] hover:text-white transition-all duration-300"
-  >
-    Explore
-
-    <ArrowRight size={17} />
-  </button>
+  onClick={() =>
+    navigate(
+      `/ministries/${createSlug(ministry.name)}`
+    )
+  }
+  className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 border-[#2e3e87] text-[#2e3e87] font-semibold hover:bg-[#2e3e87] hover:text-white transition-all duration-300"
+>
+  Explore
+  <ArrowRight size={17} />
+</button>
 
   <button
     onClick={() =>
@@ -425,22 +432,7 @@ const [showDetails, setShowDetails] = useState(false);
         </div>
       </section>
 
-      {/* MINISTRY DETAILS */}
-<MinistryDetailsModal
-  ministry={detailsMinistry}
-  isOpen={showDetails}
-  onClose={() => {
-    setShowDetails(false);
-    setDetailsMinistry(null);
-  }}
-  onJoin={() => {
-    setShowDetails(false);
-    setSelectedMinistry(detailsMinistry?.name || '');
-    setShowModal(true);
-  }}
-/>
-
-{/* REGISTRATION */}
+      {/* REGISTRATION */}
 <MinistryRegistrationModal
   ministry={selectedMinistry}
   isOpen={showModal}
