@@ -278,76 +278,192 @@ export default function Ministries() {
       )}
 
       {/* =====================================================
-          HERO
-      ====================================================== */}
+    HERO — VIDEO BACKGROUND
+====================================================== */}
 
-      <section className="relative overflow-hidden bg-[#1a2351]">
+<section className="relative min-h-[620px] md:min-h-[700px] overflow-hidden bg-[#111936]">
 
-        <div className="absolute inset-0">
+  {/* YOUTUBE BACKGROUND VIDEO */}
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
 
-          <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-[#b4712d]/20 blur-3xl" />
+    <iframe
+      className="
+        absolute
+        top-1/2
+        left-1/2
+        w-[177.78vh]
+        min-w-full
+        min-h-full
+        -translate-x-1/2
+        -translate-y-1/2
+        scale-[1.15]
+      "
+      src="https://www.youtube.com/embed/wXeKRqXTKQw?autoplay=1&mute=1&loop=1&playlist=wXeKRqXTKQw&controls=0&modestbranding=1&rel=0&playsinline=1&disablekb=1"
+      title="MUKCCU Ministry Video"
+      frameBorder="0"
+      allow="autoplay; encrypted-media"
+      aria-hidden="true"
+    />
 
-          <div className="absolute -bottom-40 -left-40 w-[30rem] h-[30rem] rounded-full bg-[#2e3e87] blur-3xl" />
+  </div>
 
-        </div>
+  {/* DARK OVERLAY */}
 
-        <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28">
+  <div className="absolute inset-0 bg-[#101735]/65" />
 
-          <div className="max-w-4xl">
+  {/* GRADIENT OVERLAY */}
 
-            {/* LABEL */}
+  <div className="absolute inset-0 bg-gradient-to-r from-[#111936]/90 via-[#1a2351]/65 to-[#111936]/45" />
 
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white backdrop-blur-md mb-7">
+  {/* BOTTOM GRADIENT */}
 
-              <Sparkles
-                size={16}
-                className="text-[#b4712d]"
-              />
+  <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#1a2351] to-transparent" />
 
-              <span className="text-xs md:text-sm font-bold uppercase tracking-[0.18em]">
-                Serve • Grow • Impact
-              </span>
+  {/* HERO CONTENT */}
 
-            </div>
+  <div className="relative z-10 max-w-7xl mx-auto px-6 min-h-[620px] md:min-h-[700px] flex items-center">
 
-            {/* TITLE */}
+    <div className="max-w-4xl pt-16 md:pt-20">
 
-            <h1 className="text-5xl md:text-7xl font-bold text-white leading-[1.05] mb-6">
+      {/* LABEL */}
 
-              {content.ministries?.pageTitle ||
-                'Ministries'}
+      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/30 text-white backdrop-blur-md mb-7 shadow-lg">
 
-            </h1>
+        <Sparkles
+          size={16}
+          className="text-[#b4712d]"
+        />
 
-            {/* SUBTITLE */}
+        <span className="text-xs md:text-sm font-bold uppercase tracking-[0.18em]">
+          Serve • Grow • Impact
+        </span>
 
-            <p className="text-xl md:text-2xl text-white/75 max-w-3xl leading-relaxed mb-8">
+      </div>
 
-              {content.ministries?.pageSubtitle ||
-                'Serving God Through Diverse Gifts'}
+      {/* TITLE */}
 
-            </p>
+      <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95] mb-6 drop-shadow-2xl">
 
-            <p className="text-base md:text-lg text-white/60 max-w-3xl leading-relaxed">
-              God has uniquely gifted every believer.
-              Discover a place where your gifts,
-              passion and calling can make a lasting
-              impact as we serve Christ together.
-            </p>
+        {content.ministries?.pageTitle ||
+          'Our Ministries'}
 
-          </div>
+      </h1>
 
-        </div>
+      {/* SUBTITLE */}
 
-      </section>
+      <p className="text-xl md:text-2xl lg:text-3xl text-[#f0c88c] font-medium max-w-3xl leading-relaxed mb-7 drop-shadow-lg">
 
+        {content.ministries?.pageSubtitle ||
+          'Serving God Through Various Ministries'}
+
+      </p>
+
+      {/* DESCRIPTION */}
+
+      <p className="text-base md:text-lg lg:text-xl text-white/85 max-w-3xl leading-relaxed drop-shadow-lg">
+
+        God has uniquely gifted every believer.
+        Discover a place where your gifts, passion
+        and calling can make a lasting impact as
+        we serve Christ together.
+
+      </p>
+
+      {/* CTA */}
+
+      <div className="flex flex-col sm:flex-row gap-4 mt-9">
+
+        <button
+          onClick={() => {
+            document
+              .getElementById('ministry-directory')
+              ?.scrollIntoView({
+                behavior: 'smooth',
+              });
+          }}
+          className="
+            inline-flex
+            items-center
+            justify-center
+            gap-2
+            px-7
+            py-3.5
+            rounded-full
+            bg-[#b4712d]
+            text-white
+            font-bold
+            shadow-xl
+            hover:bg-[#965d23]
+            hover:-translate-y-0.5
+            transition-all
+          "
+        >
+          Explore Ministries
+          <ArrowRight size={18} />
+        </button>
+
+        <button
+          onClick={() =>
+            openJoinModal(
+              'General Registration'
+            )
+          }
+          className="
+            inline-flex
+            items-center
+            justify-center
+            gap-2
+            px-7
+            py-3.5
+            rounded-full
+            border
+            border-white/40
+            bg-white/10
+            backdrop-blur-md
+            text-white
+            font-semibold
+            hover:bg-white/20
+            transition-all
+          "
+        >
+          Join a Ministry
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  {/* VIDEO INDICATOR */}
+
+  <div className="absolute bottom-7 right-6 md:right-10 z-10">
+
+    <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/30 border border-white/20 backdrop-blur-md">
+
+      <span className="relative flex h-2.5 w-2.5">
+
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#b4712d] opacity-75" />
+
+        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#b4712d]" />
+
+      </span>
+
+      <span className="text-xs text-white/80 font-medium">
+        MUKCCU in Action
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
       {/* =====================================================
           FEATURED MINISTRY
       ====================================================== */}
 
       {featuredMinistry && (
-        <section className="max-w-7xl mx-auto px-6 -mt-10 relative z-10">
-
+        <section className="max-w-7xl mx-auto px-6 pt-16 md:pt-20">
           <div className="overflow-hidden rounded-[2rem] bg-white shadow-2xl border border-gray-100">
 
             <div className="grid lg:grid-cols-2">
