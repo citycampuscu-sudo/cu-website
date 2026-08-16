@@ -8,6 +8,11 @@ import {
   Heart,
   GraduationCap,
   ChevronDown,
+  Music,
+  Flame,
+  HandHeart,
+  Globe2,
+  Handshake,
 } from 'lucide-react';
 import { useContent } from '../hooks/useContent';
 import { useSupabaseLeadership } from '../hooks/useSupabaseLeadership';
@@ -165,12 +170,28 @@ export default function Leadership() {
   );
 
   const executivePositions = [
-    'Vice-Chairperson',
-    'Secretary',
-    'Vice-Secretary',
-    'Treasurer',
-    'Board Director',
-  ];
+  'Vice-Chairperson',
+  'Secretary',
+  'Vice-Secretary',
+  'Treasurer',
+];
+
+const ministryRoleLabels: Record<string, string> = {
+  'Board Director': 'Praise & Worship Leader',
+  'Discipleship Coordinator': 'Discipleship Ministry',
+  'Prayer Coordinator': 'Prayer Ministry',
+  'Missions Coordinator': 'Missions Ministry',
+  'Hospitality Director': 'Hospitality Ministry',
+  'Bible Study Coordinator': 'Bible Study Ministry',
+};
+  const ministryRoleIcons: Record<string, any> = {
+  'Board Director': Music,
+  'Discipleship Coordinator': Flame,
+  'Prayer Coordinator': HandHeart,
+  'Missions Coordinator': Globe2,
+  'Hospitality Director': Handshake,
+  'Bible Study Coordinator': BookOpen,
+};
 
   const executiveLeaders = otherExecutives.filter((leader: any) =>
     executivePositions.some(
@@ -279,6 +300,14 @@ export default function Leadership() {
               </span>
             </div>
           )}
+          {ministryRoleLabels[leader.position] && (
+  <p
+    className="text-sm font-semibold mt-2"
+    style={{ color: '#b4712d' }}
+  >
+    {ministryRoleLabels[leader.position]}
+  </p>
+)}
 
           {leader.bio && (
             <>
@@ -293,6 +322,112 @@ export default function Leadership() {
       </div>
     </motion.div>
   );
+  const MinistryLeaderCard = ({
+  leader,
+  index,
+}: {
+  leader: any;
+  index: number;
+}) => {
+  const MinistryIcon =
+    ministryRoleIcons[leader.position] || Heart;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -8 }}
+      viewport={{ once: true }}
+      transition={{
+        duration: 0.5,
+        delay: index * 0.05,
+      }}
+      className="group bg-white rounded-3xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100"
+    >
+      {/* Gold accent */}
+      <div
+        className="h-1.5"
+        style={{ backgroundColor: '#b4712d' }}
+      />
+
+      <div className="p-7">
+        {/* Ministry icon */}
+        <div className="flex justify-center mb-5">
+          <div
+            className="w-11 h-11 rounded-full flex items-center justify-center shadow-sm"
+            style={{
+              backgroundColor: '#f7f3ed',
+            }}
+          >
+            <MinistryIcon
+              size={21}
+              style={{ color: '#b4712d' }}
+            />
+          </div>
+        </div>
+
+        {/* Photo */}
+        <div className="flex justify-center mb-5">
+          {renderLeaderPhoto(
+            leader,
+            'w-32 h-32 md:w-36 md:h-36'
+          )}
+        </div>
+
+        <div className="text-center">
+
+          {/* Ministry function */}
+          <p
+            className="text-xs uppercase tracking-widest font-bold"
+            style={{ color: '#b4712d' }}
+          >
+            {ministryRoleLabels[leader.position] ||
+              leader.position}
+          </p>
+
+          {/* Position */}
+          <p
+            className="text-sm font-semibold mt-1"
+            style={{ color: '#2e3e87' }}
+          >
+            {leader.position}
+          </p>
+
+          {/* Name */}
+          <h3
+            className="text-xl md:text-2xl font-bold mt-2"
+            style={{ color: '#2e3e87' }}
+          >
+            {leader.name}
+          </h3>
+
+          {/* Academic information */}
+          {leader.course && leader.year && (
+            <div className="flex items-center justify-center gap-2 mt-2 text-gray-500">
+              <GraduationCap size={16} />
+
+              <span className="text-sm">
+                {leader.year} • {leader.course}
+              </span>
+            </div>
+          )}
+
+          {/* Bio */}
+          {leader.bio && (
+            <>
+              <div className="border-t border-gray-100 my-5" />
+
+              <p className="text-gray-600 text-sm leading-7">
+                {leader.bio}
+              </p>
+            </>
+          )}
+
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -673,42 +808,43 @@ export default function Leadership() {
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                          {executiveLeaders.map(
-                            (leader: any, index: number) => (
-                              <LeaderCard
-                                key={leader.name + '-' + leader.position}
-                                leader={leader}
-                                index={index}
-                              />
-                            )
-                          )}
-                        </div>
+  {ministryLeaders.map(
+    (leader: any, index: number) => (
+      <MinistryLeaderCard
+        key={leader.name + '-' + leader.position}
+        leader={leader}
+        index={index}
+      />
+    )
+  )}
+</div>
                       </>
                     )}
 
                     {/* MINISTRY LEADERS */}
                     {ministryLeaders.length > 0 && (
                       <div className="mt-16">
-                        <div className="text-center mb-8">
-                          <span
-                            className="text-sm font-bold uppercase tracking-widest"
-                            style={{ color: '#b4712d' }}
-                          >
-                            Serving the Mission
-                          </span>
+                        <div className="text-center mb-10">
+  <span
+    className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest"
+    style={{ color: '#b4712d' }}
+  >
+    <Heart size={16} />
+    Serving the Mission
+  </span>
 
-                          <h3
-                            className="text-2xl md:text-3xl font-bold mt-2"
-                            style={{ color: '#2e3e87' }}
-                          >
-                            Ministry Leadership
-                          </h3>
+  <h3
+    className="text-3xl md:text-4xl font-bold mt-2"
+    style={{ color: '#2e3e87' }}
+  >
+    Ministry Leadership
+  </h3>
 
-                          <p className="text-gray-600 mt-2">
-                            Leaders serving across the different ministries
-                            of MUKCCU.
-                          </p>
-                        </div>
+  <p className="text-gray-600 mt-3 max-w-2xl mx-auto leading-7">
+    Leaders entrusted with nurturing worship, discipleship,
+    prayer, missions, hospitality and Bible study within MUKCCU.
+  </p>
+</div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                           {ministryLeaders.map(
