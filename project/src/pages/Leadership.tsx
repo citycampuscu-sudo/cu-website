@@ -191,6 +191,59 @@ export default function Leadership() {
   ];
 
   // Ministry display names
+    // ============================================================
+  // LEADERSHIP CLASSIFICATION
+  // ============================================================
+
+  /**
+   * Normalize position names coming from Supabase.
+   *
+   * This prevents small differences such as:
+   * "Vice Chairperson"
+   * "Vice-Chairperson"
+   * " vice-chairperson "
+   *
+   * from causing a leader to disappear from the correct section.
+   */
+  const normalizePosition = (position?: string) =>
+    position
+      ?.trim()
+      .toLowerCase()
+      .replace(/[\s_-]+/g, '') || '';
+
+  /**
+   * Executive positions.
+   *
+   * IMPORTANT:
+   * Board Director is intentionally NOT included here.
+   * Board Director is the Praise & Worship Leader and therefore
+   * belongs under Ministry Leadership.
+   */
+  const executivePositions = [
+    'Vice-Chairperson',
+    'Secretary',
+    'Vice-Secretary',
+    'Treasurer',
+  ];
+
+  /**
+   * Ministry leadership positions.
+   *
+   * Board Director is intentionally included here as:
+   * Praise & Worship Leader.
+   */
+  const ministryPositions = [
+    'Board Director',
+    'Discipleship Coordinator',
+    'Prayer Coordinator',
+    'Missions Coordinator',
+    'Hospitality Director',
+    'Bible Study Coordinator',
+  ];
+
+  /**
+   * Display labels for ministry leadership.
+   */
   const ministryRoleLabels: Record<string, string> = {
     'Board Director': 'Praise & Worship Leader',
     'Discipleship Coordinator': 'Discipleship Ministry',
@@ -200,7 +253,9 @@ export default function Leadership() {
     'Bible Study Coordinator': 'Bible Study Ministry',
   };
 
-  // Ministry icons
+  /**
+   * Icons for ministry leadership.
+   */
   const ministryRoleIcons: Record<string, any> = {
     'Board Director': Music,
     'Discipleship Coordinator': Flame,
@@ -210,46 +265,53 @@ export default function Leadership() {
     'Bible Study Coordinator': BookOpen,
   };
 
-  // ============================================================
-  // CHAIRPERSON
-  // ============================================================
-
+  /**
+   * Featured Chairperson.
+   *
+   * The Chairperson is displayed separately above the Executive Team.
+   */
   const chairperson =
     filteredLeaders.find(
       (leader: any) =>
-        normalizePosition(leader.position) === 'chairperson'
+        normalizePosition(leader.position) ===
+        normalizePosition('Chairperson')
     ) || null;
 
-  // ============================================================
-  // EXECUTIVE LEADERS
-  // ============================================================
+  /**
+   * Executive Team.
+   *
+   * ONLY these four positions are allowed here:
+   * Vice-Chairperson
+   * Secretary
+   * Vice-Secretary
+   * Treasurer
+   *
+   * This prevents ministry leaders from accidentally appearing
+   * in the Executive Team.
+   */
+  const executiveLeaders = filteredLeaders.filter((leader: any) => {
+    const position = normalizePosition(leader.position);
 
-  const executiveLeaders = filteredLeaders.filter(
-    (leader: any) => {
-      const position = normalizePosition(leader.position);
+    return executivePositions.some(
+      (executivePosition) =>
+        normalizePosition(executivePosition) === position
+    );
+  });
 
-      return executivePositions.some(
-        (executivePosition) =>
-          normalizePosition(executivePosition) === position
-      );
-    }
-  );
+  /**
+   * Ministry Leadership.
+   *
+   * Board Director is included here because the Board Director
+   * serves as the Praise & Worship Leader.
+   */
+  const ministryLeaders = filteredLeaders.filter((leader: any) => {
+    const position = normalizePosition(leader.position);
 
-  // ============================================================
-  // MINISTRY LEADERS
-  // ============================================================
-
-  const ministryLeaders = filteredLeaders.filter(
-    (leader: any) => {
-      const position = normalizePosition(leader.position);
-
-      return ministryPositions.some(
-        (ministryPosition) =>
-          normalizePosition(ministryPosition) === position
-      );
-    }
-  );
-
+    return ministryPositions.some(
+      (ministryPosition) =>
+        normalizePosition(ministryPosition) === position
+    );
+  });
   // ============================================================
   // LEADER PHOTO
   // ============================================================
