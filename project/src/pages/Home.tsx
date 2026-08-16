@@ -3,8 +3,6 @@ import {
   BookOpen,
   Calendar,
   Camera,
-  CheckCircle2,
-  ChevronRight,
   Clock,
   Download,
   ExternalLink,
@@ -18,11 +16,10 @@ import {
   Quote,
   Target,
   Users,
-} from 'lucide-react';
-
-import { useMemo, useState } from 'react';
+} from 'lucide-react';eact';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
+import { motion, useReducedMotion } from 'framer-motion';
 
 import { useContent } from '../hooks/useContent';
 import { useDocuments } from '../hooks/useDocuments';
@@ -31,9 +28,60 @@ import { useSupabaseHomeData } from '../hooks/useSupabaseHomeData';
 
 import MemberRegistrationModal from '../components/MemberRegistrationModal';
 
+const fadeUp = {
+  hidden: {
+    opacity: 0,
+    y: 35,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const fadeIn = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const scaleIn = {
+  hidden: {
+    opacity: 0,
+    scale: 0.94,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
 export default function Home() {
   const navigate = useNavigate();
-
+  const shouldReduceMotion = useReducedMotion();
   const { content, loading } = useContent();
 
   const {
@@ -250,11 +298,7 @@ export default function Home() {
   loading ||
   ministriesLoading ||
   homeDataLoading;
-  {homeDataError && (
-  <div className="bg-amber-50 border-b border-amber-200 px-6 py-3 text-center text-sm text-amber-800">
-    Some live homepage content could not be loaded.
-  </div>
-)}
+  
 
   /* =====================================================
      RENDER
@@ -262,6 +306,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
+      {homeDataError && (
+  <div className="bg-amber-50 border-b border-amber-200 px-6 py-3 text-center text-sm text-amber-800">
+    Some live homepage content could not be loaded.
+  </div>
+)}
 
       {/* =================================================
           SEO
@@ -380,17 +429,53 @@ export default function Home() {
         {/* BOTTOM FADE */}
 
         <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#1a2351] to-transparent" />
+        {!shouldReduceMotion && (
+  <>
+    <motion.div
+      className="absolute top-24 right-[8%] w-24 h-24 rounded-full bg-[#b4712d]/10 blur-2xl"
+      animate={{
+        y: [0, -20, 0],
+        opacity: [0.3, 0.6, 0.3],
+      }}
+      transition={{
+        duration: 6,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      }}
+    />
+
+    <motion.div
+      className="absolute bottom-32 left-[8%] w-32 h-32 rounded-full bg-white/5 blur-3xl"
+      animate={{
+        y: [0, 25, 0],
+        opacity: [0.2, 0.5, 0.2],
+      }}
+      transition={{
+        duration: 8,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      }}
+    />
+  </>
+)}
 
         {/* CONTENT */}
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 min-h-[680px] md:min-h-[780px] flex items-center">
 
-          <div className="max-w-4xl pt-16">
+          <motion.div
+  className="max-w-4xl pt-16"
+  initial={shouldReduceMotion ? false : 'hidden'}
+  animate="visible"
+  variants={staggerContainer}
+>
 
             {/* LABEL */}
 
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/30 backdrop-blur-md text-white mb-7">
-
+            <motion.div
+  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/30 backdrop-blur-md text-white mb-7"
+  variants={fadeUp}
+>
               <Heart
                 size={16}
                 className="text-[#b4712d]"
@@ -400,28 +485,37 @@ export default function Home() {
                 Maseno University City Campus Christian Union
               </span>
 
-            </div>
+            </motion.div>
 
             {/* TITLE */}
 
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95] mb-6 drop-shadow-2xl">
+            <motion.h1
+  className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95] mb-6 drop-shadow-2xl"
+  variants={fadeUp}
+>
 
               Welcome to
               <span className="block text-[#f0c88c]">
                 MUKCCU
               </span>
 
-            </h1>
+            </motion.h1>
 
             {/* TAGLINE */}
 
-            <p className="text-2xl md:text-3xl font-semibold text-white mb-6 drop-shadow-lg">
+            <motion.p
+  className="text-2xl md:text-3xl font-semibold text-white mb-6 drop-shadow-lg"
+  variants={fadeUp}
+>
               Knowing Christ. Growing Together. Serving with Purpose.
             </p>
 
             {/* DESCRIPTION */}
 
-            <p className="text-base md:text-xl text-white/80 max-w-3xl leading-relaxed mb-9">
+            <motion.p
+  className="text-base md:text-xl text-white/80 max-w-3xl leading-relaxed mb-9"
+  variants={fadeUp}
+>
               A vibrant Christian fellowship where students
               discover Christ, grow in faith, build meaningful
               community and use their gifts to serve God's
@@ -430,58 +524,84 @@ export default function Home() {
 
             {/* BUTTONS */}
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <motion.div
+  className="flex flex-col sm:flex-row gap-4"
+  variants={fadeUp}
+>
 
-              <button
-                onClick={() =>
-                  setShowMemberModal(true)
-                }
-                className="
-                  inline-flex
-                  items-center
-                  justify-center
-                  gap-2
-                  px-8
-                  py-4
-                  rounded-full
-                  bg-[#b4712d]
-                  text-white
-                  font-bold
-                  shadow-2xl
-                  hover:bg-[#965d23]
-                  hover:-translate-y-0.5
-                  transition-all
-                "
-              >
-                Join MUKCCU
-                <ArrowRight size={19} />
-              </button>
+              <motion.button
+  whileHover={
+    shouldReduceMotion
+      ? undefined
+      : {
+          scale: 1.03,
+          y: -2,
+        }
+  }
+  whileTap={
+    shouldReduceMotion
+      ? undefined
+      : {
+          scale: 0.98,
+        }
+  }
+  onClick={() => setShowMemberModal(true)}
+  className="
+    inline-flex
+    items-center
+    justify-center
+    gap-2
+    px-8
+    py-4
+    rounded-full
+    bg-[#b4712d]
+    text-white
+    font-bold
+    shadow-2xl
+    hover:bg-[#965d23]
+    transition-all
+  "
+>
+  Join MUKCCU
+  <ArrowRight size={19} />
+</motion.button>
 
-              <button
-                onClick={() =>
-                  goTo('/ministries')
-                }
-                className="
-                  inline-flex
-                  items-center
-                  justify-center
-                  gap-2
-                  px-8
-                  py-4
-                  rounded-full
-                  bg-white/10
-                  border
-                  border-white/30
-                  backdrop-blur-md
-                  text-white
-                  font-semibold
-                  hover:bg-white/20
-                  transition-all
-                "
-              >
-                Explore Ministries
-                <ArrowRight size={19} />
-              </button>
+<motion.button
+  whileHover={
+    shouldReduceMotion
+      ? undefined
+      : {
+          scale: 1.03,
+          y: -2,
+        }
+  }
+  whileTap={
+    shouldReduceMotion
+      ? undefined
+      : {
+          scale: 0.98,
+        }
+  }
+  onClick={() => goTo('/ministries')}
+  className="
+    inline-flex
+    items-center
+    justify-center
+    gap-2
+    px-8
+    py-4
+    rounded-full
+    bg-[#b4712d]
+    text-white
+    font-bold
+    shadow-2xl
+    hover:bg-[#965d23]
+    transition-all
+  "
+>
+  Explore Ministries
+  <ArrowRight size={19} />
+</motion.button>
 
             </div>
 
@@ -517,7 +637,13 @@ export default function Home() {
           WELCOME
       ================================================== */}
 
-      <section className="relative bg-white py-20 md:py-24">
+      <motion.section
+  className="relative bg-white py-20 md:py-24"
+  initial={shouldReduceMotion ? false : 'hidden'}
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.15 }}
+  variants={fadeIn}
+>
 
         <div className="max-w-6xl mx-auto px-6">
 
@@ -525,7 +651,7 @@ export default function Home() {
 
             {/* TEXT */}
 
-            <div>
+            <motion.div variants={fadeUp}>
 
               <p className="text-[#b4712d] text-sm font-bold uppercase tracking-[0.2em] mb-3">
                 Welcome Home
@@ -564,7 +690,10 @@ export default function Home() {
 
             {/* HIGHLIGHTS */}
 
-            <div className="grid sm:grid-cols-2 gap-5">
+            <motion.div
+  className="grid sm:grid-cols-2 gap-5"
+  variants={staggerContainer}
+>
 
               {[
                 {
@@ -594,10 +723,18 @@ export default function Home() {
                     item.icon;
 
                   return (
-                    <div
-                      key={index}
-                      className="p-7 rounded-3xl bg-[#f8f7f4] border border-gray-100 hover:shadow-lg transition"
-                    >
+                    <motion.div
+  key={index}
+  variants={scaleIn}
+  whileHover={
+    shouldReduceMotion
+      ? undefined
+      : {
+          y: -6,
+        }
+  }
+  className="p-7 rounded-3xl bg-[#f8f7f4] border border-gray-100 hover:shadow-lg transition"
+>
 
                       <div className="w-12 h-12 rounded-xl bg-[#2e3e87] flex items-center justify-center mb-5">
 
@@ -627,17 +764,25 @@ export default function Home() {
 
         </div>
 
-      </section>
-
+      </motion.section>
       {/* =================================================
           THIS WEEK
       ================================================== */}
 
-      <section className="bg-[#f8f7f4] py-20 md:py-24">
+      <motion.section
+  className="bg-[#f8f7f4] py-20 md:py-24"
+  initial={shouldReduceMotion ? false : 'hidden'}
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.12 }}
+  variants={fadeIn}
+>
 
         <div className="max-w-7xl mx-auto px-6">
 
-          <div className="text-center max-w-3xl mx-auto mb-12">
+          <motion.div
+  className="text-center max-w-3xl mx-auto mb-12"
+  variants={fadeUp}
+>
 
             <p className="text-[#b4712d] text-sm font-bold uppercase tracking-[0.2em] mb-3">
               Join Us
@@ -654,7 +799,10 @@ export default function Home() {
 
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <motion.div
+  className="grid md:grid-cols-3 gap-6"
+  variants={staggerContainer}
+>
 
             {weeklyActivities.map(
               (activity, index) => {
@@ -663,10 +811,18 @@ export default function Home() {
                   activity.icon;
 
                 return (
-                  <div
-                    key={index}
-                    className="group bg-white rounded-3xl p-7 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all"
-                  >
+                  <motion.div
+  key={index}
+  variants={scaleIn}
+  whileHover={
+    shouldReduceMotion
+      ? undefined
+      : {
+          y: -7,
+        }
+  }
+  className="group bg-white rounded-3xl p-7 border border-gray-100 shadow-sm hover:shadow-xl transition-all"
+>
 
                     <div className="flex items-start justify-between mb-6">
 
@@ -730,7 +886,13 @@ export default function Home() {
           UPCOMING EVENTS
       ================================================== */}
 
-      <section className="bg-white py-20 md:py-24">
+      <motion.section
+  className="bg-white py-20 md:py-24"
+  initial={shouldReduceMotion ? false : 'hidden'}
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.12 }}
+  variants={fadeIn}
+>
 
         <div className="max-w-7xl mx-auto px-6">
 
@@ -762,19 +924,29 @@ export default function Home() {
 
           {upcomingEvents.length > 0 ? (
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <motion.div
+  className="grid md:grid-cols-3 gap-6"
+  variants={staggerContainer}
+>
 
               {upcomingEvents.map(
                 (event: any, index: number) => (
 
-                  <article
-                    key={
-                      event.id ||
-                      `${event.title}-${index}`
-                    }
-                    className="rounded-3xl overflow-hidden border border-gray-100 bg-white shadow-sm hover:shadow-xl transition"
-                  >
-
+                  <motion.article
+  key={
+    event.id ||
+    `${event.title}-${index}`
+  }
+  variants={scaleIn}
+  whileHover={
+    shouldReduceMotion
+      ? undefined
+      : {
+          y: -7,
+        }
+  }
+  className="rounded-3xl overflow-hidden border border-gray-100 bg-white shadow-sm hover:shadow-xl transition"
+>
                     <div className="h-2 bg-[#b4712d]" />
 
                     <div className="p-7">
@@ -901,13 +1073,21 @@ export default function Home() {
               {ministryPreview.map(
                 (ministry: any, index: number) => (
 
-                  <article
-                    key={
-                      ministry.id ||
-                      `${ministry.name}-${index}`
-                    }
-                    className="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all"
-                  >
+                  <motion.article
+  key={
+    ministry.id ||
+    `${ministry.name}-${index}`
+  }
+  variants={scaleIn}
+  whileHover={
+    shouldReduceMotion
+      ? undefined
+      : {
+          y: -8,
+        }
+  }
+  className="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all"
+>
 
                     <button
                       onClick={() =>
@@ -924,7 +1104,7 @@ export default function Home() {
                         <img
                           src={ministry.image_url}
                           alt={ministry.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
@@ -972,7 +1152,7 @@ export default function Home() {
 
                     </div>
 
-                  </article>
+                  </motion.article>
 
                 )
               )}
@@ -1013,7 +1193,13 @@ export default function Home() {
           MUKCCU IN ACTION
       ================================================== */}
 
-      <section className="bg-[#1a2351] py-20 md:py-24 overflow-hidden">
+      <motion.section
+  className="bg-[#1a2351] py-20 md:py-24 overflow-hidden"
+  initial={shouldReduceMotion ? false : 'hidden'}
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.15 }}
+  variants={fadeIn}
+>
 
         <div className="max-w-7xl mx-auto px-6">
 
@@ -1021,7 +1207,7 @@ export default function Home() {
 
             {/* TEXT */}
 
-            <div>
+            <motion.div variants={fadeUp}>
 
               <p className="text-[#b4712d] text-sm font-bold uppercase tracking-[0.2em] mb-3">
                 MUKCCU in Action
@@ -1053,7 +1239,10 @@ export default function Home() {
 
             {/* VIDEO */}
 
-            <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/10">
+            <motion.div
+  variants={scaleIn}
+  className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+>
 
               <iframe
                 className="absolute inset-0 w-full h-full"
@@ -1108,7 +1297,10 @@ export default function Home() {
 
           {leadershipPreview.length > 0 ? (
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+            <motion.div
+  className="grid grid-cols-2 lg:grid-cols-4 gap-5"
+  variants={staggerContainer}
+>
 
               {leadershipPreview.map(
                 (leader: any, index: number) => {
@@ -1121,13 +1313,21 @@ export default function Home() {
                     'MUKCCU Leader';
 
                   return (
-                    <div
-                      key={
-                        leader.id ||
-                        `${leader.name}-${index}`
-                      }
-                      className="group rounded-3xl overflow-hidden bg-white border border-gray-100 shadow-sm hover:shadow-xl transition"
-                    >
+                    <motion.div
+  key={
+    leader.id ||
+    `${leader.name}-${index}`
+  }
+  variants={scaleIn}
+  whileHover={
+    shouldReduceMotion
+      ? undefined
+      : {
+          y: -7,
+        }
+  }
+  className="group rounded-3xl overflow-hidden bg-white border border-gray-100 shadow-sm hover:shadow-xl transition"
+>
 
                       <div className="relative h-64 bg-[#2e3e87] overflow-hidden">
 
@@ -1400,39 +1600,48 @@ export default function Home() {
 
           {galleryPreview.length > 0 ? (
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <motion.div
+  className="grid grid-cols-2 md:grid-cols-3 gap-4"
+  variants={staggerContainer}
+>
 
               {galleryPreview.map(
                 (image: any, index: number) => (
 
-                  <button
-                    key={
-                      image.id ||
-                      `${image.title}-${index}`
-                    }
-                    onClick={() =>
-                      goTo('/gallery')
-                    }
-                    className={`
-                      group
-                      relative
-                      overflow-hidden
-                      rounded-2xl
-                      bg-[#2e3e87]
-                      ${
-                        index === 0
-                          ? 'md:row-span-2 h-80 md:h-full'
-                          : 'h-48 md:h-64'
-                      }
-                    `}
-                  >
+                  <motion.button
+  key={
+    image.id ||
+    `${image.title}-${index}`
+  }
+  variants={scaleIn}
+  whileHover={
+    shouldReduceMotion
+      ? undefined
+      : {
+          scale: 1.015,
+        }
+  }
+  onClick={() => goTo('/gallery')}
+  className={`
+    group
+    relative
+    overflow-hidden
+    rounded-2xl
+    bg-[#2e3e87]
+    ${
+      index === 0
+        ? 'md:row-span-2 h-80 md:h-full'
+        : 'h-48 md:h-64'
+    }
+  `}
+>
 
                     {image.image_url ? (
                       <img
   src={image.image_url}
   alt={image.title || 'MUKCCU'}
   loading="lazy"
-  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
 />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
@@ -1715,7 +1924,13 @@ export default function Home() {
           FINAL CTA
       ================================================== */}
 
-      <section className="px-6 pb-20 md:pb-24">
+      <motion.section
+  className="px-6 pb-20 md:pb-24"
+  initial={shouldReduceMotion ? false : 'hidden'}
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.2 }}
+  variants={scaleIn}
+>
 
         <div className="max-w-7xl mx-auto">
 
@@ -1744,12 +1959,24 @@ export default function Home() {
 
               <div className="flex flex-col sm:flex-row justify-center gap-4">
 
-                <button
-                  onClick={() =>
-                    setShowMemberModal(true)
-                  }
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-[#b4712d] text-white font-bold hover:bg-[#965d23] transition"
-                >
+                <motion.button
+  whileHover={
+    shouldReduceMotion
+      ? undefined
+      : {
+          scale: 1.04,
+        }
+  }
+  whileTap={
+    shouldReduceMotion
+      ? undefined
+      : {
+          scale: 0.97,
+        }
+  }
+  onClick={() => setShowMemberModal(true)}
+  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-[#b4712d] text-white font-bold hover:bg-[#965d23] transition"
+>
                   Join MUKCCU
                   <ArrowRight size={18} />
                 </button>
