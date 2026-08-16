@@ -1,4 +1,3 @@
-```tsx
 import {
   Award,
   Clock,
@@ -1329,4 +1328,4 @@ export default function Leadership() {
     </div>
   );
 }
-```
+
