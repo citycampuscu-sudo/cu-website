@@ -189,39 +189,45 @@ export default function Leadership() {
   );
 
   const renderLeaderPhoto = (
-    leader: any,
-    size = 'w-36 h-36 md:w-44 md:h-44'
-  ) => {
-    if (leader?.image) {
-      return (
-        <img
-          src={leader.image}
-          alt={leader.name}
-          loading="lazy"
-          className={`${size} rounded-full object-cover border-4 shadow-lg`}
-          style={{ borderColor: '#2e3e87' }}
-        />
-      );
-    }
-
+  leader: any,
+  size = 'w-36 h-36 md:w-44 md:h-44'
+) => {
+  if (leader?.image) {
     return (
-      <div
-        className={`${size} rounded-full flex items-center justify-center shadow-lg border-4`}
-        style={{
-          backgroundColor: '#2e3e87',
-          borderColor: '#b4712d',
-        }}
-      >
-        <span className="text-white text-4xl md:text-5xl font-bold">
-          {leader?.name
-            ?.split(' ')
-            .map((n: string) => n[0])
-            .slice(0, 2)
-            .join('')}
-        </span>
-      </div>
+      <img
+        src={leader.image}
+        alt={leader.name}
+        loading="lazy"
+        className={
+          size +
+          ' rounded-full object-cover border-4 shadow-lg'
+        }
+        style={{ borderColor: '#2e3e87' }}
+      />
     );
-  };
+  }
+
+  return (
+    <div
+      className={
+        size +
+        ' rounded-full flex items-center justify-center shadow-lg border-4'
+      }
+      style={{
+        backgroundColor: '#2e3e87',
+        borderColor: '#b4712d',
+      }}
+    >
+      <span className="text-white text-4xl md:text-5xl font-bold">
+        {leader?.name
+          ?.split(' ')
+          .map((n: string) => n[0])
+          .slice(0, 2)
+          .join('')}
+      </span>
+    </div>
+  );
+};
 
   const LeaderCard = ({
     leader,
