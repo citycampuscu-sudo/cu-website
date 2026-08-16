@@ -677,7 +677,7 @@ export default function Leadership() {
                           {executiveLeaders.map(
                             (leader: any, index: number) => (
                               <LeaderCard
-                                key={`${leader.name}-${leader.position}`}
+                                key={leader.name + '-' + leader.position}
                                 leader={leader}
                                 index={index}
                               />
@@ -715,7 +715,7 @@ export default function Leadership() {
                           {ministryLeaders.map(
                             (leader: any, index: number) => (
                               <LeaderCard
-                                key={`${leader.name}-${leader.position}`}
+                                key={leader.name + '-' + leader.position}
                                 leader={leader}
                                 index={index}
                               />
@@ -759,7 +759,7 @@ export default function Leadership() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {recentFOCUSStaffs.map((staff: any, index: number) => (
                     <motion.div
-                      key={`${staff.name}-${staff.year}-${index}`}
+                      key={staff.name + '-' + staff.year + '-' + index}
                       initial={{ opacity: 0, y: 25 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       whileHover={{ y: -6 }}
@@ -981,7 +981,7 @@ export default function Leadership() {
                   {previousChairpersons.map(
                     (chair: any, index: number) => (
                       <motion.div
-                        key={`${chair.name}-${chair.year}-${index}`}
+                        key={chair.name + '-' + chair.year + '-' + index}
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         whileHover={{ y: -6 }}
