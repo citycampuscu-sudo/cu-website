@@ -27,6 +27,7 @@ import { useNavigate } from 'react-router-dom';
 import { useContent } from '../hooks/useContent';
 import { useDocuments } from '../hooks/useDocuments';
 import { useSupabaseMinistries } from '../hooks/useSupabaseMinistries';
+import { useSupabaseHomeData } from '../hooks/useSupabaseHomeData';
 
 import MemberRegistrationModal from '../components/MemberRegistrationModal';
 
@@ -44,6 +45,13 @@ export default function Home() {
     ministries: supabaseMinistries,
     loading: ministriesLoading,
   } = useSupabaseMinistries();
+  const {
+  events: supabaseEvents,
+  leaders: supabaseLeaders,
+  galleryImages: supabaseGalleryImages,
+  loading: homeDataLoading,
+  error: homeDataError,
+} = useSupabaseHomeData();
 
   const [showMemberModal, setShowMemberModal] =
     useState(false);
@@ -61,22 +69,22 @@ export default function Home() {
   }, [supabaseMinistries]);
 
   const events = useMemo(() => {
-    return Array.isArray(content.events?.list)
-      ? content.events.list
-      : [];
-  }, [content.events?.list]);
+  return Array.isArray(supabaseEvents)
+    ? supabaseEvents
+    : [];
+}, [supabaseEvents]);
 
   const leaders = useMemo(() => {
-    return Array.isArray(content.leadership?.list)
-      ? content.leadership.list
-      : [];
-  }, [content.leadership?.list]);
+  return Array.isArray(supabaseLeaders)
+    ? supabaseLeaders
+    : [];
+}, [supabaseLeaders]);
 
-  const galleryImages = useMemo(() => {
-    return Array.isArray(content.gallery?.images)
-      ? content.gallery.images
-      : [];
-  }, [content.gallery?.images]);
+ const galleryImages = useMemo(() => {
+  return Array.isArray(supabaseGalleryImages)
+    ? supabaseGalleryImages
+    : [];
+}, [supabaseGalleryImages]);
 
   const homeDocuments = useMemo(() => {
     return documents.filter(
@@ -85,16 +93,68 @@ export default function Home() {
   }, [documents]);
 
   const upcomingEvents = useMemo(() => {
-    return events.slice(0, 3);
-  }, [events]);
+  const now = new Date();
+
+  return events
+    .filter((event: any) => {
+      if (!event.date) return false;
+
+      const eventDate = new Date(event.date);
+
+      return (
+        !Number.isNaN(eventDate.getTime()) &&
+        eventDate >= now
+      );
+    })
+    .sort((a: any, b: any) => {
+      return (
+        new Date(a.date).getTime() -
+        new Date(b.date).getTime()
+      );
+    })
+    .slice(0, 3);
+}, [events]);
 
   const ministryPreview = useMemo(() => {
     return ministries.slice(0, 3);
   }, [ministries]);
 
   const leadershipPreview = useMemo(() => {
-    return leaders.slice(0, 4);
-  }, [leaders]);
+  const positionOrder = [
+    'Chairperson',
+    'Vice-Chairperson',
+    'Secretary',
+    'Vice-Secretary',
+    'Treasurer',
+    'Board Director',
+    'Discipleship Coordinator',
+    'Prayer Coordinator',
+    'Missions Coordinator',
+    'Hospitality Director',
+    'Bible Study Coordinator',
+  ];
+
+  return [...leaders]
+    .sort((a: any, b: any) => {
+      const aIndex = positionOrder.findIndex(
+        position =>
+          position.toLowerCase() ===
+          a.position?.trim().toLowerCase()
+      );
+
+      const bIndex = positionOrder.findIndex(
+        position =>
+          position.toLowerCase() ===
+          b.position?.trim().toLowerCase()
+      );
+
+      return (
+        (aIndex === -1 ? 999 : aIndex) -
+        (bIndex === -1 ? 999 : bIndex)
+      );
+    })
+    .slice(0, 4);
+}, [leaders]);
 
   const galleryPreview = useMemo(() => {
     return galleryImages.slice(0, 6);
@@ -187,8 +247,14 @@ export default function Home() {
   ====================================================== */
 
   const isLoading =
-    loading ||
-    ministriesLoading;
+  loading ||
+  ministriesLoading ||
+  homeDataLoading;
+  {homeDataError && (
+  <div className="bg-amber-50 border-b border-amber-200 px-6 py-3 text-center text-sm text-amber-800">
+    Some live homepage content could not be loaded.
+  </div>
+)}
 
   /* =====================================================
      RENDER
@@ -1047,9 +1113,7 @@ export default function Home() {
               {leadershipPreview.map(
                 (leader: any, index: number) => {
 
-                  const image =
-                    leader.image_url ||
-                    leader.image;
+                 const image = leader.image;
 
                   const position =
                     leader.position ||
@@ -1069,10 +1133,11 @@ export default function Home() {
 
                         {image ? (
                           <img
-                            src={image}
-                            alt={leader.name}
-                            className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
-                          />
+  src={image}
+  alt={leader.name}
+  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+  loading="lazy"
+/>
                         ) : (
                           <div className="w-full h-full flex items-center justify-center">
 
@@ -1362,19 +1427,13 @@ export default function Home() {
                     `}
                   >
 
-                    {image.url ||
-                    image.image_url ? (
+                    {image.image_url ? (
                       <img
-                        src={
-                          image.url ||
-                          image.image_url
-                        }
-                        alt={
-                          image.title ||
-                          'MUKCCU'
-                        }
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
+  src={image.image_url}
+  alt={image.title || 'MUKCCU'}
+  loading="lazy"
+  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+/>
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
 
