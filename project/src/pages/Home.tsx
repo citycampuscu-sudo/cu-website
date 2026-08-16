@@ -607,9 +607,9 @@ export default function Home() {
   <ArrowRight size={19} />
 </motion.button>
 
-           </motion.div>
+           </div>
 
-          </div>
+          </motion.div>
 
         </div>
 
@@ -757,7 +757,7 @@ export default function Home() {
                         {item.text}
                       </p>
 
-                    </div>
+                    </motion.div>
                   );
                 }
               )}
@@ -801,7 +801,7 @@ export default function Home() {
               fellowship throughout the week.
             </p>
 
-          </div>
+         </motion.div>
 
           <motion.div
   className="grid md:grid-cols-3 gap-6"
@@ -861,12 +861,12 @@ export default function Home() {
                       {activity.description}
                     </p>
 
-                  </div>
+                  </motion.div>
                 );
               }
             )}
 
-          </div>
+          </motion.div>
 
           <div className="text-center mt-10">
 
@@ -884,7 +884,7 @@ export default function Home() {
 
         </div>
 
-      </section>
+      </motion.section>
 
       {/* =================================================
           UPCOMING EVENTS
@@ -1017,7 +1017,7 @@ export default function Home() {
                 )
               )}
 
-            </div>
+            </motion.div>
 
           ) : (
 
@@ -1042,7 +1042,7 @@ export default function Home() {
 
         </div>
 
-      </section>
+      </motion.section>
 
       {/* =================================================
           MINISTRIES
@@ -1263,7 +1263,7 @@ export default function Home() {
 
         </div>
 
-      </section>
+      </motion.section>
 
       {/* =================================================
           LEADERSHIP
@@ -1353,7 +1353,7 @@ export default function Home() {
                           </div>
                         )}
 
-                      </motion.div>
+                      </div>
 
                       <div className="p-5">
 
@@ -1379,12 +1379,12 @@ export default function Home() {
 
                       </div>
 
-                    </div>
+                    </motion.div>
                   );
                 }
               )}
 
-            </div>
+            </motion.div>
 
           ) : (
 
@@ -1675,7 +1675,7 @@ export default function Home() {
                 )
               )}
 
-            </div>
+            </motion.div>
 
           ) : (
 
@@ -1983,7 +1983,7 @@ export default function Home() {
 >
                   Join MUKCCU
                   <ArrowRight size={18} />
-                </button>
+                </motion.button>
 
                 <button
                   onClick={() =>
@@ -2003,7 +2003,7 @@ export default function Home() {
 
         </div>
 
-      </section>
+      </motion.section>
 
       {/* =================================================
           MEMBER REGISTRATION MODAL
