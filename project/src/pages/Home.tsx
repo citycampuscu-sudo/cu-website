@@ -512,7 +512,7 @@ export default function Home() {
   variants={fadeUp}
 >
               Knowing Christ. Growing Together. Serving with Purpose.
-            </p>
+            </motion.p>
 
             {/* DESCRIPTION */}
 
@@ -524,7 +524,7 @@ export default function Home() {
               discover Christ, grow in faith, build meaningful
               community and use their gifts to serve God's
               purposes.
-            </p>
+            </motion.p>
 
             {/* BUTTONS */}
 
@@ -607,7 +607,7 @@ export default function Home() {
   <ArrowRight size={19} />
 </motion.button>
 
-            </div>
+           </motion.div>
 
           </div>
 
@@ -690,7 +690,7 @@ export default function Home() {
                 <ArrowRight size={18} />
               </button>
 
-            </div>
+            </motion.div>
 
             {/* HIGHLIGHTS */}
 
@@ -762,7 +762,7 @@ export default function Home() {
                 }
               )}
 
-            </div>
+            </motion.div>
 
           </div>
 
@@ -1012,7 +1012,7 @@ export default function Home() {
 
                     </div>
 
-                  </article>
+                  </motion.article>
 
                 )
               )}
@@ -1239,7 +1239,7 @@ export default function Home() {
                 Watch on YouTube
               </a>
 
-            </div>
+            </motion.div>
 
             {/* VIDEO */}
 
@@ -1257,7 +1257,7 @@ export default function Home() {
                 allowFullScreen
               />
 
-            </div>
+           </motion.div>
 
           </div>
 
@@ -1353,7 +1353,7 @@ export default function Home() {
                           </div>
                         )}
 
-                      </div>
+                      </motion.div>
 
                       <div className="p-5">
 
@@ -1670,7 +1670,7 @@ export default function Home() {
                       </div>
                     )}
 
-                  </button>
+                  </motion.button>
 
                 )
               )}
