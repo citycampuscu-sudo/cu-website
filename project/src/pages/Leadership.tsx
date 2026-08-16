@@ -190,35 +190,17 @@ export default function Leadership() {
     'Bible Study Coordinator',
   ];
 
-  // Ministry display names
     // ============================================================
   // LEADERSHIP CLASSIFICATION
   // ============================================================
 
-  /**
-   * Normalize position names coming from Supabase.
-   *
-   * This prevents small differences such as:
-   * "Vice Chairperson"
-   * "Vice-Chairperson"
-   * " vice-chairperson "
-   *
-   * from causing a leader to disappear from the correct section.
-   */
   const normalizePosition = (position?: string) =>
     position
       ?.trim()
       .toLowerCase()
       .replace(/[\s_-]+/g, '') || '';
 
-  /**
-   * Executive positions.
-   *
-   * IMPORTANT:
-   * Board Director is intentionally NOT included here.
-   * Board Director is the Praise & Worship Leader and therefore
-   * belongs under Ministry Leadership.
-   */
+  // Executive Team — Board Director is NOT included here.
   const executivePositions = [
     'Vice-Chairperson',
     'Secretary',
@@ -226,12 +208,7 @@ export default function Leadership() {
     'Treasurer',
   ];
 
-  /**
-   * Ministry leadership positions.
-   *
-   * Board Director is intentionally included here as:
-   * Praise & Worship Leader.
-   */
+  // Ministry Leadership — Board Director = Praise & Worship Leader.
   const ministryPositions = [
     'Board Director',
     'Discipleship Coordinator',
@@ -241,9 +218,6 @@ export default function Leadership() {
     'Bible Study Coordinator',
   ];
 
-  /**
-   * Display labels for ministry leadership.
-   */
   const ministryRoleLabels: Record<string, string> = {
     'Board Director': 'Praise & Worship Leader',
     'Discipleship Coordinator': 'Discipleship Ministry',
@@ -253,9 +227,6 @@ export default function Leadership() {
     'Bible Study Coordinator': 'Bible Study Ministry',
   };
 
-  /**
-   * Icons for ministry leadership.
-   */
   const ministryRoleIcons: Record<string, any> = {
     'Board Director': Music,
     'Discipleship Coordinator': Flame,
@@ -265,11 +236,6 @@ export default function Leadership() {
     'Bible Study Coordinator': BookOpen,
   };
 
-  /**
-   * Featured Chairperson.
-   *
-   * The Chairperson is displayed separately above the Executive Team.
-   */
   const chairperson =
     filteredLeaders.find(
       (leader: any) =>
@@ -277,18 +243,6 @@ export default function Leadership() {
         normalizePosition('Chairperson')
     ) || null;
 
-  /**
-   * Executive Team.
-   *
-   * ONLY these four positions are allowed here:
-   * Vice-Chairperson
-   * Secretary
-   * Vice-Secretary
-   * Treasurer
-   *
-   * This prevents ministry leaders from accidentally appearing
-   * in the Executive Team.
-   */
   const executiveLeaders = filteredLeaders.filter((leader: any) => {
     const position = normalizePosition(leader.position);
 
@@ -298,12 +252,6 @@ export default function Leadership() {
     );
   });
 
-  /**
-   * Ministry Leadership.
-   *
-   * Board Director is included here because the Board Director
-   * serves as the Praise & Worship Leader.
-   */
   const ministryLeaders = filteredLeaders.filter((leader: any) => {
     const position = normalizePosition(leader.position);
 
