@@ -144,7 +144,7 @@ export default function Leadership() {
       ?.filter((r) => r.role_type === 'recent FOCUS Staffs')
       ?.sort((a, b) => parseInt(b.year) - parseInt(a.year)) || [];
 
-  const previousChairpersons =
+    const previousChairpersons =
     supabaseRoles?.filter(
       (r) => r.role_type === 'previous_chairperson'
     )?.length > 0
@@ -157,97 +157,143 @@ export default function Leadership() {
           )
       : content.leadership?.previousChairpersons || [];
 
+  // ============================================================
+  // LEADERSHIP CLASSIFICATION
+  // ============================================================
+
+  // Normalize position names so differences in spacing,
+  // capitalization or dash characters do not break filtering.
+  const normalizePosition = (position: string = '') =>
+    position
+      .trim()
+      .toLowerCase()
+      .replace(/[–—]/g, '-')
+      .replace(/\s+/g, ' ');
+
+  // Student Executive Team
+  // Board Director is intentionally NOT included here because
+  // the Board Director serves as the Praise & Worship Leader.
+  const executivePositions = [
+    'Vice-Chairperson',
+    'Secretary',
+    'Vice-Secretary',
+    'Treasurer',
+  ];
+
+  // Ministry Leadership
+  const ministryPositions = [
+    'Board Director',
+    'Discipleship Coordinator',
+    'Prayer Coordinator',
+    'Missions Coordinator',
+    'Hospitality Director',
+    'Bible Study Coordinator',
+  ];
+
+  // Ministry display names
+  const ministryRoleLabels: Record<string, string> = {
+    'Board Director': 'Praise & Worship Leader',
+    'Discipleship Coordinator': 'Discipleship Ministry',
+    'Prayer Coordinator': 'Prayer Ministry',
+    'Missions Coordinator': 'Missions Ministry',
+    'Hospitality Director': 'Hospitality Ministry',
+    'Bible Study Coordinator': 'Bible Study Ministry',
+  };
+
+  // Ministry icons
+  const ministryRoleIcons: Record<string, any> = {
+    'Board Director': Music,
+    'Discipleship Coordinator': Flame,
+    'Prayer Coordinator': HeartHandshake,
+    'Missions Coordinator': Globe2,
+    'Hospitality Director': Heart,
+    'Bible Study Coordinator': BookOpen,
+  };
+
+  // ============================================================
+  // CHAIRPERSON
+  // ============================================================
+
   const chairperson =
     filteredLeaders.find(
       (leader: any) =>
-        leader.position?.trim().toLowerCase() === 'chairperson'
+        normalizePosition(leader.position) === 'chairperson'
     ) || null;
 
-  const otherExecutives = filteredLeaders.filter(
-    (leader: any) =>
-      leader.position?.trim().toLowerCase() !== 'chairperson'
+  // ============================================================
+  // EXECUTIVE LEADERS
+  // ============================================================
+
+  const executiveLeaders = filteredLeaders.filter(
+    (leader: any) => {
+      const position = normalizePosition(leader.position);
+
+      return executivePositions.some(
+        (executivePosition) =>
+          normalizePosition(executivePosition) === position
+      );
+    }
   );
 
-  const executivePositions = [
-  'Vice-Chairperson',
-  'Secretary',
-  'Vice-Secretary',
-  'Treasurer',
-];
+  // ============================================================
+  // MINISTRY LEADERS
+  // ============================================================
 
-const ministryRoleLabels: Record<string, string> = {
-  'Board Director': 'Praise & Worship Leader',
-  'Discipleship Coordinator': 'Discipleship Ministry',
-  'Prayer Coordinator': 'Prayer Ministry',
-  'Missions Coordinator': 'Missions Ministry',
-  'Hospitality Director': 'Hospitality Ministry',
-  'Bible Study Coordinator': 'Bible Study Ministry',
-};
-  const ministryRoleIcons: Record<string, any> = {
-  'Board Director': Music,
-  'Discipleship Coordinator': Flame,
-  'Prayer Coordinator': HeartHandshake,
-  'Missions Coordinator': Globe2,
-  'Hospitality Director': Heart,
-  'Bible Study Coordinator': BookOpen,
-};
+  const ministryLeaders = filteredLeaders.filter(
+    (leader: any) => {
+      const position = normalizePosition(leader.position);
 
-  const executiveLeaders = otherExecutives.filter((leader: any) =>
-    executivePositions.some(
-      (position) =>
-        position.toLowerCase() === leader.position?.trim().toLowerCase()
-    )
+      return ministryPositions.some(
+        (ministryPosition) =>
+          normalizePosition(ministryPosition) === position
+      );
+    }
   );
 
-  const ministryLeaders = otherExecutives.filter(
-    (leader: any) =>
-      !executivePositions.some(
-        (position) =>
-          position.toLowerCase() === leader.position?.trim().toLowerCase()
-      )
-  );
+  // ============================================================
+  // LEADER PHOTO
+  // ============================================================
 
   const renderLeaderPhoto = (
-  leader: any,
-  size = 'w-36 h-36 md:w-44 md:h-44'
-) => {
-  if (leader?.image) {
+    leader: any,
+    size = 'w-36 h-36 md:w-44 md:h-44'
+  ) => {
+    if (leader?.image) {
+      return (
+        <img
+          src={leader.image}
+          alt={leader.name}
+          loading="lazy"
+          className={
+            size +
+            ' rounded-full object-cover border-4 shadow-lg'
+          }
+          style={{ borderColor: '#2e3e87' }}
+        />
+      );
+    }
+
     return (
-      <img
-        src={leader.image}
-        alt={leader.name}
-        loading="lazy"
+      <div
         className={
           size +
-          ' rounded-full object-cover border-4 shadow-lg'
+          ' rounded-full flex items-center justify-center shadow-lg border-4'
         }
-        style={{ borderColor: '#2e3e87' }}
-      />
+        style={{
+          backgroundColor: '#2e3e87',
+          borderColor: '#b4712d',
+        }}
+      >
+        <span className="text-white text-4xl md:text-5xl font-bold">
+          {leader?.name
+            ?.split(' ')
+            .map((n: string) => n[0])
+            .slice(0, 2)
+            .join('')}
+        </span>
+      </div>
     );
-  }
-
-  return (
-    <div
-      className={
-        size +
-        ' rounded-full flex items-center justify-center shadow-lg border-4'
-      }
-      style={{
-        backgroundColor: '#2e3e87',
-        borderColor: '#b4712d',
-      }}
-    >
-      <span className="text-white text-4xl md:text-5xl font-bold">
-        {leader?.name
-          ?.split(' ')
-          .map((n: string) => n[0])
-          .slice(0, 2)
-          .join('')}
-      </span>
-    </div>
-  );
-};
-
+  };
   const LeaderCard = ({
     leader,
     index,
