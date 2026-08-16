@@ -12,7 +12,6 @@ import {
   Flame,
   HeartHandshake,
   Globe2,
-  Handshake,
 } from 'lucide-react';
 import { useContent } from '../hooks/useContent';
 import { useSupabaseLeadership } from '../hooks/useSupabaseLeadership';
@@ -189,7 +188,7 @@ const ministryRoleLabels: Record<string, string> = {
   'Discipleship Coordinator': Flame,
   'Prayer Coordinator': HeartHandshake,
   'Missions Coordinator': Globe2,
-  'Hospitality Director': Handshake,
+  'Hospitality Director': Heart,
   'Bible Study Coordinator': BookOpen,
 };
 
