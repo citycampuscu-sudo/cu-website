@@ -567,14 +567,12 @@ export default function Home() {
   "
 >
   Join MUKCCU
-  <ArrowRight size={19} />
-</motion.button>
-
+    <ArrowRight size={19} />
 </motion.button>
 
             </motion.div>
 
-          </div>
+        </div>
 
         </div>
 
