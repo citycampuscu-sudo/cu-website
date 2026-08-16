@@ -607,9 +607,7 @@ export default function Home() {
   <ArrowRight size={19} />
 </motion.button>
 
-           </div>
-
-          </motion.div>
+                    </motion.div>
 
         </div>
 
