@@ -157,39 +157,7 @@ export default function Leadership() {
           )
       : content.leadership?.previousChairpersons || [];
 
-  // ============================================================
-  // LEADERSHIP CLASSIFICATION
-  // ============================================================
-
-  // Normalize position names so differences in spacing,
-  // capitalization or dash characters do not break filtering.
-  const normalizePosition = (position: string = '') =>
-    position
-      .trim()
-      .toLowerCase()
-      .replace(/[–—]/g, '-')
-      .replace(/\s+/g, ' ');
-
-  // Student Executive Team
-  // Board Director is intentionally NOT included here because
-  // the Board Director serves as the Praise & Worship Leader.
-  const executivePositions = [
-    'Vice-Chairperson',
-    'Secretary',
-    'Vice-Secretary',
-    'Treasurer',
-  ];
-
-  // Ministry Leadership
-  const ministryPositions = [
-    'Board Director',
-    'Discipleship Coordinator',
-    'Prayer Coordinator',
-    'Missions Coordinator',
-    'Hospitality Director',
-    'Bible Study Coordinator',
-  ];
-
+  
     // ============================================================
   // LEADERSHIP CLASSIFICATION
   // ============================================================
