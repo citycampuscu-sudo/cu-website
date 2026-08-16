@@ -3,6 +3,8 @@ import {
   BookOpen,
   Calendar,
   Camera,
+  CheckCircle2,
+  ChevronRight,
   Clock,
   Download,
   ExternalLink,
@@ -16,7 +18,9 @@ import {
   Quote,
   Target,
   Users,
-} from 'lucide-react';eact';
+} from 'lucide-react';
+
+import { useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
