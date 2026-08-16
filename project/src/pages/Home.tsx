@@ -570,44 +570,11 @@ export default function Home() {
   <ArrowRight size={19} />
 </motion.button>
 
-<motion.button
-  whileHover={
-    shouldReduceMotion
-      ? undefined
-      : {
-          scale: 1.03,
-          y: -2,
-        }
-  }
-  whileTap={
-    shouldReduceMotion
-      ? undefined
-      : {
-          scale: 0.98,
-        }
-  }
-  onClick={() => goTo('/ministries')}
-  className="
-    inline-flex
-    items-center
-    justify-center
-    gap-2
-    px-8
-    py-4
-    rounded-full
-    bg-[#b4712d]
-    text-white
-    font-bold
-    shadow-2xl
-    hover:bg-[#965d23]
-    transition-all
-  "
->
-  Explore Ministries
-  <ArrowRight size={19} />
 </motion.button>
 
-                    </motion.div>
+            </motion.div>
+
+          </div>
 
         </div>
 
@@ -621,7 +588,7 @@ export default function Home() {
 
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#b4712d] opacity-75" />
 
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#b4712d]" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#b4712d] opacity-75" />
 
             </span>
 
@@ -634,7 +601,6 @@ export default function Home() {
         </div>
 
       </section>
-
       {/* =================================================
           WELCOME
       ================================================== */}
@@ -2007,7 +1973,7 @@ export default function Home() {
           MEMBER REGISTRATION MODAL
       ================================================== */}
 
-      <MemberRegistrationModal
+            <MemberRegistrationModal
         isOpen={showMemberModal}
         onClose={() =>
           setShowMemberModal(false)
