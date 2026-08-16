@@ -10,7 +10,7 @@ import {
   ChevronDown,
   Music,
   Flame,
-  HandHeart,
+  HeartHandshake,
   Globe2,
   Handshake,
 } from 'lucide-react';
@@ -187,7 +187,7 @@ const ministryRoleLabels: Record<string, string> = {
   const ministryRoleIcons: Record<string, any> = {
   'Board Director': Music,
   'Discipleship Coordinator': Flame,
-  'Prayer Coordinator': HandHeart,
+  'Prayer Coordinator': HeartHandshake,
   'Missions Coordinator': Globe2,
   'Hospitality Director': Handshake,
   'Bible Study Coordinator': BookOpen,
