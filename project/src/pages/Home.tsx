@@ -400,21 +400,21 @@ export default function Home() {
   {/* BACKGROUND IMAGE */}
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
     <img
-      src="/images/Home.webp"
+      src="/image/Home.webp"
       alt=""
       aria-hidden="true"
       className="absolute inset-0 w-full h-full object-cover object-center"
     />
   </div>
 
-  {/* DARK OVERLAY */}
-  <div className="absolute inset-0 bg-[#101735]/65" />
+  {/* LIGHTER DARK OVERLAY */}
+  <div className="absolute inset-0 bg-[#101735]/30" />
 
-  {/* GRADIENT */}
-  <div className="absolute inset-0 bg-gradient-to-r from-[#101735]/95 via-[#1a2351]/70 to-[#101735]/40" />
+  {/* SUBTLE GRADIENT FOR TEXT READABILITY */}
+  <div className="absolute inset-0 bg-gradient-to-r from-[#101735]/65 via-[#101735]/30 to-transparent" />
 
   {/* BOTTOM FADE */}
-  <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#1a2351] to-transparent" />
+  <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#1a2351]/70 to-transparent" />
 
   {/* ANIMATED DECORATIVE EFFECTS */}
   {!shouldReduceMotion && (
@@ -483,7 +483,7 @@ export default function Home() {
 >
 
               Welcome to
-              <span className="block text-[#f0c88c]">
+              <span className="block text-[#b4712d]">
                 MUKCCU
               </span>
 
@@ -557,28 +557,6 @@ export default function Home() {
                         </motion.div>
 
           </motion.div>
-
-        </div>
-
-        {/* VIDEO LABEL */}
-
-        <div className="absolute bottom-8 right-6 md:right-10 z-10">
-
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/30 border border-white/20 backdrop-blur-md">
-
-            <span className="relative flex h-2.5 w-2.5">
-
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#b4712d] opacity-75" />
-
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#b4712d] opacity-75" />
-
-            </span>
-
-            <span className="text-xs text-white/80 font-medium">
-              MUKCCU in Action
-            </span>
-
-          </div>
 
         </div>
 
