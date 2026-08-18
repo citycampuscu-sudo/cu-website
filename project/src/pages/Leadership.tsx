@@ -212,6 +212,10 @@ export default function Leadership() {
     (leader: any) =>
       normalizePosition(leader.position) !== 'chairperson'
   );
+  const chairperson = leaders.find(
+  (leader: any) =>
+    normalizePosition(leader.position) === 'chairperson'
+);
 
   /*
    * EXECUTIVE TEAM
