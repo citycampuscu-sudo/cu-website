@@ -390,12 +390,11 @@ export default function Home() {
       {isLoading && (
         <div className="fixed top-0 left-0 right-0 h-1 bg-[#b4712d] animate-pulse z-[100]" />
       )}
-
-      {/* =====================================================
-    HERO — MUKCCU IMAGE
+{/* =====================================================
+    HERO — MUKCCU WELCOME
 ===================================================== */}
 
-<section className="relative min-h-[680px] md:min-h-[780px] overflow-hidden bg-[#101735]">
+<section className="relative min-h-[700px] md:min-h-[780px] overflow-hidden bg-[#101735]">
 
   {/* BACKGROUND IMAGE */}
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -407,107 +406,184 @@ export default function Home() {
     />
   </div>
 
-  {/* LIGHTER DARK OVERLAY */}
-  <div className="absolute inset-0 bg-[#101735]/30" />
+  {/* OVERALL DARK OVERLAY */}
+  <div className="absolute inset-0 bg-[#101735]/45" />
 
-  {/* SUBTLE GRADIENT FOR TEXT READABILITY */}
-  <div className="absolute inset-0 bg-gradient-to-r from-[#101735]/65 via-[#101735]/30 to-transparent" />
+  {/* LEFT-SIDE DARK GRADIENT
+      Creates the strong navy area behind the text */}
+  <div className="absolute inset-0 bg-gradient-to-r from-[#071127]/95 via-[#101735]/80 to-[#101735]/25" />
 
   {/* BOTTOM FADE */}
-  <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#1a2351]/70 to-transparent" />
+  <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#101735]/90 to-transparent" />
 
-  {/* ANIMATED DECORATIVE EFFECTS */}
+  {/* SUBTLE GOLD GLOW */}
   {!shouldReduceMotion && (
     <>
       <motion.div
-        className="absolute top-24 right-[8%] w-24 h-24 rounded-full bg-[#b4712d]/10 blur-2xl"
+        className="absolute top-20 left-[5%] w-32 h-32 rounded-full bg-[#b4712d]/10 blur-3xl"
         animate={{
           y: [0, -20, 0],
-          opacity: [0.3, 0.6, 0.3],
+          opacity: [0.2, 0.5, 0.2],
         }}
         transition={{
           duration: 6,
           repeat: Infinity,
-          ease: 'easeInOut',
+          ease: "easeInOut",
         }}
       />
 
       <motion.div
-        className="absolute bottom-32 left-[8%] w-32 h-32 rounded-full bg-white/5 blur-3xl"
+        className="absolute bottom-24 right-[10%] w-40 h-40 rounded-full bg-white/5 blur-3xl"
         animate={{
-          y: [0, 25, 0],
-          opacity: [0.2, 0.5, 0.2],
+          y: [0, 20, 0],
+          opacity: [0.15, 0.35, 0.15],
         }}
         transition={{
           duration: 8,
           repeat: Infinity,
-          ease: 'easeInOut',
+          ease: "easeInOut",
         }}
       />
     </>
   )}
 
-        {/* CONTENT */}
+  {/* =====================================================
+      CONTENT
+  ===================================================== */}
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 min-h-[680px] md:min-h-[780px] flex items-center">
+  <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 min-h-[700px] md:min-h-[780px] flex items-center">
 
-          <motion.div
-  className="max-w-4xl pt-16"
-  initial={shouldReduceMotion ? false : 'hidden'}
-  animate="visible"
-  variants={staggerContainer}
->
+    <motion.div
+      className="w-full max-w-4xl pt-10 md:pt-14"
+      initial={shouldReduceMotion ? false : "hidden"}
+      animate="visible"
+      variants={staggerContainer}
+    >
 
-            {/* LABEL */}
+      {/* =====================================================
+          ORGANIZATION NAME
+      ===================================================== */}
 
-<motion.h1
-  className="text-center font-bold mb-6"
-  variants={fadeUp}
->
-  <span className="block text-base md:text-lg font-semibold tracking-[0.35em] text-white mb-3">
-    THE
-  </span>
+      <motion.div
+        className="mb-7 md:mb-9"
+        variants={fadeUp}
+      >
 
-  <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-[#4ea4ea]">
-    MASENO UNIVERSITY KISUMU CAMPUS
-  </span>
+        {/* THE */}
+        <div className="mb-3">
+          <span className="block text-sm md:text-base font-semibold tracking-[0.45em] text-[#b4712d]">
+            THE
+          </span>
 
-  <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-[#b4712d]">
-    CHRISTIAN UNION
-  </span>
-</motion.h1>  
+          <div className="mt-2 w-20 h-[2px] bg-[#b4712d]" />
+        </div>
 
-            {/* TITLE */}
+        {/* UNIVERSITY NAME */}
+        <h1 className="font-bold uppercase leading-[0.98] tracking-tight">
 
-            <motion.h1
-  className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95] mb-6 drop-shadow-2xl"
-  variants={fadeUp}
->
+          <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white">
+            MASENO
+          </span>
 
-              Welcome to
-              <span className="block text-[#b4712d]">
-                MUKCCU
-              </span>
+          <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white">
+            UNIVERSITY
+          </span>
 
-            </motion.h1>
+          <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white">
+            KISUMU CAMPUS
+          </span>
 
-            {/* TAGLINE */}
+          <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#b4712d]">
+            CHRISTIAN UNION
+          </span>
 
-            <motion.p
-  className="text-2xl md:text-3xl font-semibold text-white mb-6 drop-shadow-lg"
-  variants={fadeUp}
->
-              Pursue Righteousness 
-            </motion.p>
+        </h1>
 
-            {/* DESCRIPTION */}
+        {/* GOLD DIVIDER */}
+        <div className="flex items-center mt-6">
+          <span className="w-4 h-4 rounded-full bg-[#b4712d]" />
 
-            <motion.p
-  className="text-base md:text-xl text-white/80 max-w-3xl leading-relaxed mb-9"
-  variants={fadeUp}
->
-              A place to fellowship,build genuine friendship,grow in faith and connect with Christ
-            </motion.p>
+          <span className="w-24 sm:w-32 md:w-40 h-[2px] bg-white/70" />
+        </div>
+
+      </motion.div>
+
+
+      {/* =====================================================
+          WELCOME TITLE
+      ===================================================== */}
+
+      <motion.div
+        className="mb-7 md:mb-9"
+        variants={fadeUp}
+      >
+
+        <h2
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white leading-[0.9] tracking-tight"
+          style={{
+            fontFamily: "'Brush Script MT', 'Segoe Script', cursive",
+            fontWeight: 400,
+          }}
+        >
+          Welcome to MUKCCU
+        </h2>
+
+      </motion.div>
+
+
+      {/* =====================================================
+          MINISTRY PURPOSE
+      ===================================================== */}
+
+      <div
+        className="flex items-start gap-5 md:gap-6 max-w-2xl"
+        variants={fadeUp}
+      >
+
+        {/* SHIELD ICON */}
+        <div className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-full border-2 border-[#b4712d] flex items-center justify-center">
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            className="w-10 h-10 md:w-12 md:h-12 text-[#b4712d]"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 3l7 3v5c0 4.5-2.8 8.5-7 10-4.2-1.5-7-5.5-7-10V6l7-3z"
+            />
+
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 8v7"
+            />
+
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9.5 11.5h5"
+            />
+          </svg>
+
+        </div>
+
+
+        {/* PURPOSE TEXT */}
+        <div className="pt-1">
+
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+            Pursue Righteousness
+          </h3>
+
+          <p className="text-base md:text-lg lg:text-xl text-white/80 leading-relaxed">
+            A place to fellowship, build genuine friendship,
+            grow in faith and connect with Christ.
+          </p>
 
             {/* BUTTONS */}
 
