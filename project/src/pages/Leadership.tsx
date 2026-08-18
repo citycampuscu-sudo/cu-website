@@ -548,7 +548,7 @@ export default function Leadership() {
   transition={{ duration: 0.8 }}
   className="relative overflow-hidden text-white bg-cover bg-center"
   style={{
-    backgroundImage: "url('/image/Exec.webp')",
+    backgroundImage: "url('/images/Exec.webp')",
   }}
 >
   {/* Dark overlay for readability */}
