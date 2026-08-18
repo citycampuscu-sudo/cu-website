@@ -925,7 +925,6 @@ export default function Leadership() {
     )
   )}
 </div>
-</div>
                       </>
                     )}
 
@@ -955,7 +954,7 @@ export default function Leadership() {
 </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                          {ministryLeaders.map(
+            {sortedExecutiveLeaders.map(
                             (leader: any, index: number) => (
                               <LeaderCard
                                 key={leader.name + '-' + leader.position}
