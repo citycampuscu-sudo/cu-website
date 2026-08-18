@@ -489,7 +489,7 @@ export default function Home() {
   className="text-2xl md:text-3xl font-semibold text-white mb-6 drop-shadow-lg"
   variants={fadeUp}
 >
-              Knowing Christ. Growing Together. Serving with Purpose.
+              Pursue Righteousness 
             </motion.p>
 
             {/* DESCRIPTION */}
@@ -498,10 +498,7 @@ export default function Home() {
   className="text-base md:text-xl text-white/80 max-w-3xl leading-relaxed mb-9"
   variants={fadeUp}
 >
-              A vibrant Christian fellowship where students
-              discover Christ, grow in faith, build meaningful
-              community and use their gifts to serve God's
-              purposes.
+              A place to fellowship,build genuine friendship,grow in faith and connect with Christ
             </motion.p>
 
             {/* BUTTONS */}
