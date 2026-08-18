@@ -536,105 +536,93 @@ export default function Home() {
       ===================================================== */}
 
       <div
-        className="flex items-start gap-5 md:gap-6 max-w-2xl"
-        variants={fadeUp}
+  className="flex items-start gap-5 md:gap-6 max-w-2xl"
+>
+  {/* SHIELD ICON */}
+  <div className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-full border-2 border-[#b4712d] flex items-center justify-center">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      className="w-10 h-10 md:w-12 md:h-12 text-[#b4712d]"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 3l7 3v5c0 4.5-2.8 8.5-7 10-4.2-1.5-7-5.5-7-10V6l7-3z"
+      />
+
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 8v7"
+      />
+
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M9.5 11.5h5"
+      />
+    </svg>
+  </div>
+
+  {/* PURPOSE TEXT */}
+  <div className="pt-1">
+    <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+      Pursue Righteousness
+    </h3>
+
+    <p className="text-base md:text-lg lg:text-xl text-white/80 leading-relaxed">
+      A place to fellowship, build genuine friendship,
+      grow in faith and connect with Christ.
+    </p>
+
+    {/* BUTTONS */}
+    <motion.div
+      className="flex flex-col sm:flex-row gap-4 mt-6"
+      variants={fadeUp}
+    >
+      <motion.button
+        whileHover={
+          shouldReduceMotion
+            ? undefined
+            : {
+                scale: 1.03,
+                y: -2,
+              }
+        }
+        whileTap={
+          shouldReduceMotion
+            ? undefined
+            : {
+                scale: 0.98,
+              }
+        }
+        onClick={() => setShowMemberModal(true)}
+        className="
+          inline-flex
+          items-center
+          justify-center
+          gap-2
+          px-8
+          py-4
+          rounded-full
+          bg-[#b4712d]
+          text-white
+          font-bold
+          shadow-2xl
+          hover:bg-[#965d23]
+          transition-all
+        "
       >
-
-        {/* SHIELD ICON */}
-        <div className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-full border-2 border-[#b4712d] flex items-center justify-center">
-
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            className="w-10 h-10 md:w-12 md:h-12 text-[#b4712d]"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 3l7 3v5c0 4.5-2.8 8.5-7 10-4.2-1.5-7-5.5-7-10V6l7-3z"
-            />
-
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 8v7"
-            />
-
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M9.5 11.5h5"
-            />
-          </svg>
-
-        </div>
-
-
-        {/* PURPOSE TEXT */}
-        <div className="pt-1">
-
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-            Pursue Righteousness
-          </h3>
-
-          <p className="text-base md:text-lg lg:text-xl text-white/80 leading-relaxed">
-            A place to fellowship, build genuine friendship,
-            grow in faith and connect with Christ.
-          </p>
-
-            {/* BUTTONS */}
-
-            <motion.div
-  className="flex flex-col sm:flex-row gap-4"
-  variants={fadeUp}
->
-
-              <motion.button
-  whileHover={
-    shouldReduceMotion
-      ? undefined
-      : {
-          scale: 1.03,
-          y: -2,
-        }
-  }
-  whileTap={
-    shouldReduceMotion
-      ? undefined
-      : {
-          scale: 0.98,
-        }
-  }
-  onClick={() => setShowMemberModal(true)}
-  className="
-    inline-flex
-    items-center
-    justify-center
-    gap-2
-    px-8
-    py-4
-    rounded-full
-    bg-[#b4712d]
-    text-white
-    font-bold
-    shadow-2xl
-    hover:bg-[#965d23]
-    transition-all
-  "
->
-  Join MUKCCU
-    <ArrowRight size={19} />
-</motion.button>
-
-                        </motion.div>
-
-          </motion.div>
-
-        </div>
-
+        Join MUKCCU
+        <ArrowRight size={19} />
+      </motion.button>
+    </motion.div>
+  </div>
+</div>
       </section>
       {/* =================================================
           WELCOME
