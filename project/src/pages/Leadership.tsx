@@ -159,16 +159,17 @@ export default function Leadership() {
 
   
     // ============================================================
-  // LEADERSHIP CLASSIFICATION
+  // LEADERSHIP STRUCTURE
   // ============================================================
 
-  const normalizePosition = (position?: string) =>
-    position
-      ?.trim()
-      .toLowerCase()
-      .replace(/[\s_-]+/g, '') || '';
-
-  // Executive Team — Board Director is NOT included here.
+  /*
+   * These are the official EXECUTIVE TEAM positions.
+   *
+   * Chairperson is handled separately as the principal leader.
+   * Board Director is intentionally NOT included here because
+   * Board Director is the Praise & Worship Leader and belongs
+   * under Ministry Leadership.
+   */
   const executivePositions = [
     'Vice-Chairperson',
     'Secretary',
@@ -176,7 +177,11 @@ export default function Leadership() {
     'Treasurer',
   ];
 
-  // Ministry Leadership — Board Director = Praise & Worship Leader.
+  /*
+   * Ministry leadership positions.
+   *
+   * Board Director = Praise & Worship Leader.
+   */
   const ministryPositions = [
     'Board Director',
     'Discipleship Coordinator',
@@ -186,6 +191,61 @@ export default function Leadership() {
     'Bible Study Coordinator',
   ];
 
+  /*
+   * Normalize positions so small differences in spacing/case
+   * do not prevent a leader from appearing.
+   */
+  const normalizePosition = (position?: string) =>
+    (position || '')
+      .trim()
+      .replace(/\s+/g, ' ')
+      .toLowerCase();
+
+  /*
+   * All leaders except the Chairperson.
+   *
+   * IMPORTANT:
+   * We are filtering directly from `leaders`, which comes from
+   * the Supabase `leaders` table.
+   */
+  const otherLeaders = leaders.filter(
+    (leader: any) =>
+      normalizePosition(leader.position) !== 'chairperson'
+  );
+
+  /*
+   * EXECUTIVE TEAM
+   *
+   * This MUST contain:
+   * - Vice-Chairperson
+   * - Secretary
+   * - Vice-Secretary
+   * - Treasurer
+   */
+  const executiveLeaders = otherLeaders.filter((leader: any) =>
+    executivePositions.some(
+      (position) =>
+        normalizePosition(position) ===
+        normalizePosition(leader.position)
+    )
+  );
+
+  /*
+   * MINISTRY LEADERSHIP
+   *
+   * Board Director is the Praise & Worship Leader.
+   */
+  const ministryLeaders = otherLeaders.filter((leader: any) =>
+    ministryPositions.some(
+      (position) =>
+        normalizePosition(position) ===
+        normalizePosition(leader.position)
+    )
+  );
+
+  /*
+   * Ministry display names.
+   */
   const ministryRoleLabels: Record<string, string> = {
     'Board Director': 'Praise & Worship Leader',
     'Discipleship Coordinator': 'Discipleship Ministry',
@@ -195,6 +255,9 @@ export default function Leadership() {
     'Bible Study Coordinator': 'Bible Study Ministry',
   };
 
+  /*
+   * Ministry icons.
+   */
   const ministryRoleIcons: Record<string, any> = {
     'Board Director': Music,
     'Discipleship Coordinator': Flame,
@@ -204,30 +267,47 @@ export default function Leadership() {
     'Bible Study Coordinator': BookOpen,
   };
 
-  const chairperson =
-    filteredLeaders.find(
-      (leader: any) =>
-        normalizePosition(leader.position) ===
-        normalizePosition('Chairperson')
-    ) || null;
+  /*
+   * Sort the Executive Team in the correct order.
+   */
+  const sortedExecutiveLeaders = [...executiveLeaders].sort(
+    (a: any, b: any) => {
+      const aIndex = executivePositions.findIndex(
+        (position) =>
+          normalizePosition(position) ===
+          normalizePosition(a.position)
+      );
 
-  const executiveLeaders = filteredLeaders.filter((leader: any) => {
-    const position = normalizePosition(leader.position);
+      const bIndex = executivePositions.findIndex(
+        (position) =>
+          normalizePosition(position) ===
+          normalizePosition(b.position)
+      );
 
-    return executivePositions.some(
-      (executivePosition) =>
-        normalizePosition(executivePosition) === position
-    );
-  });
+      return aIndex - bIndex;
+    }
+  );
 
-  const ministryLeaders = filteredLeaders.filter((leader: any) => {
-    const position = normalizePosition(leader.position);
+  /*
+   * Sort Ministry Leadership in the correct order.
+   */
+  const sortedMinistryLeaders = [...ministryLeaders].sort(
+    (a: any, b: any) => {
+      const aIndex = ministryPositions.findIndex(
+        (position) =>
+          normalizePosition(position) ===
+          normalizePosition(a.position)
+      );
 
-    return ministryPositions.some(
-      (ministryPosition) =>
-        normalizePosition(ministryPosition) === position
-    );
-  });
+      const bIndex = ministryPositions.findIndex(
+        (position) =>
+          normalizePosition(position) ===
+          normalizePosition(b.position)
+      );
+
+      return aIndex - bIndex;
+    }
+  );
   // ============================================================
   // LEADER PHOTO
   // ============================================================
