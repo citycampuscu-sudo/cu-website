@@ -400,7 +400,7 @@ export default function Home() {
   {/* BACKGROUND IMAGE */}
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
     <img
-      src="/image/Home.webp"
+      src="/images/Home.webp"
       alt=""
       aria-hidden="true"
       className="absolute inset-0 w-full h-full object-cover object-center"
@@ -461,16 +461,12 @@ export default function Home() {
             {/* LABEL */}
 
             <motion.div
-  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/30 backdrop-blur-md text-white mb-7"
+  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 border border-white/30 backdrop-blur-md text-white mb-7"
   variants={fadeUp}
 >
-              <Heart
-                size={16}
-                className="text-[#b4712d]"
-              />
 
               <span className="text-xs md:text-sm font-bold uppercase tracking-[0.2em]">
-                Maseno University City Campus Christian Union
+                Maseno University Kisumu Campus Christian Union
               </span>
 
             </motion.div>
