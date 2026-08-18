@@ -460,16 +460,14 @@ export default function Home() {
 
             {/* LABEL */}
 
-            <motion.div
-  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 border border-white/30 backdrop-blur-md text-white mb-7"
+<motion.div
+  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 border border-white/30 backdrop-blur-md text-[#4ea4ea] mb-7"
   variants={fadeUp}
 >
-
-              <span className="text-xs md:text-sm font-bold uppercase tracking-[0.2em]">
-                Maseno University Kisumu Campus Christian Union
-              </span>
-
-            </motion.div>
+  <span className="text-xs md:text-sm font-bold uppercase tracking-[0.2em]">
+    Maseno University Kisumu Campus Christian Union
+  </span>
+</motion.div>  
 
             {/* TITLE */}
 
