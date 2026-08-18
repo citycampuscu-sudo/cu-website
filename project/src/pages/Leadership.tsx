@@ -540,51 +540,58 @@ export default function Leadership() {
     <div className="min-h-screen bg-gray-50">
 
       {/* =====================================================
-          HERO
-      ===================================================== */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="relative overflow-hidden text-white"
-        style={{
-          background:
-            'linear-gradient(135deg, #2e3e87 0%, #1a2351 65%, #111735 100%)',
-        }}
+    HERO
+===================================================== */}
+<motion.section
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.8 }}
+  className="relative overflow-hidden text-white bg-cover bg-center"
+  style={{
+    backgroundImage: "url('/image/Exec.webp')",
+  }}
+>
+  {/* Dark overlay for readability */}
+  <div className="absolute inset-0 bg-black/60" />
+
+  {/* Subtle blue overlay to retain MUKCCU branding */}
+  <div className="absolute inset-0 bg-[#1a2351]/30" />
+
+  {/* Decorative circles */}
+  <div className="absolute inset-0 opacity-10">
+    <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full border border-white" />
+    <div className="absolute -bottom-32 -left-20 w-96 h-96 rounded-full border border-white" />
+  </div>
+
+  {/* Hero content */}
+  <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-24 text-center">
+    <motion.div
+      initial={{ opacity: 0, y: 25 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7 }}
+    >
+      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6 bg-white/10 border border-white/20 backdrop-blur-sm">
+        <Users size={30} style={{ color: '#b4712d' }} />
+      </div>
+
+      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-5">
+        Our Leadership
+      </h1>
+
+      <p
+        className="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
+        style={{ color: '#b4712d' }}
       >
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full border border-white" />
-          <div className="absolute -bottom-32 -left-20 w-96 h-96 rounded-full border border-white" />
-        </div>
+        Servant leaders committed to Christ, community and mission.
+      </p>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-24 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6 bg-white/10 border border-white/20">
-              <Users size={30} style={{ color: '#b4712d' }} />
-            </div>
-
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-5">
-              Our Leadership
-            </h1>
-
-            <p
-              className="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
-              style={{ color: '#b4712d' }}
-            >
-              Servant leaders committed to Christ, community and mission.
-            </p>
-
-            <p className="mt-5 text-white/75 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-              Meet the men and women serving MUKCCU, strengthening the
-              fellowship and helping students grow in Christ.
-            </p>
-          </motion.div>
-        </div>
-      </motion.section>
+      <p className="mt-5 text-white/90 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+        Meet the men and women serving MUKCCU, strengthening the
+        fellowship and helping students grow in Christ.
+      </p>
+    </motion.div>
+  </div>
+</motion.section>
 
       {/* =====================================================
           MAIN CONTENT
