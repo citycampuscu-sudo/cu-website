@@ -391,77 +391,61 @@ export default function Home() {
         <div className="fixed top-0 left-0 right-0 h-1 bg-[#b4712d] animate-pulse z-[100]" />
       )}
 
-      {/* =================================================
-          HERO — MUKCCU VIDEO
-      ================================================== */}
+      {/* =====================================================
+    HERO — MUKCCU IMAGE
+===================================================== */}
 
-      <section className="relative min-h-[680px] md:min-h-[780px] overflow-hidden bg-[#101735]">
+<section className="relative min-h-[680px] md:min-h-[780px] overflow-hidden bg-[#101735]">
 
-        {/* VIDEO */}
-
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-
-          <iframe
-            className="
-              absolute
-              top-1/2
-              left-1/2
-              w-[177.78vh]
-              min-w-full
-              min-h-full
-              -translate-x-1/2
-              -translate-y-1/2
-              scale-[1.15]
-            "
-            src="https://www.youtube.com/embed/wXeKRqXTKQw?autoplay=1&mute=1&loop=1&playlist=wXeKRqXTKQw&controls=0&modestbranding=1&rel=0&playsinline=1&disablekb=1"
-            title="MUKCCU in Action"
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
-            aria-hidden="true"
-          />
-
-        </div>
-
-        {/* DARK OVERLAY */}
-
-        <div className="absolute inset-0 bg-[#101735]/65" />
-
-        {/* GRADIENT */}
-
-        <div className="absolute inset-0 bg-gradient-to-r from-[#101735]/95 via-[#1a2351]/70 to-[#101735]/40" />
-
-        {/* BOTTOM FADE */}
-
-        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#1a2351] to-transparent" />
-        {!shouldReduceMotion && (
-  <>
-    <motion.div
-      className="absolute top-24 right-[8%] w-24 h-24 rounded-full bg-[#b4712d]/10 blur-2xl"
-      animate={{
-        y: [0, -20, 0],
-        opacity: [0.3, 0.6, 0.3],
-      }}
-      transition={{
-        duration: 6,
-        repeat: Infinity,
-        ease: 'easeInOut',
-      }}
+  {/* BACKGROUND IMAGE */}
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <img
+      src="/images/Home.webp"
+      alt=""
+      aria-hidden="true"
+      className="absolute inset-0 w-full h-full object-cover object-center"
     />
+  </div>
 
-    <motion.div
-      className="absolute bottom-32 left-[8%] w-32 h-32 rounded-full bg-white/5 blur-3xl"
-      animate={{
-        y: [0, 25, 0],
-        opacity: [0.2, 0.5, 0.2],
-      }}
-      transition={{
-        duration: 8,
-        repeat: Infinity,
-        ease: 'easeInOut',
-      }}
-    />
-  </>
-)}
+  {/* DARK OVERLAY */}
+  <div className="absolute inset-0 bg-[#101735]/65" />
+
+  {/* GRADIENT */}
+  <div className="absolute inset-0 bg-gradient-to-r from-[#101735]/95 via-[#1a2351]/70 to-[#101735]/40" />
+
+  {/* BOTTOM FADE */}
+  <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#1a2351] to-transparent" />
+
+  {/* ANIMATED DECORATIVE EFFECTS */}
+  {!shouldReduceMotion && (
+    <>
+      <motion.div
+        className="absolute top-24 right-[8%] w-24 h-24 rounded-full bg-[#b4712d]/10 blur-2xl"
+        animate={{
+          y: [0, -20, 0],
+          opacity: [0.3, 0.6, 0.3],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
+
+      <motion.div
+        className="absolute bottom-32 left-[8%] w-32 h-32 rounded-full bg-white/5 blur-3xl"
+        animate={{
+          y: [0, 25, 0],
+          opacity: [0.2, 0.5, 0.2],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
+    </>
+  )}
 
         {/* CONTENT */}
 
