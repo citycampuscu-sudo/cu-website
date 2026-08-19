@@ -3,7 +3,6 @@ import {
   BookOpen,
   Calendar,
   Camera,
-  CheckCircle2,
   ChevronRight,
   Clock,
   Download,
@@ -622,8 +621,9 @@ export default function Home() {
       </motion.button>
     </motion.div>
   </div>
-</div>
-      </section>
+  </div>
+</motion.div>
+</section>
       {/* =================================================
           WELCOME
       ================================================== */}
