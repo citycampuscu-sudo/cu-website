@@ -585,88 +585,85 @@ export default function MinistryDetails() {
         </section>
       )}
                   {/* =================================================
-                CU PODCASTS & VIDEOS
-            ================================================== */}
-            {isMediaMinistry && (
-              <section className="mb-14">
-                <div className="mb-7">
-                  <p className="text-[#b4712d] text-sm font-bold uppercase tracking-[0.2em] mb-3">
-                    Media & IT Ministry
-                  </p>
+    CU PODCASTS & VIDEOS
+================================================== */}
+{isMediaMinistry && (
+  <section className="mb-14">
 
-                  <h2 className="text-3xl md:text-4xl font-bold text-[#2e3e87] mb-3">
-                    CU Podcasts & Videos
-                  </h2>
+    <div className="mb-7">
+      <p className="text-[#b4712d] text-sm font-bold uppercase tracking-[0.2em] mb-3">
+        Media & IT Ministry
+      </p>
 
-                  <p className="text-gray-600 text-lg leading-relaxed max-w-3xl">
-                    Watch and listen to conversations, teachings,
-                    discussions and other media content from
-                    Maseno University City Campus Christian Union.
-                  </p>
-                </div>
+      <h2 className="text-3xl md:text-4xl font-bold text-[#2e3e87] mb-3">
+        CU Podcasts & Videos
+      </h2>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  {cuVideos.map((video, index) => (
-                    <motion.div
-                      key={video.id}
-                      initial={{ opacity: 0, y: 25 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{
-                        duration: 0.5,
-                        delay: index * 0.05,
-                      }}
-                      className="group overflow-hidden rounded-3xl bg-white border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300"
-                    >
-                      {/* VIDEO */}
-                      <div className="relative aspect-video bg-[#1a2351] overflow-hidden">
-                        <iframe
-                          className="absolute inset-0 w-full h-full"
-                          src={`https://www.youtube-nocookie.com/embed/${video.id}`}
-                          title={video.title}
-                          loading="lazy"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                          allowFullScreen
-                        />
+      <p className="text-gray-600 text-lg leading-relaxed max-w-3xl">
+        Watch and listen to conversations, teachings,
+        discussions and other media content from
+        Maseno University City Campus Christian Union.
+      </p>
+    </div>
 
-                        <div className="absolute top-4 left-4 pointer-events-none">
-                          <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-black/60 backdrop-blur-sm text-white text-xs font-semibold">
-                            <Play size={13} className="fill-current" />
-                            CU Video
-                          </div>
-                        </div>
-                      </div>
+    <div className="grid md:grid-cols-2 gap-6">
 
-                      {/* VIDEO INFO */}
-                      <div className="p-5">
-                        <div className="flex items-start justify-between gap-4">
-                          <div>
-                            <p className="text-xs font-bold uppercase tracking-widest text-[#b4712d] mb-2">
-                              MUKCCU Media
-                            </p>
+      {cuVideos.map((video, index) => (
+        <div
+          key={video.id}
+          className="group overflow-hidden rounded-3xl bg-white border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300"
+        >
 
-                            <h3 className="text-lg font-bold text-[#2e3e87]">
-                              {video.title} {index + 1}
-                            </h3>
-                          </div>
+          {/* VIDEO */}
+          <div className="relative aspect-video bg-[#1a2351] overflow-hidden">
 
-                          <a
-                            href={`https://youtu.be/${video.id}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex-shrink-0 w-10 h-10 rounded-full bg-[#2e3e87] text-white flex items-center justify-center hover:bg-[#b4712d] transition"
-                            aria-label={`Watch ${video.title} on YouTube`}
-                          >
-                            <ExternalLink size={17} />
-                          </a>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </section>
-            )}
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src={`https://www.youtube-nocookie.com/embed/${video.id}`}
+              title={video.title}
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
 
+          </div>
+
+          {/* VIDEO INFO */}
+          <div className="p-5">
+
+            <div className="flex items-start justify-between gap-4">
+
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#b4712d] mb-2">
+                  MUKCCU Media
+                </p>
+
+                <h3 className="text-lg font-bold text-[#2e3e87]">
+                  {video.title} {index + 1}
+                </h3>
+              </div>
+
+              <a
+                href={`https://youtu.be/${video.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-shrink-0 w-10 h-10 rounded-full bg-[#2e3e87] text-white flex items-center justify-center hover:bg-[#b4712d] transition"
+                aria-label={`Watch ${video.title} on YouTube`}
+              >
+                <ExternalLink size={17} />
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+      ))}
+
+    </div>
+
+  </section>
+  )}
       {/* =====================================================
           TEAMS
       ====================================================== */}
