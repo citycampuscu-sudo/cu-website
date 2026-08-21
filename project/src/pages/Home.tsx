@@ -14,6 +14,14 @@ import {
   MapPin,
   Music,
   Play,
+  Headphones,
+  Mic2,
+  Sparkles,
+  Church,
+  Brain,
+  History,
+  Music2,
+  HandHeart,
   Quote,
   Target,
   Users,
@@ -106,6 +114,8 @@ export default function Home() {
 
   const [showMemberModal, setShowMemberModal] =
     useState(false);
+    const [selectedMediaCategory, setSelectedMediaCategory] =
+    useState('All');
 
   /* =====================================================
      DATA
@@ -136,6 +146,17 @@ export default function Home() {
     ? supabaseGalleryImages
     : [];
 }, [supabaseGalleryImages]);
+    const featuredVideos = useMemo(() => {
+    const filtered =
+      selectedMediaCategory === 'All'
+        ? videos
+        : videos.filter(
+            video =>
+              video.category === selectedMediaCategory
+          );
+
+    return filtered.slice(0, 6);
+  }, [selectedMediaCategory]);
 
   const homeDocuments = useMemo(() => {
     return documents.filter(
@@ -272,7 +293,159 @@ export default function Home() {
       icon: HeartHandshake,
     },
   ];
+  /* =====================================================
+     WATCH & LISTEN
+  ====================================================== */
 
+  const mediaCategories = [
+    {
+      name: 'All',
+      icon: Play,
+    },
+    {
+      name: 'Podcasts',
+      icon: Headphones,
+    },
+    {
+      name: 'Sermons',
+      icon: Mic2,
+    },
+    {
+      name: 'Worship',
+      icon: Music,
+    },
+    {
+      name: 'Creative',
+      icon: Sparkles,
+    },
+    {
+      name: 'Choir',
+      icon: Music2,
+    },
+  ];
+
+  const videos = [
+    {
+      id: 'OFRLMjo7zp4',
+      category: 'Podcasts',
+      title: 'MUKCCU Podcast',
+      description:
+        'Conversations, encouragement and insights for faith and life.',
+    },
+    {
+      id: 'GbIZo8ys22c',
+      category: 'Podcasts',
+      title: 'MUKCCU Podcast',
+      description:
+        'Growing together through meaningful Christian conversations.',
+    },
+    {
+      id: 'w0XPkw8e0iM',
+      category: 'Podcasts',
+      title: 'MUKCCU Podcast',
+      description:
+        'Inspiring conversations from the MUKCCU family.',
+    },
+
+    {
+      id: 'KHwMkO6_fhw',
+      category: 'Sermons',
+      title: 'MUKCCU Sermon',
+      description:
+        'Be encouraged and equipped through the teaching of God’s Word.',
+    },
+    {
+      id: 'RGO0k0c1Gv0',
+      category: 'Sermons',
+      title: 'MUKCCU Sermon',
+      description:
+        'Biblical teaching to strengthen your faith and walk with Christ.',
+    },
+
+    {
+      id: 'exUYvOgV65A',
+      category: 'Worship',
+      title: 'Worship Experience',
+      description:
+        'A powerful moment of worship and fellowship in God’s presence.',
+    },
+    {
+      id: 'wnLC33uAEUw',
+      category: 'Worship',
+      title: 'Worship Experience',
+      description:
+        'Experience worship with the MUKCCU family.',
+    },
+
+    {
+      id: 'HQmW_IkApAY',
+      category: 'Worship',
+      title: 'Praise & Worship',
+      description:
+        'Lifting our voices together in praise and worship.',
+    },
+
+    {
+      id: 'Lp1dXy7UPeY',
+      category: 'Creative',
+      title: 'Creative Ministry',
+      description:
+        'Using creativity and God-given gifts to communicate the Gospel.',
+    },
+    {
+      id: 'rAXZdpVzXZg',
+      category: 'Creative',
+      title: 'Creative Ministry',
+      description:
+        'Creative expressions of faith and ministry.',
+    },
+
+    {
+      id: 'FHmKlBtn0fA',
+      category: 'Bible Trivia',
+      title: 'Bible Trivia',
+      description:
+        'Test your knowledge and learn more from God’s Word.',
+    },
+
+    {
+      id: 'K51BTAx1FAI',
+      category: 'History',
+      title: 'History of the CU',
+      description:
+        'Discover the journey and story of MUKCCU.',
+    },
+
+    {
+      id: 'q8WCSJcJvOU',
+      category: 'Choir',
+      title: 'MUKCCU Choir',
+      description:
+        'Ministering through music and worship.',
+    },
+    {
+      id: 'giYwszXxU94',
+      category: 'Choir',
+      title: 'MUKCCU Choir',
+      description:
+        'Songs of worship and praise from our choir.',
+    },
+    {
+      id: 'dpXncXrt_vg',
+      category: 'Choir',
+      title: 'MUKCCU Choir',
+      description:
+        'Experience ministry through music.',
+    },
+
+    {
+      id: 'YhYASLriZ2Y',
+      category: 'Prayer',
+      title: 'Prayer Kesha',
+      description:
+        'A powerful time of prayer, worship and seeking God together.',
+    },
+  ];
   /* =====================================================
      NAVIGATION HELPERS
   ====================================================== */
@@ -1180,6 +1353,226 @@ export default function Home() {
         </div>
 
       </section>
+            {/* =================================================
+          WATCH & LISTEN
+      ================================================== */}
+
+      <motion.section
+        className="bg-white py-20 md:py-24 overflow-hidden"
+        initial={shouldReduceMotion ? false : 'hidden'}
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={fadeIn}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+
+          {/* HEADER */}
+
+          <motion.div
+            className="text-center max-w-3xl mx-auto mb-10"
+            variants={fadeUp}
+          >
+            <p className="text-[#b4712d] text-sm font-bold uppercase tracking-[0.2em] mb-3">
+              Media Ministry
+            </p>
+
+            <h2 className="text-4xl md:text-5xl font-bold text-[#2e3e87] mb-5">
+              Watch & Listen
+            </h2>
+
+            <p className="text-lg text-gray-600 leading-relaxed">
+              Be encouraged, equipped and inspired through
+              sermons, podcasts, worship, creative ministry,
+              choir and more from the MUKCCU family.
+            </p>
+          </motion.div>
+
+
+          {/* CATEGORY FILTERS */}
+
+          <motion.div
+            className="flex flex-wrap justify-center gap-3 mb-12"
+            variants={fadeUp}
+          >
+            {mediaCategories.map(category => {
+
+              const Icon = category.icon;
+
+              const isActive =
+                selectedMediaCategory === category.name;
+
+              return (
+                <button
+                  key={category.name}
+                  onClick={() =>
+                    setSelectedMediaCategory(
+                      category.name
+                    )
+                  }
+                  className={`
+                    inline-flex items-center gap-2
+                    px-5 py-3 rounded-full
+                    font-bold text-sm
+                    transition-all duration-300
+                    ${
+                      isActive
+                        ? 'bg-[#2e3e87] text-white shadow-lg'
+                        : 'bg-[#f8f7f4] text-[#2e3e87] hover:bg-[#b4712d]/10'
+                    }
+                  `}
+                >
+                  <Icon size={16} />
+                  {category.name}
+                </button>
+              );
+            })}
+          </motion.div>
+
+
+          {/* VIDEO GRID */}
+
+          {featuredVideos.length > 0 ? (
+
+            <motion.div
+              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+              variants={staggerContainer}
+            >
+              {featuredVideos.map((video, index) => (
+
+                <motion.article
+                  key={`${video.id}-${index}`}
+                  variants={scaleIn}
+                  whileHover={
+                    shouldReduceMotion
+                      ? undefined
+                      : {
+                          y: -8,
+                        }
+                  }
+                  className="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all"
+                >
+
+                  {/* THUMBNAIL */}
+
+                  <a
+                    href={`https://www.youtube.com/watch?v=${video.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative block aspect-video overflow-hidden bg-[#2e3e87]"
+                    aria-label={`Watch ${video.title}`}
+                  >
+                    <img
+                      src={`https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`}
+                      alt={video.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                      onError={event => {
+                        event.currentTarget.src =
+                          `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+                      }}
+                    />
+
+                    {/* DARK OVERLAY */}
+
+                    <div className="absolute inset-0 bg-black/25 group-hover:bg-black/40 transition" />
+
+                    {/* CATEGORY */}
+
+                    <div className="absolute top-4 left-4">
+                      <span className="px-3 py-1.5 rounded-full bg-[#b4712d] text-white text-xs font-bold shadow-lg">
+                        {video.category}
+                      </span>
+                    </div>
+
+                    {/* PLAY BUTTON */}
+
+                    <div className="absolute inset-0 flex items-center justify-center">
+
+                      <div className="w-16 h-16 rounded-full bg-white/95 text-[#b4712d] flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300">
+
+                        <Play
+                          size={26}
+                          fill="currentColor"
+                          className="ml-1"
+                        />
+
+                      </div>
+
+                    </div>
+
+                  </a>
+
+
+                  {/* CONTENT */}
+
+                  <div className="p-6">
+
+                    <h3 className="text-xl font-bold text-[#2e3e87] mb-3">
+                      {video.title}
+                    </h3>
+
+                    <p className="text-gray-600 leading-relaxed mb-5">
+                      {video.description}
+                    </p>
+
+                    <a
+                      href={`https://www.youtube.com/watch?v=${video.id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-[#2e3e87] font-bold hover:text-[#b4712d] transition"
+                    >
+                      Watch Now
+                      <ExternalLink size={16} />
+                    </a>
+
+                  </div>
+
+                </motion.article>
+
+              ))}
+            </motion.div>
+
+          ) : (
+
+            <div className="text-center py-12">
+
+              <Play
+                size={42}
+                className="mx-auto mb-4 text-[#b4712d]"
+              />
+
+              <p className="text-gray-500">
+                No videos are available in this category yet.
+              </p>
+
+            </div>
+
+          )}
+
+
+          {/* YOUTUBE CTA */}
+
+          <motion.div
+            className="mt-12 text-center"
+            variants={fadeUp}
+          >
+            <a
+              href="https://www.youtube.com/@mukccu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#b4712d] text-white font-bold hover:bg-[#965d23] transition-all hover:-translate-y-1 shadow-lg"
+            >
+              <Play
+                size={19}
+                fill="currentColor"
+              />
+              Explore More on YouTube
+              <ArrowRight size={18} />
+            </a>
+          </motion.div>
+
+        </div>
+      </motion.section>
 
       {/* =================================================
           MUKCCU IN ACTION
