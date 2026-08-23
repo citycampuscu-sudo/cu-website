@@ -3,7 +3,6 @@ import {
   BookOpen,
   Calendar,
   Camera,
-  ChevronRight,
   Clock,
   Download,
   ExternalLink,
@@ -11,14 +10,17 @@ import {
   Globe,
   Heart,
   HeartHandshake,
+  Headphones,
   MapPin,
+  Mic2,
   Music,
+  Music2,
   Play,
   Quote,
+  Sparkles,
   Target,
   Users,
 } from 'lucide-react';
-
 import { useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
@@ -108,6 +110,169 @@ export default function Home() {
     useState(false);
     const [selectedMediaCategory, setSelectedMediaCategory] =
     useState('All');
+  const [showMemberModal, setShowMemberModal] =
+  useState(false);
+
+const [selectedMediaCategory, setSelectedMediaCategory] =
+  useState('All');
+
+/* =====================================================
+   WATCH & LISTEN
+===================================================== */
+
+const mediaCategories = [
+  {
+    name: 'All',
+    icon: Play,
+  },
+  {
+    name: 'Podcasts',
+    icon: Headphones,
+  },
+  {
+    name: 'Sermons',
+    icon: Mic2,
+  },
+  {
+    name: 'Worship',
+    icon: Music,
+  },
+  {
+    name: 'Creative',
+    icon: Sparkles,
+  },
+  {
+    name: 'Choir',
+    icon: Music2,
+  },
+];
+
+const videos = [
+  {
+    id: 'OFRLMjo7zp4',
+    category: 'Podcasts',
+    title: 'MUKCCU Podcast',
+    description:
+      'Conversations, encouragement and insights for faith and life.',
+  },
+  {
+    id: 'GbIZo8ys22c',
+    category: 'Podcasts',
+    title: 'MUKCCU Podcast',
+    description:
+      'Growing together through meaningful Christian conversations.',
+  },
+  {
+    id: 'w0XPkw8e0iM',
+    category: 'Podcasts',
+    title: 'MUKCCU Podcast',
+    description:
+      'Inspiring conversations from the MUKCCU family.',
+  },
+  {
+    id: 'KHwMkO6_fhw',
+    category: 'Sermons',
+    title: 'MUKCCU Sermon',
+    description:
+      'Be encouraged and equipped through the teaching of God’s Word.',
+  },
+  {
+    id: 'RGO0k0c1Gv0',
+    category: 'Sermons',
+    title: 'MUKCCU Sermon',
+    description:
+      'Biblical teaching to strengthen your faith and walk with Christ.',
+  },
+  {
+    id: 'exUYvOgV65A',
+    category: 'Worship',
+    title: 'Worship Experience',
+    description:
+      'A powerful moment of worship and fellowship in God’s presence.',
+  },
+  {
+    id: 'wnLC33uAEUw',
+    category: 'Worship',
+    title: 'Worship Experience',
+    description:
+      'Experience worship with the MUKCCU family.',
+  },
+  {
+    id: 'HQmW_IkApAY',
+    category: 'Worship',
+    title: 'Praise & Worship',
+    description:
+      'Lifting our voices together in praise and worship.',
+  },
+  {
+    id: 'Lp1dXy7UPeY',
+    category: 'Creative',
+    title: 'Creative Ministry',
+    description:
+      'Using creativity and God-given gifts to communicate the Gospel.',
+  },
+  {
+    id: 'rAXZdpVzXZg',
+    category: 'Creative',
+    title: 'Creative Ministry',
+    description:
+      'Creative expressions of faith and ministry.',
+  },
+  {
+    id: 'FHmKlBtn0fA',
+    category: 'Bible Trivia',
+    title: 'Bible Trivia',
+    description:
+      'Test your knowledge and learn more from God’s Word.',
+  },
+  {
+    id: 'K51BTAx1FAI',
+    category: 'History',
+    title: 'History of the CU',
+    description:
+      'Discover the journey and story of MUKCCU.',
+  },
+  {
+    id: 'q8WCSJcJvOU',
+    category: 'Choir',
+    title: 'MUKCCU Choir',
+    description:
+      'Ministering through music and worship.',
+  },
+  {
+    id: 'giYwszXxU94',
+    category: 'Choir',
+    title: 'MUKCCU Choir',
+    description:
+      'Songs of worship and praise from our choir.',
+  },
+  {
+    id: 'dpXncXrt_vg',
+    category: 'Choir',
+    title: 'MUKCCU Choir',
+    description:
+      'Experience ministry through music.',
+  },
+  {
+    id: 'YhYASLriZ2Y',
+    category: 'Prayer',
+    title: 'Prayer Kesha',
+    description:
+      'A powerful time of prayer, worship and seeking God together.',
+  },
+];
+
+const featuredVideos = useMemo(() => {
+  const filtered =
+    selectedMediaCategory === 'All'
+      ? videos
+      : videos.filter(
+          video =>
+            video.category === selectedMediaCategory
+        );
+
+  return filtered.slice(0, 6);
+}, [selectedMediaCategory]);
 
   /* =====================================================
      DATA
@@ -138,23 +303,28 @@ export default function Home() {
     ? supabaseGalleryImages
     : [];
 }, [supabaseGalleryImages]);
-    const featuredVideos = useMemo(() => {
-    const filtered =
-      selectedMediaCategory === 'All'
-        ? videos
-        : videos.filter(
-            video =>
-              video.category === selectedMediaCategory
-          );
 
-    return filtered.slice(0, 6);
-  }, [selectedMediaCategory]);
+/* =====================================================
+   FILTERED VIDEOS
+===================================================== */
 
-  const homeDocuments = useMemo(() => {
-    return documents.filter(
-      (doc: any) => doc.category === 'home'
-    );
-  }, [documents]);
+const featuredVideos = useMemo(() => {
+  const filtered =
+    selectedMediaCategory === 'All'
+      ? videos
+      : videos.filter(
+          video =>
+            video.category === selectedMediaCategory
+        );
+
+  return filtered.slice(0, 6);
+}, [selectedMediaCategory]);
+
+const homeDocuments = useMemo(() => {
+  return documents.filter(
+    (doc: any) => doc.category === 'home'
+  );
+}, [documents]);
 
   const upcomingEvents = useMemo(() => {
   const now = new Date();
