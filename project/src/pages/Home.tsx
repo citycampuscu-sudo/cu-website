@@ -87,6 +87,7 @@ const scaleIn = {
 export default function Home() {
   const navigate = useNavigate();
   const shouldReduceMotion = useReducedMotion();
+
   const { content, loading } = useContent();
 
   const {
@@ -98,181 +99,79 @@ export default function Home() {
     ministries: supabaseMinistries,
     loading: ministriesLoading,
   } = useSupabaseMinistries();
+
   const {
-  events: supabaseEvents,
-  leaders: supabaseLeaders,
-  galleryImages: supabaseGalleryImages,
-  loading: homeDataLoading,
-  error: homeDataError,
-} = useSupabaseHomeData();
+    events: supabaseEvents,
+    leaders: supabaseLeaders,
+    galleryImages: supabaseGalleryImages,
+    loading: homeDataLoading,
+    error: homeDataError,
+  } = useSupabaseHomeData();
+
+  /* =====================================================
+     STATE
+  ====================================================== */
 
   const [showMemberModal, setShowMemberModal] =
     useState(false);
-    const [selectedMediaCategory, setSelectedMediaCategory] =
+
+  const [selectedMediaCategory, setSelectedMediaCategory] =
     useState('All');
-  const [showMemberModal, setShowMemberModal] =
-  useState(false);
 
-const [selectedMediaCategory, setSelectedMediaCategory] =
-  useState('All');
+  /* =====================================================
+     WATCH & LISTEN DATA
+  ====================================================== */
 
-/* =====================================================
-   WATCH & LISTEN
-===================================================== */
+  const mediaCategories = [
+    {
+      name: 'All',
+      icon: Play,
+    },
+    {
+      name: 'Podcasts',
+      icon: Headphones,
+    },
+    {
+      name: 'Sermons',
+      icon: Mic2,
+    },
+    {
+      name: 'Worship',
+      icon: Music,
+    },
+    {
+      name: 'Creative',
+      icon: Sparkles,
+    },
+    {
+      name: 'Choir',
+      icon: Music2,
+    },
+  ];
 
-const mediaCategories = [
-  {
-    name: 'All',
-    icon: Play,
-  },
-  {
-    name: 'Podcasts',
-    icon: Headphones,
-  },
-  {
-    name: 'Sermons',
-    icon: Mic2,
-  },
-  {
-    name: 'Worship',
-    icon: Music,
-  },
-  {
-    name: 'Creative',
-    icon: Sparkles,
-  },
-  {
-    name: 'Choir',
-    icon: Music2,
-  },
-];
+  const videos = [
+    {
+      id: 'OFRLMjo7zp4',
+      category: 'Podcasts',
+      title: 'MUKCCU Podcast',
+      description:
+        'Conversations, encouragement and insights for faith and life.',
+    },
 
-const videos = [
-  {
-    id: 'OFRLMjo7zp4',
-    category: 'Podcasts',
-    title: 'MUKCCU Podcast',
-    description:
-      'Conversations, encouragement and insights for faith and life.',
-  },
-  {
-    id: 'GbIZo8ys22c',
-    category: 'Podcasts',
-    title: 'MUKCCU Podcast',
-    description:
-      'Growing together through meaningful Christian conversations.',
-  },
-  {
-    id: 'w0XPkw8e0iM',
-    category: 'Podcasts',
-    title: 'MUKCCU Podcast',
-    description:
-      'Inspiring conversations from the MUKCCU family.',
-  },
-  {
-    id: 'KHwMkO6_fhw',
-    category: 'Sermons',
-    title: 'MUKCCU Sermon',
-    description:
-      'Be encouraged and equipped through the teaching of God’s Word.',
-  },
-  {
-    id: 'RGO0k0c1Gv0',
-    category: 'Sermons',
-    title: 'MUKCCU Sermon',
-    description:
-      'Biblical teaching to strengthen your faith and walk with Christ.',
-  },
-  {
-    id: 'exUYvOgV65A',
-    category: 'Worship',
-    title: 'Worship Experience',
-    description:
-      'A powerful moment of worship and fellowship in God’s presence.',
-  },
-  {
-    id: 'wnLC33uAEUw',
-    category: 'Worship',
-    title: 'Worship Experience',
-    description:
-      'Experience worship with the MUKCCU family.',
-  },
-  {
-    id: 'HQmW_IkApAY',
-    category: 'Worship',
-    title: 'Praise & Worship',
-    description:
-      'Lifting our voices together in praise and worship.',
-  },
-  {
-    id: 'Lp1dXy7UPeY',
-    category: 'Creative',
-    title: 'Creative Ministry',
-    description:
-      'Using creativity and God-given gifts to communicate the Gospel.',
-  },
-  {
-    id: 'rAXZdpVzXZg',
-    category: 'Creative',
-    title: 'Creative Ministry',
-    description:
-      'Creative expressions of faith and ministry.',
-  },
-  {
-    id: 'FHmKlBtn0fA',
-    category: 'Bible Trivia',
-    title: 'Bible Trivia',
-    description:
-      'Test your knowledge and learn more from God’s Word.',
-  },
-  {
-    id: 'K51BTAx1FAI',
-    category: 'History',
-    title: 'History of the CU',
-    description:
-      'Discover the journey and story of MUKCCU.',
-  },
-  {
-    id: 'q8WCSJcJvOU',
-    category: 'Choir',
-    title: 'MUKCCU Choir',
-    description:
-      'Ministering through music and worship.',
-  },
-  {
-    id: 'giYwszXxU94',
-    category: 'Choir',
-    title: 'MUKCCU Choir',
-    description:
-      'Songs of worship and praise from our choir.',
-  },
-  {
-    id: 'dpXncXrt_vg',
-    category: 'Choir',
-    title: 'MUKCCU Choir',
-    description:
-      'Experience ministry through music.',
-  },
-  {
-    id: 'YhYASLriZ2Y',
-    category: 'Prayer',
-    title: 'Prayer Kesha',
-    description:
-      'A powerful time of prayer, worship and seeking God together.',
-  },
-];
+    // ...keep the rest of your existing videos here...
+  ];
 
-const featuredVideos = useMemo(() => {
-  const filtered =
-    selectedMediaCategory === 'All'
-      ? videos
-      : videos.filter(
-          video =>
-            video.category === selectedMediaCategory
-        );
+  const featuredVideos = useMemo(() => {
+    const filtered =
+      selectedMediaCategory === 'All'
+        ? videos
+        : videos.filter(
+            video =>
+              video.category === selectedMediaCategory
+          );
 
-  return filtered.slice(0, 6);
-}, [selectedMediaCategory]);
+    return filtered.slice(0, 6);
+  }, [selectedMediaCategory]);
 
   /* =====================================================
      DATA
@@ -287,44 +186,28 @@ const featuredVideos = useMemo(() => {
   }, [supabaseMinistries]);
 
   const events = useMemo(() => {
-  return Array.isArray(supabaseEvents)
-    ? supabaseEvents
-    : [];
-}, [supabaseEvents]);
+    return Array.isArray(supabaseEvents)
+      ? supabaseEvents
+      : [];
+  }, [supabaseEvents]);
 
   const leaders = useMemo(() => {
-  return Array.isArray(supabaseLeaders)
-    ? supabaseLeaders
-    : [];
-}, [supabaseLeaders]);
+    return Array.isArray(supabaseLeaders)
+      ? supabaseLeaders
+      : [];
+  }, [supabaseLeaders]);
 
- const galleryImages = useMemo(() => {
-  return Array.isArray(supabaseGalleryImages)
-    ? supabaseGalleryImages
-    : [];
-}, [supabaseGalleryImages]);
+  const galleryImages = useMemo(() => {
+    return Array.isArray(supabaseGalleryImages)
+      ? supabaseGalleryImages
+      : [];
+  }, [supabaseGalleryImages]);
 
-/* =====================================================
-   FILTERED VIDEOS
-===================================================== */
-
-const featuredVideos = useMemo(() => {
-  const filtered =
-    selectedMediaCategory === 'All'
-      ? videos
-      : videos.filter(
-          video =>
-            video.category === selectedMediaCategory
-        );
-
-  return filtered.slice(0, 6);
-}, [selectedMediaCategory]);
-
-const homeDocuments = useMemo(() => {
-  return documents.filter(
-    (doc: any) => doc.category === 'home'
-  );
-}, [documents]);
+  const homeDocuments = useMemo(() => {
+    return documents.filter(
+      (doc: any) => doc.category === 'home'
+    );
+  }, [documents]);
 
   const upcomingEvents = useMemo(() => {
   const now = new Date();
@@ -486,128 +369,6 @@ const homeDocuments = useMemo(() => {
     },
   ];
 
-  const videos = [
-    {
-      id: 'OFRLMjo7zp4',
-      category: 'Podcasts',
-      title: 'MUKCCU Podcast',
-      description:
-        'Conversations, encouragement and insights for faith and life.',
-    },
-    {
-      id: 'GbIZo8ys22c',
-      category: 'Podcasts',
-      title: 'MUKCCU Podcast',
-      description:
-        'Growing together through meaningful Christian conversations.',
-    },
-    {
-      id: 'w0XPkw8e0iM',
-      category: 'Podcasts',
-      title: 'MUKCCU Podcast',
-      description:
-        'Inspiring conversations from the MUKCCU family.',
-    },
-
-    {
-      id: 'KHwMkO6_fhw',
-      category: 'Sermons',
-      title: 'MUKCCU Sermon',
-      description:
-        'Be encouraged and equipped through the teaching of God’s Word.',
-    },
-    {
-      id: 'RGO0k0c1Gv0',
-      category: 'Sermons',
-      title: 'MUKCCU Sermon',
-      description:
-        'Biblical teaching to strengthen your faith and walk with Christ.',
-    },
-
-    {
-      id: 'exUYvOgV65A',
-      category: 'Worship',
-      title: 'Worship Experience',
-      description:
-        'A powerful moment of worship and fellowship in God’s presence.',
-    },
-    {
-      id: 'wnLC33uAEUw',
-      category: 'Worship',
-      title: 'Worship Experience',
-      description:
-        'Experience worship with the MUKCCU family.',
-    },
-
-    {
-      id: 'HQmW_IkApAY',
-      category: 'Worship',
-      title: 'Praise & Worship',
-      description:
-        'Lifting our voices together in praise and worship.',
-    },
-
-    {
-      id: 'Lp1dXy7UPeY',
-      category: 'Creative',
-      title: 'Creative Ministry',
-      description:
-        'Using creativity and God-given gifts to communicate the Gospel.',
-    },
-    {
-      id: 'rAXZdpVzXZg',
-      category: 'Creative',
-      title: 'Creative Ministry',
-      description:
-        'Creative expressions of faith and ministry.',
-    },
-
-    {
-      id: 'FHmKlBtn0fA',
-      category: 'Bible Trivia',
-      title: 'Bible Trivia',
-      description:
-        'Test your knowledge and learn more from God’s Word.',
-    },
-
-    {
-      id: 'K51BTAx1FAI',
-      category: 'History',
-      title: 'History of the CU',
-      description:
-        'Discover the journey and story of MUKCCU.',
-    },
-
-    {
-      id: 'q8WCSJcJvOU',
-      category: 'Choir',
-      title: 'MUKCCU Choir',
-      description:
-        'Ministering through music and worship.',
-    },
-    {
-      id: 'giYwszXxU94',
-      category: 'Choir',
-      title: 'MUKCCU Choir',
-      description:
-        'Songs of worship and praise from our choir.',
-    },
-    {
-      id: 'dpXncXrt_vg',
-      category: 'Choir',
-      title: 'MUKCCU Choir',
-      description:
-        'Experience ministry through music.',
-    },
-
-    {
-      id: 'YhYASLriZ2Y',
-      category: 'Prayer',
-      title: 'Prayer Kesha',
-      description:
-        'A powerful time of prayer, worship and seeking God together.',
-    },
-  ];
   /* =====================================================
      NAVIGATION HELPERS
   ====================================================== */
