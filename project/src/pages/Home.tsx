@@ -338,36 +338,6 @@ export default function Home() {
       icon: HeartHandshake,
     },
   ];
-  /* =====================================================
-     WATCH & LISTEN
-  ====================================================== */
-
-  const mediaCategories = [
-    {
-      name: 'All',
-      icon: Play,
-    },
-    {
-      name: 'Podcasts',
-      icon: Headphones,
-    },
-    {
-      name: 'Sermons',
-      icon: Mic2,
-    },
-    {
-      name: 'Worship',
-      icon: Music,
-    },
-    {
-      name: 'Creative',
-      icon: Sparkles,
-    },
-    {
-      name: 'Choir',
-      icon: Music2,
-    },
-  ];
 
   /* =====================================================
      NAVIGATION HELPERS
