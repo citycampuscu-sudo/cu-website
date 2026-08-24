@@ -446,20 +446,11 @@ export default function Home() {
           content="Knowing Christ. Growing Together. Serving with Purpose."
         />
 
-      </Helmet>
-
-      {/* =================================================
-          LOADING BAR
-      ================================================== */}
-
-      {isLoading && (
-        <div className="fixed top-0 left-0 right-0 h-1 bg-[#b4712d] animate-pulse z-[100]" />
-      )}
-{/* =====================================================
+      {/* =====================================================
     HERO — MUKCCU WELCOME
 ===================================================== */}
 
-<section className="relative min-h-[700px] md:min-h-[780px] overflow-hidden bg-[#101735]">
+<section className="relative min-h-[520px] md:min-h-[600px] overflow-hidden bg-[#101735]">
 
   {/* BACKGROUND IMAGE */}
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -471,24 +462,24 @@ export default function Home() {
     />
   </div>
 
-  {/* OVERALL DARK OVERLAY */}
-  <div className="absolute inset-0 bg-[#101735]/45" />
+  {/* LIGHT OVERALL DARK OVERLAY */}
+  <div className="absolute inset-0 bg-[#101735]/20" />
 
-  {/* LEFT-SIDE DARK GRADIENT
-      Creates the strong navy area behind the text */}
-  <div className="absolute inset-0 bg-gradient-to-r from-[#071127]/95 via-[#101735]/80 to-[#101735]/25" />
+  {/* SUBTLE LEFT-SIDE GRADIENT
+      Much lighter so the background remains visible */}
+  <div className="absolute inset-0 bg-gradient-to-r from-[#071127]/50 via-[#101735]/25 to-transparent" />
 
   {/* BOTTOM FADE */}
-  <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#101735]/90 to-transparent" />
+  <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#101735]/65 to-transparent" />
 
   {/* SUBTLE GOLD GLOW */}
   {!shouldReduceMotion && (
     <>
       <motion.div
-        className="absolute top-20 left-[5%] w-32 h-32 rounded-full bg-[#b4712d]/10 blur-3xl"
+        className="absolute top-16 left-[8%] w-28 h-28 rounded-full bg-[#b4712d]/10 blur-3xl"
         animate={{
-          y: [0, -20, 0],
-          opacity: [0.2, 0.5, 0.2],
+          y: [0, -15, 0],
+          opacity: [0.15, 0.35, 0.15],
         }}
         transition={{
           duration: 6,
@@ -498,10 +489,10 @@ export default function Home() {
       />
 
       <motion.div
-        className="absolute bottom-24 right-[10%] w-40 h-40 rounded-full bg-white/5 blur-3xl"
+        className="absolute bottom-16 right-[10%] w-36 h-36 rounded-full bg-white/5 blur-3xl"
         animate={{
-          y: [0, 20, 0],
-          opacity: [0.15, 0.35, 0.15],
+          y: [0, 15, 0],
+          opacity: [0.1, 0.25, 0.1],
         }}
         transition={{
           duration: 8,
@@ -513,184 +504,88 @@ export default function Home() {
   )}
 
   {/* =====================================================
-      CONTENT
+      CENTERED CONTENT
   ===================================================== */}
 
-  <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 min-h-[700px] md:min-h-[780px] flex items-center">
+  <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 min-h-[520px] md:min-h-[600px] flex items-center justify-center">
 
     <motion.div
-      className="w-full max-w-4xl pt-10 md:pt-14"
+      className="w-full max-w-5xl text-center"
       initial={shouldReduceMotion ? false : "hidden"}
       animate="visible"
       variants={staggerContainer}
     >
 
       {/* =====================================================
-          ORGANIZATION NAME
+          CU TITLE
       ===================================================== */}
 
       <motion.div
-        className="mb-7 md:mb-9"
+        className="flex flex-col items-center"
         variants={fadeUp}
       >
 
         {/* THE */}
-        <div className="mb-3">
-          <span className="block text-sm md:text-base font-semibold tracking-[0.45em] text-[#b4712d]">
-            THE
-          </span>
-
-          <div className="mt-2 w-20 h-[2px] bg-[#b4712d]" />
-        </div>
+        <span className="block text-xs sm:text-sm md:text-base font-semibold tracking-[0.4em] text-[#b4712d] mb-3">
+          THE
+        </span>
 
         {/* UNIVERSITY NAME */}
-        <h1 className="font-bold uppercase leading-[0.98] tracking-tight">
+        <h1 className="font-bold uppercase leading-[0.95] tracking-tight">
 
-          <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white">
-            MASENO
+          <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white">
+            MASENO UNIVERSITY
           </span>
 
-          <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white">
-            UNIVERSITY
-          </span>
-
-          <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white">
+          <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white">
             KISUMU CAMPUS
           </span>
 
-          <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#b4712d]">
+          <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#b4712d]">
             CHRISTIAN UNION
           </span>
 
         </h1>
 
         {/* GOLD DIVIDER */}
-        <div className="flex items-center mt-6">
-          <span className="w-4 h-4 rounded-full bg-[#b4712d]" />
-
-          <span className="w-24 sm:w-32 md:w-40 h-[2px] bg-white/70" />
+        <div className="flex items-center justify-center mt-5">
+          <span className="w-3 h-3 rounded-full bg-[#b4712d]" />
+          <span className="w-20 sm:w-28 md:w-36 h-[2px] bg-white/60" />
+          <span className="w-3 h-3 rounded-full bg-[#b4712d]" />
         </div>
 
       </motion.div>
 
 
       {/* =====================================================
-          WELCOME TITLE
+          PURPOSE / TAGLINE
       ===================================================== */}
 
       <motion.div
-        className="mb-7 md:mb-9"
+        className="mt-7 md:mt-9"
         variants={fadeUp}
       >
 
         <h2
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white leading-[0.9] tracking-tight"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white"
           style={{
             fontFamily: "'Brush Script MT', 'Segoe Script', cursive",
             fontWeight: 400,
           }}
         >
-          Welcome to MUKCCU
+          WELCOME TO MUKCCU
+          Pursuing Righteousness
         </h2>
 
       </motion.div>
 
+    </motion.div>
 
-      {/* =====================================================
-          MINISTRY PURPOSE
-      ===================================================== */}
-
-      <div
-  className="flex items-start gap-5 md:gap-6 max-w-2xl"
->
-  {/* SHIELD ICON */}
-  <div className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-full border-2 border-[#b4712d] flex items-center justify-center">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      className="w-10 h-10 md:w-12 md:h-12 text-[#b4712d]"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M12 3l7 3v5c0 4.5-2.8 8.5-7 10-4.2-1.5-7-5.5-7-10V6l7-3z"
-      />
-
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M12 8v7"
-      />
-
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M9.5 11.5h5"
-      />
-    </svg>
   </div>
 
-  {/* PURPOSE TEXT */}
-  <div className="pt-1">
-    <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-      Pursue Righteousness
-    </h3>
-
-    <p className="text-base md:text-lg lg:text-xl text-white/80 leading-relaxed">
-      A place to fellowship, build genuine friendship,
-      grow in faith and connect with Christ.
-    </p>
-
-    {/* BUTTONS */}
-    <motion.div
-      className="flex flex-col sm:flex-row gap-4 mt-6"
-      variants={fadeUp}
-    >
-      <motion.button
-        whileHover={
-          shouldReduceMotion
-            ? undefined
-            : {
-                scale: 1.03,
-                y: -2,
-              }
-        }
-        whileTap={
-          shouldReduceMotion
-            ? undefined
-            : {
-                scale: 0.98,
-              }
-        }
-        onClick={() => setShowMemberModal(true)}
-        className="
-          inline-flex
-          items-center
-          justify-center
-          gap-2
-          px-8
-          py-4
-          rounded-full
-          bg-[#b4712d]
-          text-white
-          font-bold
-          shadow-2xl
-          hover:bg-[#965d23]
-          transition-all
-        "
-      >
-        Join MUKCCU
-        <ArrowRight size={19} />
-      </motion.button>
-    </motion.div>
-</div>
-</div>
-</motion.div>
-</div>
 </section>
+
+
 
       {/* =================================================
           FIRST YEARS WELCOME
