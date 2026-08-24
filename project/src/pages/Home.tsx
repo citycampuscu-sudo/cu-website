@@ -445,6 +445,7 @@ export default function Home() {
           name="twitter:description"
           content="Knowing Christ. Growing Together. Serving with Purpose."
         />
+      </Helmet>
 
       {/* =====================================================
     HERO — MUKCCU WELCOME
