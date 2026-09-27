@@ -1,4 +1,13 @@
-import { Target, Heart, Users, Book, Cross, Globe } from 'lucide-react';
+import {
+  Target,
+  Heart,
+  Users,
+  Book,
+  Cross,
+  Globe,
+  Link2,
+  ExternalLink,
+} from 'lucide-react';
 import { useContent } from '../hooks/useContent';
 import { Helmet } from 'react-helmet-async';
 
@@ -65,6 +74,55 @@ export default function About() {
         'To identify and develop Christian leaders',
     },
   ];
+  const affiliations = [
+  {
+    name: "FOCUS Kenya",
+    logo: "/images/focus-logo.jpeg",
+    website: "https://www.focuskenya.org",
+    description:
+      "FOCUS Kenya is an umbrella organization that guides Christian Unions in universities, colleges, TVETS, and KMTCs across Kenya.",
+    role:
+      "Provides spiritual guidance, training resources, and connects us with the broader Christian student movement in Kenya.",
+    color: "#2e3e87",
+  },
+  {
+    name: "KSCF",
+    logo: "/images/kscf-logo.png",
+    website: "https://kscf.org",
+    description:
+      "Kenya Students Christian Fellowship connects us with high schools for missions and weekend challenges.",
+    role:
+      "Facilitates outreach programs to secondary schools, enabling us to share the Gospel with the next generation of students.",
+    color: "#b4712d",
+  },
+];
+
+const affiliationBenefits = [
+  {
+    icon: Link2,
+    title: "Network & Connection",
+    description:
+      "Access to a nationwide network of Christian students and leaders.",
+  },
+  {
+    icon: Target,
+    title: "Training & Development",
+    description:
+      "Regular training programs and leadership development opportunities.",
+  },
+  {
+    icon: Users,
+    title: "Resource Sharing",
+    description:
+      "Access to ministry resources, materials, and best practices.",
+  },
+  {
+    icon: Book,
+    title: "Mission Opportunities",
+    description:
+      "Coordinated outreach programs to schools and communities.",
+  },
+];
 
   return (
     <div className="min-h-screen">
@@ -339,6 +397,181 @@ export default function About() {
     </div>
   </div>
 
+</div>
+        {/* AFFILIATIONS */}
+<div className="mb-16">
+  <div className="text-center mb-12">
+    <p
+      className="text-sm font-semibold uppercase tracking-wider mb-3"
+      style={{ color: "#b4712d" }}
+    >
+      Part of a Greater Movement
+    </p>
+
+    <h2
+      className="text-4xl font-bold mb-4"
+      style={{ color: "#2e3e87" }}
+    >
+      Our Affiliations
+    </h2>
+
+    <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+      MUKCCU is part of larger Christian movements that strengthen
+      student ministry, discipleship, leadership development and
+      outreach across Kenya.
+    </p>
+  </div>
+
+  {/* AFFILIATION CARDS */}
+  <div className="space-y-8 mb-12">
+    {affiliations.map((affiliation, index) => (
+      <div
+        key={index}
+        className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+      >
+        <div className="flex flex-col md:flex-row">
+          {/* Logo */}
+          <div
+            className="md:w-64 p-8 flex flex-col items-center justify-center text-white"
+            style={{ backgroundColor: affiliation.color }}
+          >
+            <a
+              href={affiliation.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Visit ${affiliation.name} website`}
+            >
+              <img
+                src={affiliation.logo}
+                alt={`${affiliation.name} logo`}
+                className="w-24 h-24 object-contain mb-4 hover:scale-105 transition-transform"
+              />
+            </a>
+
+            <h3 className="text-2xl font-bold text-center">
+              {affiliation.name}
+            </h3>
+          </div>
+
+          {/* Content */}
+          <div className="flex-1 p-8">
+            <div className="mb-6">
+              <h4
+                className="text-xl font-bold mb-3"
+                style={{ color: "#2e3e87" }}
+              >
+                About
+              </h4>
+
+              <p className="text-gray-700 leading-relaxed">
+                {affiliation.description}
+              </p>
+            </div>
+
+            <div>
+              <h4
+                className="text-xl font-bold mb-3"
+                style={{ color: "#2e3e87" }}
+              >
+                Their Role in Our Ministry
+              </h4>
+
+              <p className="text-gray-700 leading-relaxed mb-4">
+                {affiliation.role}
+              </p>
+
+              <a
+                href={affiliation.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-lg text-white font-medium transition hover:opacity-90"
+                style={{ backgroundColor: affiliation.color }}
+              >
+                Learn More
+                <ExternalLink size={16} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  {/* BENEFITS */}
+  <div className="mt-12">
+    <h3
+      className="text-3xl font-bold text-center mb-8"
+      style={{ color: "#2e3e87" }}
+    >
+      Benefits of Our Affiliations
+    </h3>
+
+    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {affiliationBenefits.map((benefit, index) => {
+        const Icon = benefit.icon;
+
+        return (
+          <div
+            key={index}
+            className="bg-white rounded-2xl shadow-lg p-6"
+            style={{ borderTop: "4px solid #b4712d" }}
+          >
+            <Icon
+              className="mb-4"
+              style={{ color: "#2e3e87" }}
+              size={36}
+            />
+
+            <h4
+              className="text-lg font-bold mb-2"
+              style={{ color: "#2e3e87" }}
+            >
+              {benefit.title}
+            </h4>
+
+            <p className="text-gray-600 leading-relaxed">
+              {benefit.description}
+            </p>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+
+  {/* PARTNERSHIP ENGAGEMENT */}
+  <div className="mt-12">
+    <div
+      className="rounded-2xl p-8 md:p-10"
+      style={{ backgroundColor: "#2e3e87" }}
+    >
+      <h3 className="text-3xl font-bold text-white mb-6 text-center">
+        How We Engage With Our Partners
+      </h3>
+
+      <div className="grid sm:grid-cols-2 gap-4">
+        {[
+          "Participation in FOCUS conferences",
+          "Leadership training programs",
+          "High school mission outreaches",
+          "Regional CU fellowships",
+          "National prayer initiatives",
+          "Mentorship and discipleship support",
+        ].map((item, index) => (
+          <div
+            key={index}
+            className="flex items-center bg-white/10 rounded-xl p-4 text-white"
+          >
+            <div
+              className="w-2 h-2 rounded-full mr-4 flex-shrink-0"
+              style={{ backgroundColor: "#b4712d" }}
+            />
+
+            <span>{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
 </div>
 
 </div>
