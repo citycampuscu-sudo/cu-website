@@ -8,7 +8,7 @@ import {
   Users,
   HeartHandshake,
   CalendarDays,
-  Images,
+  Image,
   GraduationCap,
   MessageCircle,
   ArrowRight,
@@ -29,7 +29,7 @@ export default function Navigation() {
     { label: 'Leadership', path: '/leadership', icon: Users },
     { label: 'Ministries', path: '/ministries', icon: HeartHandshake },
     { label: 'Activities', path: '/activities', icon: CalendarDays },
-    { label: 'Gallery', path: '/gallery', icon: Images },
+    { label: 'Gallery', path: '/gallery', icon: Image },
     { label: 'Alumni', path: '/alumni', icon: GraduationCap },
     { label: 'Connect', path: '/connect', icon: MessageCircle },
   ];
