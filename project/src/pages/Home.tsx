@@ -589,69 +589,53 @@ export default function Home() {
 
 
       {/* =================================================
-          FIRST YEARS WELCOME
-          Poster + functional CU registration CTA
-      ================================================== */}
-      <motion.section
-        className="bg-white py-10 md:py-14"
-        initial={shouldReduceMotion ? false : "hidden"}
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
-        variants={fadeIn}
+    JOIN THE CU
+================================================== */}
+<motion.section
+  className="bg-white py-10 md:py-14"
+  initial={shouldReduceMotion ? false : "hidden"}
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.15 }}
+  variants={fadeIn}
+>
+  <div className="max-w-4xl mx-auto px-4 sm:px-6">
+    <motion.div
+      className="text-center"
+      variants={scaleIn}
+    >
+      {/* Join message */}
+      <p className="text-gray-600 text-base md:text-lg mb-6">
+        Ready to be part of the MUKCCU family? Register today and
+        begin your journey with us.
+      </p>
+
+      {/* Registration button */}
+      <motion.button
+        type="button"
+        onClick={() => setShowMemberModal(true)}
+        whileHover={
+          shouldReduceMotion
+            ? undefined
+            : {
+                scale: 1.03,
+                y: -2,
+              }
+        }
+        whileTap={
+          shouldReduceMotion
+            ? undefined
+            : {
+                scale: 0.98,
+              }
+        }
+        className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-[#b4712d] text-white font-bold shadow-lg hover:bg-[#965d23] transition-all"
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <motion.div
-            className="relative overflow-hidden rounded-[2rem] border border-gray-100 bg-white shadow-xl"
-            variants={scaleIn}
-          >
-            {/* First Years Welcome Poster */}
-            <div className="bg-white">
-              <img
-                src="/images/welcome-first-years.png"
-                alt="Welcome First Years to Maseno University Kisumu Campus Christian Union"
-                className="block w-full h-auto"
-              />
-            </div>
-
-            {/* Functional registration CTA */}
-            <div className="px-6 py-7 md:px-10 md:py-8 text-center bg-white">
-              <p className="text-gray-600 text-base md:text-lg mb-5">
-                Ready to be part of the MUKCCU family? Register today and
-                begin your journey with us.
-              </p>
-
-              <motion.button
-                type="button"
-                onClick={() => setShowMemberModal(true)}
-                whileHover={
-                  shouldReduceMotion
-                    ? undefined
-                    : {
-                        scale: 1.03,
-                        y: -2,
-                      }
-                }
-                whileTap={
-                  shouldReduceMotion
-                    ? undefined
-                    : {
-                        scale: 0.98,
-                      }
-                }
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-[#b4712d] text-white font-bold shadow-lg hover:bg-[#965d23] transition-all"
-              >
-                Join the CU
-                <ArrowRight size={19} />
-              </motion.button>
-
-              <p className="mt-3 text-sm text-[#2e3e87] font-medium">
-                Pursuing Holiness • Growing Together • Serving Others
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </motion.section>
-
+        Join the CU
+        <ArrowRight size={19} />
+      </motion.button>
+    </motion.div>
+  </div>
+</motion.section>
       {/* =================================================
           WELCOME
       ================================================== */}
