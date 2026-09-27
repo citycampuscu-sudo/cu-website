@@ -124,7 +124,7 @@ export default function Navigation() {
                   }`}
                   style={{ color: '#b4712d' }}
                 >
-                  Pursuing Holiness
+                  Pursuing Righteousness
                 </div>
               </div>
             </Link>
