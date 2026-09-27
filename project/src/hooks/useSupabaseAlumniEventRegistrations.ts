@@ -21,11 +21,9 @@ export async function registerForAlumniEvent(
     email: registration.email.trim().toLowerCase(),
   };
 
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from('alumni_event_registrations')
-    .insert(payload)
-    .select()
-    .single();
+    .insert(payload);
 
   if (error) {
     if (error.code === '23505') {
@@ -37,5 +35,5 @@ export async function registerForAlumniEvent(
     throw error;
   }
 
-  return data;
+  return true;
 }
