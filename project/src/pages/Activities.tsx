@@ -562,6 +562,5 @@ export default function Activities() {
           </section>
         </div>
       </div>
-    </div>
   );
 }
