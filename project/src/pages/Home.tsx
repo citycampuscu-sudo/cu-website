@@ -30,6 +30,7 @@ import { useContent } from '../hooks/useContent';
 import { useDocuments } from '../hooks/useDocuments';
 import { useSupabaseMinistries } from '../hooks/useSupabaseMinistries';
 import { useSupabaseHomeData } from '../hooks/useSupabaseHomeData';
+import { useEffect, useState } from 'react';
 
 import MemberRegistrationModal from '../components/MemberRegistrationModal';
 
@@ -117,6 +118,23 @@ export default function Home() {
 
   const [selectedMediaCategory, setSelectedMediaCategory] =
     useState('All');
+  useEffect(() => {
+  const handleOpenRegistration = () => {
+    setShowMemberModal(true);
+  };
+
+  window.addEventListener(
+    'open-member-registration',
+    handleOpenRegistration
+  );
+
+  return () => {
+    window.removeEventListener(
+      'open-member-registration',
+      handleOpenRegistration
+    );
+  };
+}, []);
 
   /* =====================================================
      WATCH & LISTEN DATA
