@@ -15,6 +15,7 @@ import { useState } from 'react';
 import { useDocuments } from '../hooks/useDocuments';
 import { createAlumni } from '../hooks/useSupabaseAlumni';
 import { useSupabaseAlumniEvents } from "../hooks/useSupabaseAlumniEvents";
+import { registerForAlumniEvent } from '../hooks/useSupabaseAlumniEventRegistrations';
 
 export default function Alumni() {
   const benefits = [
@@ -77,6 +78,82 @@ const [formData, setFormData] = useState({
   mentor: false,
   message: '',
 });
+  const [selectedEvent, setSelectedEvent] = useState<any>(null);
+const [eventRegistrationOpen, setEventRegistrationOpen] = useState(false);
+const [eventRegistrationLoading, setEventRegistrationLoading] =
+  useState(false);
+
+const [eventRegistration, setEventRegistration] = useState({
+  full_name: '',
+  email: '',
+  phone: '',
+  graduation_year: '',
+  course: '',
+  occupation: '',
+  location: '',
+});
+  const handleEventRegistrationChange = (
+  e: React.ChangeEvent<HTMLInputElement>
+) => {
+  const { name, value } = e.target;
+
+  setEventRegistration(prev => ({
+    ...prev,
+    [name]: value,
+  }));
+};
+
+const handleEventRegistrationSubmit = async (
+  e: React.FormEvent
+) => {
+  e.preventDefault();
+
+  if (!selectedEvent) return;
+
+  setEventRegistrationLoading(true);
+
+  try {
+    await registerForAlumniEvent({
+      event_id: selectedEvent.id,
+      full_name: eventRegistration.full_name,
+      email: eventRegistration.email,
+      phone: eventRegistration.phone,
+      graduation_year: eventRegistration.graduation_year
+        ? Number(eventRegistration.graduation_year)
+        : null,
+      course: eventRegistration.course,
+      occupation: eventRegistration.occupation,
+      location: eventRegistration.location,
+    });
+
+    alert(
+      `Registration successful! You are registered for ${selectedEvent.title}.`
+    );
+
+    setEventRegistration({
+      full_name: '',
+      email: '',
+      phone: '',
+      graduation_year: '',
+      course: '',
+      occupation: '',
+      location: '',
+    });
+
+    setSelectedEvent(null);
+    setEventRegistrationOpen(false);
+
+  } catch (error: any) {
+    console.error('Alumni event registration error:', error);
+
+    alert(
+      error?.message ||
+      'Registration failed. Please try again.'
+    );
+  } finally {
+    setEventRegistrationLoading(false);
+  }
+};
   const handleChange = (
   e: React.ChangeEvent<
     HTMLInputElement | HTMLTextAreaElement
@@ -711,17 +788,17 @@ const copyText = async (text: string, field: string) => {
             {event.description}
           </p>
 
-          {event.registration_link && (
-            <a
-              href={event.registration_link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-6 py-3 rounded-lg text-white font-semibold"
-              style={{ backgroundColor: "#2e3e87" }}
-            >
-              Register
-            </a>
-          )}
+         <button
+  type="button"
+  onClick={() => {
+    setSelectedEvent(event);
+    setEventRegistrationOpen(true);
+  }}
+  className="inline-flex items-center justify-center px-6 py-3 rounded-lg text-white font-semibold hover:scale-105 transition"
+  style={{ backgroundColor: "#2e3e87" }}
+>
+  Register
+</button>
 
         </div>
 
@@ -1067,6 +1144,202 @@ style={{color:"#2e3e87"}}
 </button>
         </div>
       </section>
+      {eventRegistrationOpen && selectedEvent && (
+  <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 px-4 py-6">
+    <div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white rounded-3xl shadow-2xl">
+
+      <div
+        className="p-6 md:p-8 text-white rounded-t-3xl"
+        style={{
+          background:
+            'linear-gradient(135deg, #2e3e87 0%, #1a2351 100%)',
+        }}
+      >
+        <div className="flex items-start justify-between gap-4">
+
+          <div>
+            <p
+              className="text-sm uppercase tracking-widest font-semibold"
+              style={{ color: '#b4712d' }}
+            >
+              MUKCCU Alumni Event
+            </p>
+
+            <h2 className="text-2xl md:text-3xl font-bold mt-2">
+              Register for {selectedEvent.title}
+            </h2>
+
+            <p className="text-white/75 mt-2">
+              {selectedEvent.event_date}
+              {selectedEvent.venue
+                ? ` • ${selectedEvent.venue}`
+                : ''}
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => {
+              setEventRegistrationOpen(false);
+              setSelectedEvent(null);
+            }}
+            className="text-white/80 hover:text-white text-3xl leading-none"
+            aria-label="Close registration"
+          >
+            ×
+          </button>
+
+        </div>
+      </div>
+
+      <form
+        onSubmit={handleEventRegistrationSubmit}
+        className="p-6 md:p-8 grid md:grid-cols-2 gap-5"
+      >
+
+        <div className="md:col-span-2">
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Full Name *
+          </label>
+
+          <input
+            required
+            type="text"
+            name="full_name"
+            value={eventRegistration.full_name}
+            onChange={handleEventRegistrationChange}
+            placeholder="Your full name"
+            className="w-full border border-gray-300 rounded-xl p-4 focus:ring-2 focus:ring-[#2e3e87] focus:border-[#2e3e87] outline-none"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Email Address *
+          </label>
+
+          <input
+            required
+            type="email"
+            name="email"
+            value={eventRegistration.email}
+            onChange={handleEventRegistrationChange}
+            placeholder="you@example.com"
+            className="w-full border border-gray-300 rounded-xl p-4 focus:ring-2 focus:ring-[#2e3e87] focus:border-[#2e3e87] outline-none"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Phone Number
+          </label>
+
+          <input
+            type="tel"
+            name="phone"
+            value={eventRegistration.phone}
+            onChange={handleEventRegistrationChange}
+            placeholder="+254..."
+            className="w-full border border-gray-300 rounded-xl p-4 focus:ring-2 focus:ring-[#2e3e87] focus:border-[#2e3e87] outline-none"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Graduation Year
+          </label>
+
+          <input
+            type="number"
+            name="graduation_year"
+            value={eventRegistration.graduation_year}
+            onChange={handleEventRegistrationChange}
+            placeholder="2024"
+            min="1900"
+            max="2100"
+            className="w-full border border-gray-300 rounded-xl p-4 focus:ring-2 focus:ring-[#2e3e87] focus:border-[#2e3e87] outline-none"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Course
+          </label>
+
+          <input
+            type="text"
+            name="course"
+            value={eventRegistration.course}
+            onChange={handleEventRegistrationChange}
+            placeholder="Course studied"
+            className="w-full border border-gray-300 rounded-xl p-4 focus:ring-2 focus:ring-[#2e3e87] focus:border-[#2e3e87] outline-none"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Occupation
+          </label>
+
+          <input
+            type="text"
+            name="occupation"
+            value={eventRegistration.occupation}
+            onChange={handleEventRegistrationChange}
+            placeholder="Current occupation"
+            className="w-full border border-gray-300 rounded-xl p-4 focus:ring-2 focus:ring-[#2e3e87] focus:border-[#2e3e87] outline-none"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Current Location
+          </label>
+
+          <input
+            type="text"
+            name="location"
+            value={eventRegistration.location}
+            onChange={handleEventRegistrationChange}
+            placeholder="County / Country"
+            className="w-full border border-gray-300 rounded-xl p-4 focus:ring-2 focus:ring-[#2e3e87] focus:border-[#2e3e87] outline-none"
+          />
+        </div>
+
+        <div className="md:col-span-2 flex flex-col sm:flex-row gap-3 pt-3">
+
+          <button
+            type="submit"
+            disabled={eventRegistrationLoading}
+            className="flex-1 px-6 py-4 rounded-xl text-white font-semibold transition hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed"
+            style={{ backgroundColor: '#2e3e87' }}
+          >
+            {eventRegistrationLoading
+              ? 'Registering...'
+              : 'Confirm Registration'}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setEventRegistrationOpen(false);
+              setSelectedEvent(null);
+            }}
+            className="px-6 py-4 rounded-xl font-semibold border-2"
+            style={{
+              color: '#2e3e87',
+              borderColor: '#2e3e87',
+            }}
+          >
+            Cancel
+          </button>
+
+        </div>
+
+      </form>
+    </div>
+  </div>
+)}
     </div>
   );
         }
