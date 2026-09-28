@@ -753,12 +753,15 @@ const copyText = async (text: string, field: string) => {
       >
 
         {event.image && (
-          <img
-            src={event.image}
-            alt={event.title}
-            className="w-full h-52 object-cover"
-          />
-        )}
+  <div className="w-full bg-white overflow-hidden">
+    <img
+      src={event.image}
+      alt={event.title}
+      className="block w-full h-auto object-contain"
+      loading="lazy"
+    />
+  </div>
+)}
 
         <div className="p-8">
 
